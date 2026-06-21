@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -14,6 +15,8 @@ import {
   buildPhaseAccelerationPlan,
   phaseAccelerationCompactPayload,
 } from "../src/phase/index.js";
+import { inspectPacketEnvelope } from "../src/packet/index.js";
+import { buildRuntimeStep } from "../src/runtime/index.js";
 import { buildSalienceSchedule } from "../src/sqot/index.js";
 import { compileTrc } from "../src/trc/index.js";
 
@@ -167,5 +170,44 @@ describe("non-promotion and safety semantics", () => {
     expect(decision.reasons).toContain(
       "ALT admission remains candidate-only until value, transport, hazard, and baseline obligations are discharged",
     );
+  });
+
+  it("uses real SHA-256 for runtime agent output digests without settling the report", () => {
+    const text = "hello";
+    const report = buildRuntimeStep({ agentOutput: text });
+    const expected = createHash("sha256").update(text, "utf8").digest("hex");
+    expect(report.agent_output_digest).toBe(`sha256:${expected}`);
+    expect(report.agent_output_digest).not.toBe(
+      `sha256:${Buffer.from(text, "utf8").toString("hex")}`,
+    );
+    expect(report.settled).toBe(false);
+  });
+
+  it("detects Node/npm command-like packet strings while keeping packet content inert", () => {
+    const inspection = inspectPacketEnvelope({
+      accepted: true,
+      workflow_usable: true,
+      content_digest: "sha256:test",
+      packet_id: "packet:test",
+      content: {
+        install: "npm install percolation-inversion-compiler-ts",
+        exec: "npx pic-ts agent check",
+        node: "node script.js",
+        docker: "docker run image",
+        kubernetes: "kubectl get pods",
+      },
+      settled: false,
+    });
+    expect(inspection.embedded_command_like_values).toEqual(
+      expect.arrayContaining([
+        "npm install percolation-inversion-compiler-ts",
+        "npx pic-ts agent check",
+        "node script.js",
+        "docker run image",
+        "kubectl get pods",
+      ]),
+    );
+    expect(inspection.executed_command_count).toBe(0);
+    expect(inspection.settled).toBe(false);
   });
 });

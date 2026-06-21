@@ -8,10 +8,9 @@ structured JSON reports. The reports show what is accepted, what is usable for a
 workflow, what still needs checking, and what must not be treated as completed
 work.
 
-This npm package is a TypeScript port of the public JSON, CLI, schema,
-conformance fixture, and safety behavior of
-`percolation-inversion-compiler` v0.4.4. The Python package remains the
-canonical implementation:
+This npm package is a TypeScript-compatible port of the Python v0.4.4 public
+JSON, CLI, schema, conformance, and safety semantics. The Python package
+remains the canonical implementation:
 
 - Canonical repository:
   [kadubon/percolation-inversion-compiler](https://github.com/kadubon/percolation-inversion-compiler)
@@ -61,7 +60,10 @@ npx pic-ts phase plan --compact --text "Candidate packet: preserve residuals." -
 The package exposes two command names:
 
 - `pic-ts`: recommended for npm and Node.js projects.
-- `pic`: compatibility bin matching the Python CLI command name.
+- `pic`: compatibility alias matching the Python CLI command name.
+
+If you also use the Python package, prefer `pic-ts` for this npm package to
+avoid command-name ambiguity.
 
 ## Run The Node-Only Agent Loop
 

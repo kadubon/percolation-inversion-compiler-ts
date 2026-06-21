@@ -29,6 +29,7 @@ const requiredFilesEntries = [
   "fixtures/python_v044_cli/",
   "fixtures/python_v044_demo/",
   "fixtures/python_v044_snapshots/",
+  "CHANGELOG.md",
   "README.md",
   "LICENSE",
   "NOTICE",
@@ -45,6 +46,7 @@ const allowedPrefixes = [
 
 const allowedExact = new Set([
   "package.json",
+  "CHANGELOG.md",
   "README.md",
   "LICENSE",
   "NOTICE",
@@ -122,6 +124,16 @@ const textPatterns = [
   /-----BEGIN (?:RSA |OPENSSH |EC |DSA )?PRIVATE KEY-----/i,
 ];
 
+const overclaimPatterns = [
+  /\bcomplete replacement\b/i,
+  /\bproves real ASI\b/i,
+  /\bguarantees ASI\b/i,
+  /\bsafe autonomous execution\b/i,
+  /\baccepted means settled\b/i,
+  /\bworkflow_usable means settled\b/i,
+  /\bsafe_commands execute automatically\b/i,
+];
+
 function suffixOf(file) {
   if (file.endsWith(".d.ts")) {
     return ".d.ts";
@@ -184,6 +196,11 @@ for (const file of files) {
     for (const pattern of textPatterns) {
       if (pattern.test(text)) {
         failures.push(`${file} matched ${pattern}`);
+      }
+    }
+    for (const pattern of overclaimPatterns) {
+      if (pattern.test(text)) {
+        failures.push(`${file} contains unqualified overclaim ${pattern}`);
       }
     }
   }

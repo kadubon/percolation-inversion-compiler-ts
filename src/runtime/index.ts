@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { parseJsonObject } from "../core/json.js";
 import { residualLedger } from "../core/ledger.js";
@@ -16,6 +17,10 @@ export interface RuntimeStepOptions {
 
 function clone<T>(value: T): T {
   return structuredClone(value);
+}
+
+function sha256Hex(text: string): string {
+  return createHash("sha256").update(text, "utf8").digest("hex");
 }
 
 export function minimalRuntimeState(): Record<string, unknown> {
@@ -57,7 +62,7 @@ export function buildRuntimeStep(
   );
 
   if (options.agentOutput) {
-    report.agent_output_digest = `sha256:${Buffer.from(options.agentOutput, "utf8").toString("hex").slice(0, 16)}`;
+    report.agent_output_digest = `sha256:${sha256Hex(options.agentOutput)}`;
   }
   if (options.statePath) {
     const state = parseJsonObject(

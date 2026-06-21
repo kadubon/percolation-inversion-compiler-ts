@@ -61,11 +61,20 @@ import {
   phaseAccelerationRunbook,
 } from "../phase/index.js";
 import type { PhaseAccelerationRequest } from "../phase/index.js";
+import {
+  renderAdoptionPacketMarkdown,
+  renderAdoptionRequestMarkdown,
+  renderAgentAutonomyAuditMarkdown,
+  renderPhaseBenchmarkSuiteMarkdown,
+  renderPhaseDashboardMarkdown,
+  renderPhaseObserveMarkdown,
+  writeTextOutput,
+} from "../render/markdown.js";
 import { buildRuntimeStep, runtimeHealth } from "../runtime/index.js";
 import { buildSalienceSchedule } from "../sqot/index.js";
 import { compileTrc } from "../trc/index.js";
 
-const VERSION = "0.4.4";
+const VERSION = "0.4.5";
 
 function outputJson(data: unknown, output?: string): void {
   const text = stableStringify(data);
@@ -519,8 +528,9 @@ addOutputOptions(
 ).action((options) => {
   const report = buildAgentAutonomyAudit(options.profile);
   if (options.format === "markdown") {
-    process.stdout.write(
-      `# Agent Autonomy Audit\n\n- accepted: ${report.accepted}\n- workflow_usable: ${report.workflow_usable}\n- settled: ${report.settled}\n- safe_commands_executable_by_pic: ${report.safe_commands_executable_by_pic}\n`,
+    writeTextOutput(
+      renderAgentAutonomyAuditMarkdown(report, options.language),
+      options.output,
     );
     return;
   }
@@ -785,8 +795,9 @@ addOutputOptions(
 ).action((options) => {
   const packet = pythonCliFixture("adoption_packet");
   if (options.format === "markdown") {
-    process.stdout.write(
-      `# Operator Adoption Packet\n\n- accepted: ${packet.accepted}\n- workflow_usable: ${packet.workflow_usable}\n- settled: ${packet.settled}\n`,
+    writeTextOutput(
+      renderAdoptionPacketMarkdown(packet, options.language),
+      options.output,
     );
     return;
   }
@@ -802,8 +813,9 @@ addOutputOptions(
 ).action((options) => {
   const request = pythonCliFixture("adoption_request");
   if (options.format === "markdown") {
-    process.stdout.write(
-      `# Agent To Operator Request\n\n- accepted: ${request.accepted}\n- settled: ${request.settled}\n`,
+    writeTextOutput(
+      renderAdoptionRequestMarkdown(request, options.language),
+      options.output,
     );
     return;
   }
@@ -884,14 +896,23 @@ for (const name of ["benchmark-suite", "dashboard", "observe"]) {
     addProfile(
       phase
         .command(name)
-        .option("--format <format>", "json or markdown", "json"),
+        .option("--format <format>", "json or markdown", "json")
+        .option("--language <language>", "markdown language", "en"),
     ),
-  ).action((options) =>
-    outputJson(
-      pythonCliFixture(`phase_${name.replace("-", "_")}`),
-      options.output,
-    ),
-  );
+  ).action((options) => {
+    const data = pythonCliFixture(`phase_${name.replace("-", "_")}`);
+    if (options.format === "markdown") {
+      const renderer =
+        name === "benchmark-suite"
+          ? renderPhaseBenchmarkSuiteMarkdown
+          : name === "dashboard"
+            ? renderPhaseDashboardMarkdown
+            : renderPhaseObserveMarkdown;
+      writeTextOutput(renderer(data, options.language), options.output);
+      return;
+    }
+    outputJson(data, options.output);
+  });
 }
 
 const runtime = program

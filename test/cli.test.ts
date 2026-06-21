@@ -18,6 +18,17 @@ function pic(args: string[]): Record<string, unknown> {
   return JSON.parse(stdout) as Record<string, unknown>;
 }
 
+function picText(args: string[]): string {
+  return execFileSync(
+    process.execPath,
+    [join(packageRoot(), "dist", "cli", "main.js"), ...args],
+    {
+      cwd: packageRoot(),
+      encoding: "utf8",
+    },
+  );
+}
+
 function picFailure(args: string[]): { status: number; stderr: string } {
   try {
     execFileSync(
@@ -184,6 +195,88 @@ describe("CLI golden parity", () => {
     expect(
       pic(["demo", "installed-smoke", "--profile", "development"]),
     ).toEqual(fixture("demo_installed_smoke"));
+  });
+
+  it("renders meaningful Markdown with output files and safety boundaries", () => {
+    const commands: Array<{ args: string[]; heading: string }> = [
+      {
+        args: ["adoption", "packet", "--format", "markdown"],
+        heading: "# Operator Adoption Packet",
+      },
+      {
+        args: ["adoption", "request", "--format", "markdown"],
+        heading: "# Agent-To-Operator Request",
+      },
+      {
+        args: ["phase", "benchmark-suite", "--format", "markdown"],
+        heading: "# Phase Benchmark Suite",
+      },
+      {
+        args: ["phase", "dashboard", "--format", "markdown"],
+        heading: "# Phase Dashboard",
+      },
+      {
+        args: ["phase", "observe", "--format", "markdown"],
+        heading: "# Phase Observation",
+      },
+      {
+        args: ["agent", "autonomy-audit", "--format", "markdown"],
+        heading: "# Agent Autonomy Audit",
+      },
+    ];
+    for (const command of commands) {
+      const markdown = picText(command.args);
+      expect(markdown).toContain(command.heading);
+      expect(markdown).toContain("not execution authority");
+      expect(markdown).toContain("settled=false");
+    }
+
+    const dir = mkdtempSync(join(tmpdir(), "pic-ts-markdown-"));
+    const outputPath = join(dir, "request.md");
+    const stdout = picText([
+      "adoption",
+      "request",
+      "--format",
+      "markdown",
+      "--language",
+      "en",
+      "--output",
+      outputPath,
+    ]);
+    expect(stdout).toBe("");
+    expect(readFileSync(outputPath, "utf8")).toContain(
+      "# Agent-To-Operator Request",
+    );
+
+    expect(
+      picText([
+        "adoption",
+        "request",
+        "--format",
+        "markdown",
+        "--language",
+        "ja",
+      ]),
+    ).toContain("# Agent から Operator へのリクエスト");
+    expect(
+      picText([
+        "phase",
+        "dashboard",
+        "--format",
+        "markdown",
+        "--language",
+        "ja",
+      ]),
+    ).toContain("# Phase Dashboard");
+  });
+
+  it("documents pic-ts as the recommended npm command and Python pic ambiguity", () => {
+    const readme = readFileSync(join(packageRoot(), "README.md"), "utf8");
+    expect(readme).toContain(
+      "`pic-ts`: recommended for npm and Node.js projects.",
+    );
+    expect(readme).toContain("avoid command-name ambiguity");
+    expect(readme).toMatch(/Python package\s+remains the canonical/);
   });
 
   it("matches snapshot show and verify fixtures for all bundled artifacts", () => {

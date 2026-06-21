@@ -1,7 +1,7 @@
 {
   "name": "percolation-inversion-compiler-ts",
-  "version": "0.4.4",
-  "description": "TypeScript port of percolation-inversion-compiler v0.4.4 public JSON, CLI, schema, conformance, and safety semantics for npm and JS agent runtimes.",
+  "version": "0.4.5",
+  "description": "TypeScript-compatible port of the Python v0.4.4 public JSON, CLI, schema, conformance, and safety semantics for npm and JS agent runtimes.",
   "type": "module",
   "license": "Apache-2.0",
   "author": "K. Takahashi",
@@ -79,6 +79,7 @@
     "fixtures/python_v044_cli/",
     "fixtures/python_v044_demo/",
     "fixtures/python_v044_snapshots/",
+    "CHANGELOG.md",
     "README.md",
     "LICENSE",
     "NOTICE"
