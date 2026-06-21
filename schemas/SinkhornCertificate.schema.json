@@ -1,0 +1,55 @@
+{
+  "properties": {
+    "duality_gap": {
+      "default": 0.0,
+      "title": "Duality Gap",
+      "type": "number"
+    },
+    "marginal_tolerance": {
+      "default": 1e-06,
+      "title": "Marginal Tolerance",
+      "type": "number"
+    },
+    "plan": {
+      "items": {
+        "items": {
+          "type": "number"
+        },
+        "type": "array"
+      },
+      "title": "Plan",
+      "type": "array"
+    },
+    "solver_gap": {
+      "default": 0.0,
+      "title": "Solver Gap",
+      "type": "number"
+    },
+    "source": {
+      "items": {
+        "type": "number"
+      },
+      "title": "Source",
+      "type": "array"
+    },
+    "target": {
+      "items": {
+        "type": "number"
+      },
+      "title": "Target",
+      "type": "array"
+    },
+    "unit_ledger_charge": {
+      "default": 0.0,
+      "title": "Unit Ledger Charge",
+      "type": "number"
+    }
+  },
+  "required": [
+    "source",
+    "target",
+    "plan"
+  ],
+  "title": "SinkhornCertificate",
+  "type": "object"
+}

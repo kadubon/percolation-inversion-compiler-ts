@@ -1,0 +1,64 @@
+{
+  "properties": {
+    "accepting_states": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Accepting States",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "initial_state": {
+      "title": "Initial State",
+      "type": "string"
+    },
+    "input_alphabet": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Alphabet",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "output_alphabet": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Output Alphabet",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "outputs": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Outputs",
+      "type": "object"
+    },
+    "states": {
+      "items": {
+        "type": "string"
+      },
+      "title": "States",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "transducer_id": {
+      "title": "Transducer Id",
+      "type": "string"
+    },
+    "transitions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Transitions",
+      "type": "object"
+    }
+  },
+  "required": [
+    "transducer_id",
+    "initial_state"
+  ],
+  "title": "TypedTraceTransducerRecord",
+  "type": "object"
+}

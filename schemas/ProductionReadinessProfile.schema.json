@@ -1,0 +1,37 @@
+{
+  "description": "Production policy knobs for fail-closed operational readiness.",
+  "properties": {
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "require_available_external_routes": {
+      "default": false,
+      "title": "Require Available External Routes",
+      "type": "boolean"
+    },
+    "require_canonical_or_signed_snapshot": {
+      "default": false,
+      "title": "Require Canonical Or Signed Snapshot",
+      "type": "boolean"
+    },
+    "require_optional_dependencies": {
+      "default": false,
+      "title": "Require Optional Dependencies",
+      "type": "boolean"
+    },
+    "require_security_metadata": {
+      "default": false,
+      "title": "Require Security Metadata",
+      "type": "boolean"
+    },
+    "require_signed_schema_bundle": {
+      "default": false,
+      "title": "Require Signed Schema Bundle",
+      "type": "boolean"
+    }
+  },
+  "title": "ProductionReadinessProfile",
+  "type": "object"
+}

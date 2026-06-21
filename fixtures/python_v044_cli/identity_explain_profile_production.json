@@ -1,0 +1,39 @@
+{
+  "identity_limit": "cryptographic identity proves protocol-relative key control only; it does not prove legal identity, real-world personhood, organizational authority, or global uniqueness",
+  "packet_promotion_policy": {
+    "allow_residual_external_obligations": false,
+    "minimum_confidence_lower_bound": 0.5,
+    "require_agent_identity_attestation": true,
+    "require_edge_certificate": true,
+    "require_issuer_in_population": true,
+    "require_receiver_compatibility": true,
+    "require_rollback_available": true,
+    "require_route_resolution": true
+  },
+  "profile": "production",
+  "sybil_policy": {
+    "allow_homogeneous_fleet_with_unique_keys": true,
+    "max_agents_per_fleet": 4,
+    "max_agents_per_issuer": null,
+    "max_agents_per_model_digest": null,
+    "max_agents_per_policy_digest": null,
+    "max_clone_fanout": 1,
+    "metadata": {
+      "purpose": "production packet issuer and population checks"
+    },
+    "minimum_identity_strength": "public-key-attested",
+    "policy_id": "sybil-policy:production",
+    "reject_expired": true,
+    "reject_failed_signatures": true,
+    "reject_revoked": true,
+    "require_credential_ref": false,
+    "require_distinct_role_or_worker_index_for_fleet": false,
+    "require_issuer_id": false,
+    "require_unique_agent_id": true,
+    "require_unique_credential_ref": false,
+    "require_unique_public_key_fingerprint": true,
+    "require_unique_public_key_id": true,
+    "required_identity_evidence_refs": [],
+    "trust_profile": "production"
+  }
+}

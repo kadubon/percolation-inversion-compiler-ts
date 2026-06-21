@@ -1,0 +1,33 @@
+{
+  "description": "Finite attention occupation by queue class.",
+  "properties": {
+    "attention_budget": {
+      "title": "Attention Budget",
+      "type": "number"
+    },
+    "occupied": {
+      "default": 0.0,
+      "title": "Occupied",
+      "type": "number"
+    },
+    "occupied_by_class": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Occupied By Class",
+      "type": "object"
+    },
+    "unknown_occupation": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unknown Occupation",
+      "type": "array"
+    }
+  },
+  "required": [
+    "attention_budget"
+  ],
+  "title": "OccupationLedger",
+  "type": "object"
+}

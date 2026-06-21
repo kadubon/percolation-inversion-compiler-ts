@@ -1,0 +1,213 @@
+{
+  "$defs": {
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "VerificationThroughputReport": {
+      "description": "Finite throughput dashboard for verifier queue health.",
+      "properties": {
+        "abstained_packets": {
+          "default": 0,
+          "title": "Abstained Packets",
+          "type": "integer"
+        },
+        "accepted_packets": {
+          "default": 0,
+          "title": "Accepted Packets",
+          "type": "integer"
+        },
+        "evidence_hash_mismatch_rate": {
+          "default": 0.0,
+          "title": "Evidence Hash Mismatch Rate",
+          "type": "number"
+        },
+        "false_liquidity_rate": {
+          "default": 0.0,
+          "title": "False Liquidity Rate",
+          "type": "number"
+        },
+        "low_contribution_queue_occupation": {
+          "default": 0.0,
+          "title": "Low Contribution Queue Occupation",
+          "type": "number"
+        },
+        "packet_inflow": {
+          "default": 0,
+          "title": "Packet Inflow",
+          "type": "integer"
+        },
+        "rejected_packets": {
+          "default": 0,
+          "title": "Rejected Packets",
+          "type": "integer"
+        },
+        "residual_debt_growth": {
+          "default": 0.0,
+          "title": "Residual Debt Growth",
+          "type": "number"
+        },
+        "stale_packet_ratio": {
+          "default": 0.0,
+          "title": "Stale Packet Ratio",
+          "type": "number"
+        },
+        "unresolved_obligation_backlog": {
+          "default": 0,
+          "title": "Unresolved Obligation Backlog",
+          "type": "integer"
+        },
+        "verifier_latency_proxy": {
+          "default": 0.0,
+          "title": "Verifier Latency Proxy",
+          "type": "number"
+        }
+      },
+      "title": "VerificationThroughputReport",
+      "type": "object"
+    }
+  },
+  "description": "ECPT ASI-proxy phase bundle dashboard.",
+  "properties": {
+    "components": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Components",
+      "type": "object"
+    },
+    "dashboard_id": {
+      "title": "Dashboard Id",
+      "type": "string"
+    },
+    "distance_to_threshold": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Distance To Threshold",
+      "type": "object"
+    },
+    "limiting_components": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limiting Components",
+      "type": "array"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "threshold": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Threshold",
+      "type": "object"
+    },
+    "throughput": {
+      "$ref": "#/$defs/VerificationThroughputReport"
+    }
+  },
+  "required": [
+    "dashboard_id",
+    "components",
+    "threshold",
+    "distance_to_threshold"
+  ],
+  "title": "PsiDashboard",
+  "type": "object"
+}

@@ -1,0 +1,3373 @@
+{
+  "$defs": {
+    "AcceptedPacketPath": {
+      "description": "Accepted packet path witness into a finite ECPT basin.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "cost": {
+          "default": 0.0,
+          "title": "Cost",
+          "type": "number"
+        },
+        "edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Edge Ids",
+          "type": "array"
+        },
+        "packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Packet Ids",
+          "type": "array"
+        },
+        "path_id": {
+          "title": "Path Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "route_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Route Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path_id"
+      ],
+      "title": "AcceptedPacketPath",
+      "type": "object"
+    },
+    "ActionCommit": {
+      "description": "Commit decision for a planned action under the configured policy.",
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "committed": {
+          "default": false,
+          "title": "Committed",
+          "type": "boolean"
+        },
+        "finite_scope_usable": {
+          "default": false,
+          "title": "Finite Scope Usable",
+          "type": "boolean"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "policy": {
+          "$ref": "#/$defs/ActionCommitPolicy"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "recommended": {
+          "default": true,
+          "title": "Recommended",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "verifier_resolution_required": {
+          "default": true,
+          "title": "Verifier Resolution Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "action_id",
+        "policy"
+      ],
+      "title": "ActionCommit",
+      "type": "object"
+    },
+    "ActionCommitPolicy": {
+      "description": "How aggressively a runtime may turn ranked advice into agent commitments.",
+      "enum": [
+        "recommend_only",
+        "require_verifier_resolution",
+        "allow_finite_scope_commit"
+      ],
+      "title": "ActionCommitPolicy",
+      "type": "string"
+    },
+    "AgentTask": {
+      "description": "Concrete next action for an AI agent or orchestration system.",
+      "properties": {
+        "action_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Action Id"
+        },
+        "action_kind": {
+          "title": "Action Kind",
+          "type": "string"
+        },
+        "expected_proxy_gain": {
+          "default": 0.0,
+          "title": "Expected Proxy Gain",
+          "type": "number"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Metadata",
+          "type": "object"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "priority_score": {
+          "title": "Priority Score",
+          "type": "number"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "required_evidence_kind": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Evidence Kind",
+          "type": "array"
+        },
+        "required_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Routes",
+          "type": "array"
+        },
+        "residual_coordinates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual Coordinates",
+          "type": "array"
+        },
+        "rollback_condition": {
+          "default": "runtime-score-nonpositive",
+          "title": "Rollback Condition",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "target_component": {
+          "title": "Target Component",
+          "type": "string"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "task_type": {
+          "title": "Task Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task_id",
+        "task_type",
+        "priority_score",
+        "target_component",
+        "action_kind"
+      ],
+      "title": "AgentTask",
+      "type": "object"
+    },
+    "BasinReachabilityReport": {
+      "description": "Finite basin reachability report for ECPT target contracts.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "accepted_edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Edge Ids",
+          "type": "array"
+        },
+        "accepted_paths": {
+          "items": {
+            "$ref": "#/$defs/AcceptedPacketPath"
+          },
+          "title": "Accepted Paths",
+          "type": "array"
+        },
+        "basin_id": {
+          "title": "Basin Id",
+          "type": "string"
+        },
+        "missing_edge_types": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Edge Types",
+          "type": "array"
+        },
+        "missing_packet_types": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Packet Types",
+          "type": "array"
+        },
+        "missing_verifier_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Verifier Routes",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "path_cost_lower_bound": {
+          "default": 0.0,
+          "title": "Path Cost Lower Bound",
+          "type": "number"
+        },
+        "reachable_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reachable Packet Ids",
+          "type": "array"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "receiver_compatible": {
+          "default": false,
+          "title": "Receiver Compatible",
+          "type": "boolean"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "report_id",
+        "basin_id"
+      ],
+      "title": "BasinReachabilityReport",
+      "type": "object"
+    },
+    "BottleneckIntervention": {
+      "description": "One ranked bottleneck-inversion intervention.",
+      "properties": {
+        "action_kind": {
+          "title": "Action Kind",
+          "type": "string"
+        },
+        "expected_gain": {
+          "default": 0.0,
+          "title": "Expected Gain",
+          "type": "number"
+        },
+        "intervention_id": {
+          "title": "Intervention Id",
+          "type": "string"
+        },
+        "post_intervention_horizon": {
+          "default": 1,
+          "title": "Post Intervention Horizon",
+          "type": "integer"
+        },
+        "required_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Routes",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "risk_charge": {
+          "default": 0.0,
+          "title": "Risk Charge",
+          "type": "number"
+        },
+        "rollback_condition": {
+          "default": "no-positive-finite-gain",
+          "title": "Rollback Condition",
+          "type": "string"
+        },
+        "score": {
+          "default": 0.0,
+          "title": "Score",
+          "type": "number"
+        },
+        "target_component": {
+          "title": "Target Component",
+          "type": "string"
+        },
+        "verification_cost": {
+          "default": 0.0,
+          "title": "Verification Cost",
+          "type": "number"
+        }
+      },
+      "required": [
+        "intervention_id",
+        "target_component",
+        "action_kind"
+      ],
+      "title": "BottleneckIntervention",
+      "type": "object"
+    },
+    "BottleneckInversionPlan": {
+      "description": "Ranked plan for improving limiting ECPT proxy components.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "after_psi_lower_bound": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "After Psi Lower Bound",
+          "type": "object"
+        },
+        "before_psi": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Before Psi",
+          "type": "object"
+        },
+        "interventions": {
+          "items": {
+            "$ref": "#/$defs/BottleneckIntervention"
+          },
+          "title": "Interventions",
+          "type": "array"
+        },
+        "limiting_components": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limiting Components",
+          "type": "array"
+        },
+        "plan_id": {
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "plan_id"
+      ],
+      "title": "BottleneckInversionPlan",
+      "type": "object"
+    },
+    "BottleneckWitnessReport": {
+      "description": "Portable BIT witness task extracted from runtime bottleneck diagnostics.",
+      "properties": {
+        "action_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Action Id"
+        },
+        "action_kind": {
+          "default": "",
+          "title": "Action Kind",
+          "type": "string"
+        },
+        "burden_delta": {
+          "default": 0.0,
+          "title": "Burden Delta",
+          "type": "number"
+        },
+        "next_verifier_route": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Next Verifier Route"
+        },
+        "next_verifier_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Next Verifier Routes",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "portable_task_kind": {
+          "default": "runtime-bottleneck-verifier-task",
+          "title": "Portable Task Kind",
+          "type": "string"
+        },
+        "priority_score": {
+          "default": 0.0,
+          "title": "Priority Score",
+          "type": "number"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "release_delta": {
+          "default": 0.0,
+          "title": "Release Delta",
+          "type": "number"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "required_evidence_kind": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Evidence Kind",
+          "type": "array"
+        },
+        "residual_coordinates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual Coordinates",
+          "type": "array"
+        },
+        "rollback_condition": {
+          "default": "runtime-score-nonpositive",
+          "title": "Rollback Condition",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "simulation_barrier_residuals": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Simulation Barrier Residuals",
+          "type": "array"
+        },
+        "target_component": {
+          "default": "",
+          "title": "Target Component",
+          "type": "string"
+        },
+        "task_id": {
+          "default": "",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "witness_kind": {
+          "default": "bottleneck-intervention",
+          "title": "Witness Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "report_id"
+      ],
+      "title": "BottleneckWitnessReport",
+      "type": "object"
+    },
+    "CapabilityPacketCandidate": {
+      "description": "An observable artifact that may become an ECPT capability packet.",
+      "properties": {
+        "authority_granted": {
+          "default": true,
+          "title": "Authority Granted",
+          "type": "boolean"
+        },
+        "authority_required": {
+          "default": false,
+          "title": "Authority Required",
+          "type": "boolean"
+        },
+        "claim": {
+          "title": "Claim",
+          "type": "string"
+        },
+        "content_sha256": {
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "dependencies": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Dependencies",
+          "type": "array"
+        },
+        "evidence_hash_valid": {
+          "default": true,
+          "title": "Evidence Hash Valid",
+          "type": "boolean"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "expected_downstream_gain": {
+          "default": 0.0,
+          "title": "Expected Downstream Gain",
+          "type": "number"
+        },
+        "expires_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expires At"
+        },
+        "freshness": {
+          "default": 1.0,
+          "title": "Freshness",
+          "type": "number"
+        },
+        "hazard_charge": {
+          "default": 0.0,
+          "title": "Hazard Charge",
+          "type": "number"
+        },
+        "identity_contribution_status": {
+          "$ref": "#/$defs/IdentityContributionStatus",
+          "default": "provisional"
+        },
+        "issuer_agent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Agent Id"
+        },
+        "issuer_attestation_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Attestation Id"
+        },
+        "issuer_public_key_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Public Key Id"
+        },
+        "issuer_signature_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Signature Ref"
+        },
+        "packet_id": {
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "receiver_family": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Receiver Family",
+          "type": "array"
+        },
+        "residual_charge": {
+          "default": 0.0,
+          "title": "Residual Charge",
+          "type": "number"
+        },
+        "reuse_context": {
+          "default": "general",
+          "title": "Reuse Context",
+          "type": "string"
+        },
+        "rollback_available": {
+          "default": true,
+          "title": "Rollback Available",
+          "type": "boolean"
+        },
+        "route_safe": {
+          "default": true,
+          "title": "Route Safe",
+          "type": "boolean"
+        },
+        "salience_class": {
+          "default": "default",
+          "title": "Salience Class",
+          "type": "string"
+        },
+        "source_kind": {
+          "$ref": "#/$defs/PacketSourceKind",
+          "default": "local"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "provisional"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        },
+        "verification_cost": {
+          "default": 0.0,
+          "title": "Verification Cost",
+          "type": "number"
+        },
+        "verifier_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verifier Routes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "packet_id",
+        "source_ref",
+        "content_sha256",
+        "claim"
+      ],
+      "title": "CapabilityPacketCandidate",
+      "type": "object"
+    },
+    "CapabilityPacketRegistry": {
+      "description": "Deterministic packet registry for an ECPT packet ecology run.",
+      "properties": {
+        "edges": {
+          "items": {
+            "$ref": "#/$defs/EdgeWitness"
+          },
+          "title": "Edges",
+          "type": "array"
+        },
+        "packets": {
+          "items": {
+            "$ref": "#/$defs/CapabilityPacketCandidate"
+          },
+          "title": "Packets",
+          "type": "array"
+        },
+        "registry_id": {
+          "title": "Registry Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        }
+      },
+      "required": [
+        "registry_id"
+      ],
+      "title": "CapabilityPacketRegistry",
+      "type": "object"
+    },
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "DiagnosticReservePolicy": {
+      "description": "Reserve rule for diagnostic work and audit recursion.",
+      "properties": {
+        "audit_depth": {
+          "default": 1,
+          "title": "Audit Depth",
+          "type": "integer"
+        },
+        "minimum_reserve": {
+          "default": 0.0,
+          "title": "Minimum Reserve",
+          "type": "number"
+        },
+        "reserve_fraction": {
+          "default": 0.1,
+          "title": "Reserve Fraction",
+          "type": "number"
+        }
+      },
+      "title": "DiagnosticReservePolicy",
+      "type": "object"
+    },
+    "DischargeLevel": {
+      "enum": [
+        "finite_value_check",
+        "replay_check",
+        "contract_enforced",
+        "external_domain_required"
+      ],
+      "title": "DischargeLevel",
+      "type": "string"
+    },
+    "EdgeRelationVerificationReport": {
+      "description": "Semantic finite check for an edge certificate relation.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "certificate_id": {
+          "title": "Certificate Id",
+          "type": "string"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "matched_evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Matched Evidence Refs",
+          "type": "array"
+        },
+        "missing_evidence_markers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Evidence Markers",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "relation_type": {
+          "title": "Relation Type",
+          "type": "string"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "report_id",
+        "certificate_id",
+        "relation_type"
+      ],
+      "title": "EdgeRelationVerificationReport",
+      "type": "object"
+    },
+    "EdgeWitness": {
+      "description": "Finite witness that one or more packets support another packet or receiver.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "confidence": {
+          "default": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "edge_id": {
+          "title": "Edge Id",
+          "type": "string"
+        },
+        "edge_type": {
+          "default": "semantic-dependency",
+          "title": "Edge Type",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "expires_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expires At"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual": {
+          "default": 0.0,
+          "title": "Residual",
+          "type": "number"
+        },
+        "source_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Packet Ids",
+          "type": "array"
+        },
+        "target_packet_id": {
+          "title": "Target Packet Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "edge_id",
+        "source_packet_ids",
+        "target_packet_id"
+      ],
+      "title": "EdgeWitness",
+      "type": "object"
+    },
+    "EvidenceResolutionBatch": {
+      "description": "Batch verifier evidence resolution for one runtime step.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "accepted_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Obligations",
+          "type": "array"
+        },
+        "batch_id": {
+          "title": "Batch Id",
+          "type": "string"
+        },
+        "envelope_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Envelope Refs",
+          "type": "array"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "rejected_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Obligations",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "resolutions": {
+          "items": {
+            "$ref": "#/$defs/VerifierResolution"
+          },
+          "title": "Resolutions",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "unresolved_envelope_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unresolved Envelope Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "batch_id"
+      ],
+      "title": "EvidenceResolutionBatch",
+      "type": "object"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "EvidenceVerificationProfile": {
+      "enum": [
+        "development",
+        "research",
+        "production"
+      ],
+      "title": "EvidenceVerificationProfile",
+      "type": "string"
+    },
+    "FrontierDebtReport": {
+      "description": "Typed TRC frontier debt summary for finite runtime outputs.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "external_obligation_count": {
+          "default": 0,
+          "title": "External Obligation Count",
+          "type": "integer"
+        },
+        "frontier_debt_classes": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Frontier Debt Classes",
+          "type": "object"
+        },
+        "hybrid_residual_propagation_count": {
+          "default": 0,
+          "title": "Hybrid Residual Propagation Count",
+          "type": "integer"
+        },
+        "missing_obligation_count": {
+          "default": 0,
+          "title": "Missing Obligation Count",
+          "type": "integer"
+        },
+        "missing_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Obligations",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "partial_frontier_debt_count": {
+          "default": 0,
+          "title": "Partial Frontier Debt Count",
+          "type": "integer"
+        },
+        "physical_hybrid_obligation_count": {
+          "default": 0,
+          "title": "Physical Hybrid Obligation Count",
+          "type": "integer"
+        },
+        "physical_null_channel_debt_count": {
+          "default": 0,
+          "title": "Physical Null Channel Debt Count",
+          "type": "integer"
+        },
+        "progressive_fidelity_debt_count": {
+          "default": 0,
+          "title": "Progressive Fidelity Debt Count",
+          "type": "integer"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "report_id": {
+          "default": "frontier-debt:runtime",
+          "title": "Report Id",
+          "type": "string"
+        },
+        "residual_burden": {
+          "default": 0.0,
+          "title": "Residual Burden",
+          "type": "number"
+        },
+        "residual_coordinate_count": {
+          "default": 0,
+          "title": "Residual Coordinate Count",
+          "type": "integer"
+        },
+        "residual_coordinates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual Coordinates",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "telemetry_resource_cost_debt_count": {
+          "default": 0,
+          "title": "Telemetry Resource Cost Debt Count",
+          "type": "integer"
+        },
+        "trace_normal_form_debt_count": {
+          "default": 0,
+          "title": "Trace Normal Form Debt Count",
+          "type": "integer"
+        },
+        "trace_or_frontier_debt_count": {
+          "default": 0,
+          "title": "Trace Or Frontier Debt Count",
+          "type": "integer"
+        }
+      },
+      "title": "FrontierDebtReport",
+      "type": "object"
+    },
+    "IdentityContributionStatus": {
+      "description": "How identity evidence may contribute to runtime packet capital.",
+      "enum": [
+        "verified",
+        "provisional",
+        "diagnostic",
+        "quarantined",
+        "rejected"
+      ],
+      "title": "IdentityContributionStatus",
+      "type": "string"
+    },
+    "IntakeProvenanceRecord": {
+      "description": "Sanitized provenance for external packet candidates.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "byte_count": {
+          "default": 0,
+          "title": "Byte Count",
+          "type": "integer"
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Sha256"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Final Url"
+        },
+        "media_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Media Type"
+        },
+        "provenance_id": {
+          "title": "Provenance Id",
+          "type": "string"
+        },
+        "public_source_ref": {
+          "title": "Public Source Ref",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "redirect_chain": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Redirect Chain",
+          "type": "array"
+        },
+        "residual_coordinates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual Coordinates",
+          "type": "array"
+        },
+        "robots_decision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RobotsDecision"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "source_kind": {
+          "$ref": "#/$defs/PacketSourceKind"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "status_code": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status Code"
+        }
+      },
+      "required": [
+        "provenance_id",
+        "source_kind",
+        "source_ref",
+        "public_source_ref"
+      ],
+      "title": "IntakeProvenanceRecord",
+      "type": "object"
+    },
+    "InterventionCandidate": {
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/PhaseControlAction"
+        },
+        "baseline_proxy_mass": {
+          "default": 0.0,
+          "title": "Baseline Proxy Mass",
+          "type": "number"
+        },
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "controlled_proxy_mass": {
+          "default": 0.0,
+          "title": "Controlled Proxy Mass",
+          "type": "number"
+        },
+        "finite_proxy_gain": {
+          "default": 0.0,
+          "title": "Finite Proxy Gain",
+          "type": "number"
+        },
+        "finite_scope_usable": {
+          "default": false,
+          "title": "Finite Scope Usable",
+          "type": "boolean"
+        },
+        "missing_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Obligations",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "required_evidence_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Evidence Routes",
+          "type": "array"
+        },
+        "residual_charge": {
+          "default": 0.0,
+          "title": "Residual Charge",
+          "type": "number"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "resource_cost": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Resource Cost",
+          "type": "object"
+        },
+        "risk_charge": {
+          "default": 0.0,
+          "title": "Risk Charge",
+          "type": "number"
+        },
+        "score": {
+          "default": 0.0,
+          "title": "Score",
+          "type": "number"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "action"
+      ],
+      "title": "InterventionCandidate",
+      "type": "object"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "OccupationLedger": {
+      "description": "Finite attention occupation by queue class.",
+      "properties": {
+        "attention_budget": {
+          "title": "Attention Budget",
+          "type": "number"
+        },
+        "occupied": {
+          "default": 0.0,
+          "title": "Occupied",
+          "type": "number"
+        },
+        "occupied_by_class": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Occupied By Class",
+          "type": "object"
+        },
+        "unknown_occupation": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unknown Occupation",
+          "type": "array"
+        }
+      },
+      "required": [
+        "attention_budget"
+      ],
+      "title": "OccupationLedger",
+      "type": "object"
+    },
+    "PacketIngestionReport": {
+      "description": "Packet ingestion result for local, live, or agent-output sources.",
+      "properties": {
+        "accepted": {
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "packets": {
+          "items": {
+            "$ref": "#/$defs/CapabilityPacketCandidate"
+          },
+          "title": "Packets",
+          "type": "array"
+        },
+        "provenance": {
+          "items": {
+            "$ref": "#/$defs/IntakeProvenanceRecord"
+          },
+          "title": "Provenance",
+          "type": "array"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "rejected_sources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Sources",
+          "type": "array"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "source_kind": {
+          "$ref": "#/$defs/PacketSourceKind"
+        },
+        "web_fetch_reports": {
+          "items": {
+            "$ref": "#/$defs/WebFetchReport"
+          },
+          "title": "Web Fetch Reports",
+          "type": "array"
+        }
+      },
+      "required": [
+        "report_id",
+        "accepted",
+        "source_kind"
+      ],
+      "title": "PacketIngestionReport",
+      "type": "object"
+    },
+    "PacketPromotionReport": {
+      "description": "Batch packet promotion output for runtime steps.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "identity_contribution_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Identity Contribution Summary",
+          "type": "object"
+        },
+        "rejected_packets": {
+          "items": {
+            "$ref": "#/$defs/PacketRejection"
+          },
+          "title": "Rejected Packets",
+          "type": "array"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "safety_invariants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safety Invariants",
+          "type": "array"
+        },
+        "verified_packets": {
+          "items": {
+            "$ref": "#/$defs/VerifiedCapabilityPacket"
+          },
+          "title": "Verified Packets",
+          "type": "array"
+        }
+      },
+      "required": [
+        "report_id"
+      ],
+      "title": "PacketPromotionReport",
+      "type": "object"
+    },
+    "PacketRejection": {
+      "description": "Machine-readable packet promotion rejection.",
+      "properties": {
+        "identity_contribution_status": {
+          "$ref": "#/$defs/IdentityContributionStatus",
+          "default": "rejected"
+        },
+        "packet_id": {
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "source_candidate_id": {
+          "title": "Source Candidate Id",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "diagnostic"
+        }
+      },
+      "required": [
+        "packet_id",
+        "source_candidate_id"
+      ],
+      "title": "PacketRejection",
+      "type": "object"
+    },
+    "PacketSourceKind": {
+      "enum": [
+        "local",
+        "github",
+        "zenodo",
+        "arxiv",
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "agent-message",
+        "agent-inbox",
+        "web-crawl",
+        "agent-output",
+        "auto"
+      ],
+      "title": "PacketSourceKind",
+      "type": "string"
+    },
+    "PhaseAccelerationScore": {
+      "description": "Finite ECPT ASI-proxy acceleration score for ranking runtime outputs.",
+      "properties": {
+        "components": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Components",
+          "type": "object"
+        },
+        "false_liquidity_charge": {
+          "default": 0.0,
+          "title": "False Liquidity Charge",
+          "type": "number"
+        },
+        "finite_proxy_gain": {
+          "default": 0.0,
+          "title": "Finite Proxy Gain",
+          "type": "number"
+        },
+        "missing_route_charge": {
+          "default": 0.0,
+          "title": "Missing Route Charge",
+          "type": "number"
+        },
+        "psi_distance_reduction": {
+          "default": 0.0,
+          "title": "Psi Distance Reduction",
+          "type": "number"
+        },
+        "residual_debt_charge": {
+          "default": 0.0,
+          "title": "Residual Debt Charge",
+          "type": "number"
+        },
+        "risk_charge": {
+          "default": 0.0,
+          "title": "Risk Charge",
+          "type": "number"
+        },
+        "score_id": {
+          "title": "Score Id",
+          "type": "string"
+        },
+        "stale_packet_charge": {
+          "default": 0.0,
+          "title": "Stale Packet Charge",
+          "type": "number"
+        },
+        "total_score": {
+          "title": "Total Score",
+          "type": "number"
+        },
+        "verification_throughput_score": {
+          "default": 0.0,
+          "title": "Verification Throughput Score",
+          "type": "number"
+        }
+      },
+      "required": [
+        "score_id",
+        "total_score"
+      ],
+      "title": "PhaseAccelerationScore",
+      "type": "object"
+    },
+    "PhaseControlAction": {
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "activation_delta": {
+          "default": 0.0,
+          "title": "Activation Delta",
+          "type": "number"
+        },
+        "burden_delta": {
+          "default": 0.0,
+          "title": "Burden Delta",
+          "type": "number"
+        },
+        "postconditions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Postconditions",
+          "type": "array"
+        },
+        "preconditions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preconditions",
+          "type": "array"
+        },
+        "required_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Obligations",
+          "type": "array"
+        },
+        "residual_charge": {
+          "default": 0.0,
+          "title": "Residual Charge",
+          "type": "number"
+        },
+        "resource_cost": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Resource Cost",
+          "type": "object"
+        },
+        "risk_charge": {
+          "default": 0.0,
+          "title": "Risk Charge",
+          "type": "number"
+        },
+        "source_nodes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Nodes",
+          "type": "array"
+        },
+        "target_node": {
+          "title": "Target Node",
+          "type": "string"
+        },
+        "verifier_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verifier Routes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "action_id",
+        "target_node"
+      ],
+      "title": "PhaseControlAction",
+      "type": "object"
+    },
+    "PhaseControlAuditSummary": {
+      "description": "Typed ECPT phase-control diagnostics derived from a finite runtime step.",
+      "properties": {
+        "baseline_comparison_label": {
+          "default": "unavailable",
+          "title": "Baseline Comparison Label",
+          "type": "string"
+        },
+        "baseline_comparison_ready": {
+          "default": false,
+          "title": "Baseline Comparison Ready",
+          "type": "boolean"
+        },
+        "baseline_proxy_mass": {
+          "default": 0.0,
+          "title": "Baseline Proxy Mass",
+          "type": "number"
+        },
+        "candidate_count": {
+          "default": 0,
+          "title": "Candidate Count",
+          "type": "integer"
+        },
+        "controlled_proxy_mass": {
+          "default": 0.0,
+          "title": "Controlled Proxy Mass",
+          "type": "number"
+        },
+        "duplicate_mass_excluded": {
+          "default": false,
+          "title": "Duplicate Mass Excluded",
+          "type": "boolean"
+        },
+        "execution_availability_required": {
+          "default": true,
+          "title": "Execution Availability Required",
+          "type": "boolean"
+        },
+        "execution_available_path_count": {
+          "default": 0,
+          "title": "Execution Available Path Count",
+          "type": "integer"
+        },
+        "finite_proxy_gain_total": {
+          "default": 0.0,
+          "title": "Finite Proxy Gain Total",
+          "type": "number"
+        },
+        "missing_obligation_count": {
+          "default": 0,
+          "title": "Missing Obligation Count",
+          "type": "integer"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "partial": {
+          "default": false,
+          "title": "Partial",
+          "type": "boolean"
+        },
+        "proxy_bundle_coordinate_count": {
+          "default": 0,
+          "title": "Proxy Bundle Coordinate Count",
+          "type": "integer"
+        },
+        "proxy_bundle_mass": {
+          "default": 0.0,
+          "title": "Proxy Bundle Mass",
+          "type": "number"
+        },
+        "proxy_target_grounding_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Proxy Target Grounding Refs",
+          "type": "array"
+        },
+        "proxy_target_grounding_required": {
+          "default": true,
+          "title": "Proxy Target Grounding Required",
+          "type": "boolean"
+        },
+        "queue_capacity_constraints_visible": {
+          "default": false,
+          "title": "Queue Capacity Constraints Visible",
+          "type": "boolean"
+        },
+        "queue_capacity_margin": {
+          "default": 0.0,
+          "title": "Queue Capacity Margin",
+          "type": "number"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "selected_action_count": {
+          "default": 0,
+          "title": "Selected Action Count",
+          "type": "integer"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "split_certificate_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Split Certificate Refs",
+          "type": "array"
+        },
+        "split_certified_quotient_ready": {
+          "default": false,
+          "title": "Split Certified Quotient Ready",
+          "type": "boolean"
+        },
+        "summary_id": {
+          "default": "phase-control-audit:runtime",
+          "title": "Summary Id",
+          "type": "string"
+        },
+        "target_id": {
+          "default": "",
+          "title": "Target Id",
+          "type": "string"
+        },
+        "target_node_count": {
+          "default": 0,
+          "title": "Target Node Count",
+          "type": "integer"
+        }
+      },
+      "title": "PhaseControlAuditSummary",
+      "type": "object"
+    },
+    "PhaseControlPlan": {
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "candidates": {
+          "items": {
+            "$ref": "#/$defs/InterventionCandidate"
+          },
+          "title": "Candidates",
+          "type": "array"
+        },
+        "finite_proxy_gain_total": {
+          "default": 0.0,
+          "title": "Finite Proxy Gain Total",
+          "type": "number"
+        },
+        "missing_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Obligations",
+          "type": "array"
+        },
+        "objective_id": {
+          "title": "Objective Id",
+          "type": "string"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "partial": {
+          "default": true,
+          "title": "Partial",
+          "type": "boolean"
+        },
+        "plan_id": {
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "profile": {
+          "default": "development",
+          "title": "Profile",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "required_evidence_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Evidence Routes",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "score": {
+          "default": 0.0,
+          "title": "Score",
+          "type": "number"
+        },
+        "selected_actions": {
+          "items": {
+            "$ref": "#/$defs/PhaseControlAction"
+          },
+          "title": "Selected Actions",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "diagnostic"
+        }
+      },
+      "required": [
+        "plan_id",
+        "objective_id"
+      ],
+      "title": "PhaseControlPlan",
+      "type": "object"
+    },
+    "PhaseControlRunReport": {
+      "properties": {
+        "baseline_reachable_mass": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Baseline Reachable Mass",
+          "type": "object"
+        },
+        "controlled_reachable_mass": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Controlled Reachable Mass",
+          "type": "object"
+        },
+        "plan": {
+          "$ref": "#/$defs/PhaseControlPlan"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "safety_invariants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safety Invariants",
+          "type": "array"
+        },
+        "state_id": {
+          "title": "State Id",
+          "type": "string"
+        },
+        "target_id": {
+          "title": "Target Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "report_id",
+        "state_id",
+        "target_id",
+        "plan"
+      ],
+      "title": "PhaseControlRunReport",
+      "type": "object"
+    },
+    "PsiDashboard": {
+      "description": "ECPT ASI-proxy phase bundle dashboard.",
+      "properties": {
+        "components": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Components",
+          "type": "object"
+        },
+        "dashboard_id": {
+          "title": "Dashboard Id",
+          "type": "string"
+        },
+        "distance_to_threshold": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Distance To Threshold",
+          "type": "object"
+        },
+        "limiting_components": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limiting Components",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "safety_invariants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safety Invariants",
+          "type": "array"
+        },
+        "threshold": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Threshold",
+          "type": "object"
+        },
+        "throughput": {
+          "$ref": "#/$defs/VerificationThroughputReport"
+        }
+      },
+      "required": [
+        "dashboard_id",
+        "components",
+        "threshold",
+        "distance_to_threshold"
+      ],
+      "title": "PsiDashboard",
+      "type": "object"
+    },
+    "QuarantineLedger": {
+      "description": "Fail-closed quarantine and rollback ledger.",
+      "properties": {
+        "quarantined_items": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Quarantined Items",
+          "type": "array"
+        },
+        "reasons": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Reasons",
+          "type": "object"
+        },
+        "rollback_items": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rollback Items",
+          "type": "array"
+        }
+      },
+      "title": "QuarantineLedger",
+      "type": "object"
+    },
+    "RiskBudgetLedger": {
+      "description": "Finite SQOT risk budget ledger.",
+      "properties": {
+        "risk_budget": {
+          "default": 0.0,
+          "title": "Risk Budget",
+          "type": "number"
+        },
+        "risk_charges": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Risk Charges",
+          "type": "object"
+        }
+      },
+      "title": "RiskBudgetLedger",
+      "type": "object"
+    },
+    "RobotsDecision": {
+      "description": "Recorded robots/rate decision for bounded web intake.\n\nThis is an audit record, not a guarantee that the remote site authorizes\nevery downstream use.  Unknown or unavailable policy can remain diagnostic\nunder stricter profiles.",
+      "properties": {
+        "allowed": {
+          "default": true,
+          "title": "Allowed",
+          "type": "boolean"
+        },
+        "decision_id": {
+          "default": "robots:not-checked",
+          "title": "Decision Id",
+          "type": "string"
+        },
+        "mode": {
+          "default": "not-checked",
+          "title": "Mode",
+          "type": "string"
+        },
+        "reason": {
+          "default": "robots policy was recorded but not enforced",
+          "title": "Reason",
+          "type": "string"
+        },
+        "residual_coordinate": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Residual Coordinate"
+        },
+        "source_ref": {
+          "default": "",
+          "title": "Source Ref",
+          "type": "string"
+        }
+      },
+      "title": "RobotsDecision",
+      "type": "object"
+    },
+    "RouteExecutionRequest": {
+      "description": "Verifier-route work item emitted by the runtime.",
+      "properties": {
+        "obligation_category": {
+          "title": "Obligation Category",
+          "type": "string"
+        },
+        "priority_score": {
+          "default": 0.0,
+          "title": "Priority Score",
+          "type": "number"
+        },
+        "request_id": {
+          "title": "Request Id",
+          "type": "string"
+        },
+        "required_evidence_kind": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Evidence Kind",
+          "type": "array"
+        },
+        "residual_external_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual External Obligations",
+          "type": "array"
+        },
+        "residual_policy": {
+          "title": "Residual Policy",
+          "type": "string"
+        },
+        "route_id": {
+          "title": "Route Id",
+          "type": "string"
+        },
+        "safe_default": {
+          "title": "Safe Default",
+          "type": "string"
+        },
+        "settlement_scope": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Settlement Scope",
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "diagnostic"
+        },
+        "verifier_route": {
+          "title": "Verifier Route",
+          "type": "string"
+        }
+      },
+      "required": [
+        "request_id",
+        "route_id",
+        "verifier_route",
+        "obligation_category",
+        "safe_default",
+        "residual_policy"
+      ],
+      "title": "RouteExecutionRequest",
+      "type": "object"
+    },
+    "RuntimeEvent": {
+      "description": "Append-only runtime event for audit and replay.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "event_type": {
+          "title": "Event Type",
+          "type": "string"
+        },
+        "payload_ref": {
+          "title": "Payload Ref",
+          "type": "string"
+        },
+        "payload_sha256": {
+          "title": "Payload Sha256",
+          "type": "string"
+        },
+        "residual_delta": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "step_index": {
+          "title": "Step Index",
+          "type": "integer"
+        },
+        "timestamp": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timestamp"
+        }
+      },
+      "required": [
+        "event_id",
+        "event_type",
+        "step_index",
+        "payload_ref",
+        "payload_sha256"
+      ],
+      "title": "RuntimeEvent",
+      "type": "object"
+    },
+    "RuntimeEventLog": {
+      "description": "Deterministic event log with aggregate hash.",
+      "properties": {
+        "aggregate_sha256": {
+          "default": "0000000000000000000000000000000000000000000000000000000000000000",
+          "title": "Aggregate Sha256",
+          "type": "string"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/$defs/RuntimeEvent"
+          },
+          "title": "Events",
+          "type": "array"
+        }
+      },
+      "title": "RuntimeEventLog",
+      "type": "object"
+    },
+    "RuntimeStepReport": {
+      "description": "One deterministic runtime step result.",
+      "properties": {
+        "acceleration_certificate_eligible": {
+          "default": false,
+          "title": "Acceleration Certificate Eligible",
+          "type": "boolean"
+        },
+        "accepted": {
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "action_commits": {
+          "items": {
+            "$ref": "#/$defs/ActionCommit"
+          },
+          "title": "Action Commits",
+          "type": "array"
+        },
+        "agent_tasks": {
+          "items": {
+            "$ref": "#/$defs/AgentTask"
+          },
+          "title": "Agent Tasks",
+          "type": "array"
+        },
+        "allow_live_connectors": {
+          "default": false,
+          "title": "Allow Live Connectors",
+          "type": "boolean"
+        },
+        "basin_reachability": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BasinReachabilityReport"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "bottleneck_plan": {
+          "$ref": "#/$defs/BottleneckInversionPlan"
+        },
+        "bottleneck_witness_reports": {
+          "items": {
+            "$ref": "#/$defs/BottleneckWitnessReport"
+          },
+          "title": "Bottleneck Witness Reports",
+          "type": "array"
+        },
+        "bottleneck_witness_tasks": {
+          "items": {
+            "$ref": "#/$defs/AgentTask"
+          },
+          "title": "Bottleneck Witness Tasks",
+          "type": "array"
+        },
+        "edge_relation_reports": {
+          "items": {
+            "$ref": "#/$defs/EdgeRelationVerificationReport"
+          },
+          "title": "Edge Relation Reports",
+          "type": "array"
+        },
+        "event_log_delta": {
+          "$ref": "#/$defs/RuntimeEventLog"
+        },
+        "evidence_resolution_batch": {
+          "$ref": "#/$defs/EvidenceResolutionBatch"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "frontier_debt_report": {
+          "$ref": "#/$defs/FrontierDebtReport"
+        },
+        "frontier_debt_summary": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "title": "Frontier Debt Summary",
+          "type": "object"
+        },
+        "ingestion_reports": {
+          "items": {
+            "$ref": "#/$defs/PacketIngestionReport"
+          },
+          "title": "Ingestion Reports",
+          "type": "array"
+        },
+        "input_id": {
+          "title": "Input Id",
+          "type": "string"
+        },
+        "missing_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Obligations",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "phase_acceleration_score": {
+          "$ref": "#/$defs/PhaseAccelerationScore"
+        },
+        "phase_control_audit": {
+          "$ref": "#/$defs/PhaseControlAuditSummary"
+        },
+        "phase_control_summary": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "title": "Phase Control Summary",
+          "type": "object"
+        },
+        "phase_run_report": {
+          "$ref": "#/$defs/PhaseControlRunReport"
+        },
+        "promotion_report": {
+          "$ref": "#/$defs/PacketPromotionReport"
+        },
+        "psi": {
+          "$ref": "#/$defs/PsiDashboard"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "registry": {
+          "$ref": "#/$defs/CapabilityPacketRegistry"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "route_execution_requests": {
+          "items": {
+            "$ref": "#/$defs/RouteExecutionRequest"
+          },
+          "title": "Route Execution Requests",
+          "type": "array"
+        },
+        "safety_invariants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safety Invariants",
+          "type": "array"
+        },
+        "salience_schedule": {
+          "$ref": "#/$defs/SalienceScheduleReport"
+        },
+        "schema_valid": {
+          "default": true,
+          "title": "Schema Valid",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "state_id": {
+          "title": "State Id",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "diagnostic"
+        },
+        "step_index": {
+          "title": "Step Index",
+          "type": "integer"
+        },
+        "verified_packet_count": {
+          "default": 0,
+          "title": "Verified Packet Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "report_id",
+        "state_id",
+        "input_id",
+        "step_index",
+        "accepted",
+        "registry",
+        "psi",
+        "bottleneck_plan",
+        "phase_run_report",
+        "salience_schedule",
+        "phase_acceleration_score"
+      ],
+      "title": "RuntimeStepReport",
+      "type": "object"
+    },
+    "SalienceDecision": {
+      "enum": [
+        "run",
+        "defer",
+        "quarantine",
+        "rollback",
+        "abstain"
+      ],
+      "title": "SalienceDecision",
+      "type": "string"
+    },
+    "SalienceScheduleReport": {
+      "description": "Deterministic SQOT scheduling output for agent runners.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "adversarial_transfer_charge": {
+          "default": 0.0,
+          "title": "Adversarial Transfer Charge",
+          "type": "number"
+        },
+        "aggregation_group_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Aggregation Group Counts",
+          "type": "object"
+        },
+        "aggregation_group_occupation": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Aggregation Group Occupation",
+          "type": "object"
+        },
+        "audit_recursion_violations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Audit Recursion Violations",
+          "type": "array"
+        },
+        "decisions": {
+          "items": {
+            "$ref": "#/$defs/SalienceSchedulingDecision"
+          },
+          "title": "Decisions",
+          "type": "array"
+        },
+        "diagnostic_reserve": {
+          "$ref": "#/$defs/DiagnosticReservePolicy"
+        },
+        "distributed_origin_count": {
+          "default": 0,
+          "title": "Distributed Origin Count",
+          "type": "integer"
+        },
+        "effective_diagnostic_reserve": {
+          "default": 0.0,
+          "title": "Effective Diagnostic Reserve",
+          "type": "number"
+        },
+        "false_liquidity_rate": {
+          "default": 0.0,
+          "title": "False Liquidity Rate",
+          "type": "number"
+        },
+        "label_laundering_suspicions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Label Laundering Suspicions",
+          "type": "array"
+        },
+        "latency_deadline_loss": {
+          "default": 0.0,
+          "title": "Latency Deadline Loss",
+          "type": "number"
+        },
+        "low_contribution_occupation": {
+          "default": 0.0,
+          "title": "Low Contribution Occupation",
+          "type": "number"
+        },
+        "occupation_ledger": {
+          "$ref": "#/$defs/OccupationLedger"
+        },
+        "privacy_rejoin_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Privacy Rejoin Refs",
+          "type": "array"
+        },
+        "profile": {
+          "default": "development",
+          "title": "Profile",
+          "type": "string"
+        },
+        "protocol_integrity_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Protocol Integrity Refs",
+          "type": "array"
+        },
+        "quarantine_ledger": {
+          "$ref": "#/$defs/QuarantineLedger"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "residual_debt_growth": {
+          "default": 0.0,
+          "title": "Residual Debt Growth",
+          "type": "number"
+        },
+        "risk_ledger": {
+          "$ref": "#/$defs/RiskBudgetLedger"
+        },
+        "rollback_class_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Rollback Class Summary",
+          "type": "object"
+        },
+        "safety_invariants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safety Invariants",
+          "type": "array"
+        },
+        "sovereignty_kernel_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sovereignty Kernel Refs",
+          "type": "array"
+        },
+        "stale_packet_ratio": {
+          "default": 0.0,
+          "title": "Stale Packet Ratio",
+          "type": "number"
+        },
+        "thermodynamic_discharge_charge": {
+          "default": 0.0,
+          "title": "Thermodynamic Discharge Charge",
+          "type": "number"
+        },
+        "unresolved_obligation_backlog": {
+          "default": 0,
+          "title": "Unresolved Obligation Backlog",
+          "type": "integer"
+        },
+        "verifier_latency_proxy": {
+          "default": 0.0,
+          "title": "Verifier Latency Proxy",
+          "type": "number"
+        }
+      },
+      "required": [
+        "report_id",
+        "occupation_ledger"
+      ],
+      "title": "SalienceScheduleReport",
+      "type": "object"
+    },
+    "SalienceSchedulingDecision": {
+      "description": "One scheduler decision with explicit residual accounting.",
+      "properties": {
+        "decision": {
+          "$ref": "#/$defs/SalienceDecision"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "priority_score": {
+          "title": "Priority Score",
+          "type": "number"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "diagnostic"
+        }
+      },
+      "required": [
+        "record_id",
+        "decision",
+        "priority_score"
+      ],
+      "title": "SalienceSchedulingDecision",
+      "type": "object"
+    },
+    "VerificationThroughputReport": {
+      "description": "Finite throughput dashboard for verifier queue health.",
+      "properties": {
+        "abstained_packets": {
+          "default": 0,
+          "title": "Abstained Packets",
+          "type": "integer"
+        },
+        "accepted_packets": {
+          "default": 0,
+          "title": "Accepted Packets",
+          "type": "integer"
+        },
+        "evidence_hash_mismatch_rate": {
+          "default": 0.0,
+          "title": "Evidence Hash Mismatch Rate",
+          "type": "number"
+        },
+        "false_liquidity_rate": {
+          "default": 0.0,
+          "title": "False Liquidity Rate",
+          "type": "number"
+        },
+        "low_contribution_queue_occupation": {
+          "default": 0.0,
+          "title": "Low Contribution Queue Occupation",
+          "type": "number"
+        },
+        "packet_inflow": {
+          "default": 0,
+          "title": "Packet Inflow",
+          "type": "integer"
+        },
+        "rejected_packets": {
+          "default": 0,
+          "title": "Rejected Packets",
+          "type": "integer"
+        },
+        "residual_debt_growth": {
+          "default": 0.0,
+          "title": "Residual Debt Growth",
+          "type": "number"
+        },
+        "stale_packet_ratio": {
+          "default": 0.0,
+          "title": "Stale Packet Ratio",
+          "type": "number"
+        },
+        "unresolved_obligation_backlog": {
+          "default": 0,
+          "title": "Unresolved Obligation Backlog",
+          "type": "integer"
+        },
+        "verifier_latency_proxy": {
+          "default": 0.0,
+          "title": "Verifier Latency Proxy",
+          "type": "number"
+        }
+      },
+      "title": "VerificationThroughputReport",
+      "type": "object"
+    },
+    "VerifiedCapabilityPacket": {
+      "description": "Finite-scope reusable packet capital after verifier and edge checks.",
+      "properties": {
+        "accepted_edge_witness_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Edge Witness Ids",
+          "type": "array"
+        },
+        "execution_available": {
+          "default": false,
+          "title": "Execution Available",
+          "type": "boolean"
+        },
+        "expires_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expires At"
+        },
+        "identity_contribution_status": {
+          "$ref": "#/$defs/IdentityContributionStatus",
+          "default": "verified"
+        },
+        "issuer_agent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Agent Id"
+        },
+        "issuer_attestation_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Attestation Id"
+        },
+        "issuer_public_key_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Public Key Id"
+        },
+        "liquidity_score": {
+          "default": 0.0,
+          "title": "Liquidity Score",
+          "type": "number"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "packet_id": {
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "receiver_family": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Receiver Family",
+          "type": "array"
+        },
+        "residual_external_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual External Obligations",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "rollback_receipt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rollback Receipt"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "settlement_scope": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Settlement Scope",
+          "type": "array"
+        },
+        "source_candidate_id": {
+          "title": "Source Candidate Id",
+          "type": "string"
+        },
+        "validity_domain": {
+          "default": "protocol-relative-finite",
+          "title": "Validity Domain",
+          "type": "string"
+        },
+        "verification_resolution_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verification Resolution Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "packet_id",
+        "source_candidate_id"
+      ],
+      "title": "VerifiedCapabilityPacket",
+      "type": "object"
+    },
+    "VerifierResolution": {
+      "description": "Adapter-route resolution result that preserves safe failure behavior.",
+      "properties": {
+        "accepted": {
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "accepted_obligation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Obligation Ids",
+          "type": "array"
+        },
+        "availability": {
+          "title": "Availability",
+          "type": "string"
+        },
+        "binding_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Binding Id"
+        },
+        "discharge_level": {
+          "$ref": "#/$defs/DischargeLevel",
+          "default": "external_domain_required"
+        },
+        "domain_witness_required": {
+          "default": false,
+          "title": "Domain Witness Required",
+          "type": "boolean"
+        },
+        "evidence_artifact_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Artifact Ids",
+          "type": "array"
+        },
+        "evidence_envelope_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Envelope Id"
+        },
+        "finite_scope_usable": {
+          "default": false,
+          "title": "Finite Scope Usable",
+          "type": "boolean"
+        },
+        "missing_evidence_kind": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Evidence Kind",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "profile": {
+          "$ref": "#/$defs/EvidenceVerificationProfile",
+          "default": "development"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "rejected_obligation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Obligation Ids",
+          "type": "array"
+        },
+        "residual_external_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual External Obligations",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "resolution_digest": {
+          "title": "Resolution Digest",
+          "type": "string"
+        },
+        "resolution_id": {
+          "title": "Resolution Id",
+          "type": "string"
+        },
+        "route_id": {
+          "title": "Route Id",
+          "type": "string"
+        },
+        "safe_default": {
+          "default": "diagnostic-with-unresolved-obligations",
+          "title": "Safe Default",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "settled_scope": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Settled Scope",
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus"
+        }
+      },
+      "required": [
+        "resolution_id",
+        "route_id",
+        "accepted",
+        "status",
+        "availability",
+        "resolution_digest"
+      ],
+      "title": "VerifierResolution",
+      "type": "object"
+    },
+    "WebFetchReport": {
+      "description": "Portable audit record for one bounded HTTP(S) resource fetch.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "byte_count": {
+          "default": 0,
+          "title": "Byte Count",
+          "type": "integer"
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Sha256"
+        },
+        "content_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Type"
+        },
+        "final_url": {
+          "default": "",
+          "title": "Final Url",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "redirect_chain": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Redirect Chain",
+          "type": "array"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "robots_decision": {
+          "$ref": "#/$defs/RobotsDecision"
+        },
+        "status_code": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status Code"
+        }
+      },
+      "required": [
+        "report_id",
+        "requested_url"
+      ],
+      "title": "WebFetchReport",
+      "type": "object"
+    }
+  },
+  "description": "High-level residual-preserving report returned by agent intake.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "profile": {
+      "title": "Profile",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "recommended_next_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Recommended Next Commands",
+      "type": "array"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_summary": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residual Summary",
+      "type": "object"
+    },
+    "runtime_report": {
+      "$ref": "#/$defs/RuntimeStepReport"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "report_id",
+    "profile",
+    "runtime_report"
+  ],
+  "title": "AgentIntakeReport",
+  "type": "object"
+}

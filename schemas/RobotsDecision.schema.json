@@ -1,0 +1,44 @@
+{
+  "description": "Recorded robots/rate decision for bounded web intake.\n\nThis is an audit record, not a guarantee that the remote site authorizes\nevery downstream use.  Unknown or unavailable policy can remain diagnostic\nunder stricter profiles.",
+  "properties": {
+    "allowed": {
+      "default": true,
+      "title": "Allowed",
+      "type": "boolean"
+    },
+    "decision_id": {
+      "default": "robots:not-checked",
+      "title": "Decision Id",
+      "type": "string"
+    },
+    "mode": {
+      "default": "not-checked",
+      "title": "Mode",
+      "type": "string"
+    },
+    "reason": {
+      "default": "robots policy was recorded but not enforced",
+      "title": "Reason",
+      "type": "string"
+    },
+    "residual_coordinate": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Residual Coordinate"
+    },
+    "source_ref": {
+      "default": "",
+      "title": "Source Ref",
+      "type": "string"
+    }
+  },
+  "title": "RobotsDecision",
+  "type": "object"
+}

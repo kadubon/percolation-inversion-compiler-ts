@@ -1,0 +1,60 @@
+{
+  "description": "Accepted population identity context for agent-to-agent messages.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "accepted_agent_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Accepted Agent Ids",
+      "type": "array"
+    },
+    "accepted_attestation_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Accepted Attestation Ids",
+      "type": "array"
+    },
+    "accepted_public_key_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Accepted Public Key Ids",
+      "type": "array"
+    },
+    "context_id": {
+      "default": "agent-message-verification-context",
+      "title": "Context Id",
+      "type": "string"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "require_agent_membership": {
+      "default": true,
+      "title": "Require Agent Membership",
+      "type": "boolean"
+    },
+    "require_public_key_membership": {
+      "default": true,
+      "title": "Require Public Key Membership",
+      "type": "boolean"
+    }
+  },
+  "title": "AgentMessageVerificationContext",
+  "type": "object"
+}

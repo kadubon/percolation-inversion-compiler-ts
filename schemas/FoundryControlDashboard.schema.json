@@ -1,0 +1,198 @@
+{
+  "$defs": {
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "FoundryBottleneck": {
+      "description": "Finite foundry bottleneck labels used by phase-control dashboards.",
+      "enum": [
+        "evidence-limited",
+        "transport-limited",
+        "risk-limited",
+        "capacity-limited",
+        "subcritical",
+        "unsaturated-supercritical",
+        "collect-evidence",
+        "suspend"
+      ],
+      "title": "FoundryBottleneck",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "description": "Foundry dashboard for ALT bottleneck control.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "bottlenecks": {
+      "items": {
+        "$ref": "#/$defs/FoundryBottleneck"
+      },
+      "title": "Bottlenecks",
+      "type": "array"
+    },
+    "certified_capital_count": {
+      "default": 0,
+      "title": "Certified Capital Count",
+      "type": "integer"
+    },
+    "dashboard_id": {
+      "title": "Dashboard Id",
+      "type": "string"
+    },
+    "evidence_backlog": {
+      "default": 0,
+      "title": "Evidence Backlog",
+      "type": "integer"
+    },
+    "foundry_id": {
+      "title": "Foundry Id",
+      "type": "string"
+    },
+    "net_certified_surplus": {
+      "default": 0.0,
+      "title": "Net Certified Surplus",
+      "type": "number"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "receiver_absorption_capacity": {
+      "default": 0.0,
+      "title": "Receiver Absorption Capacity",
+      "type": "number"
+    },
+    "recommended_rule": {
+      "$ref": "#/$defs/FoundryBottleneck",
+      "default": "collect-evidence"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "risk_backlog": {
+      "default": 0,
+      "title": "Risk Backlog",
+      "type": "integer"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "settlement_capacity": {
+      "default": 0.0,
+      "title": "Settlement Capacity",
+      "type": "number"
+    },
+    "token_candidate_count": {
+      "default": 0,
+      "title": "Token Candidate Count",
+      "type": "integer"
+    },
+    "transport_backlog": {
+      "default": 0,
+      "title": "Transport Backlog",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "dashboard_id",
+    "foundry_id"
+  ],
+  "title": "FoundryControlDashboard",
+  "type": "object"
+}

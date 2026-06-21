@@ -1,0 +1,19 @@
+{
+  "content": "Candidate packet: preserve residuals and route peer-agent verifier messages.",
+  "content_sha256": "59a375bc418bf4c016c387d3e387e70e9451b7bc5b15592c911ffb0c0fd5be88",
+  "declared_packet_kind": "capability-packet-candidate",
+  "declared_receiver_family": [
+    "agent",
+    "verifier"
+  ],
+  "declared_validity_domain": "protocol-relative-finite",
+  "message_id": "agent-message:demo-relay",
+  "nonce": "nonce:demo-relay:001",
+  "protocol_version": "pic-agent-message-v1",
+  "receiver_agent_id": "agent:demo-receiver",
+  "sender_agent_id": "agent:demo-sender",
+  "tags": [
+    "agent-message",
+    "demo"
+  ]
+}

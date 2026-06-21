@@ -1,0 +1,57 @@
+{
+  "$defs": {
+    "EvidenceVerificationProfile": {
+      "enum": [
+        "development",
+        "research",
+        "production"
+      ],
+      "title": "EvidenceVerificationProfile",
+      "type": "string"
+    }
+  },
+  "description": "Profile-specific evidence hardening policy for verifier envelopes.",
+  "properties": {
+    "allow_verified_attestation_without_content": {
+      "default": false,
+      "title": "Allow Verified Attestation Without Content",
+      "type": "boolean"
+    },
+    "profile": {
+      "$ref": "#/$defs/EvidenceVerificationProfile",
+      "default": "development"
+    },
+    "require_attestation_ref": {
+      "default": false,
+      "title": "Require Attestation Ref",
+      "type": "boolean"
+    },
+    "require_content_ref": {
+      "default": false,
+      "title": "Require Content Ref",
+      "type": "boolean"
+    },
+    "require_deterministic": {
+      "default": true,
+      "title": "Require Deterministic",
+      "type": "boolean"
+    },
+    "require_schema_digest": {
+      "default": true,
+      "title": "Require Schema Digest",
+      "type": "boolean"
+    },
+    "require_signature": {
+      "default": false,
+      "title": "Require Signature",
+      "type": "boolean"
+    },
+    "require_verifier_identity": {
+      "default": true,
+      "title": "Require Verifier Identity",
+      "type": "boolean"
+    }
+  },
+  "title": "EvidencePolicy",
+  "type": "object"
+}

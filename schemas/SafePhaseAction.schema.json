@@ -1,0 +1,96 @@
+{
+  "description": "Recommendation-only action for an agent or orchestration layer.",
+  "properties": {
+    "action_id": {
+      "title": "Action Id",
+      "type": "string"
+    },
+    "action_type": {
+      "title": "Action Type",
+      "type": "string"
+    },
+    "candidate_only": {
+      "default": false,
+      "title": "Candidate Only",
+      "type": "boolean"
+    },
+    "execution_authority_granted": {
+      "default": false,
+      "title": "Execution Authority Granted",
+      "type": "boolean"
+    },
+    "expected_effect": {
+      "default": "diagnostic planning only",
+      "title": "Expected Effect",
+      "type": "string"
+    },
+    "inspect_fields": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Inspect Fields",
+      "type": "array"
+    },
+    "priority_score": {
+      "default": 0.0,
+      "title": "Priority Score",
+      "type": "number"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "required_inputs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Inputs",
+      "type": "array"
+    },
+    "safe_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safe Commands",
+      "type": "array"
+    },
+    "schema_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Schema Refs",
+      "type": "array"
+    },
+    "sdk_calls": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sdk Calls",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "action_id",
+    "action_type",
+    "title",
+    "purpose"
+  ],
+  "title": "SafePhaseAction",
+  "type": "object"
+}

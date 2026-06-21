@@ -1,0 +1,47 @@
+{
+  "allow_live_connectors": false,
+  "alt_admission_decisions": [
+    {
+      "accepted": true,
+      "candidate_only_reasons": [
+        "ALT admission is candidate-only until missing obligations are discharged"
+      ],
+      "decision_id": "alt-admission:node-only-asi-proxy-loop",
+      "missing_obligations": [
+        "alt:baseline-certificate",
+        "alt:hazard-certificate"
+      ],
+      "settled": false,
+      "workflow_usable": true
+    }
+  ],
+  "compact": true,
+  "general_intake_bridge_reports": [
+    {
+      "accepted": true,
+      "candidate_only": true,
+      "missing_obligations": [
+        "external-intake:finite-verifier-route"
+      ],
+      "report_id": "general-intake:node-only-asi-proxy-loop",
+      "residual_summary": {
+        "external_candidate": 1
+      },
+      "settled": false,
+      "workflow_usable": true
+    }
+  ],
+  "profile": "development",
+  "request_id": "asi-proxy-node-only-loop",
+  "runtime_report": {
+    "accepted": true,
+    "finite_checks_passed": true,
+    "operationally_usable": true,
+    "report_id": "runtime-step:node-only-asi-proxy-loop",
+    "residual_ledger": {
+      "coordinates": {}
+    },
+    "settled": false,
+    "workflow_usable": true
+  }
+}

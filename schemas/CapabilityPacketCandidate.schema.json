@@ -1,0 +1,247 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "IdentityContributionStatus": {
+      "description": "How identity evidence may contribute to runtime packet capital.",
+      "enum": [
+        "verified",
+        "provisional",
+        "diagnostic",
+        "quarantined",
+        "rejected"
+      ],
+      "title": "IdentityContributionStatus",
+      "type": "string"
+    },
+    "PacketSourceKind": {
+      "enum": [
+        "local",
+        "github",
+        "zenodo",
+        "arxiv",
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "agent-message",
+        "agent-inbox",
+        "web-crawl",
+        "agent-output",
+        "auto"
+      ],
+      "title": "PacketSourceKind",
+      "type": "string"
+    }
+  },
+  "description": "An observable artifact that may become an ECPT capability packet.",
+  "properties": {
+    "authority_granted": {
+      "default": true,
+      "title": "Authority Granted",
+      "type": "boolean"
+    },
+    "authority_required": {
+      "default": false,
+      "title": "Authority Required",
+      "type": "boolean"
+    },
+    "claim": {
+      "title": "Claim",
+      "type": "string"
+    },
+    "content_sha256": {
+      "title": "Content Sha256",
+      "type": "string"
+    },
+    "dependencies": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Dependencies",
+      "type": "array"
+    },
+    "evidence_hash_valid": {
+      "default": true,
+      "title": "Evidence Hash Valid",
+      "type": "boolean"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "expected_downstream_gain": {
+      "default": 0.0,
+      "title": "Expected Downstream Gain",
+      "type": "number"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expires At"
+    },
+    "freshness": {
+      "default": 1.0,
+      "title": "Freshness",
+      "type": "number"
+    },
+    "hazard_charge": {
+      "default": 0.0,
+      "title": "Hazard Charge",
+      "type": "number"
+    },
+    "identity_contribution_status": {
+      "$ref": "#/$defs/IdentityContributionStatus",
+      "default": "provisional"
+    },
+    "issuer_agent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Issuer Agent Id"
+    },
+    "issuer_attestation_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Issuer Attestation Id"
+    },
+    "issuer_public_key_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Issuer Public Key Id"
+    },
+    "issuer_signature_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Issuer Signature Ref"
+    },
+    "packet_id": {
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "receiver_family": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Receiver Family",
+      "type": "array"
+    },
+    "residual_charge": {
+      "default": 0.0,
+      "title": "Residual Charge",
+      "type": "number"
+    },
+    "reuse_context": {
+      "default": "general",
+      "title": "Reuse Context",
+      "type": "string"
+    },
+    "rollback_available": {
+      "default": true,
+      "title": "Rollback Available",
+      "type": "boolean"
+    },
+    "route_safe": {
+      "default": true,
+      "title": "Route Safe",
+      "type": "boolean"
+    },
+    "salience_class": {
+      "default": "default",
+      "title": "Salience Class",
+      "type": "string"
+    },
+    "source_kind": {
+      "$ref": "#/$defs/PacketSourceKind",
+      "default": "local"
+    },
+    "source_ref": {
+      "title": "Source Ref",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ClaimStatus",
+      "default": "provisional"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "verification_cost": {
+      "default": 0.0,
+      "title": "Verification Cost",
+      "type": "number"
+    },
+    "verifier_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Verifier Routes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "packet_id",
+    "source_ref",
+    "content_sha256",
+    "claim"
+  ],
+  "title": "CapabilityPacketCandidate",
+  "type": "object"
+}

@@ -1,0 +1,55 @@
+{
+  "description": "Finite semiring table with domain and coordinate metadata.",
+  "properties": {
+    "coordinate_units": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Coordinate Units",
+      "type": "object"
+    },
+    "domain_id": {
+      "title": "Domain Id",
+      "type": "string"
+    },
+    "elements": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Elements",
+      "type": "array"
+    },
+    "one": {
+      "title": "One",
+      "type": "string"
+    },
+    "plus_table": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Plus Table",
+      "type": "object"
+    },
+    "times_table": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Times Table",
+      "type": "object"
+    },
+    "zero": {
+      "title": "Zero",
+      "type": "string"
+    }
+  },
+  "required": [
+    "domain_id",
+    "elements",
+    "zero",
+    "one",
+    "plus_table",
+    "times_table"
+  ],
+  "title": "DomainTypedSemiring",
+  "type": "object"
+}

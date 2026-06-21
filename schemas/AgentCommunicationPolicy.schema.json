@@ -1,0 +1,73 @@
+{
+  "description": "Bounded default-live policy for external communication guidance.",
+  "properties": {
+    "allow_live_connectors": {
+      "title": "Allow Live Connectors",
+      "type": "boolean"
+    },
+    "allowed_source_kinds": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Source Kinds",
+      "type": "array"
+    },
+    "arbitrary_execution_allowed": {
+      "default": false,
+      "title": "Arbitrary Execution Allowed",
+      "type": "boolean"
+    },
+    "background_crawling_allowed": {
+      "default": false,
+      "title": "Background Crawling Allowed",
+      "type": "boolean"
+    },
+    "candidate_only_by_default": {
+      "default": true,
+      "title": "Candidate Only By Default",
+      "type": "boolean"
+    },
+    "explicit_source_required": {
+      "default": true,
+      "title": "Explicit Source Required",
+      "type": "boolean"
+    },
+    "live_connectors_default_enabled": {
+      "title": "Live Connectors Default Enabled",
+      "type": "boolean"
+    },
+    "live_default_mode": {
+      "title": "Live Default Mode",
+      "type": "string"
+    },
+    "opt_out_available": {
+      "default": true,
+      "title": "Opt Out Available",
+      "type": "boolean"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "required_env_vars": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Env Vars",
+      "type": "array"
+    },
+    "residual_behavior": {
+      "default": "connector failures become diagnostic residual ledger entries",
+      "title": "Residual Behavior",
+      "type": "string"
+    },
+    "token_policy": {
+      "default": "environment-only",
+      "title": "Token Policy",
+      "type": "string"
+    }
+  },
+  "title": "AgentCommunicationPolicy",
+  "type": "object"
+}

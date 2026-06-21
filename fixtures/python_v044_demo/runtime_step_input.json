@@ -1,0 +1,8 @@
+{
+  "agent_output": "ECPT runtime packet: route proxy target evidence, preserve residual ledgers, and schedule verifier work through SQOT.",
+  "allow_live_connectors": true,
+  "input_id": "runtime-step-1",
+  "live_sources": [],
+  "local_sources": [],
+  "packets": []
+}

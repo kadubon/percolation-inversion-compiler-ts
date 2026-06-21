@@ -1,0 +1,383 @@
+{
+  "$defs": {
+    "CapabilityEdge": {
+      "properties": {
+        "activation_weight": {
+          "default": 1.0,
+          "title": "Activation Weight",
+          "type": "number"
+        },
+        "burden": {
+          "default": 0.0,
+          "title": "Burden",
+          "type": "number"
+        },
+        "edge_id": {
+          "title": "Edge Id",
+          "type": "string"
+        },
+        "required_capacity": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Required Capacity",
+          "type": "object"
+        },
+        "sources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "provisional"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        }
+      },
+      "required": [
+        "edge_id",
+        "sources",
+        "target"
+      ],
+      "title": "CapabilityEdge",
+      "type": "object"
+    },
+    "CapabilityHypergraph": {
+      "properties": {
+        "edges": {
+          "items": {
+            "$ref": "#/$defs/CapabilityEdge"
+          },
+          "title": "Edges",
+          "type": "array"
+        },
+        "nodes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Nodes",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "seed_mass": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Seed Mass",
+          "type": "object"
+        }
+      },
+      "title": "CapabilityHypergraph",
+      "type": "object"
+    },
+    "CapabilityPacket": {
+      "properties": {
+        "burden": {
+          "default": 0.0,
+          "title": "Burden",
+          "type": "number"
+        },
+        "coordinates": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        },
+        "duplicate_mass": {
+          "default": 0.0,
+          "title": "Duplicate Mass",
+          "type": "number"
+        },
+        "packet_id": {
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "provisional"
+        },
+        "validity_domain": {
+          "default": "global",
+          "title": "Validity Domain",
+          "type": "string"
+        }
+      },
+      "required": [
+        "packet_id"
+      ],
+      "title": "CapabilityPacket",
+      "type": "object"
+    },
+    "CapabilityStateVector": {
+      "properties": {
+        "burden_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "packets": {
+          "items": {
+            "$ref": "#/$defs/CapabilityPacket"
+          },
+          "title": "Packets",
+          "type": "array"
+        },
+        "validity_domain": {
+          "default": "global",
+          "title": "Validity Domain",
+          "type": "string"
+        }
+      },
+      "title": "CapabilityStateVector",
+      "type": "object"
+    },
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "ConstraintFrame": {
+      "properties": {
+        "capacity": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "expires": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Expires",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "hard_gates": {
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "title": "Hard Gates",
+          "type": "object"
+        },
+        "hazards": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "queue": {
+          "$ref": "#/$defs/Ledger"
+        }
+      },
+      "title": "ConstraintFrame",
+      "type": "object"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "PhaseControlEnvelope": {
+      "properties": {
+        "control_surface": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Control Surface",
+          "type": "object"
+        },
+        "envelope_id": {
+          "title": "Envelope Id",
+          "type": "string"
+        },
+        "finite_horizon": {
+          "default": 0,
+          "title": "Finite Horizon",
+          "type": "integer"
+        },
+        "finite_state_space": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Finite State Space",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "phase_response": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Phase Response",
+          "type": "object"
+        },
+        "residual": {
+          "default": 0.0,
+          "title": "Residual",
+          "type": "number"
+        },
+        "thermodynamic_obligation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Thermodynamic Obligation Ids",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "envelope_id"
+      ],
+      "title": "PhaseControlEnvelope",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "budgets": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Budgets",
+      "type": "object"
+    },
+    "constraint_frame": {
+      "$ref": "#/$defs/ConstraintFrame"
+    },
+    "envelope": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PhaseControlEnvelope"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "graph": {
+      "$ref": "#/$defs/CapabilityHypergraph"
+    },
+    "present_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Present Obligations",
+      "type": "array"
+    },
+    "route_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Route Ids",
+      "type": "array"
+    },
+    "state_id": {
+      "title": "State Id",
+      "type": "string"
+    },
+    "state_vector": {
+      "$ref": "#/$defs/CapabilityStateVector"
+    }
+  },
+  "required": [
+    "state_id",
+    "graph",
+    "state_vector"
+  ],
+  "title": "PhaseControlState",
+  "type": "object"
+}

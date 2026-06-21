@@ -1,0 +1,115 @@
+{
+  "description": "Typed TRC frontier debt summary for finite runtime outputs.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "external_obligation_count": {
+      "default": 0,
+      "title": "External Obligation Count",
+      "type": "integer"
+    },
+    "frontier_debt_classes": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Frontier Debt Classes",
+      "type": "object"
+    },
+    "hybrid_residual_propagation_count": {
+      "default": 0,
+      "title": "Hybrid Residual Propagation Count",
+      "type": "integer"
+    },
+    "missing_obligation_count": {
+      "default": 0,
+      "title": "Missing Obligation Count",
+      "type": "integer"
+    },
+    "missing_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Obligations",
+      "type": "array"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "partial_frontier_debt_count": {
+      "default": 0,
+      "title": "Partial Frontier Debt Count",
+      "type": "integer"
+    },
+    "physical_hybrid_obligation_count": {
+      "default": 0,
+      "title": "Physical Hybrid Obligation Count",
+      "type": "integer"
+    },
+    "physical_null_channel_debt_count": {
+      "default": 0,
+      "title": "Physical Null Channel Debt Count",
+      "type": "integer"
+    },
+    "progressive_fidelity_debt_count": {
+      "default": 0,
+      "title": "Progressive Fidelity Debt Count",
+      "type": "integer"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "frontier-debt:runtime",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_burden": {
+      "default": 0.0,
+      "title": "Residual Burden",
+      "type": "number"
+    },
+    "residual_coordinate_count": {
+      "default": 0,
+      "title": "Residual Coordinate Count",
+      "type": "integer"
+    },
+    "residual_coordinates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual Coordinates",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "telemetry_resource_cost_debt_count": {
+      "default": 0,
+      "title": "Telemetry Resource Cost Debt Count",
+      "type": "integer"
+    },
+    "trace_normal_form_debt_count": {
+      "default": 0,
+      "title": "Trace Normal Form Debt Count",
+      "type": "integer"
+    },
+    "trace_or_frontier_debt_count": {
+      "default": 0,
+      "title": "Trace Or Frontier Debt Count",
+      "type": "integer"
+    }
+  },
+  "title": "FrontierDebtReport",
+  "type": "object"
+}

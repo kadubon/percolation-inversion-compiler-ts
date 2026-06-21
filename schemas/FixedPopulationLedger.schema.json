@@ -1,0 +1,255 @@
+{
+  "$defs": {
+    "AgentPolicyIdentity": {
+      "description": "Policy identity for one member of a fixed ECPT agent population.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "model_digest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Digest"
+        },
+        "policy_digest": {
+          "title": "Policy Digest",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "route_allowlist": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Route Allowlist",
+          "type": "array"
+        },
+        "self_rewrite_allowed": {
+          "default": false,
+          "title": "Self Rewrite Allowed",
+          "type": "boolean"
+        },
+        "source_kind_allowlist": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Kind Allowlist",
+          "type": "array"
+        },
+        "tool_allowlist_digest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool Allowlist Digest"
+        },
+        "weight_update_allowed": {
+          "default": false,
+          "title": "Weight Update Allowed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "agent_id",
+        "policy_digest"
+      ],
+      "title": "AgentPolicyIdentity",
+      "type": "object"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "description": "Finite ledger asserting fixed agent identities and no self-rewrite.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "after_agents": {
+      "items": {
+        "$ref": "#/$defs/AgentPolicyIdentity"
+      },
+      "title": "After Agents",
+      "type": "array"
+    },
+    "before_agents": {
+      "items": {
+        "$ref": "#/$defs/AgentPolicyIdentity"
+      },
+      "title": "Before Agents",
+      "type": "array"
+    },
+    "finite_checks_passed": {
+      "default": false,
+      "title": "Finite Checks Passed",
+      "type": "boolean"
+    },
+    "fixed_population": {
+      "default": true,
+      "title": "Fixed Population",
+      "type": "boolean"
+    },
+    "ledger_id": {
+      "title": "Ledger Id",
+      "type": "string"
+    },
+    "no_self_rewrite": {
+      "default": true,
+      "title": "No Self Rewrite",
+      "type": "boolean"
+    },
+    "no_weight_update": {
+      "default": true,
+      "title": "No Weight Update",
+      "type": "boolean"
+    },
+    "observation_window_id": {
+      "default": "default-observation-window",
+      "title": "Observation Window Id",
+      "type": "string"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "policy_digests_unchanged": {
+      "default": true,
+      "title": "Policy Digests Unchanged",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "ledger_id"
+  ],
+  "title": "FixedPopulationLedger",
+  "type": "object"
+}

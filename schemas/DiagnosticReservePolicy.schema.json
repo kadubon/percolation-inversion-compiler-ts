@@ -1,0 +1,22 @@
+{
+  "description": "Reserve rule for diagnostic work and audit recursion.",
+  "properties": {
+    "audit_depth": {
+      "default": 1,
+      "title": "Audit Depth",
+      "type": "integer"
+    },
+    "minimum_reserve": {
+      "default": 0.0,
+      "title": "Minimum Reserve",
+      "type": "number"
+    },
+    "reserve_fraction": {
+      "default": 0.1,
+      "title": "Reserve Fraction",
+      "type": "number"
+    }
+  },
+  "title": "DiagnosticReservePolicy",
+  "type": "object"
+}

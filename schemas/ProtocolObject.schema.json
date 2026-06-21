@@ -1,0 +1,45 @@
+{
+  "properties": {
+    "candidate_universe": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Candidate Universe",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "law_labels": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Law Labels",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "observation_sigma": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observation Sigma",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "protocol_id": {
+      "title": "Protocol Id",
+      "type": "string"
+    },
+    "validity_domains": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Validity Domains",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "protocol_id"
+  ],
+  "title": "ProtocolObject",
+  "type": "object"
+}

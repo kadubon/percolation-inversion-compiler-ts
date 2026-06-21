@@ -1,0 +1,133 @@
+{
+  "$defs": {
+    "RobotsDecision": {
+      "description": "Recorded robots/rate decision for bounded web intake.\n\nThis is an audit record, not a guarantee that the remote site authorizes\nevery downstream use.  Unknown or unavailable policy can remain diagnostic\nunder stricter profiles.",
+      "properties": {
+        "allowed": {
+          "default": true,
+          "title": "Allowed",
+          "type": "boolean"
+        },
+        "decision_id": {
+          "default": "robots:not-checked",
+          "title": "Decision Id",
+          "type": "string"
+        },
+        "mode": {
+          "default": "not-checked",
+          "title": "Mode",
+          "type": "string"
+        },
+        "reason": {
+          "default": "robots policy was recorded but not enforced",
+          "title": "Reason",
+          "type": "string"
+        },
+        "residual_coordinate": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Residual Coordinate"
+        },
+        "source_ref": {
+          "default": "",
+          "title": "Source Ref",
+          "type": "string"
+        }
+      },
+      "title": "RobotsDecision",
+      "type": "object"
+    }
+  },
+  "description": "Portable audit record for one bounded HTTP(S) resource fetch.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "byte_count": {
+      "default": 0,
+      "title": "Byte Count",
+      "type": "integer"
+    },
+    "content_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Content Sha256"
+    },
+    "content_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Content Type"
+    },
+    "final_url": {
+      "default": "",
+      "title": "Final Url",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "redirect_chain": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Redirect Chain",
+      "type": "array"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "requested_url": {
+      "title": "Requested Url",
+      "type": "string"
+    },
+    "robots_decision": {
+      "$ref": "#/$defs/RobotsDecision"
+    },
+    "status_code": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Status Code"
+    }
+  },
+  "required": [
+    "report_id",
+    "requested_url"
+  ],
+  "title": "WebFetchReport",
+  "type": "object"
+}

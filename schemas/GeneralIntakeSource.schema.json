@@ -1,0 +1,57 @@
+{
+  "$defs": {
+    "PacketSourceKind": {
+      "enum": [
+        "local",
+        "github",
+        "zenodo",
+        "arxiv",
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "agent-message",
+        "agent-inbox",
+        "web-crawl",
+        "agent-output",
+        "auto"
+      ],
+      "title": "PacketSourceKind",
+      "type": "string"
+    }
+  },
+  "description": "One source descriptor for bounded general packet intake.",
+  "properties": {
+    "allow_live_connectors": {
+      "title": "Allow Live Connectors",
+      "type": "boolean"
+    },
+    "kind": {
+      "$ref": "#/$defs/PacketSourceKind",
+      "default": "auto"
+    },
+    "label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source"
+  ],
+  "title": "GeneralIntakeSource",
+  "type": "object"
+}

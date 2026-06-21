@@ -1,0 +1,89 @@
+{
+  "$defs": {
+    "ObservationProtocol": {
+      "properties": {
+        "receiver_contexts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Receiver Contexts",
+          "type": "array"
+        },
+        "time_index": {
+          "title": "Time Index",
+          "type": "string"
+        },
+        "validity_domains": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Validity Domains",
+          "type": "array"
+        },
+        "window_family": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Window Family",
+          "type": "array"
+        }
+      },
+      "required": [
+        "time_index"
+      ],
+      "title": "ObservationProtocol",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "accepted_extension": {
+      "default": false,
+      "title": "Accepted Extension",
+      "type": "boolean"
+    },
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "object_map": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Object Map",
+      "type": "object"
+    },
+    "obligation_map": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Obligation Map",
+      "type": "object"
+    },
+    "ontology_extension_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Ontology Extension Obligations",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "residual": {
+      "default": 0.0,
+      "title": "Residual",
+      "type": "number"
+    },
+    "source_protocol": {
+      "$ref": "#/$defs/ObservationProtocol"
+    },
+    "target_protocol": {
+      "$ref": "#/$defs/ObservationProtocol"
+    }
+  },
+  "required": [
+    "certificate_id",
+    "source_protocol",
+    "target_protocol"
+  ],
+  "title": "ProtocolFunctorCertificate",
+  "type": "object"
+}

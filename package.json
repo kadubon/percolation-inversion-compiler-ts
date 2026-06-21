@@ -1,0 +1,129 @@
+{
+  "name": "percolation-inversion-compiler-ts",
+  "version": "0.4.4",
+  "description": "TypeScript port of percolation-inversion-compiler v0.4.4 public JSON, CLI, schema, conformance, and safety semantics for npm and JS agent runtimes.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "K. Takahashi",
+  "homepage": "https://github.com/kadubon/percolation-inversion-compiler",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadubon/percolation-inversion-compiler-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kadubon/percolation-inversion-compiler-ts/issues"
+  },
+  "keywords": [
+    "ai-agents",
+    "agent-runtime",
+    "workflow-verification",
+    "evidence-routing",
+    "verifier-routing",
+    "residual-ledger",
+    "json-schema",
+    "runtime-verification",
+    "percolation",
+    "formal-methods",
+    "abstraction-liquidity",
+    "ecpt",
+    "sqot",
+    "alt",
+    "typescript"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "pic": "dist/cli/main.js",
+    "pic-ts": "dist/cli/main.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./schema": {
+      "types": "./dist/io/schema.d.ts",
+      "import": "./dist/io/schema.js"
+    },
+    "./agent/messages": {
+      "types": "./dist/agent/messages.d.ts",
+      "import": "./dist/agent/messages.js"
+    },
+    "./packet": {
+      "types": "./dist/packet/index.d.ts",
+      "import": "./dist/packet/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "schema": [
+        "dist/io/schema.d.ts"
+      ],
+      "agent/messages": [
+        "dist/agent/messages.d.ts"
+      ],
+      "packet": [
+        "dist/packet/index.d.ts"
+      ],
+      "*": [
+        "dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist/",
+    "schemas/",
+    "fixtures/portability_conformance/",
+    "fixtures/python_v044_cli/",
+    "fixtures/python_v044_demo/",
+    "fixtures/python_v044_snapshots/",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format:check": "prettier --check .",
+    "test": "npm run build && vitest run",
+    "conformance": "npm run build && vitest run test/portability.test.ts test/cli.test.ts",
+    "publish:safety": "node scripts/check-publish-safety.mjs",
+    "pack:check": "npm run publish:safety",
+    "installed:smoke": "node scripts/check-installed-smoke.mjs",
+    "publint": "publint",
+    "attw": "attw --pack . --profile esm-only --ignore-rules cjs-resolves-to-esm",
+    "prepack": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run conformance && npm run publish:safety && npm run installed:smoke",
+    "prepublishOnly": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run conformance && npm run pack:check && npm run publint && npm run attw && npm run installed:smoke && npm audit --audit-level=high"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "commander": "^15.0.0"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.3",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.10.0",
+    "@typescript-eslint/parser": "^8.61.1",
+    "eslint": "^10.5.0",
+    "json-schema-to-typescript": "^15.0.4",
+    "prettier": "^3.8.4",
+    "publint": "^0.3.21",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "main": "./dist/index.js",
+  "directories": {
+    "test": "test"
+  }
+}

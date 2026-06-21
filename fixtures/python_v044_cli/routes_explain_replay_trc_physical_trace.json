@@ -1,0 +1,57 @@
+{
+  "binding": {
+    "binding_id": "binding:trc.adapters.physical_hybrid.verify_envelope->adapters.domain.replay_trc_physical_trace",
+    "canonical_route_id": "trc.adapters.physical_hybrid.verify_envelope",
+    "canonical_verifier_route": "trc.adapters.physical_hybrid.verify_envelope",
+    "discharge_level": "replay_check",
+    "evidence_kind_map": {
+      "instrumented-trace": "finite-physical-trace",
+      "physics-simulator-certificate": "physics-simulator-certificate",
+      "resource-calendar": "resource-calendar"
+    },
+    "implemented_route_id": "adapters.domain.replay_trc_physical_trace",
+    "implemented_verifier_route": "percolation_inversion_compiler.adapters.domain.replay_trc_physical_trace",
+    "obligation_category": "physical-hybrid-system",
+    "residual_external_obligation_refs": [
+      "continuous-physics-envelope",
+      "resource-calendar-domain-witness"
+    ],
+    "residual_policy": "charge-physical-residual-until-verifier-accepts",
+    "safe_default": "diagnostic-with-physical-obligation",
+    "settlement_scope": [
+      "finite-replay:adapters.domain.replay_trc_physical_trace"
+    ],
+    "unresolved_domain_obligations": [
+      "continuous-physics-envelope",
+      "resource-calendar-domain-witness"
+    ]
+  },
+  "finite_scope_usable": true,
+  "required_evidence_kind": [
+    "finite-physical-trace"
+  ],
+  "residual_external_obligations": [
+    "continuous-physics-envelope",
+    "resource-calendar-domain-witness"
+  ],
+  "route": {
+    "availability": "implemented",
+    "canonical_route_id": null,
+    "discharge_level": "replay_check",
+    "license_note": "core deterministic implementation, Apache-2.0",
+    "notes": [],
+    "obligation_category": "physical-trace-replay",
+    "optional_dependency": null,
+    "required_evidence_kind": [
+      "finite-physical-trace"
+    ],
+    "residual_policy": "charge-physical-residual-until-replay-matches-transition-log",
+    "route_id": "adapters.domain.replay_trc_physical_trace",
+    "safe_default": "diagnostic-with-physical-trace-obligation",
+    "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+    "verifier_route": "percolation_inversion_compiler.adapters.domain.replay_trc_physical_trace"
+  },
+  "settled_scope": [
+    "finite-replay:adapters.domain.replay_trc_physical_trace"
+  ]
+}

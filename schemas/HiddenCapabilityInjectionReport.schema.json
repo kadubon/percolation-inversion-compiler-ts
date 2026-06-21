@@ -1,0 +1,212 @@
+{
+  "$defs": {
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "description": "Fail-closed check for packets, edges, evidence, or events outside protocol.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "allowed_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Packet Ids",
+      "type": "array"
+    },
+    "allowed_route_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Route Ids",
+      "type": "array"
+    },
+    "allowed_source_kinds": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Source Kinds",
+      "type": "array"
+    },
+    "checked_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checked Packet Ids",
+      "type": "array"
+    },
+    "finite_checks_passed": {
+      "default": false,
+      "title": "Finite Checks Passed",
+      "type": "boolean"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "protocol_id": {
+      "title": "Protocol Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "rejected_agent_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Agent Ids",
+      "type": "array"
+    },
+    "rejected_edge_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Edge Ids",
+      "type": "array"
+    },
+    "rejected_event_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Event Ids",
+      "type": "array"
+    },
+    "rejected_evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Evidence Refs",
+      "type": "array"
+    },
+    "rejected_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Packet Ids",
+      "type": "array"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "unsigned_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unsigned Packet Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "report_id",
+    "protocol_id"
+  ],
+  "title": "HiddenCapabilityInjectionReport",
+  "type": "object"
+}

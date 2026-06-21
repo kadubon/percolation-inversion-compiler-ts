@@ -1,0 +1,313 @@
+{
+  "$defs": {
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "description": "One finite packet, obligation, or verifier task occupying attention budget.",
+  "properties": {
+    "adversarial_transfer_risk": {
+      "default": 0.0,
+      "title": "Adversarial Transfer Risk",
+      "type": "number"
+    },
+    "aggregation_group": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Aggregation Group"
+    },
+    "audit_recursion_depth": {
+      "default": 0,
+      "title": "Audit Recursion Depth",
+      "type": "integer"
+    },
+    "authority_granted": {
+      "default": true,
+      "title": "Authority Granted",
+      "type": "boolean"
+    },
+    "authority_required": {
+      "default": false,
+      "title": "Authority Required",
+      "type": "boolean"
+    },
+    "deadline_loss": {
+      "default": 0.0,
+      "title": "Deadline Loss",
+      "type": "number"
+    },
+    "distributed_origin_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Distributed Origin Ref"
+    },
+    "effective_reserve_eligible": {
+      "default": true,
+      "title": "Effective Reserve Eligible",
+      "type": "boolean"
+    },
+    "evidence_hash_valid": {
+      "default": true,
+      "title": "Evidence Hash Valid",
+      "type": "boolean"
+    },
+    "expected_downstream_gain": {
+      "default": 0.0,
+      "title": "Expected Downstream Gain",
+      "type": "number"
+    },
+    "freshness": {
+      "default": 1.0,
+      "title": "Freshness",
+      "type": "number"
+    },
+    "hazard_charge": {
+      "default": 0.0,
+      "title": "Hazard Charge",
+      "type": "number"
+    },
+    "item_type": {
+      "default": "packet",
+      "title": "Item Type",
+      "type": "string"
+    },
+    "label_laundering_suspected": {
+      "default": false,
+      "title": "Label Laundering Suspected",
+      "type": "boolean"
+    },
+    "latency_cost": {
+      "default": 0.0,
+      "title": "Latency Cost",
+      "type": "number"
+    },
+    "obligation_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Obligation Ids",
+      "type": "array"
+    },
+    "privacy_rejoin_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Privacy Rejoin Ref"
+    },
+    "protocol_integrity_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Protocol Integrity Ref"
+    },
+    "record_id": {
+      "title": "Record Id",
+      "type": "string"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "residual_reduction": {
+      "default": 0.0,
+      "title": "Residual Reduction",
+      "type": "number"
+    },
+    "rollback_available": {
+      "default": false,
+      "title": "Rollback Available",
+      "type": "boolean"
+    },
+    "rollback_class": {
+      "default": "none",
+      "title": "Rollback Class",
+      "type": "string"
+    },
+    "route_safe": {
+      "default": true,
+      "title": "Route Safe",
+      "type": "boolean"
+    },
+    "salience_class": {
+      "default": "default",
+      "title": "Salience Class",
+      "type": "string"
+    },
+    "source_label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Label"
+    },
+    "sovereignty_kernel_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sovereignty Kernel Ref"
+    },
+    "stale": {
+      "default": false,
+      "title": "Stale",
+      "type": "boolean"
+    },
+    "thermodynamic_discharge_cost": {
+      "default": 0.0,
+      "title": "Thermodynamic Discharge Cost",
+      "type": "number"
+    },
+    "underlying_signal_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Underlying Signal Ref"
+    },
+    "verification_cost": {
+      "default": 0.0,
+      "title": "Verification Cost",
+      "type": "number"
+    },
+    "verifier_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Verifier Routes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "record_id"
+  ],
+  "title": "SalienceQueueRecord",
+  "type": "object"
+}

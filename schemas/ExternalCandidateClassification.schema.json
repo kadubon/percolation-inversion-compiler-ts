@@ -1,0 +1,10 @@
+{
+  "enum": [
+    "diagnostic_work",
+    "verifier_work",
+    "quarantine_work",
+    "candidate_only"
+  ],
+  "title": "ExternalCandidateClassification",
+  "type": "string"
+}

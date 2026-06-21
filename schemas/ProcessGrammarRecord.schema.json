@@ -1,0 +1,56 @@
+{
+  "properties": {
+    "action_classes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Action Classes",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "forbidden_actions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Forbidden Actions",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "grammar_id": {
+      "title": "Grammar Id",
+      "type": "string"
+    },
+    "start_actions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Start Actions",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "terminal_actions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Terminal Actions",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "transitions": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array",
+        "uniqueItems": true
+      },
+      "title": "Transitions",
+      "type": "object"
+    }
+  },
+  "required": [
+    "grammar_id"
+  ],
+  "title": "ProcessGrammarRecord",
+  "type": "object"
+}

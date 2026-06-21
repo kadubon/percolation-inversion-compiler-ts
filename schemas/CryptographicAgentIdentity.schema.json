@@ -1,0 +1,192 @@
+{
+  "$defs": {
+    "AgentIdentityStrength": {
+      "description": "Protocol-relative strength of an agent identity assertion.",
+      "enum": [
+        "declared",
+        "public-key-attested",
+        "hardware-attested",
+        "institutionally-attested",
+        "revoked"
+      ],
+      "title": "AgentIdentityStrength",
+      "type": "string"
+    }
+  },
+  "description": "Public-key-backed identity for an agent inside a declared protocol.",
+  "properties": {
+    "agent_id": {
+      "title": "Agent Id",
+      "type": "string"
+    },
+    "credential_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Credential Ref"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expires At"
+    },
+    "fleet_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fleet Id"
+    },
+    "identity_strength": {
+      "$ref": "#/$defs/AgentIdentityStrength",
+      "default": "public-key-attested"
+    },
+    "issued_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Issued At"
+    },
+    "issuer_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Issuer Id"
+    },
+    "key_type": {
+      "default": "ed25519-public",
+      "title": "Key Type",
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Metadata",
+      "type": "object"
+    },
+    "model_digest": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model Digest"
+    },
+    "policy_digest": {
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "public_key_b64": {
+      "title": "Public Key B64",
+      "type": "string"
+    },
+    "public_key_fingerprint": {
+      "title": "Public Key Fingerprint",
+      "type": "string"
+    },
+    "public_key_id": {
+      "title": "Public Key Id",
+      "type": "string"
+    },
+    "revoked": {
+      "default": false,
+      "title": "Revoked",
+      "type": "boolean"
+    },
+    "role_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Role Id"
+    },
+    "signature_b64": {
+      "title": "Signature B64",
+      "type": "string"
+    },
+    "signature_payload_sha256": {
+      "title": "Signature Payload Sha256",
+      "type": "string"
+    },
+    "signature_suite": {
+      "default": "ed25519",
+      "title": "Signature Suite",
+      "type": "string"
+    },
+    "tool_digest": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tool Digest"
+    },
+    "worker_index": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Worker Index"
+    }
+  },
+  "required": [
+    "agent_id",
+    "public_key_id",
+    "public_key_b64",
+    "public_key_fingerprint",
+    "signature_b64",
+    "signature_payload_sha256",
+    "policy_digest"
+  ],
+  "title": "CryptographicAgentIdentity",
+  "type": "object"
+}

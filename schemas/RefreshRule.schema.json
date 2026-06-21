@@ -1,0 +1,31 @@
+{
+  "description": "Finite expiry/refresh rule for certificate routes.",
+  "properties": {
+    "expired_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Expired Obligations",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "live_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Live Obligations",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "refresh_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Refresh Obligations",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "title": "RefreshRule",
+  "type": "object"
+}

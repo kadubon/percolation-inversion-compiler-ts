@@ -1,0 +1,113 @@
+{
+  "description": "Stable JSON outputs for cross-language schema and behavior conformance.",
+  "examples": [
+    {
+      "file": "agent_check_report.json",
+      "schema": "AgentCheckReport",
+      "sha256": "c8d5deceb93dff1d2c4050c366e0b02549d156484eb4b83c7fd71f1040501224"
+    },
+    {
+      "file": "agent_intake_report.json",
+      "schema": "AgentIntakeReport",
+      "sha256": "bc659cfe5fb10993e5cba17f19515565bd41741484296463db453ceab13026eb"
+    },
+    {
+      "file": "agent_message_delivery_report.json",
+      "schema": "AgentMessageDeliveryReport",
+      "sha256": "d9399bb6e4eb69b492363f45e65c1e45900b31c6784ee4af1d031103b604e6c7"
+    },
+    {
+      "file": "agent_relay_readiness_report.json",
+      "schema": "AgentRelayReadinessReport",
+      "sha256": "2596884a1c9f72c89538a2ed6580d7f74e1b59e52a3a559ce7acf3c7ea910cb0"
+    },
+    {
+      "file": "runtime_step_report.json",
+      "schema": "RuntimeStepReport",
+      "sha256": "87cfb006d6a6c0322a0e7e0d01cf2fbb24389d17f87b4488837bbb1269099cb9"
+    },
+    {
+      "file": "salience_schedule_report.json",
+      "schema": "SalienceScheduleReport",
+      "sha256": "8d50622be7dd8bd58974dbadcf38ce9a5da219faffafc9c53a2a5ac311cb999b"
+    },
+    {
+      "file": "alt_admission_decision.json",
+      "schema": "ALTAdmissionDecision",
+      "sha256": "cc555c6d8b7e7e2f75e428be24ed527297448d549b83d22339a0bf2193d93566"
+    },
+    {
+      "file": "bottleneck_witness_report.json",
+      "schema": "BottleneckWitnessReport",
+      "sha256": "b6dde5aa933e4910d8574efb77623b42249ee05c35ca8722357dea39d78cd670"
+    },
+    {
+      "file": "collective_phase_certificate.json",
+      "schema": "CollectivePhaseCertificate",
+      "sha256": "32b7980afb387685a0e4bd00fde1f41e45d302b728652e325289b0c11b932198"
+    },
+    {
+      "file": "frontier_debt_report.json",
+      "schema": "FrontierDebtReport",
+      "sha256": "5bd4f3afc5f0274407740c5b26469aa2842ce9d8ad95cfa66d35e5dc47f3f256"
+    },
+    {
+      "file": "phase_control_audit_summary.json",
+      "schema": "PhaseControlAuditSummary",
+      "sha256": "cc15fcbdd9c13461f73a8c9fa84a34912aceefebd4113865e58c14e25b471b2c"
+    },
+    {
+      "file": "phase_acceleration_plan.json",
+      "schema": "PhaseAccelerationPlan",
+      "sha256": "a5b0baa5a88a2d6e42b51f8b15c4c7ef31777c6dc36dae3d19c1403707da74b7"
+    },
+    {
+      "file": "phase_acceleration_benchmark_report.json",
+      "schema": "PhaseAccelerationBenchmarkReport",
+      "sha256": "e8ee06549432e450bc5afc63b9699d1fb5ee58eee89f22382770d819def56224"
+    },
+    {
+      "file": "theory_fidelity_report.json",
+      "schema": "TheoryFidelityReport",
+      "sha256": "ac4d3fdc062436cb9bf4c21fba42ff2cc6acb682e159afdcf4505d57688857a8"
+    },
+    {
+      "file": "value_bridge_report.json",
+      "schema": "ValueBridgeReport",
+      "sha256": "303264814bd9b70f7204f171a40f5b41eb8a751a87ff59d7867e47014d2032e2"
+    }
+  ],
+  "negative_examples": [
+    {
+      "expected_status": "schema-invalid",
+      "file": "negative/schema_invalid_agent_check.json",
+      "schema": "AgentCheckReport"
+    },
+    {
+      "expected_status": "unknown-schema",
+      "file": "negative/unknown_schema.json",
+      "schema": "UnknownPortSchema"
+    },
+    {
+      "expected_status": "sha256-mismatch",
+      "file": "negative/checksum_mismatch.json",
+      "schema": "AgentRunbookReport",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "expected_status": "missing",
+      "file": "negative/missing.json",
+      "schema": "AgentCheckReport"
+    }
+  ],
+  "invariants": [
+    "accepted and settled remain separate booleans",
+    "residual ledgers are preserved in nested reports",
+    "candidate and certificate outputs remain protocol-relative",
+    "live communication defaults remain bounded and candidate-only for explicit sources",
+    "phase acceleration plans are recommendation-only and cannot settle claims",
+    "candidate-only external volume cannot reduce phase gaps"
+  ],
+  "manifest_id": "pic-portability-conformance-v1",
+  "schema_version": "portability-conformance-1.0"
+}

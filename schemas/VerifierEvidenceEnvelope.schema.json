@@ -1,0 +1,178 @@
+{
+  "$defs": {
+    "EvidenceArtifact": {
+      "description": "Replayable evidence metadata for an external verifier route.",
+      "properties": {
+        "artifact_id": {
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "attestation_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Attestation Ref"
+        },
+        "attestation_verified": {
+          "default": false,
+          "title": "Attestation Verified",
+          "type": "boolean"
+        },
+        "content_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Ref"
+        },
+        "evidence_kind": {
+          "title": "Evidence Kind",
+          "type": "string"
+        },
+        "media_type": {
+          "title": "Media Type",
+          "type": "string"
+        },
+        "produced_at": {
+          "title": "Produced At",
+          "type": "string"
+        },
+        "producer_id": {
+          "title": "Producer Id",
+          "type": "string"
+        },
+        "schema_sha256": {
+          "title": "Schema Sha256",
+          "type": "string"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "signature": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Signature"
+        },
+        "signature_algorithm": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Signature Algorithm"
+        },
+        "verifier_id": {
+          "title": "Verifier Id",
+          "type": "string"
+        },
+        "verifier_version": {
+          "title": "Verifier Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "evidence_kind",
+        "sha256",
+        "media_type",
+        "schema_uri",
+        "schema_sha256",
+        "producer_id",
+        "produced_at",
+        "verifier_id",
+        "verifier_version"
+      ],
+      "title": "EvidenceArtifact",
+      "type": "object"
+    }
+  },
+  "description": "Finite evidence envelope supplied to an adapter route.",
+  "properties": {
+    "deterministic": {
+      "default": true,
+      "title": "Deterministic",
+      "type": "boolean"
+    },
+    "envelope_id": {
+      "title": "Envelope Id",
+      "type": "string"
+    },
+    "envelope_schema_version": {
+      "default": "verifier-evidence-envelope-2.0",
+      "title": "Envelope Schema Version",
+      "type": "string"
+    },
+    "evidence_artifacts": {
+      "items": {
+        "$ref": "#/$defs/EvidenceArtifact"
+      },
+      "title": "Evidence Artifacts",
+      "type": "array"
+    },
+    "evidence_kind": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Kind",
+      "type": "array"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "obligation_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Obligation Ids",
+      "type": "array"
+    },
+    "residual_coordinates": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residual Coordinates",
+      "type": "object"
+    },
+    "route_id": {
+      "title": "Route Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "envelope_id",
+    "route_id"
+  ],
+  "title": "VerifierEvidenceEnvelope",
+  "type": "object"
+}

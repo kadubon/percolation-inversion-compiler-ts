@@ -1,0 +1,24 @@
+{
+  "accepted": true,
+  "external_obligation_count": 1,
+  "missing_obligation_count": 1,
+  "missing_obligations": [
+    "proxy-target-grounding-proof"
+  ],
+  "operationally_usable": false,
+  "partial_frontier_debt_count": 1,
+  "physical_hybrid_obligation_count": 0,
+  "progressive_fidelity_debt_count": 1,
+  "reasons": [
+    "missing obligations remain on the runtime frontier"
+  ],
+  "report_id": "frontier-debt:portability",
+  "residual_burden": 1.0,
+  "residual_coordinate_count": 1,
+  "residual_coordinates": [
+    "runtime:external:proxy-target-grounding-proof"
+  ],
+  "settled": false,
+  "trace_normal_form_debt_count": 0,
+  "trace_or_frontier_debt_count": 1
+}

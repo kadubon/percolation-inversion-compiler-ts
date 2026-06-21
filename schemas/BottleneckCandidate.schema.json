@@ -1,0 +1,105 @@
+{
+  "description": "Ranked repair target derived from existing runtime and theory reports.",
+  "properties": {
+    "bottleneck_kind": {
+      "title": "Bottleneck Kind",
+      "type": "string"
+    },
+    "burden_delta": {
+      "default": 0.0,
+      "title": "Burden Delta",
+      "type": "number"
+    },
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "candidate_only": {
+      "default": false,
+      "title": "Candidate Only",
+      "type": "boolean"
+    },
+    "cannot_promote_because": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Cannot Promote Because",
+      "type": "array"
+    },
+    "next_safe_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Next Safe Commands",
+      "type": "array"
+    },
+    "next_verifier_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Next Verifier Routes",
+      "type": "array"
+    },
+    "priority_score": {
+      "default": 0.0,
+      "title": "Priority Score",
+      "type": "number"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "release_delta": {
+      "default": 0.0,
+      "title": "Release Delta",
+      "type": "number"
+    },
+    "required_evidence_kind": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Evidence Kind",
+      "type": "array"
+    },
+    "residual_coordinates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual Coordinates",
+      "type": "array"
+    },
+    "schema_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Schema Refs",
+      "type": "array"
+    },
+    "sdk_calls": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sdk Calls",
+      "type": "array"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    },
+    "target_component": {
+      "default": "",
+      "title": "Target Component",
+      "type": "string"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "source",
+    "bottleneck_kind"
+  ],
+  "title": "BottleneckCandidate",
+  "type": "object"
+}

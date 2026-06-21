@@ -1,0 +1,33 @@
+{
+  "properties": {
+    "coordinates": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Coordinates",
+      "type": "object"
+    },
+    "relaxed_coordinates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Relaxed Coordinates",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "residual": {
+      "default": 0.0,
+      "title": "Residual",
+      "type": "number"
+    },
+    "vector_id": {
+      "title": "Vector Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "vector_id"
+  ],
+  "title": "ActionabilityVector",
+  "type": "object"
+}

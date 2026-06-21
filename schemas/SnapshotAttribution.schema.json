@@ -1,0 +1,63 @@
+{
+  "description": "Attribution metadata for a derived non-vendored snapshot.",
+  "properties": {
+    "author": {
+      "title": "Author",
+      "type": "string"
+    },
+    "derived_from": {
+      "default": "canonical TeX metadata extraction",
+      "title": "Derived From",
+      "type": "string"
+    },
+    "doi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Doi"
+    },
+    "license_id": {
+      "title": "License Id",
+      "type": "string"
+    },
+    "source_tex_md5": {
+      "title": "Source Tex Md5",
+      "type": "string"
+    },
+    "source_tex_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Tex Sha256"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "year": {
+      "title": "Year",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "author",
+    "year",
+    "title",
+    "license_id",
+    "source_tex_md5"
+  ],
+  "title": "SnapshotAttribution",
+  "type": "object"
+}

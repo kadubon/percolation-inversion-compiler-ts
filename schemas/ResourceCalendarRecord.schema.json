@@ -1,0 +1,67 @@
+{
+  "$defs": {
+    "ResourceReservationRecord": {
+      "properties": {
+        "amount": {
+          "title": "Amount",
+          "type": "number"
+        },
+        "end_tick": {
+          "title": "End Tick",
+          "type": "integer"
+        },
+        "reservation_id": {
+          "title": "Reservation Id",
+          "type": "string"
+        },
+        "resource": {
+          "title": "Resource",
+          "type": "string"
+        },
+        "start_tick": {
+          "title": "Start Tick",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "reservation_id",
+        "resource",
+        "start_tick",
+        "end_tick",
+        "amount"
+      ],
+      "title": "ResourceReservationRecord",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "calendar_id": {
+      "title": "Calendar Id",
+      "type": "string"
+    },
+    "capacities": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Capacities",
+      "type": "object"
+    },
+    "freshness_version": {
+      "default": "v1",
+      "title": "Freshness Version",
+      "type": "string"
+    },
+    "reservations": {
+      "items": {
+        "$ref": "#/$defs/ResourceReservationRecord"
+      },
+      "title": "Reservations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "calendar_id"
+  ],
+  "title": "ResourceCalendarRecord",
+  "type": "object"
+}

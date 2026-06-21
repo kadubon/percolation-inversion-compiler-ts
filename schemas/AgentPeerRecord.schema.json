@@ -1,0 +1,85 @@
+{
+  "$defs": {
+    "PacketSourceKind": {
+      "enum": [
+        "local",
+        "github",
+        "zenodo",
+        "arxiv",
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "agent-message",
+        "agent-inbox",
+        "web-crawl",
+        "agent-output",
+        "auto"
+      ],
+      "title": "PacketSourceKind",
+      "type": "string"
+    }
+  },
+  "description": "Declared peer identity and communication capability.",
+  "properties": {
+    "accepted_source_kinds": {
+      "items": {
+        "$ref": "#/$defs/PacketSourceKind"
+      },
+      "title": "Accepted Source Kinds",
+      "type": "array"
+    },
+    "agent_id": {
+      "title": "Agent Id",
+      "type": "string"
+    },
+    "endpoint_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Endpoint Ref"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Metadata",
+      "type": "object"
+    },
+    "peer_id": {
+      "title": "Peer Id",
+      "type": "string"
+    },
+    "public_key_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Public Key Id"
+    },
+    "trust_profile": {
+      "default": "development",
+      "title": "Trust Profile",
+      "type": "string"
+    }
+  },
+  "required": [
+    "peer_id",
+    "agent_id"
+  ],
+  "title": "AgentPeerRecord",
+  "type": "object"
+}

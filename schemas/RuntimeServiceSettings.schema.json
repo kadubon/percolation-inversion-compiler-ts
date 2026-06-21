@@ -1,0 +1,55 @@
+{
+  "description": "Local HTTP service settings.",
+  "properties": {
+    "allow_live_connectors": {
+      "title": "Allow Live Connectors",
+      "type": "boolean"
+    },
+    "allowed_route_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Route Ids",
+      "type": "array"
+    },
+    "host": {
+      "default": "127.0.0.1",
+      "title": "Host",
+      "type": "string"
+    },
+    "max_request_bytes": {
+      "default": 1000000,
+      "title": "Max Request Bytes",
+      "type": "integer"
+    },
+    "port": {
+      "default": 8765,
+      "title": "Port",
+      "type": "integer"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "require_token": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Require Token"
+    },
+    "token_env_var": {
+      "default": "PIC_RUNTIME_TOKEN",
+      "title": "Token Env Var",
+      "type": "string"
+    }
+  },
+  "title": "RuntimeServiceSettings",
+  "type": "object"
+}

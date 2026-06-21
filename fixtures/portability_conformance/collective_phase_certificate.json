@@ -1,0 +1,330 @@
+{
+  "accepted": true,
+  "basin_id": "runtime-demo-basin",
+  "certificate_id": "collective-phase:population:collective-demo:collective-runtime-demo:runtime-demo-basin",
+  "closure_witnesses": [
+    {
+      "accepted": true,
+      "closure_packet_ids": [
+        "packet:a",
+        "packet:b"
+      ],
+      "closure_strength": 0.9,
+      "external_seed_packet_ids": [],
+      "false_liquidity_rate": 0.0,
+      "finite_checks_passed": true,
+      "internal_edge_ids": [
+        "edge:a-b",
+        "edge:b-a"
+      ],
+      "operationally_usable": true,
+      "productive_packet_ids": [
+        "packet:a",
+        "packet:b"
+      ],
+      "productivity_lower_bound": 1.6,
+      "reasons": [],
+      "regeneration_edge_ids": [
+        "edge:a-b",
+        "edge:b-a"
+      ],
+      "residual_ledger": {
+        "coordinates": {}
+      },
+      "settled": false,
+      "witness_id": "closure:collective-packet-registry:ec043d059b20"
+    }
+  ],
+  "execution_available_paths": [
+    {
+      "accepted": true,
+      "authority_granted": true,
+      "certificate_id": "execution-available:accepted-path:runtime-demo-basin:packet:a",
+      "constraint_frame_id": "default-constraint-frame",
+      "edge_ids": [
+        "edge:a-b",
+        "edge:b-a"
+      ],
+      "evidence_refs": [
+        "closure:witness",
+        "execution:path",
+        "regeneration:witness",
+        "rollback:receipt",
+        "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      ],
+      "execution_gates": [
+        "operator-review",
+        "safety-ledger-live"
+      ],
+      "finite_checks_passed": true,
+      "not_executed": true,
+      "operationally_usable": true,
+      "packet_ids": [
+        "packet:a",
+        "packet:b"
+      ],
+      "path_id": "accepted-path:runtime-demo-basin:packet:a",
+      "reasons": [],
+      "receiver_context": [
+        "agent",
+        "verifier"
+      ],
+      "residual_ledger": {
+        "coordinates": {}
+      },
+      "rollback_available": true,
+      "route_ids": [
+        "adapters.domain.verify_ecpt_proxy_target_contract"
+      ],
+      "settled": false
+    },
+    {
+      "accepted": true,
+      "authority_granted": true,
+      "certificate_id": "execution-available:accepted-path:runtime-demo-basin:packet:b",
+      "constraint_frame_id": "default-constraint-frame",
+      "edge_ids": [
+        "edge:a-b",
+        "edge:b-a"
+      ],
+      "evidence_refs": [
+        "closure:witness",
+        "execution:path",
+        "regeneration:witness",
+        "rollback:receipt",
+        "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      ],
+      "execution_gates": [
+        "operator-review",
+        "safety-ledger-live"
+      ],
+      "finite_checks_passed": true,
+      "not_executed": true,
+      "operationally_usable": true,
+      "packet_ids": [
+        "packet:a",
+        "packet:b"
+      ],
+      "path_id": "accepted-path:runtime-demo-basin:packet:b",
+      "reasons": [],
+      "receiver_context": [
+        "agent",
+        "verifier"
+      ],
+      "residual_ledger": {
+        "coordinates": {}
+      },
+      "rollback_available": true,
+      "route_ids": [
+        "adapters.domain.verify_ecpt_proxy_target_contract"
+      ],
+      "settled": false
+    }
+  ],
+  "false_liquidity_bounded": true,
+  "finite_checks_passed": true,
+  "fixed_population_ledger": {
+    "accepted": true,
+    "after_agents": [
+      {
+        "accepted": true,
+        "agent_id": "agent:collective-demo",
+        "model_digest": "model:2222222222222222222222222222222222222222222222222222222222222222",
+        "policy_digest": "policy:1111111111111111111111111111111111111111111111111111111111111111",
+        "reasons": [],
+        "route_allowlist": [
+          "adapters.domain.verify_ecpt_proxy_target_contract"
+        ],
+        "self_rewrite_allowed": false,
+        "source_kind_allowlist": [
+          "agent-output"
+        ],
+        "tool_allowlist_digest": null,
+        "weight_update_allowed": false
+      }
+    ],
+    "before_agents": [
+      {
+        "accepted": true,
+        "agent_id": "agent:collective-demo",
+        "model_digest": "model:2222222222222222222222222222222222222222222222222222222222222222",
+        "policy_digest": "policy:1111111111111111111111111111111111111111111111111111111111111111",
+        "reasons": [],
+        "route_allowlist": [
+          "adapters.domain.verify_ecpt_proxy_target_contract"
+        ],
+        "self_rewrite_allowed": false,
+        "source_kind_allowlist": [
+          "agent-output"
+        ],
+        "tool_allowlist_digest": null,
+        "weight_update_allowed": false
+      }
+    ],
+    "finite_checks_passed": true,
+    "fixed_population": true,
+    "ledger_id": "fixed-population:collective-demo",
+    "no_self_rewrite": true,
+    "no_weight_update": true,
+    "observation_window_id": "demo-window",
+    "operationally_usable": true,
+    "policy_digests_unchanged": true,
+    "reasons": [],
+    "residual_ledger": {
+      "coordinates": {}
+    },
+    "settled": false
+  },
+  "hazard_authority_non_rejecting": true,
+  "hidden_injection_report": {
+    "accepted": true,
+    "allowed_packet_ids": [
+      "packet:a",
+      "packet:b"
+    ],
+    "allowed_route_ids": [
+      "adapters.domain.verify_ecpt_proxy_target_contract"
+    ],
+    "allowed_source_kinds": [
+      "agent-output"
+    ],
+    "checked_packet_ids": [
+      "packet:a",
+      "packet:b"
+    ],
+    "finite_checks_passed": true,
+    "operationally_usable": true,
+    "protocol_id": "protocol:collective-demo",
+    "reasons": [],
+    "rejected_agent_ids": [],
+    "rejected_edge_ids": [],
+    "rejected_event_ids": [],
+    "rejected_evidence_refs": [],
+    "rejected_packet_ids": [],
+    "report_id": "hidden-injection:protocol:collective-demo:collective-packet-registry",
+    "residual_ledger": {
+      "coordinates": {}
+    },
+    "settled": false,
+    "unsigned_packet_ids": []
+  },
+  "identity_attestation_refs": [],
+  "identity_contribution_summary": {
+    "diagnostic": 2
+  },
+  "identity_profile": "development",
+  "minimum_identity_strength": "declared",
+  "operationally_usable": true,
+  "packet_lineage": [],
+  "population_id": "population:collective-demo",
+  "protocol_frame": {
+    "accepted": true,
+    "allowed_evidence_prefixes": [
+      "sha256:",
+      "closure:",
+      "regeneration:",
+      "execution:",
+      "rollback:"
+    ],
+    "allowed_packet_ids": [
+      "packet:a",
+      "packet:b"
+    ],
+    "allowed_route_ids": [
+      "adapters.domain.verify_ecpt_proxy_target_contract"
+    ],
+    "allowed_source_kinds": [
+      "agent-output"
+    ],
+    "constraint_frame_id": "default-constraint-frame",
+    "observation_window_id": "demo-window",
+    "protocol_id": "protocol:collective-demo",
+    "reasons": [],
+    "route_catalog_digest": "route-catalog-demo",
+    "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "validity_domain": "protocol-relative-finite"
+  },
+  "psi": {
+    "components": {
+      "AC": 0.9,
+      "BR": 1.0,
+      "CV": 1.0,
+      "DE": 1.0,
+      "FR": 1.0,
+      "G": 1.0,
+      "HZ": 1.0,
+      "LX": 0.5,
+      "QS": 0.91,
+      "SD": 1.0,
+      "VT": 1.0
+    },
+    "dashboard_id": "psi:collective-packet-registry",
+    "distance_to_threshold": {
+      "AC": 0.0,
+      "BR": 0.0,
+      "CV": 0.0,
+      "DE": 0.0,
+      "FR": 0.0,
+      "G": 0.0,
+      "HZ": 0.0,
+      "LX": 0.0,
+      "QS": 0.0,
+      "SD": 0.0,
+      "VT": 0.0
+    },
+    "limiting_components": [],
+    "residual_ledger": {
+      "coordinates": {}
+    },
+    "safety_invariants": [
+      "Psi components are protocol-relative finite proxies",
+      "dashboard output does not prove unobserved ASI or physical outcomes",
+      "residual obligations remain explicit until verifier routes discharge them"
+    ],
+    "threshold": {
+      "AC": 0.5,
+      "BR": 0.1,
+      "CV": 0.5,
+      "DE": 0.5,
+      "FR": 0.5,
+      "G": 0.5,
+      "HZ": 0.5,
+      "LX": 0.5,
+      "QS": 0.5,
+      "SD": 0.5,
+      "VT": 0.5
+    },
+    "throughput": {
+      "abstained_packets": 0,
+      "accepted_packets": 2,
+      "evidence_hash_mismatch_rate": 0.0,
+      "false_liquidity_rate": 0.0,
+      "low_contribution_queue_occupation": 0.0,
+      "packet_inflow": 2,
+      "rejected_packets": 0,
+      "residual_debt_growth": 0.0,
+      "stale_packet_ratio": 0.0,
+      "unresolved_obligation_backlog": 2,
+      "verifier_latency_proxy": 0.1
+    }
+  },
+  "reasons": [],
+  "residual_external_obligations": [],
+  "residual_ledger": {
+    "coordinates": {}
+  },
+  "resource_matched_baseline": true,
+  "settled": false,
+  "sqot_reserve_live": true,
+  "state_id": "collective-runtime-demo",
+  "sybil_resistance_ledger": null,
+  "threshold": {
+    "BR": 0.1,
+    "G": 0.5,
+    "VT": 0.5
+  },
+  "threshold_crossed": true,
+  "verification_backlog_bounded": true
+}

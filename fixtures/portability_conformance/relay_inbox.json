@@ -1,0 +1,37 @@
+{
+  "inbox_id": "relay_inbox",
+  "messages": [
+    {
+      "audience": [],
+      "content": "Portability relay packet: preserve residuals.",
+      "content_sha256": "bbe9ff00252faac0d01996b1ccb77a0b91762ea8f0849ca29d48b10f436a9488",
+      "declared_packet_kind": "capability-packet-candidate",
+      "declared_receiver_family": [
+        "agent",
+        "verifier"
+      ],
+      "declared_routes": [],
+      "declared_validity_domain": "protocol-relative-finite",
+      "evidence_refs": [],
+      "expires_at": null,
+      "issued_at": null,
+      "issuer_attestation_id": null,
+      "issuer_public_key_id": null,
+      "message_id": "agent-message:bbe9ff00252f",
+      "metadata": {},
+      "nonce": "nonce-portability-1",
+      "protocol_version": "pic-agent-message-v1",
+      "receiver_agent_id": "agent:peer",
+      "reply_to": null,
+      "route_request_refs": [],
+      "sender_agent_id": "agent:port",
+      "signature_ref": null,
+      "tags": [
+        "agent-message"
+      ],
+      "thread_id": null
+    }
+  ],
+  "peers": [],
+  "seen_nonces": []
+}

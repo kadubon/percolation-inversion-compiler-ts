@@ -1,0 +1,23 @@
+{
+  "action_id": "action:release-bottleneck",
+  "action_kind": "reduce-downstream-search-cost",
+  "burden_delta": 1.0,
+  "next_verifier_routes": [
+    "adapters.domain.verify_ecpt_proxy_target_contract"
+  ],
+  "operationally_usable": true,
+  "priority_score": 0.75,
+  "release_delta": 0.5,
+  "report_id": "bottleneck-witness:portability",
+  "required_evidence_kind": [
+    "finite-proxy-target-contract"
+  ],
+  "residual_coordinates": [
+    "residual:bottleneck:proxy-target"
+  ],
+  "rollback_condition": "verifier-resolution-missing",
+  "settled": false,
+  "target_component": "SD",
+  "task_id": "task:portability:bottleneck",
+  "witness_kind": "bottleneck-intervention"
+}

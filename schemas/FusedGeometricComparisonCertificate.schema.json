@@ -1,0 +1,79 @@
+{
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "coupling": {
+      "items": {
+        "maxItems": 3,
+        "minItems": 3,
+        "prefixItems": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "number"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Coupling",
+      "type": "array"
+    },
+    "distortion_upper_bound": {
+      "default": 0.0,
+      "title": "Distortion Upper Bound",
+      "type": "number"
+    },
+    "feature_distortion": {
+      "default": 0.0,
+      "title": "Feature Distortion",
+      "type": "number"
+    },
+    "geometry_distortion": {
+      "default": 0.0,
+      "title": "Geometry Distortion",
+      "type": "number"
+    },
+    "marginal_residual": {
+      "default": 0.0,
+      "title": "Marginal Residual",
+      "type": "number"
+    },
+    "solver_gap": {
+      "default": 0.0,
+      "title": "Solver Gap",
+      "type": "number"
+    },
+    "source_nodes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Nodes",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "target_nodes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Target Nodes",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "certificate_id"
+  ],
+  "title": "FusedGeometricComparisonCertificate",
+  "type": "object"
+}

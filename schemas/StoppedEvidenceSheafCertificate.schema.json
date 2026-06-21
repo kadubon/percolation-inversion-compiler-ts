@@ -1,0 +1,120 @@
+{
+  "$defs": {
+    "PullbackGluingWitness": {
+      "properties": {
+        "glued_section": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Glued Section",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "local_sections": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "title": "Local Sections",
+          "type": "object"
+        },
+        "overlaps": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "title": "Overlaps",
+          "type": "object"
+        },
+        "witness_id": {
+          "title": "Witness Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "witness_id"
+      ],
+      "title": "PullbackGluingWitness",
+      "type": "object"
+    },
+    "StoppedEvidenceWitness": {
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ledger_id": {
+          "title": "Ledger Id",
+          "type": "string"
+        },
+        "probability_space": {
+          "title": "Probability Space",
+          "type": "string"
+        },
+        "stopping_time": {
+          "title": "Stopping Time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "probability_space",
+        "stopping_time",
+        "ledger_id"
+      ],
+      "title": "StoppedEvidenceWitness",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "gluing_witness": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PullbackGluingWitness"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "missing_sections": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Sections",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "residual": {
+      "default": 0.0,
+      "title": "Residual",
+      "type": "number"
+    },
+    "witnesses": {
+      "items": {
+        "$ref": "#/$defs/StoppedEvidenceWitness"
+      },
+      "title": "Witnesses",
+      "type": "array"
+    }
+  },
+  "required": [
+    "certificate_id"
+  ],
+  "title": "StoppedEvidenceSheafCertificate",
+  "type": "object"
+}

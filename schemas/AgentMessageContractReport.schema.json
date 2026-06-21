@@ -1,0 +1,195 @@
+{
+  "$defs": {
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "description": "Portable contract check for one agent-to-agent message envelope.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "candidate_only": {
+      "default": true,
+      "title": "Candidate Only",
+      "type": "boolean"
+    },
+    "declared_packet_kind": {
+      "default": "capability-packet-candidate",
+      "title": "Declared Packet Kind",
+      "type": "string"
+    },
+    "declared_receiver_family": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Declared Receiver Family",
+      "type": "array"
+    },
+    "declared_validity_domain": {
+      "default": "protocol-relative-finite",
+      "title": "Declared Validity Domain",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "message_contract_valid": {
+      "default": false,
+      "title": "Message Contract Valid",
+      "type": "boolean"
+    },
+    "message_id": {
+      "title": "Message Id",
+      "type": "string"
+    },
+    "protocol_version": {
+      "default": "pic-agent-message-v1",
+      "title": "Protocol Version",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "receiver_agent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Receiver Agent Id"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "route_request_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Route Request Refs",
+      "type": "array"
+    },
+    "sender_agent_id": {
+      "title": "Sender Agent Id",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "report_id",
+    "message_id",
+    "sender_agent_id"
+  ],
+  "title": "AgentMessageContractReport",
+  "type": "object"
+}

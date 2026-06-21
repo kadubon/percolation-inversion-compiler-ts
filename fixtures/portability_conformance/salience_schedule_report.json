@@ -1,0 +1,100 @@
+{
+  "accepted": true,
+  "adversarial_transfer_charge": 0.0,
+  "aggregation_group_counts": {},
+  "aggregation_group_occupation": {},
+  "audit_recursion_violations": [],
+  "decisions": [
+    {
+      "decision": "run",
+      "operationally_usable": true,
+      "priority_score": 1.2,
+      "reasons": [],
+      "record_id": "packet:sqot-reserve",
+      "residual_ledger": {
+        "coordinates": {}
+      },
+      "settled": false,
+      "status": "provisional"
+    },
+    {
+      "decision": "rollback",
+      "operationally_usable": false,
+      "priority_score": 0.15,
+      "reasons": [
+        "queue record evidence hash is invalid"
+      ],
+      "record_id": "packet:hash-invalid",
+      "residual_ledger": {
+        "coordinates": {
+          "sqot:packet:hash-invalid:rollback": {
+            "description": null,
+            "evidence_refs": [],
+            "evidence_status": "declared",
+            "kind": "residual",
+            "known": true,
+            "name": "sqot:packet:hash-invalid:rollback",
+            "unit": "dimensionless",
+            "value": 0.25
+          }
+        }
+      },
+      "settled": false,
+      "status": "diagnostic"
+    }
+  ],
+  "diagnostic_reserve": {
+    "audit_depth": 1,
+    "minimum_reserve": 0.0,
+    "reserve_fraction": 0.1
+  },
+  "distributed_origin_count": 0,
+  "effective_diagnostic_reserve": 0.0,
+  "false_liquidity_rate": 0.5,
+  "label_laundering_suspicions": [],
+  "latency_deadline_loss": 0.0,
+  "low_contribution_occupation": 0.0,
+  "occupation_ledger": {
+    "attention_budget": 1.0,
+    "occupied": 0.19999999999999996,
+    "occupied_by_class": {
+      "diagnostic": 0.2
+    },
+    "unknown_occupation": []
+  },
+  "privacy_rejoin_refs": [],
+  "profile": "development",
+  "protocol_integrity_refs": [],
+  "quarantine_ledger": {
+    "quarantined_items": [],
+    "reasons": {
+      "packet:hash-invalid": [
+        "queue record evidence hash is invalid"
+      ]
+    },
+    "rollback_items": [
+      "packet:hash-invalid"
+    ]
+  },
+  "report_id": "sqot-salience-schedule",
+  "residual_debt_growth": 0.25,
+  "risk_ledger": {
+    "risk_budget": 1.0,
+    "risk_charges": {
+      "packet:sqot-reserve": 0.0
+    }
+  },
+  "rollback_class_summary": {
+    "none": 2
+  },
+  "safety_invariants": [
+    "queue priority never promotes obligations to settled status",
+    "stale, hash-invalid, authority-invalid, or unsafe-route items fail closed",
+    "diagnostic reserve is preserved before non-diagnostic work is scheduled"
+  ],
+  "sovereignty_kernel_refs": [],
+  "stale_packet_ratio": 0.0,
+  "thermodynamic_discharge_charge": 0.0,
+  "unresolved_obligation_backlog": 1,
+  "verifier_latency_proxy": 0.09999999999999998
+}

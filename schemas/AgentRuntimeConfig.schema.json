@@ -1,0 +1,78 @@
+{
+  "$defs": {
+    "ActionCommitPolicy": {
+      "description": "How aggressively a runtime may turn ranked advice into agent commitments.",
+      "enum": [
+        "recommend_only",
+        "require_verifier_resolution",
+        "allow_finite_scope_commit"
+      ],
+      "title": "ActionCommitPolicy",
+      "type": "string"
+    }
+  },
+  "description": "Runtime knobs for deterministic active agent loops.",
+  "properties": {
+    "action_commit_policy": {
+      "$ref": "#/$defs/ActionCommitPolicy",
+      "default": "require_verifier_resolution"
+    },
+    "allow_live_connectors": {
+      "title": "Allow Live Connectors",
+      "type": "boolean"
+    },
+    "attention_budget": {
+      "default": 1.0,
+      "title": "Attention Budget",
+      "type": "number"
+    },
+    "identity_profile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Identity Profile"
+    },
+    "max_tasks": {
+      "default": 8,
+      "title": "Max Tasks",
+      "type": "integer"
+    },
+    "minimum_task_score": {
+      "default": 0.0,
+      "title": "Minimum Task Score",
+      "type": "number"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "psi_threshold": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Psi Threshold",
+      "type": "object"
+    },
+    "required_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Routes",
+      "type": "array"
+    },
+    "risk_budget": {
+      "default": 1.0,
+      "title": "Risk Budget",
+      "type": "number"
+    }
+  },
+  "title": "AgentRuntimeConfig",
+  "type": "object"
+}

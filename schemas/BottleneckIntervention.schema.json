@@ -1,0 +1,157 @@
+{
+  "$defs": {
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "description": "One ranked bottleneck-inversion intervention.",
+  "properties": {
+    "action_kind": {
+      "title": "Action Kind",
+      "type": "string"
+    },
+    "expected_gain": {
+      "default": 0.0,
+      "title": "Expected Gain",
+      "type": "number"
+    },
+    "intervention_id": {
+      "title": "Intervention Id",
+      "type": "string"
+    },
+    "post_intervention_horizon": {
+      "default": 1,
+      "title": "Post Intervention Horizon",
+      "type": "integer"
+    },
+    "required_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Routes",
+      "type": "array"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "risk_charge": {
+      "default": 0.0,
+      "title": "Risk Charge",
+      "type": "number"
+    },
+    "rollback_condition": {
+      "default": "no-positive-finite-gain",
+      "title": "Rollback Condition",
+      "type": "string"
+    },
+    "score": {
+      "default": 0.0,
+      "title": "Score",
+      "type": "number"
+    },
+    "target_component": {
+      "title": "Target Component",
+      "type": "string"
+    },
+    "verification_cost": {
+      "default": 0.0,
+      "title": "Verification Cost",
+      "type": "number"
+    }
+  },
+  "required": [
+    "intervention_id",
+    "target_component",
+    "action_kind"
+  ],
+  "title": "BottleneckIntervention",
+  "type": "object"
+}

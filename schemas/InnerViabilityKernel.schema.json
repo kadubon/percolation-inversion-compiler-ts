@@ -1,0 +1,45 @@
+{
+  "properties": {
+    "inner_states": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Inner States",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "kernel_id": {
+      "title": "Kernel Id",
+      "type": "string"
+    },
+    "residual": {
+      "default": 0.0,
+      "title": "Residual",
+      "type": "number"
+    },
+    "states": {
+      "items": {
+        "type": "string"
+      },
+      "title": "States",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "transition_map": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array",
+        "uniqueItems": true
+      },
+      "title": "Transition Map",
+      "type": "object"
+    }
+  },
+  "required": [
+    "kernel_id"
+  ],
+  "title": "InnerViabilityKernel",
+  "type": "object"
+}

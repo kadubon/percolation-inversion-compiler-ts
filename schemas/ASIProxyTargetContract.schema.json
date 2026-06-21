@@ -1,0 +1,52 @@
+{
+  "description": "Protocol-relative ASI-proxy target, not an unobserved ASI proof claim.",
+  "properties": {
+    "forbidden_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Forbidden Obligations",
+      "type": "array"
+    },
+    "minimum_proxy_mass": {
+      "default": 0.0,
+      "title": "Minimum Proxy Mass",
+      "type": "number"
+    },
+    "proxy_coordinates": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Proxy Coordinates",
+      "type": "object"
+    },
+    "required_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Obligations",
+      "type": "array"
+    },
+    "residual_policy": {
+      "default": "preserve-unresolved-asi-proxy-residuals",
+      "title": "Residual Policy",
+      "type": "string"
+    },
+    "target_id": {
+      "title": "Target Id",
+      "type": "string"
+    },
+    "target_nodes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Target Nodes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "target_id"
+  ],
+  "title": "ASIProxyTargetContract",
+  "type": "object"
+}

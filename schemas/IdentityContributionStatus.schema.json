@@ -1,0 +1,11 @@
+{
+  "enum": [
+    "verified",
+    "provisional",
+    "diagnostic",
+    "quarantined",
+    "rejected"
+  ],
+  "title": "IdentityContributionStatus",
+  "type": "string"
+}

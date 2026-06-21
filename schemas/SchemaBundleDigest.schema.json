@@ -1,0 +1,57 @@
+{
+  "$defs": {
+    "ProvenanceManifestEntry": {
+      "description": "One file entry in a deterministic provenance manifest.",
+      "properties": {
+        "media_type": {
+          "default": "application/octet-stream",
+          "title": "Media Type",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "ProvenanceManifestEntry",
+      "type": "object"
+    }
+  },
+  "description": "Digest summary for a generated schema bundle.",
+  "properties": {
+    "aggregate_sha256": {
+      "title": "Aggregate Sha256",
+      "type": "string"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/ProvenanceManifestEntry"
+      },
+      "title": "Entries",
+      "type": "array"
+    },
+    "schema_dir": {
+      "title": "Schema Dir",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_dir",
+    "aggregate_sha256"
+  ],
+  "title": "SchemaBundleDigest",
+  "type": "object"
+}

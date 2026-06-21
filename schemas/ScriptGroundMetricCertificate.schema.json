@@ -1,0 +1,47 @@
+{
+  "properties": {
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "distance": {
+      "default": 0.0,
+      "title": "Distance",
+      "type": "number"
+    },
+    "lower_bound": {
+      "default": 0.0,
+      "title": "Lower Bound",
+      "type": "number"
+    },
+    "residual": {
+      "default": 0.0,
+      "title": "Residual",
+      "type": "number"
+    },
+    "source_script": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Script",
+      "type": "array"
+    },
+    "target_script": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Target Script",
+      "type": "array"
+    },
+    "triangle_witness": {
+      "default": false,
+      "title": "Triangle Witness",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "certificate_id"
+  ],
+  "title": "ScriptGroundMetricCertificate",
+  "type": "object"
+}

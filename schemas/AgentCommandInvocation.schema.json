@@ -1,0 +1,63 @@
+{
+  "description": "OS-independent command description for autonomous agents.",
+  "properties": {
+    "argv": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Argv",
+      "type": "array"
+    },
+    "executes_shell_commands_by_pic": {
+      "default": false,
+      "title": "Executes Shell Commands By Pic",
+      "type": "boolean"
+    },
+    "invocation_id": {
+      "title": "Invocation Id",
+      "type": "string"
+    },
+    "mutates_environment_if_operator_runs_it": {
+      "default": false,
+      "title": "Mutates Environment If Operator Runs It",
+      "type": "boolean"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "requires_agent_full_extra": {
+      "default": false,
+      "title": "Requires Agent Full Extra",
+      "type": "boolean"
+    },
+    "requires_operator_authority": {
+      "default": false,
+      "title": "Requires Operator Authority",
+      "type": "boolean"
+    },
+    "requires_source_checkout": {
+      "default": false,
+      "title": "Requires Source Checkout",
+      "type": "boolean"
+    },
+    "safety_notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Notes",
+      "type": "array"
+    },
+    "shell_command": {
+      "default": "",
+      "title": "Shell Command",
+      "type": "string"
+    }
+  },
+  "required": [
+    "invocation_id",
+    "purpose"
+  ],
+  "title": "AgentCommandInvocation",
+  "type": "object"
+}

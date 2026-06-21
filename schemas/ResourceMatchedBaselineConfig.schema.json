@@ -1,0 +1,81 @@
+{
+  "$defs": {
+    "ResourceEnvelope": {
+      "description": "Finite resource envelope for protocol-competitive runtime comparison.",
+      "properties": {
+        "compute_cost": {
+          "default": 0.0,
+          "title": "Compute Cost",
+          "type": "number"
+        },
+        "human_review_budget": {
+          "default": 0.0,
+          "title": "Human Review Budget",
+          "type": "number"
+        },
+        "network_calls": {
+          "default": 0,
+          "title": "Network Calls",
+          "type": "integer"
+        },
+        "risk_budget": {
+          "default": 0.0,
+          "title": "Risk Budget",
+          "type": "number"
+        },
+        "token_budget": {
+          "default": 0,
+          "title": "Token Budget",
+          "type": "integer"
+        },
+        "verifier_calls": {
+          "default": 0,
+          "title": "Verifier Calls",
+          "type": "integer"
+        },
+        "wall_time_seconds": {
+          "default": 0.0,
+          "title": "Wall Time Seconds",
+          "type": "number"
+        }
+      },
+      "title": "ResourceEnvelope",
+      "type": "object"
+    }
+  },
+  "description": "Baseline comparability contract for ECPT acceleration certificates.",
+  "properties": {
+    "constraint_frame_id": {
+      "default": "default-constraint-frame",
+      "title": "Constraint Frame Id",
+      "type": "string"
+    },
+    "observation_protocol_id": {
+      "default": "default-observation-protocol",
+      "title": "Observation Protocol Id",
+      "type": "string"
+    },
+    "receiver_family": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Receiver Family",
+      "type": "array"
+    },
+    "resource_envelope": {
+      "$ref": "#/$defs/ResourceEnvelope"
+    },
+    "tolerance": {
+      "default": 0.0,
+      "title": "Tolerance",
+      "type": "number"
+    },
+    "validity_domain": {
+      "default": "protocol-relative-finite",
+      "title": "Validity Domain",
+      "type": "string"
+    }
+  },
+  "title": "ResourceMatchedBaselineConfig",
+  "type": "object"
+}

@@ -1,0 +1,42 @@
+{
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "dependence_residual": {
+      "default": 0.0,
+      "title": "Dependence Residual",
+      "type": "number"
+    },
+    "separating_events": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Separating Events",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "variable_groups": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array",
+        "uniqueItems": true
+      },
+      "title": "Variable Groups",
+      "type": "object"
+    }
+  },
+  "required": [
+    "certificate_id"
+  ],
+  "title": "IndependenceCertificate",
+  "type": "object"
+}

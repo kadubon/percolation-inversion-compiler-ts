@@ -1,0 +1,206 @@
+{
+  "$defs": {
+    "CommercialReadinessSummary": {
+      "description": "Practical onboarding readiness summary for commercial and OSS users.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "bounded_intake_default": {
+          "default": true,
+          "title": "Bounded Intake Default",
+          "type": "boolean"
+        },
+        "checks": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Checks",
+          "type": "object"
+        },
+        "connector_dependency_ready": {
+          "default": false,
+          "title": "Connector Dependency Ready",
+          "type": "boolean"
+        },
+        "curated_demo_available": {
+          "default": false,
+          "title": "Curated Demo Available",
+          "type": "boolean"
+        },
+        "identity_ready": {
+          "default": false,
+          "title": "Identity Ready",
+          "type": "boolean"
+        },
+        "install_mode": {
+          "default": "unknown",
+          "title": "Install Mode",
+          "type": "string"
+        },
+        "live_connector_opt_out_available": {
+          "default": true,
+          "title": "Live Connector Opt Out Available",
+          "type": "boolean"
+        },
+        "live_connectors_default_enabled": {
+          "title": "Live Connectors Default Enabled",
+          "type": "boolean"
+        },
+        "live_connectors_default_off": {
+          "default": false,
+          "title": "Live Connectors Default Off",
+          "type": "boolean"
+        },
+        "live_default_mode": {
+          "title": "Live Default Mode",
+          "type": "string"
+        },
+        "onboarding_status": {
+          "default": "diagnostic",
+          "title": "Onboarding Status",
+          "type": "string"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "package_version": {
+          "default": "",
+          "title": "Package Version",
+          "type": "string"
+        },
+        "production_identity_required": {
+          "default": false,
+          "title": "Production Identity Required",
+          "type": "boolean"
+        },
+        "provenance_verified": {
+          "default": false,
+          "title": "Provenance Verified",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "schema_count": {
+          "default": 0,
+          "title": "Schema Count",
+          "type": "integer"
+        },
+        "schema_registry_ready": {
+          "default": false,
+          "title": "Schema Registry Ready",
+          "type": "boolean"
+        },
+        "security_metadata_present": {
+          "default": false,
+          "title": "Security Metadata Present",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "snapshot_bundle_ready": {
+          "default": false,
+          "title": "Snapshot Bundle Ready",
+          "type": "boolean"
+        },
+        "snapshot_count": {
+          "default": 0,
+          "title": "Snapshot Count",
+          "type": "integer"
+        },
+        "summary_id": {
+          "default": "pic-commercial-readiness",
+          "title": "Summary Id",
+          "type": "string"
+        },
+        "token_ready": {
+          "default": false,
+          "title": "Token Ready",
+          "type": "boolean"
+        }
+      },
+      "title": "CommercialReadinessSummary",
+      "type": "object"
+    }
+  },
+  "description": "Agent-facing readiness summary for full runtime use.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "commercial_readiness": {
+      "$ref": "#/$defs/CommercialReadinessSummary"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "profile": {
+      "title": "Profile",
+      "type": "string"
+    },
+    "readiness": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Readiness",
+      "type": "object"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "recommended_next_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Recommended Next Commands",
+      "type": "array"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "runtime_health": {
+      "additionalProperties": true,
+      "title": "Runtime Health",
+      "type": "object"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "report_id",
+    "profile"
+  ],
+  "title": "AgentFeatureReadinessReport",
+  "type": "object"
+}

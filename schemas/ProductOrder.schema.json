@@ -1,0 +1,53 @@
+{
+  "$defs": {
+    "FiniteOrder": {
+      "description": "A finite preorder/partial order represented by a finite relation.",
+      "properties": {
+        "elements": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Elements",
+          "type": "array"
+        },
+        "leq_pairs": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Leq Pairs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "elements"
+      ],
+      "title": "FiniteOrder",
+      "type": "object"
+    }
+  },
+  "description": "Coordinatewise product order over named finite orders.",
+  "properties": {
+    "coordinate_orders": {
+      "additionalProperties": {
+        "$ref": "#/$defs/FiniteOrder"
+      },
+      "title": "Coordinate Orders",
+      "type": "object"
+    }
+  },
+  "required": [
+    "coordinate_orders"
+  ],
+  "title": "ProductOrder",
+  "type": "object"
+}

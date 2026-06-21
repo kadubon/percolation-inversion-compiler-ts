@@ -1,0 +1,264 @@
+{
+  "checks": [
+    {
+      "check_id": "provenance-manifest",
+      "details": {
+        "reasons": []
+      },
+      "message": "release provenance manifest verifies schema, snapshot, examples, and metadata",
+      "status": "warn"
+    },
+    {
+      "check_id": "schema-registry",
+      "details": {
+        "schema_count": 277
+      },
+      "message": "public schema registry is available",
+      "status": "pass"
+    },
+    {
+      "check_id": "derived-snapshots",
+      "details": {
+        "snapshot_count": 5,
+        "unsupported_by_artifact": {
+          "alt": 0,
+          "bit": 0,
+          "ecpt": 0,
+          "sqot": 0,
+          "trc": 0
+        }
+      },
+      "message": "bundled derived snapshots are available and keep unsupported at zero",
+      "status": "pass"
+    },
+    {
+      "check_id": "adapter-route-catalog",
+      "details": {
+        "binding_count": 29,
+        "contract_enforced_routes": [
+          "ecpt.adapters.bridge.verify_cross_theory_bridge",
+          "ecpt.adapters.trace_complex.verify_diagnostic_projection",
+          "trc.adapters.contracts.verify_assume_guarantee_library",
+          "trc.adapters.metric.verify_distributionally_robust_dual",
+          "trc.adapters.observation.verify_partition_cover"
+        ],
+        "discharge_level_summary": {
+          "contract_enforced": 5,
+          "external_domain_required": 19,
+          "finite_value_check": 4,
+          "replay_check": 1
+        },
+        "external_domain_required_routes": [
+          "alt.adapters.causal.verify_token_effect",
+          "alt.adapters.hazard.verify_adversarial_token_clearance",
+          "alt.adapters.reproduction.verify_capital_reproduction_matrix",
+          "alt.adapters.root.verify_role_separated_quorum",
+          "alt.adapters.target.verify_alt_cara_target",
+          "alt.adapters.telemetry.verify_cost_instrumentation",
+          "alt.adapters.transport.verify_density_ratio_support",
+          "core.adapters.external.verify_domain_obligation",
+          "ecpt.adapters.ecology.verify_domain_abstraction",
+          "ecpt.adapters.policy.verify_execution_policy",
+          "ecpt.adapters.proxy.verify_target_contract",
+          "ecpt.adapters.speculative.verify_channel_and_repair",
+          "sqot.adapters.adversarial.verify_transfer_game",
+          "sqot.adapters.integrity.verify_protocol_kernel",
+          "sqot.adapters.privacy.verify_rejoin_transcript",
+          "sqot.adapters.salience.verify_queue_policy",
+          "sqot.adapters.thermodynamic.verify_discharge_envelope",
+          "trc.adapters.latent_oracle.verify_model_witness",
+          "trc.adapters.redesign.verify_response_interval"
+        ],
+        "missing_required_routes": [],
+        "missing_routes": [],
+        "replay_residual_routes": [
+          "trc.adapters.physical_hybrid.verify_envelope"
+        ],
+        "route_count": 44,
+        "unavailable_routes": [],
+        "unbound_contract_routes": [],
+        "unresolved_domain_obligation_count": 27
+      },
+      "message": "every external obligation route has an AdapterRouteSpec",
+      "status": "pass"
+    },
+    {
+      "check_id": "optional-adapters",
+      "details": {
+        "dependencies": {
+          "networkx": "missing",
+          "ot": "missing",
+          "pint": "missing"
+        }
+      },
+      "message": "optional scientific adapters are reported explicitly",
+      "status": "warn"
+    },
+    {
+      "check_id": "canonical-tex",
+      "details": {
+        "provenance_verified": false
+      },
+      "message": "PIC_CANONICAL_TEX_DIR is not set; verified provenance may substitute local TeX",
+      "status": "warn"
+    },
+    {
+      "check_id": "canonical-manifest",
+      "details": {
+        "record_count": 5,
+        "schema_version": "canonical-manifest-2.0"
+      },
+      "message": "canonical DOI manifest uses SHA-256 as primary integrity identity",
+      "status": "pass"
+    },
+    {
+      "check_id": "security-metadata",
+      "details": {
+        "distribution_metadata": false,
+        "source_files": {
+          "CITATION.cff": false,
+          "LICENSE": true,
+          "NOTICE": true,
+          "SECURITY.md": false,
+          "THIRD_PARTY_LICENSES.md": false
+        }
+      },
+      "message": "security, citation, and license metadata are present",
+      "status": "pass"
+    },
+    {
+      "check_id": "schema-provenance",
+      "details": {
+        "provenance_verified": false,
+        "signed": false
+      },
+      "message": "schema bundle provenance is verified by deterministic SHA-256 manifest",
+      "status": "warn"
+    },
+    {
+      "check_id": "status-policy",
+      "details": {
+        "policy": [
+          "declared_status is metadata",
+          "checker output derives status",
+          "external routes default to diagnostic unless accepted evidence is present"
+        ]
+      },
+      "message": "non-promotion and residual preservation policies are active",
+      "status": "pass"
+    }
+  ],
+  "commercial_readiness": {
+    "accepted": false,
+    "bounded_intake_default": true,
+    "checks": {
+      "bounded_candidate_intake": "ready",
+      "connector_dependency": "ready",
+      "curated_demo": "ready",
+      "identity": "ready",
+      "install_mode": "installed-package",
+      "live_connector_opt_out": "ready",
+      "live_connectors": "bounded-default-on",
+      "provenance": "diagnostic",
+      "schema_registry": "ready",
+      "security_metadata": "fail",
+      "snapshots": "ready",
+      "token_readiness": "ready"
+    },
+    "connector_dependency_ready": true,
+    "curated_demo_available": true,
+    "identity_ready": true,
+    "install_mode": "installed-package",
+    "live_connector_opt_out_available": true,
+    "live_connectors_default_enabled": true,
+    "live_connectors_default_off": false,
+    "live_default_mode": "explicit-source-bounded-candidate-intake",
+    "onboarding_status": "fail",
+    "operationally_usable": false,
+    "package_version": "0.4.4",
+    "production_identity_required": false,
+    "provenance_verified": false,
+    "reasons": [
+      "release or schema provenance is not verified in this environment",
+      "security, citation, or license metadata is incomplete"
+    ],
+    "schema_count": 277,
+    "schema_registry_ready": true,
+    "security_metadata_present": false,
+    "settled": false,
+    "snapshot_bundle_ready": true,
+    "snapshot_count": 5,
+    "summary_id": "pic-commercial-readiness",
+    "token_ready": true
+  },
+  "overall_status": "warn",
+  "package_version": "0.4.4",
+  "python_version": "3.13.5",
+  "report_id": "pic-operational-readiness",
+  "safety_invariants": [
+    "registry entries are metadata, not evidence",
+    "derived_status is checker-derived",
+    "unresolved external obligations do not promote to settled",
+    "snapshots are derived metadata and do not vendor TeX/PDF sources"
+  ],
+  "summary": {
+    "adapter_route_count": 44,
+    "canonical_manifest_records": 5,
+    "contract_enforced_routes": [
+      "ecpt.adapters.bridge.verify_cross_theory_bridge",
+      "ecpt.adapters.trace_complex.verify_diagnostic_projection",
+      "trc.adapters.contracts.verify_assume_guarantee_library",
+      "trc.adapters.metric.verify_distributionally_robust_dual",
+      "trc.adapters.observation.verify_partition_cover"
+    ],
+    "discharge_level_summary": {
+      "contract_enforced": 5,
+      "external_domain_required": 19,
+      "finite_value_check": 4,
+      "replay_check": 1
+    },
+    "discharge_route_binding_count": 29,
+    "external_domain_required_routes": [
+      "alt.adapters.causal.verify_token_effect",
+      "alt.adapters.hazard.verify_adversarial_token_clearance",
+      "alt.adapters.reproduction.verify_capital_reproduction_matrix",
+      "alt.adapters.root.verify_role_separated_quorum",
+      "alt.adapters.target.verify_alt_cara_target",
+      "alt.adapters.telemetry.verify_cost_instrumentation",
+      "alt.adapters.transport.verify_density_ratio_support",
+      "core.adapters.external.verify_domain_obligation",
+      "ecpt.adapters.ecology.verify_domain_abstraction",
+      "ecpt.adapters.policy.verify_execution_policy",
+      "ecpt.adapters.proxy.verify_target_contract",
+      "ecpt.adapters.speculative.verify_channel_and_repair",
+      "sqot.adapters.adversarial.verify_transfer_game",
+      "sqot.adapters.integrity.verify_protocol_kernel",
+      "sqot.adapters.privacy.verify_rejoin_transcript",
+      "sqot.adapters.salience.verify_queue_policy",
+      "sqot.adapters.thermodynamic.verify_discharge_envelope",
+      "trc.adapters.latent_oracle.verify_model_witness",
+      "trc.adapters.redesign.verify_response_interval"
+    ],
+    "external_obligation_totals": {
+      "alt": 54,
+      "bit": 0,
+      "ecpt": 30,
+      "sqot": 15,
+      "trc": 32
+    },
+    "optional_dependency_status": {
+      "networkx": "missing",
+      "ot": "missing",
+      "pint": "missing"
+    },
+    "profile": "development",
+    "provenance_verified": false,
+    "replay_residual_routes": [
+      "trc.adapters.physical_hybrid.verify_envelope"
+    ],
+    "required_routes": [],
+    "residual_external_obligation_count": 27,
+    "schema_count": 277,
+    "snapshot_count": 5
+  }
+}

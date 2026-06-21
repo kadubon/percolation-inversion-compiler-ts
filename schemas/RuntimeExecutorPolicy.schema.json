@@ -1,0 +1,68 @@
+{
+  "description": "Fail-closed policy for autonomous runtime execution.",
+  "properties": {
+    "allow_file_write": {
+      "default": false,
+      "title": "Allow File Write",
+      "type": "boolean"
+    },
+    "allow_network": {
+      "default": false,
+      "title": "Allow Network",
+      "type": "boolean"
+    },
+    "allow_shell": {
+      "default": false,
+      "title": "Allow Shell",
+      "type": "boolean"
+    },
+    "allowed_route_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Route Ids",
+      "type": "array"
+    },
+    "allowed_task_types": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Task Types",
+      "type": "array"
+    },
+    "max_tasks": {
+      "default": 16,
+      "title": "Max Tasks",
+      "type": "integer"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "require_authority_grant": {
+      "default": true,
+      "title": "Require Authority Grant",
+      "type": "boolean"
+    },
+    "require_rollback_receipt": {
+      "default": true,
+      "title": "Require Rollback Receipt",
+      "type": "boolean"
+    },
+    "sandbox_root": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sandbox Root"
+    }
+  },
+  "title": "RuntimeExecutorPolicy",
+  "type": "object"
+}

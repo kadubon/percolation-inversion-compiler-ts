@@ -1,0 +1,185 @@
+{
+  "$defs": {
+    "ALTAdmissionAction": {
+      "description": "Lifecycle action for an abstraction token or certificate packet.",
+      "enum": [
+        "admit",
+        "reject",
+        "defer",
+        "suspend",
+        "deprecate",
+        "rollback",
+        "resurrect_as_candidate"
+      ],
+      "title": "ALTAdmissionAction",
+      "type": "string"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "description": "Report that an ALT kernel transition preserved dual-ledger invariants.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "action": {
+      "$ref": "#/$defs/ALTAdmissionAction"
+    },
+    "deprecation_record_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Deprecation Record Refs",
+      "type": "array"
+    },
+    "exploration_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "finite_checks_passed": {
+      "default": false,
+      "title": "Finite Checks Passed",
+      "type": "boolean"
+    },
+    "next_state_id": {
+      "title": "Next State Id",
+      "type": "string"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "prior_state_id": {
+      "title": "Prior State Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "resurrection_record_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Resurrection Record Refs",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "settlement_ledger": {
+      "$ref": "#/$defs/Ledger"
+    }
+  },
+  "required": [
+    "report_id",
+    "prior_state_id",
+    "next_state_id",
+    "action"
+  ],
+  "title": "ALTKernelTransitionReport",
+  "type": "object"
+}

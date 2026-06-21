@@ -1,0 +1,21 @@
+{
+  "accepted": true,
+  "baseline_candidate_only_count": 1,
+  "baseline_phase_gap": 0.5,
+  "candidate_label": "pic-guided-finite-routing",
+  "finite_route_count_delta": 1,
+  "invariant_checks": {
+    "candidate_only_volume_does_not_reduce_gap": true,
+    "planner_does_not_execute_commands": true,
+    "residuals_visible": true,
+    "settled_not_promoted": true
+  },
+  "operationally_usable": true,
+  "pic_guided_phase_gap": 0.5,
+  "pic_guided_repairable_bottleneck_count": 1,
+  "profile": "development",
+  "report_id": "phase-acceleration-benchmark",
+  "residual_visibility_delta": 1,
+  "settled": false,
+  "workflow_usable": true
+}

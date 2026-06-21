@@ -1,0 +1,31 @@
+{
+  "description": "Certificate that one finite element is no worse than another.",
+  "properties": {
+    "accepted": {
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "left": {
+      "title": "Left",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "right": {
+      "title": "Right",
+      "type": "string"
+    }
+  },
+  "required": [
+    "left",
+    "right",
+    "accepted"
+  ],
+  "title": "DominanceWitness",
+  "type": "object"
+}

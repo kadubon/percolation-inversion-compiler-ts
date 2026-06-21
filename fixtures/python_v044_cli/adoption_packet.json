@@ -1,0 +1,131 @@
+{
+  "accepted": true,
+  "accepted_true_meaning": "accepted=true means the finite checker accepted the report shape and routing record; it does not mean final truth or settled obligations.",
+  "candidate_work_rationale": "AI-agent output is treated as candidate work until finite verifier, residual, identity, route, rollback, and promotion checks accept the scoped packet.",
+  "compact_json_fields_to_inspect": [
+    "accepted",
+    "workflow_usable",
+    "settled",
+    "unresolved_obligations",
+    "residual_summary",
+    "safe_commands",
+    "cannot_promote_because",
+    "candidate_only_reasons",
+    "settled_blockers",
+    "safety_invariants"
+  ],
+  "distribution_modes": [
+    "PyPI install: practical agent checks, bundled snapshots, schema export, demo bootstrap",
+    "source checkout: root examples, canonical TeX audits, development fixtures",
+    "Wiki: human-oriented conceptual guide",
+    "ClawHub skill: external agent skill packaging surface when separately provided",
+    "full development checkout: tests, release checks, and local implementation work"
+  ],
+  "features_requiring_explicit_operator_permission": [
+    "installing the PyPI package",
+    "cloning a source checkout",
+    "running commands that mutate local environments or repositories",
+    "enabling live network connectors for explicit sources",
+    "executing verifier routes or shell commands outside PIC documentation output"
+  ],
+  "first_run_commands": [
+    {
+      "command": "python -m pip install percolation-inversion-compiler",
+      "command_id": "minimal-pypi-install",
+      "executed_by_pic": false,
+      "expected_output": "PIC package installed in the selected Python environment",
+      "mutates_environment_if_operator_runs_it": true,
+      "purpose": "Install PIC from PyPI when the operator has chosen to allow local use.",
+      "requires_operator_authority": true
+    },
+    {
+      "command": "pic agent check --compact --text \"Candidate packet: route evidence and preserve residuals.\" --profile development",
+      "command_id": "minimal-first-check",
+      "executed_by_pic": false,
+      "expected_output": "compact JSON with accepted, workflow_usable, settled, residuals, and blockers",
+      "mutates_environment_if_operator_runs_it": false,
+      "purpose": "Run the shortest compact agent-output contract after installation.",
+      "requires_operator_authority": false
+    },
+    {
+      "command": "pic phase plan --compact --text \"Candidate packet: route evidence and preserve residuals.\" --profile development",
+      "command_id": "minimal-next-phase-plan",
+      "executed_by_pic": false,
+      "expected_output": "compact PhaseAccelerationPlan JSON with settled=false when obligations remain",
+      "mutates_environment_if_operator_runs_it": false,
+      "purpose": "Inspect ranked phase gaps and promotion blockers after the first check.",
+      "requires_operator_authority": false
+    }
+  ],
+  "operationally_usable": true,
+  "operator_adoption_status": "not-recorded",
+  "packet_id": "operator-adoption-packet",
+  "profile": "development",
+  "reasons": [
+    "operator adoption sidecar is optional documentation and does not gate PIC core commands"
+  ],
+  "review_checklist": {
+    "accepted": true,
+    "checklist_id": "adoption-review-checklist",
+    "interpretation_rules": [
+      "if adoption_sidecar is absent: continue normal checking and planning",
+      "if adoption_sidecar is present: treat it as operator-facing documentation only",
+      "if operator_adoption is approved: this may authorize local use in that environment",
+      "operator adoption does not settle external obligations",
+      "operator adoption does not promote packets"
+    ],
+    "items": [
+      "Confirm the agent has authority only to request use, not to self-install.",
+      "Confirm PIC output will be treated as candidate work, not final truth.",
+      "Confirm safe_commands will be inspected before any execution.",
+      "Confirm live connectors, repository mutation, and shell execution require explicit authority.",
+      "Confirm accepted=true and workflow_usable=true do not imply settled=true."
+    ],
+    "settled": false
+  },
+  "safe_commands_meaning": "safe_commands are deterministic hints to inspect or run only under operator authority.",
+  "safety_boundary": {
+    "affects_agent_accelerate": false,
+    "affects_agent_check": false,
+    "affects_packet_promotion": false,
+    "affects_phase_plan": false,
+    "affects_settled": false,
+    "approval_settles_truth": false,
+    "boundary_id": "adoption-safety-boundary",
+    "calls_network": false,
+    "clones_repository": false,
+    "creates_required_approval_state": false,
+    "executes_shell_commands": false,
+    "installs_package": false,
+    "invariants": [
+      "adoption sidecars are optional operator-facing documentation",
+      "absence of an adoption sidecar is normal and is not a blocker",
+      "operator adoption does not settle runtime obligations",
+      "operator adoption does not prove real ASI, physical truth, or oracle truth",
+      "operator adoption does not promote packet candidates",
+      "agents without install authority should generate an operator request instead"
+    ],
+    "modifies_config_files": false,
+    "mutates_runtime_state": false,
+    "pure_output_generator": true,
+    "safe_commands_are_execution_authority": false,
+    "settled": false,
+    "sidecar_only": true
+  },
+  "settled": false,
+  "settled_false_meaning": "settled=false means unresolved obligations remain explicit; it is not command failure.",
+  "what_pic_does": [
+    "Checks AI-agent output as capability packet candidates.",
+    "Preserves evidence, proof obligations, residual ledgers, and settlement blockers.",
+    "Routes finite verifier work and phase-planning diagnostics.",
+    "Emits machine-readable JSON contracts for agent and CI workflows."
+  ],
+  "what_pic_does_not_do": [
+    "It does not execute proposed actions from agent output.",
+    "It does not bypass operator approval policy.",
+    "It does not prove real ASI, physical truth, simulator truth, or oracle truth.",
+    "It does not silently promote accepted or workflow_usable outputs to settled.",
+    "It does not require adoption approval for agent check, phase plan, or accelerate."
+  ],
+  "workflow_usable": true
+}

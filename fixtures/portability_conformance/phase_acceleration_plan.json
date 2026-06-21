@@ -1,0 +1,72 @@
+{
+  "accepted": true,
+  "bottlenecks": [
+    {
+      "bottleneck_kind": "verifier-route",
+      "candidate_id": "bottleneck:route:example",
+      "next_verifier_routes": [
+        "adapters.domain.verify_ecpt_proxy_target_contract"
+      ],
+      "priority_score": 9.0,
+      "schema_refs": [
+        "RouteExecutionRequest",
+        "VerifierResolution"
+      ],
+      "source": "RouteExecutionRequest",
+      "target_component": "ecpt-proxy-target"
+    }
+  ],
+  "candidate_only_reasons": [
+    "external bridge is candidate-only until downstream verification"
+  ],
+  "cannot_promote_because": [
+    "missing obligations remain"
+  ],
+  "operationally_usable": true,
+  "phase_gap_vector": {
+    "accepted": true,
+    "aggregate_gap": 0.5,
+    "components": [
+      {
+        "component": "AC",
+        "current_value": 0.0,
+        "gap": 0.5,
+        "limiting": true,
+        "threshold_value": 0.5
+      }
+    ],
+    "limiting_components": [
+      "AC"
+    ],
+    "operationally_usable": true,
+    "settled": false
+  },
+  "plan_id": "phase-acceleration-plan:portability",
+  "profile": "development",
+  "recommended_actions": [
+    {
+      "action_id": "phase-action:inspect-gap",
+      "action_type": "phase-gap-inspection",
+      "execution_authority_granted": false,
+      "purpose": "Read finite Psi component gaps before selecting repair work.",
+      "safe_commands": [
+        "pic phase gap --compact"
+      ],
+      "settled": false,
+      "title": "Inspect Phase Gap"
+    }
+  ],
+  "report_mode": "compact",
+  "request_id": "phase-portability",
+  "schema_refs": [
+    "PhaseAccelerationPlan",
+    "PhaseGapVector",
+    "BottleneckCandidate",
+    "SafePhaseAction"
+  ],
+  "settled": false,
+  "settled_blockers": [
+    "phase planner is recommendation-only and cannot settle claims"
+  ],
+  "workflow_usable": true
+}

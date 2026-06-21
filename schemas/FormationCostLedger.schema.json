@@ -1,0 +1,91 @@
+{
+  "description": "ALT cost ledger for forming, validating, deploying, and maintaining a token.",
+  "properties": {
+    "absorption_cost": {
+      "default": 0.0,
+      "title": "Absorption Cost",
+      "type": "number"
+    },
+    "certification_cost": {
+      "default": 0.0,
+      "title": "Certification Cost",
+      "type": "number"
+    },
+    "contamination_cost": {
+      "default": 0.0,
+      "title": "Contamination Cost",
+      "type": "number"
+    },
+    "deployment_cost": {
+      "default": 0.0,
+      "title": "Deployment Cost",
+      "type": "number"
+    },
+    "depreciation_cost": {
+      "default": 0.0,
+      "title": "Depreciation Cost",
+      "type": "number"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "formation_cost": {
+      "default": 0.0,
+      "title": "Formation Cost",
+      "type": "number"
+    },
+    "hazard_cost": {
+      "default": 0.0,
+      "title": "Hazard Cost",
+      "type": "number"
+    },
+    "hidden_resource_cost": {
+      "default": 0.0,
+      "title": "Hidden Resource Cost",
+      "type": "number"
+    },
+    "ledger_id": {
+      "title": "Ledger Id",
+      "type": "string"
+    },
+    "maintenance_cost": {
+      "default": 0.0,
+      "title": "Maintenance Cost",
+      "type": "number"
+    },
+    "misapplication_cost": {
+      "default": 0.0,
+      "title": "Misapplication Cost",
+      "type": "number"
+    },
+    "settlement_cost": {
+      "default": 0.0,
+      "title": "Settlement Cost",
+      "type": "number"
+    },
+    "telemetry_cost": {
+      "default": 0.0,
+      "title": "Telemetry Cost",
+      "type": "number"
+    },
+    "unit": {
+      "default": "dimensionless",
+      "title": "Unit",
+      "type": "string"
+    },
+    "validation_cost": {
+      "default": 0.0,
+      "title": "Validation Cost",
+      "type": "number"
+    }
+  },
+  "required": [
+    "ledger_id"
+  ],
+  "title": "FormationCostLedger",
+  "type": "object"
+}

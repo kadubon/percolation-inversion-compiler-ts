@@ -1,0 +1,66 @@
+{
+  "description": "Finite ECPT ASI-proxy acceleration score for ranking runtime outputs.",
+  "properties": {
+    "components": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Components",
+      "type": "object"
+    },
+    "false_liquidity_charge": {
+      "default": 0.0,
+      "title": "False Liquidity Charge",
+      "type": "number"
+    },
+    "finite_proxy_gain": {
+      "default": 0.0,
+      "title": "Finite Proxy Gain",
+      "type": "number"
+    },
+    "missing_route_charge": {
+      "default": 0.0,
+      "title": "Missing Route Charge",
+      "type": "number"
+    },
+    "psi_distance_reduction": {
+      "default": 0.0,
+      "title": "Psi Distance Reduction",
+      "type": "number"
+    },
+    "residual_debt_charge": {
+      "default": 0.0,
+      "title": "Residual Debt Charge",
+      "type": "number"
+    },
+    "risk_charge": {
+      "default": 0.0,
+      "title": "Risk Charge",
+      "type": "number"
+    },
+    "score_id": {
+      "title": "Score Id",
+      "type": "string"
+    },
+    "stale_packet_charge": {
+      "default": 0.0,
+      "title": "Stale Packet Charge",
+      "type": "number"
+    },
+    "total_score": {
+      "title": "Total Score",
+      "type": "number"
+    },
+    "verification_throughput_score": {
+      "default": 0.0,
+      "title": "Verification Throughput Score",
+      "type": "number"
+    }
+  },
+  "required": [
+    "score_id",
+    "total_score"
+  ],
+  "title": "PhaseAccelerationScore",
+  "type": "object"
+}

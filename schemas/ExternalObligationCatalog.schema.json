@@ -1,0 +1,238 @@
+{
+  "$defs": {
+    "CoverageStatus": {
+      "enum": [
+        "implemented_constructive",
+        "implemented_checker",
+        "implemented_schema",
+        "partial",
+        "external_obligation",
+        "unsupported"
+      ],
+      "title": "CoverageStatus",
+      "type": "string"
+    },
+    "ImplementationMaturity": {
+      "enum": [
+        "implemented_verified_algorithm",
+        "implemented_shape_checker",
+        "implemented_schema_only",
+        "external_contract_only",
+        "snapshot_metadata_only",
+        "unsupported_no_interface"
+      ],
+      "title": "ImplementationMaturity",
+      "type": "string"
+    },
+    "TheoryImplementationRecord": {
+      "description": "Portable implementation mapping for one finite theory item.",
+      "properties": {
+        "accepted_evidence_kind": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Evidence Kind",
+          "type": "array"
+        },
+        "artifact": {
+          "title": "Artifact",
+          "type": "string"
+        },
+        "checker_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Checker Ref"
+        },
+        "checker_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checker Refs",
+          "type": "array"
+        },
+        "coverage_status": {
+          "$ref": "#/$defs/CoverageStatus"
+        },
+        "external_failure_modes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "External Failure Modes",
+          "type": "array"
+        },
+        "failure_modes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Failure Modes",
+          "type": "array"
+        },
+        "implementation_maturity": {
+          "$ref": "#/$defs/ImplementationMaturity",
+          "default": "unsupported_no_interface"
+        },
+        "implementation_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Implementation Ref"
+        },
+        "implementation_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Implementation Refs",
+          "type": "array"
+        },
+        "item_id": {
+          "title": "Item Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "obligation_category": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Obligation Category"
+        },
+        "proof_obligation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Proof Obligation Ids",
+          "type": "array"
+        },
+        "residual_coordinates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual Coordinates",
+          "type": "array"
+        },
+        "residual_policy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Residual Policy"
+        },
+        "safe_default": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Safe Default"
+        },
+        "schema_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Schema Ref"
+        },
+        "schema_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Schema Refs",
+          "type": "array"
+        },
+        "verifier_contract": {
+          "additionalProperties": true,
+          "title": "Verifier Contract",
+          "type": "object"
+        },
+        "verifier_route": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verifier Route"
+        }
+      },
+      "required": [
+        "item_id",
+        "artifact",
+        "label",
+        "coverage_status"
+      ],
+      "title": "TheoryImplementationRecord",
+      "type": "object"
+    }
+  },
+  "description": "Catalog of non-finite or domain-specific obligations.",
+  "properties": {
+    "artifact": {
+      "title": "Artifact",
+      "type": "string"
+    },
+    "category_summary": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Category Summary",
+      "type": "object"
+    },
+    "obligations": {
+      "items": {
+        "$ref": "#/$defs/TheoryImplementationRecord"
+      },
+      "title": "Obligations",
+      "type": "array"
+    },
+    "verifier_route_summary": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Verifier Route Summary",
+      "type": "object"
+    }
+  },
+  "required": [
+    "artifact"
+  ],
+  "title": "ExternalObligationCatalog",
+  "type": "object"
+}

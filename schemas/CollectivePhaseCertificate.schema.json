@@ -1,0 +1,1377 @@
+{
+  "$defs": {
+    "AgentIdentityCheckReport": {
+      "description": "Fail-closed verification report for identity or attestation evidence.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "digest_valid": {
+          "default": false,
+          "title": "Digest Valid",
+          "type": "boolean"
+        },
+        "fingerprint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fingerprint"
+        },
+        "fingerprint_valid": {
+          "default": false,
+          "title": "Fingerprint Valid",
+          "type": "boolean"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "key_valid": {
+          "default": false,
+          "title": "Key Valid",
+          "type": "boolean"
+        },
+        "non_expired": {
+          "default": false,
+          "title": "Non Expired",
+          "type": "boolean"
+        },
+        "non_revoked": {
+          "default": false,
+          "title": "Non Revoked",
+          "type": "boolean"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "payload_digest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Payload Digest"
+        },
+        "policy_digest_present": {
+          "default": false,
+          "title": "Policy Digest Present",
+          "type": "boolean"
+        },
+        "public_key_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Public Key Id"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "signature_suite": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Signature Suite"
+        },
+        "signature_valid": {
+          "default": false,
+          "title": "Signature Valid",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "report_id",
+        "agent_id"
+      ],
+      "title": "AgentIdentityCheckReport",
+      "type": "object"
+    },
+    "AgentPolicyIdentity": {
+      "description": "Policy identity for one member of a fixed ECPT agent population.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "model_digest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Digest"
+        },
+        "policy_digest": {
+          "title": "Policy Digest",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "route_allowlist": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Route Allowlist",
+          "type": "array"
+        },
+        "self_rewrite_allowed": {
+          "default": false,
+          "title": "Self Rewrite Allowed",
+          "type": "boolean"
+        },
+        "source_kind_allowlist": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Kind Allowlist",
+          "type": "array"
+        },
+        "tool_allowlist_digest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool Allowlist Digest"
+        },
+        "weight_update_allowed": {
+          "default": false,
+          "title": "Weight Update Allowed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "agent_id",
+        "policy_digest"
+      ],
+      "title": "AgentPolicyIdentity",
+      "type": "object"
+    },
+    "AutocatalyticClosureWitness": {
+      "description": "Accepted finite closure witness for ECPT collective packet regeneration.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "closure_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Closure Packet Ids",
+          "type": "array"
+        },
+        "closure_strength": {
+          "default": 0.0,
+          "title": "Closure Strength",
+          "type": "number"
+        },
+        "external_seed_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "External Seed Packet Ids",
+          "type": "array"
+        },
+        "false_liquidity_rate": {
+          "default": 0.0,
+          "title": "False Liquidity Rate",
+          "type": "number"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "internal_edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Internal Edge Ids",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "productive_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Productive Packet Ids",
+          "type": "array"
+        },
+        "productivity_lower_bound": {
+          "default": 0.0,
+          "title": "Productivity Lower Bound",
+          "type": "number"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "regeneration_edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Regeneration Edge Ids",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "witness_id": {
+          "title": "Witness Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "witness_id"
+      ],
+      "title": "AutocatalyticClosureWitness",
+      "type": "object"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "ExecutionAvailablePathCertificate": {
+      "description": "Finite certificate that a path is execution-available but not executed.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "authority_granted": {
+          "default": true,
+          "title": "Authority Granted",
+          "type": "boolean"
+        },
+        "certificate_id": {
+          "title": "Certificate Id",
+          "type": "string"
+        },
+        "constraint_frame_id": {
+          "default": "default-constraint-frame",
+          "title": "Constraint Frame Id",
+          "type": "string"
+        },
+        "edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Edge Ids",
+          "type": "array"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "execution_gates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Execution Gates",
+          "type": "array"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "not_executed": {
+          "default": true,
+          "title": "Not Executed",
+          "type": "boolean"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Packet Ids",
+          "type": "array"
+        },
+        "path_id": {
+          "title": "Path Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "receiver_context": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Receiver Context",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "rollback_available": {
+          "default": true,
+          "title": "Rollback Available",
+          "type": "boolean"
+        },
+        "route_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Route Ids",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "certificate_id",
+        "path_id"
+      ],
+      "title": "ExecutionAvailablePathCertificate",
+      "type": "object"
+    },
+    "FixedPopulationLedger": {
+      "description": "Finite ledger asserting fixed agent identities and no self-rewrite.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "after_agents": {
+          "items": {
+            "$ref": "#/$defs/AgentPolicyIdentity"
+          },
+          "title": "After Agents",
+          "type": "array"
+        },
+        "before_agents": {
+          "items": {
+            "$ref": "#/$defs/AgentPolicyIdentity"
+          },
+          "title": "Before Agents",
+          "type": "array"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "fixed_population": {
+          "default": true,
+          "title": "Fixed Population",
+          "type": "boolean"
+        },
+        "ledger_id": {
+          "title": "Ledger Id",
+          "type": "string"
+        },
+        "no_self_rewrite": {
+          "default": true,
+          "title": "No Self Rewrite",
+          "type": "boolean"
+        },
+        "no_weight_update": {
+          "default": true,
+          "title": "No Weight Update",
+          "type": "boolean"
+        },
+        "observation_window_id": {
+          "default": "default-observation-window",
+          "title": "Observation Window Id",
+          "type": "string"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "policy_digests_unchanged": {
+          "default": true,
+          "title": "Policy Digests Unchanged",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "ledger_id"
+      ],
+      "title": "FixedPopulationLedger",
+      "type": "object"
+    },
+    "HiddenCapabilityInjectionReport": {
+      "description": "Fail-closed check for packets, edges, evidence, or events outside protocol.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "allowed_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Packet Ids",
+          "type": "array"
+        },
+        "allowed_route_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Route Ids",
+          "type": "array"
+        },
+        "allowed_source_kinds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Source Kinds",
+          "type": "array"
+        },
+        "checked_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checked Packet Ids",
+          "type": "array"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "protocol_id": {
+          "title": "Protocol Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "rejected_agent_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Agent Ids",
+          "type": "array"
+        },
+        "rejected_edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Edge Ids",
+          "type": "array"
+        },
+        "rejected_event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Event Ids",
+          "type": "array"
+        },
+        "rejected_evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Evidence Refs",
+          "type": "array"
+        },
+        "rejected_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Packet Ids",
+          "type": "array"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "unsigned_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unsigned Packet Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "report_id",
+        "protocol_id"
+      ],
+      "title": "HiddenCapabilityInjectionReport",
+      "type": "object"
+    },
+    "IdentityTrustProfile": {
+      "description": "Operational trust profile for protocol-relative identity checks.",
+      "enum": [
+        "development",
+        "research",
+        "controlled",
+        "federated",
+        "production",
+        "adversarial"
+      ],
+      "title": "IdentityTrustProfile",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "PacketCapitalLineage": {
+      "description": "Lineage record for finite verified packet capital.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "edge_certificate_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Edge Certificate Ids",
+          "type": "array"
+        },
+        "lineage_id": {
+          "title": "Lineage Id",
+          "type": "string"
+        },
+        "packet_id": {
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "parent_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Parent Packet Ids",
+          "type": "array"
+        },
+        "protocol_frame_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Protocol Frame Sha256"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_external_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual External Obligations",
+          "type": "array"
+        },
+        "runtime_event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Runtime Event Ids",
+          "type": "array"
+        },
+        "source_candidate_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Candidate Id"
+        },
+        "verifier_resolution_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verifier Resolution Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "lineage_id",
+        "packet_id"
+      ],
+      "title": "PacketCapitalLineage",
+      "type": "object"
+    },
+    "ProtocolFrameDigest": {
+      "description": "Finite digest of the declared ECPT protocol frame.\n\nThe digest fixes the observation window, validity domain, allowed packet\nsources, and route catalog used by hidden-capability-injection checks.  It\nis a protocol identity record, not a proof of physical outcomes.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "allowed_evidence_prefixes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Evidence Prefixes",
+          "type": "array"
+        },
+        "allowed_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Packet Ids",
+          "type": "array"
+        },
+        "allowed_route_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Route Ids",
+          "type": "array"
+        },
+        "allowed_source_kinds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Source Kinds",
+          "type": "array"
+        },
+        "constraint_frame_id": {
+          "default": "default-constraint-frame",
+          "title": "Constraint Frame Id",
+          "type": "string"
+        },
+        "observation_window_id": {
+          "default": "default-observation-window",
+          "title": "Observation Window Id",
+          "type": "string"
+        },
+        "protocol_id": {
+          "title": "Protocol Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "route_catalog_digest": {
+          "default": "",
+          "title": "Route Catalog Digest",
+          "type": "string"
+        },
+        "sha256": {
+          "default": "",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "validity_domain": {
+          "default": "protocol-relative-finite",
+          "title": "Validity Domain",
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocol_id"
+      ],
+      "title": "ProtocolFrameDigest",
+      "type": "object"
+    },
+    "PsiDashboard": {
+      "description": "ECPT ASI-proxy phase bundle dashboard.",
+      "properties": {
+        "components": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Components",
+          "type": "object"
+        },
+        "dashboard_id": {
+          "title": "Dashboard Id",
+          "type": "string"
+        },
+        "distance_to_threshold": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Distance To Threshold",
+          "type": "object"
+        },
+        "limiting_components": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limiting Components",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "safety_invariants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safety Invariants",
+          "type": "array"
+        },
+        "threshold": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Threshold",
+          "type": "object"
+        },
+        "throughput": {
+          "$ref": "#/$defs/VerificationThroughputReport"
+        }
+      },
+      "required": [
+        "dashboard_id",
+        "components",
+        "threshold",
+        "distance_to_threshold"
+      ],
+      "title": "PsiDashboard",
+      "type": "object"
+    },
+    "SybilResistanceLedger": {
+      "description": "Population-level Sybil-resistance judgment and residual ledger.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "accepted_agent_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Agent Ids",
+          "type": "array"
+        },
+        "accepted_public_key_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Public Key Ids",
+          "type": "array"
+        },
+        "clone_fanout_groups": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Clone Fanout Groups",
+          "type": "array"
+        },
+        "duplicate_agent_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Duplicate Agent Ids",
+          "type": "array"
+        },
+        "duplicate_credential_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Duplicate Credential Refs",
+          "type": "array"
+        },
+        "duplicate_public_key_fingerprints": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Duplicate Public Key Fingerprints",
+          "type": "array"
+        },
+        "duplicate_public_key_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Duplicate Public Key Ids",
+          "type": "array"
+        },
+        "expired_agent_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Expired Agent Ids",
+          "type": "array"
+        },
+        "failed_signature_agent_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Failed Signature Agent Ids",
+          "type": "array"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "fleet_overrepresented": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fleet Overrepresented",
+          "type": "array"
+        },
+        "identity_check_reports": {
+          "items": {
+            "$ref": "#/$defs/AgentIdentityCheckReport"
+          },
+          "title": "Identity Check Reports",
+          "type": "array"
+        },
+        "identity_count": {
+          "title": "Identity Count",
+          "type": "integer"
+        },
+        "issuer_overrepresented": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Issuer Overrepresented",
+          "type": "array"
+        },
+        "ledger_id": {
+          "title": "Ledger Id",
+          "type": "string"
+        },
+        "missing_evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Evidence Refs",
+          "type": "array"
+        },
+        "model_overrepresented": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Model Overrepresented",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "policy_explanation": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Policy Explanation",
+          "type": "object"
+        },
+        "policy_id": {
+          "title": "Policy Id",
+          "type": "string"
+        },
+        "policy_overrepresented": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Policy Overrepresented",
+          "type": "array"
+        },
+        "population_id": {
+          "title": "Population Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "rejected_agent_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Agent Ids",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "revoked_agent_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Revoked Agent Ids",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "trust_profile": {
+          "$ref": "#/$defs/IdentityTrustProfile",
+          "default": "production"
+        }
+      },
+      "required": [
+        "ledger_id",
+        "population_id",
+        "policy_id",
+        "identity_count"
+      ],
+      "title": "SybilResistanceLedger",
+      "type": "object"
+    },
+    "VerificationThroughputReport": {
+      "description": "Finite throughput dashboard for verifier queue health.",
+      "properties": {
+        "abstained_packets": {
+          "default": 0,
+          "title": "Abstained Packets",
+          "type": "integer"
+        },
+        "accepted_packets": {
+          "default": 0,
+          "title": "Accepted Packets",
+          "type": "integer"
+        },
+        "evidence_hash_mismatch_rate": {
+          "default": 0.0,
+          "title": "Evidence Hash Mismatch Rate",
+          "type": "number"
+        },
+        "false_liquidity_rate": {
+          "default": 0.0,
+          "title": "False Liquidity Rate",
+          "type": "number"
+        },
+        "low_contribution_queue_occupation": {
+          "default": 0.0,
+          "title": "Low Contribution Queue Occupation",
+          "type": "number"
+        },
+        "packet_inflow": {
+          "default": 0,
+          "title": "Packet Inflow",
+          "type": "integer"
+        },
+        "rejected_packets": {
+          "default": 0,
+          "title": "Rejected Packets",
+          "type": "integer"
+        },
+        "residual_debt_growth": {
+          "default": 0.0,
+          "title": "Residual Debt Growth",
+          "type": "number"
+        },
+        "stale_packet_ratio": {
+          "default": 0.0,
+          "title": "Stale Packet Ratio",
+          "type": "number"
+        },
+        "unresolved_obligation_backlog": {
+          "default": 0,
+          "title": "Unresolved Obligation Backlog",
+          "type": "integer"
+        },
+        "verifier_latency_proxy": {
+          "default": 0.0,
+          "title": "Verifier Latency Proxy",
+          "type": "number"
+        }
+      },
+      "title": "VerificationThroughputReport",
+      "type": "object"
+    }
+  },
+  "description": "Protocol-relative finite certificate for collective ECPT phase progress.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "basin_id": {
+      "title": "Basin Id",
+      "type": "string"
+    },
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "closure_witnesses": {
+      "items": {
+        "$ref": "#/$defs/AutocatalyticClosureWitness"
+      },
+      "title": "Closure Witnesses",
+      "type": "array"
+    },
+    "execution_available_paths": {
+      "items": {
+        "$ref": "#/$defs/ExecutionAvailablePathCertificate"
+      },
+      "title": "Execution Available Paths",
+      "type": "array"
+    },
+    "false_liquidity_bounded": {
+      "default": false,
+      "title": "False Liquidity Bounded",
+      "type": "boolean"
+    },
+    "finite_checks_passed": {
+      "default": false,
+      "title": "Finite Checks Passed",
+      "type": "boolean"
+    },
+    "fixed_population_ledger": {
+      "$ref": "#/$defs/FixedPopulationLedger"
+    },
+    "hazard_authority_non_rejecting": {
+      "default": false,
+      "title": "Hazard Authority Non Rejecting",
+      "type": "boolean"
+    },
+    "hidden_injection_report": {
+      "$ref": "#/$defs/HiddenCapabilityInjectionReport"
+    },
+    "identity_attestation_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Identity Attestation Refs",
+      "type": "array"
+    },
+    "identity_contribution_summary": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Identity Contribution Summary",
+      "type": "object"
+    },
+    "identity_profile": {
+      "default": "development",
+      "title": "Identity Profile",
+      "type": "string"
+    },
+    "minimum_identity_strength": {
+      "default": "public-key-attested",
+      "title": "Minimum Identity Strength",
+      "type": "string"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "packet_lineage": {
+      "items": {
+        "$ref": "#/$defs/PacketCapitalLineage"
+      },
+      "title": "Packet Lineage",
+      "type": "array"
+    },
+    "population_id": {
+      "title": "Population Id",
+      "type": "string"
+    },
+    "protocol_frame": {
+      "$ref": "#/$defs/ProtocolFrameDigest"
+    },
+    "psi": {
+      "$ref": "#/$defs/PsiDashboard"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_external_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual External Obligations",
+      "type": "array"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "resource_matched_baseline": {
+      "default": false,
+      "title": "Resource Matched Baseline",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "sqot_reserve_live": {
+      "default": false,
+      "title": "Sqot Reserve Live",
+      "type": "boolean"
+    },
+    "state_id": {
+      "title": "State Id",
+      "type": "string"
+    },
+    "sybil_resistance_ledger": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SybilResistanceLedger"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "threshold": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Threshold",
+      "type": "object"
+    },
+    "threshold_crossed": {
+      "default": false,
+      "title": "Threshold Crossed",
+      "type": "boolean"
+    },
+    "verification_backlog_bounded": {
+      "default": false,
+      "title": "Verification Backlog Bounded",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "certificate_id",
+    "population_id",
+    "state_id",
+    "basin_id",
+    "protocol_frame",
+    "fixed_population_ledger",
+    "hidden_injection_report",
+    "psi"
+  ],
+  "title": "CollectivePhaseCertificate",
+  "type": "object"
+}

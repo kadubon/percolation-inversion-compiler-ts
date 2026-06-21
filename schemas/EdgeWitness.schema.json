@@ -1,0 +1,73 @@
+{
+  "description": "Finite witness that one or more packets support another packet or receiver.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "confidence": {
+      "default": 0.0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "edge_id": {
+      "title": "Edge Id",
+      "type": "string"
+    },
+    "edge_type": {
+      "default": "semantic-dependency",
+      "title": "Edge Type",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expires At"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual": {
+      "default": 0.0,
+      "title": "Residual",
+      "type": "number"
+    },
+    "source_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Packet Ids",
+      "type": "array"
+    },
+    "target_packet_id": {
+      "title": "Target Packet Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "edge_id",
+    "source_packet_ids",
+    "target_packet_id"
+  ],
+  "title": "EdgeWitness",
+  "type": "object"
+}

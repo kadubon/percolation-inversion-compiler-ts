@@ -1,0 +1,100 @@
+{
+  "description": "Canonical-suite-derived theory-fidelity summary for v0.4.4 hardening.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "canonical_dir": {
+      "default": "",
+      "title": "Canonical Dir",
+      "type": "string"
+    },
+    "external_obligation_totals": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "External Obligation Totals",
+      "type": "object"
+    },
+    "finite_upgrade_candidates": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Finite Upgrade Candidates",
+      "type": "object"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "partial_total": {
+      "default": 0,
+      "title": "Partial Total",
+      "type": "integer"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "pic-theory-fidelity",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "snapshot_health": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "title": "Snapshot Health",
+      "type": "object"
+    },
+    "strict_grammar_accepted": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "title": "Strict Grammar Accepted",
+      "type": "object"
+    },
+    "suite_status": {
+      "default": "fail",
+      "title": "Suite Status",
+      "type": "string"
+    },
+    "theory_summaries": {
+      "additionalProperties": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Theory Summaries",
+      "type": "object"
+    },
+    "unsupported_total": {
+      "default": 0,
+      "title": "Unsupported Total",
+      "type": "integer"
+    }
+  },
+  "title": "TheoryFidelityReport",
+  "type": "object"
+}

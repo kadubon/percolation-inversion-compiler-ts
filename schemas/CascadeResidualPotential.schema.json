@@ -1,0 +1,32 @@
+{
+  "properties": {
+    "component_potentials": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Component Potentials",
+      "type": "object"
+    },
+    "edge_couplings": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Edge Couplings",
+      "type": "object"
+    },
+    "potential_id": {
+      "title": "Potential Id",
+      "type": "string"
+    },
+    "residual_floor": {
+      "default": 0.0,
+      "title": "Residual Floor",
+      "type": "number"
+    }
+  },
+  "required": [
+    "potential_id"
+  ],
+  "title": "CascadeResidualPotential",
+  "type": "object"
+}

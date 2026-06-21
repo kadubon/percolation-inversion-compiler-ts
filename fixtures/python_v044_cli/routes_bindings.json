@@ -1,0 +1,716 @@
+{
+  "bindings": [
+    {
+      "binding_id": "binding:alt.adapters.causal.verify_token_effect->alt.adapters.causal.verify_token_effect",
+      "canonical_route_id": "alt.adapters.causal.verify_token_effect",
+      "canonical_verifier_route": "alt.adapters.causal.verify_token_effect",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "causal-effect-witness": "causal-effect-witness",
+        "counterfactual-report": "counterfactual-report",
+        "mechanism-ablation-contrast": "mechanism-ablation-contrast"
+      },
+      "implemented_route_id": "alt.adapters.causal.verify_token_effect",
+      "implemented_verifier_route": "alt.adapters.causal.verify_token_effect",
+      "obligation_category": "alt-causal-effect",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-alt-causal-residual-until-token-effect-certified",
+      "safe_default": "diagnostic-with-alt-causal-obligation",
+      "settlement_scope": [
+        "routing-contract:alt.adapters.causal.verify_token_effect"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:alt.adapters.hazard.verify_adversarial_token_clearance->alt.adapters.hazard.verify_adversarial_token_clearance",
+      "canonical_route_id": "alt.adapters.hazard.verify_adversarial_token_clearance",
+      "canonical_verifier_route": "alt.adapters.hazard.verify_adversarial_token_clearance",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "contamination-bound": "contamination-bound",
+        "hazard-envelope": "hazard-envelope",
+        "misapplication-audit": "misapplication-audit"
+      },
+      "implemented_route_id": "alt.adapters.hazard.verify_adversarial_token_clearance",
+      "implemented_verifier_route": "alt.adapters.hazard.verify_adversarial_token_clearance",
+      "obligation_category": "alt-hazard",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-alt-hazard-residual-until-token-clearance-accepted",
+      "safe_default": "diagnostic-with-alt-hazard-obligation",
+      "settlement_scope": [
+        "routing-contract:alt.adapters.hazard.verify_adversarial_token_clearance"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:alt.adapters.reproduction.verify_capital_reproduction_matrix->alt.adapters.reproduction.verify_capital_reproduction_matrix",
+      "canonical_route_id": "alt.adapters.reproduction.verify_capital_reproduction_matrix",
+      "canonical_verifier_route": "alt.adapters.reproduction.verify_capital_reproduction_matrix",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "capacity-bound": "capacity-bound",
+        "recombination-witness": "recombination-witness",
+        "reproduction-matrix-certificate": "reproduction-matrix-certificate"
+      },
+      "implemented_route_id": "alt.adapters.reproduction.verify_capital_reproduction_matrix",
+      "implemented_verifier_route": "alt.adapters.reproduction.verify_capital_reproduction_matrix",
+      "obligation_category": "alt-reproduction",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-alt-reproduction-residual-until-matrix-certified",
+      "safe_default": "diagnostic-with-alt-reproduction-obligation",
+      "settlement_scope": [
+        "routing-contract:alt.adapters.reproduction.verify_capital_reproduction_matrix"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:alt.adapters.root.verify_role_separated_quorum->alt.adapters.root.verify_role_separated_quorum",
+      "canonical_route_id": "alt.adapters.root.verify_role_separated_quorum",
+      "canonical_verifier_route": "alt.adapters.root.verify_role_separated_quorum",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "quorum-signature-report": "quorum-signature-report",
+        "role-separation-ledger": "role-separation-ledger",
+        "root-of-trust-packet": "root-of-trust-packet"
+      },
+      "implemented_route_id": "alt.adapters.root.verify_role_separated_quorum",
+      "implemented_verifier_route": "alt.adapters.root.verify_role_separated_quorum",
+      "obligation_category": "alt-root-trust",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-alt-root-residual-until-quorum-accepted",
+      "safe_default": "diagnostic-with-alt-root-obligation",
+      "settlement_scope": [
+        "routing-contract:alt.adapters.root.verify_role_separated_quorum"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:alt.adapters.target.verify_alt_cara_target->alt.adapters.target.verify_alt_cara_target",
+      "canonical_route_id": "alt.adapters.target.verify_alt_cara_target",
+      "canonical_verifier_route": "alt.adapters.target.verify_alt_cara_target",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "baseline-upper-envelope": "baseline-upper-envelope",
+        "resource-matched-report": "resource-matched-report",
+        "target-validity-certificate": "target-validity-certificate"
+      },
+      "implemented_route_id": "alt.adapters.target.verify_alt_cara_target",
+      "implemented_verifier_route": "alt.adapters.target.verify_alt_cara_target",
+      "obligation_category": "alt-cara-target",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-alt-cara-residual-until-target-contract-accepted",
+      "safe_default": "diagnostic-with-alt-cara-obligation",
+      "settlement_scope": [
+        "routing-contract:alt.adapters.target.verify_alt_cara_target"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:alt.adapters.telemetry.verify_cost_instrumentation->alt.adapters.telemetry.verify_cost_instrumentation",
+      "canonical_route_id": "alt.adapters.telemetry.verify_cost_instrumentation",
+      "canonical_verifier_route": "alt.adapters.telemetry.verify_cost_instrumentation",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "hidden-resource-audit": "hidden-resource-audit",
+        "instrumentation-contract": "instrumentation-contract",
+        "telemetry-ledger": "telemetry-ledger"
+      },
+      "implemented_route_id": "alt.adapters.telemetry.verify_cost_instrumentation",
+      "implemented_verifier_route": "alt.adapters.telemetry.verify_cost_instrumentation",
+      "obligation_category": "alt-telemetry",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-alt-telemetry-residual-until-instrumentation-accepted",
+      "safe_default": "diagnostic-with-alt-telemetry-obligation",
+      "settlement_scope": [
+        "routing-contract:alt.adapters.telemetry.verify_cost_instrumentation"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:alt.adapters.transport.verify_density_ratio_support->alt.adapters.transport.verify_density_ratio_support",
+      "canonical_route_id": "alt.adapters.transport.verify_density_ratio_support",
+      "canonical_verifier_route": "alt.adapters.transport.verify_density_ratio_support",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "density-ratio-bound": "density-ratio-bound",
+        "support-coverage-witness": "support-coverage-witness",
+        "transport-certificate": "transport-certificate"
+      },
+      "implemented_route_id": "alt.adapters.transport.verify_density_ratio_support",
+      "implemented_verifier_route": "alt.adapters.transport.verify_density_ratio_support",
+      "obligation_category": "alt-transport",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-alt-transport-residual-until-support-and-density-accepted",
+      "safe_default": "diagnostic-with-alt-transport-obligation",
+      "settlement_scope": [
+        "routing-contract:alt.adapters.transport.verify_density_ratio_support"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:core.adapters.envelope.verify_finite_bound->adapters.domain.verify_ecpt_numerical_envelope",
+      "canonical_route_id": "core.adapters.envelope.verify_finite_bound",
+      "canonical_verifier_route": "core.adapters.envelope.verify_finite_bound",
+      "discharge_level": "finite_value_check",
+      "evidence_kind_map": {
+        "finite-bound-table": "finite-numerical-envelope",
+        "residual-envelope-proof": "residual-envelope-proof",
+        "tail-bound-certificate": "tail-bound-certificate"
+      },
+      "implemented_route_id": "adapters.domain.verify_ecpt_numerical_envelope",
+      "implemented_verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_numerical_envelope",
+      "obligation_category": "numerical-envelope",
+      "residual_external_obligation_refs": [],
+      "residual_policy": "charge-envelope-residual-until-bound-certified",
+      "safe_default": "diagnostic-with-envelope-obligation",
+      "settlement_scope": [
+        "finite-value:adapters.domain.verify_ecpt_numerical_envelope"
+      ],
+      "unresolved_domain_obligations": []
+    },
+    {
+      "binding_id": "binding:core.adapters.external.verify_domain_obligation->core.adapters.external.verify_domain_obligation",
+      "canonical_route_id": "core.adapters.external.verify_domain_obligation",
+      "canonical_verifier_route": "core.adapters.external.verify_domain_obligation",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "domain-certificate": "domain-certificate",
+        "replayable-witness": "replayable-witness"
+      },
+      "implemented_route_id": "core.adapters.external.verify_domain_obligation",
+      "implemented_verifier_route": "core.adapters.external.verify_domain_obligation",
+      "obligation_category": "domain-specific-proof",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-domain-residual-until-specific-verifier-accepted",
+      "safe_default": "diagnostic-with-domain-obligation",
+      "settlement_scope": [
+        "routing-contract:core.adapters.external.verify_domain_obligation"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:ecpt.adapters.bridge.verify_cross_theory_bridge->adapters.domain.verify_ecpt_bridge_reserve",
+      "canonical_route_id": "ecpt.adapters.bridge.verify_cross_theory_bridge",
+      "canonical_verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge",
+      "discharge_level": "contract_enforced",
+      "evidence_kind_map": {
+        "bridge-map": "finite-bridge-reserve",
+        "machine-readable-capsule-audit": "machine-readable-capsule-audit",
+        "reserve-invariance-proof": "reserve-invariance-proof"
+      },
+      "implemented_route_id": "adapters.domain.verify_ecpt_bridge_reserve",
+      "implemented_verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_bridge_reserve",
+      "obligation_category": "ecpt-bridge-reserve",
+      "residual_external_obligation_refs": [
+        "cross-theory-bridge-proof"
+      ],
+      "residual_policy": "charge-bridge-residual-until-cross-theory-proof-accepted",
+      "safe_default": "diagnostic-with-bridge-obligation",
+      "settlement_scope": [
+        "contract-envelope:adapters.domain.verify_ecpt_bridge_reserve"
+      ],
+      "unresolved_domain_obligations": [
+        "cross-theory-bridge-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:ecpt.adapters.ecology.verify_domain_abstraction->adapters.domain.verify_ecpt_domain_abstraction",
+      "canonical_route_id": "ecpt.adapters.ecology.verify_domain_abstraction",
+      "canonical_verifier_route": "ecpt.adapters.ecology.verify_domain_abstraction",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "abstraction-map": "finite-domain-abstraction",
+        "domain-semantics-report": "domain-semantics-report",
+        "simulation-refinement-witness": "simulation-refinement-witness"
+      },
+      "implemented_route_id": "adapters.domain.verify_ecpt_domain_abstraction",
+      "implemented_verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_domain_abstraction",
+      "obligation_category": "ecpt-ecology-ontology",
+      "residual_external_obligation_refs": [
+        "ontology-extension-domain-proof"
+      ],
+      "residual_policy": "charge-abstraction-residual-until-domain-witness-accepted",
+      "safe_default": "diagnostic-with-abstraction-obligation",
+      "settlement_scope": [
+        "routing-contract:adapters.domain.verify_ecpt_domain_abstraction"
+      ],
+      "unresolved_domain_obligations": [
+        "ontology-extension-domain-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:ecpt.adapters.generators.verify_limit_envelope->adapters.domain.verify_ecpt_generator_limit",
+      "canonical_route_id": "ecpt.adapters.generators.verify_limit_envelope",
+      "canonical_verifier_route": "ecpt.adapters.generators.verify_limit_envelope",
+      "discharge_level": "finite_value_check",
+      "evidence_kind_map": {
+        "finite-envelope": "finite-generator-limit",
+        "generator-identification-report": "generator-identification-report",
+        "transition-kernel-audit": "transition-kernel-audit"
+      },
+      "implemented_route_id": "adapters.domain.verify_ecpt_generator_limit",
+      "implemented_verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_generator_limit",
+      "obligation_category": "ecpt-generator-limit",
+      "residual_external_obligation_refs": [],
+      "residual_policy": "charge-generator-limit-residual-until-calibration-accepted",
+      "safe_default": "diagnostic-with-generator-obligation",
+      "settlement_scope": [
+        "finite-value:adapters.domain.verify_ecpt_generator_limit"
+      ],
+      "unresolved_domain_obligations": []
+    },
+    {
+      "binding_id": "binding:ecpt.adapters.policy.verify_execution_policy->adapters.domain.verify_ecpt_execution_policy",
+      "canonical_route_id": "ecpt.adapters.policy.verify_execution_policy",
+      "canonical_verifier_route": "ecpt.adapters.policy.verify_execution_policy",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "execution-availability-audit": "finite-execution-policy-envelope",
+        "policy-counterfactual-report": "policy-counterfactual-report",
+        "value-bound": "value-bound"
+      },
+      "implemented_route_id": "adapters.domain.verify_ecpt_execution_policy",
+      "implemented_verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_execution_policy",
+      "obligation_category": "ecpt-economics-policy",
+      "residual_external_obligation_refs": [
+        "policy-counterfactual-domain-proof"
+      ],
+      "residual_policy": "charge-policy-residual-until-counterfactual-accepted",
+      "safe_default": "diagnostic-with-policy-obligation",
+      "settlement_scope": [
+        "routing-contract:adapters.domain.verify_ecpt_execution_policy"
+      ],
+      "unresolved_domain_obligations": [
+        "policy-counterfactual-domain-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:ecpt.adapters.proxy.verify_target_contract->adapters.domain.verify_ecpt_proxy_target_contract",
+      "canonical_route_id": "ecpt.adapters.proxy.verify_target_contract",
+      "canonical_verifier_route": "ecpt.adapters.proxy.verify_target_contract",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "protocol-comparison-certificate": "finite-proxy-target-contract",
+        "proxy-grounding-report": "proxy-grounding-report",
+        "target-contract": "target-contract"
+      },
+      "implemented_route_id": "adapters.domain.verify_ecpt_proxy_target_contract",
+      "implemented_verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_proxy_target_contract",
+      "obligation_category": "ecpt-proxy-target",
+      "residual_external_obligation_refs": [
+        "proxy-target-grounding-proof"
+      ],
+      "residual_policy": "charge-proxy-target-residual-until-contract-accepted",
+      "safe_default": "diagnostic-with-proxy-obligation",
+      "settlement_scope": [
+        "routing-contract:adapters.domain.verify_ecpt_proxy_target_contract"
+      ],
+      "unresolved_domain_obligations": [
+        "proxy-target-grounding-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:ecpt.adapters.speculative.verify_channel_and_repair->adapters.domain.verify_ecpt_speculative_channel_repair",
+      "canonical_route_id": "ecpt.adapters.speculative.verify_channel_and_repair",
+      "canonical_verifier_route": "ecpt.adapters.speculative.verify_channel_and_repair",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "repair-route-certificate": "finite-speculative-channel-repair",
+        "speculative-channel-audit": "speculative-channel-audit",
+        "synergy-lower-bound": "synergy-lower-bound"
+      },
+      "implemented_route_id": "adapters.domain.verify_ecpt_speculative_channel_repair",
+      "implemented_verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_speculative_channel_repair",
+      "obligation_category": "ecpt-speculative-channel",
+      "residual_external_obligation_refs": [
+        "speculative-channel-repair-proof"
+      ],
+      "residual_policy": "charge-speculative-residual-until-channel-certified",
+      "safe_default": "diagnostic-with-speculative-obligation",
+      "settlement_scope": [
+        "routing-contract:adapters.domain.verify_ecpt_speculative_channel_repair"
+      ],
+      "unresolved_domain_obligations": [
+        "speculative-channel-repair-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:ecpt.adapters.trace_complex.verify_diagnostic_projection->adapters.domain.verify_ecpt_trace_diagnostic_projection",
+      "canonical_route_id": "ecpt.adapters.trace_complex.verify_diagnostic_projection",
+      "canonical_verifier_route": "ecpt.adapters.trace_complex.verify_diagnostic_projection",
+      "discharge_level": "contract_enforced",
+      "evidence_kind_map": {
+        "diagnostic-projection-certificate": "finite-trace-diagnostic-projection",
+        "residual-trace-ledger": "residual-trace-ledger",
+        "trace-complex-audit": "trace-complex-audit"
+      },
+      "implemented_route_id": "adapters.domain.verify_ecpt_trace_diagnostic_projection",
+      "implemented_verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_trace_diagnostic_projection",
+      "obligation_category": "ecpt-trace-diagnostic",
+      "residual_external_obligation_refs": [
+        "trace-complex-domain-witness"
+      ],
+      "residual_policy": "charge-trace-diagnostic-residual-until-projection-certified",
+      "safe_default": "diagnostic-with-trace-complex-obligation",
+      "settlement_scope": [
+        "contract-envelope:adapters.domain.verify_ecpt_trace_diagnostic_projection"
+      ],
+      "unresolved_domain_obligations": [
+        "trace-complex-domain-witness"
+      ]
+    },
+    {
+      "binding_id": "binding:sqot.adapters.adversarial.verify_transfer_game->sqot.adapters.adversarial.verify_transfer_game",
+      "canonical_route_id": "sqot.adapters.adversarial.verify_transfer_game",
+      "canonical_verifier_route": "sqot.adapters.adversarial.verify_transfer_game",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "counterfactual-probe-log": "counterfactual-probe-log",
+        "finite-game-certificate": "finite-game-certificate",
+        "transfer-bound": "transfer-bound"
+      },
+      "implemented_route_id": "sqot.adapters.adversarial.verify_transfer_game",
+      "implemented_verifier_route": "sqot.adapters.adversarial.verify_transfer_game",
+      "obligation_category": "sqot-adversarial-transfer",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-adversarial-transfer-residual-until-game-certificate-accepted",
+      "safe_default": "diagnostic-with-adversarial-transfer-obligation",
+      "settlement_scope": [
+        "routing-contract:sqot.adapters.adversarial.verify_transfer_game"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:sqot.adapters.integrity.verify_protocol_kernel->sqot.adapters.integrity.verify_protocol_kernel",
+      "canonical_route_id": "sqot.adapters.integrity.verify_protocol_kernel",
+      "canonical_verifier_route": "sqot.adapters.integrity.verify_protocol_kernel",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "authority-ledger": "authority-ledger",
+        "protocol-kernel-certificate": "protocol-kernel-certificate",
+        "source-attribution-proof": "source-attribution-proof"
+      },
+      "implemented_route_id": "sqot.adapters.integrity.verify_protocol_kernel",
+      "implemented_verifier_route": "sqot.adapters.integrity.verify_protocol_kernel",
+      "obligation_category": "sqot-protocol-integrity",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-protocol-integrity-residual-until-kernel-certified",
+      "safe_default": "diagnostic-with-protocol-integrity-obligation",
+      "settlement_scope": [
+        "routing-contract:sqot.adapters.integrity.verify_protocol_kernel"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:sqot.adapters.privacy.verify_rejoin_transcript->sqot.adapters.privacy.verify_rejoin_transcript",
+      "canonical_route_id": "sqot.adapters.privacy.verify_rejoin_transcript",
+      "canonical_verifier_route": "sqot.adapters.privacy.verify_rejoin_transcript",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "privacy-leakage-bound": "privacy-leakage-bound",
+        "queue-membership-proof": "queue-membership-proof",
+        "zk-rejoin-transcript": "zk-rejoin-transcript"
+      },
+      "implemented_route_id": "sqot.adapters.privacy.verify_rejoin_transcript",
+      "implemented_verifier_route": "sqot.adapters.privacy.verify_rejoin_transcript",
+      "obligation_category": "sqot-private-rejoin",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-privacy-residual-until-rejoin-transcript-accepted",
+      "safe_default": "diagnostic-with-private-rejoin-obligation",
+      "settlement_scope": [
+        "routing-contract:sqot.adapters.privacy.verify_rejoin_transcript"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:sqot.adapters.salience.verify_queue_policy->sqot.adapters.salience.verify_queue_policy",
+      "canonical_route_id": "sqot.adapters.salience.verify_queue_policy",
+      "canonical_verifier_route": "sqot.adapters.salience.verify_queue_policy",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "attention-budget-ledger": "attention-budget-ledger",
+        "priority-trace": "priority-trace",
+        "queue-policy-certificate": "queue-policy-certificate"
+      },
+      "implemented_route_id": "sqot.adapters.salience.verify_queue_policy",
+      "implemented_verifier_route": "sqot.adapters.salience.verify_queue_policy",
+      "obligation_category": "sqot-salience-queue",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-salience-queue-residual-until-policy-certified",
+      "safe_default": "diagnostic-with-salience-queue-obligation",
+      "settlement_scope": [
+        "routing-contract:sqot.adapters.salience.verify_queue_policy"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:sqot.adapters.thermodynamic.verify_discharge_envelope->sqot.adapters.thermodynamic.verify_discharge_envelope",
+      "canonical_route_id": "sqot.adapters.thermodynamic.verify_discharge_envelope",
+      "canonical_verifier_route": "sqot.adapters.thermodynamic.verify_discharge_envelope",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "finite-discharge-envelope": "finite-discharge-envelope",
+        "limit-residual": "limit-residual",
+        "regularity-regime-certificate": "regularity-regime-certificate"
+      },
+      "implemented_route_id": "sqot.adapters.thermodynamic.verify_discharge_envelope",
+      "implemented_verifier_route": "sqot.adapters.thermodynamic.verify_discharge_envelope",
+      "obligation_category": "sqot-thermodynamic-discharge",
+      "residual_external_obligation_refs": [
+        "domain-specific-proof"
+      ],
+      "residual_policy": "charge-thermodynamic-discharge-residual-until-envelope-certified",
+      "safe_default": "diagnostic-with-thermodynamic-discharge-obligation",
+      "settlement_scope": [
+        "routing-contract:sqot.adapters.thermodynamic.verify_discharge_envelope"
+      ],
+      "unresolved_domain_obligations": [
+        "domain-specific-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:trc.adapters.archive.verify_domain_cover->adapters.domain.verify_archive_domain_evidence",
+      "canonical_route_id": "trc.adapters.archive.verify_domain_cover",
+      "canonical_verifier_route": "trc.adapters.archive.verify_domain_cover",
+      "discharge_level": "finite_value_check",
+      "evidence_kind_map": {
+        "archive-replay-log": "finite-archive-domain",
+        "cover-certificate": "cover-certificate",
+        "distortion-bound": "distortion-bound"
+      },
+      "implemented_route_id": "adapters.domain.verify_archive_domain_evidence",
+      "implemented_verifier_route": "percolation_inversion_compiler.adapters.domain.verify_archive_domain_evidence",
+      "obligation_category": "archive-domain-cover",
+      "residual_external_obligation_refs": [],
+      "residual_policy": "charge-archive-distortion-residual-until-cover-certified",
+      "safe_default": "diagnostic-with-archive-obligation",
+      "settlement_scope": [
+        "finite-value:adapters.domain.verify_archive_domain_evidence"
+      ],
+      "unresolved_domain_obligations": []
+    },
+    {
+      "binding_id": "binding:trc.adapters.contracts.verify_assume_guarantee_library->trc.adapters.contracts.verify_assume_guarantee_library",
+      "canonical_route_id": "trc.adapters.contracts.verify_assume_guarantee_library",
+      "canonical_verifier_route": "trc.adapters.contracts.verify_assume_guarantee_library",
+      "discharge_level": "contract_enforced",
+      "evidence_kind_map": {
+        "composition-proof": "composition-proof",
+        "contract-library": "contract-library",
+        "counterexample-search-report": "counterexample-search-report"
+      },
+      "implemented_route_id": "trc.adapters.contracts.verify_assume_guarantee_library",
+      "implemented_verifier_route": "trc.adapters.contracts.verify_assume_guarantee_library",
+      "obligation_category": "assume-guarantee-contract",
+      "residual_external_obligation_refs": [
+        "contract-library-domain-witness"
+      ],
+      "residual_policy": "charge-contract-gap-until-composition-proof-accepted",
+      "safe_default": "diagnostic-with-contract-obligation",
+      "settlement_scope": [
+        "contract-envelope:trc.adapters.contracts.verify_assume_guarantee_library"
+      ],
+      "unresolved_domain_obligations": [
+        "contract-library-domain-witness"
+      ]
+    },
+    {
+      "binding_id": "binding:trc.adapters.latent_oracle.verify_model_witness->trc.adapters.latent_oracle.verify_model_witness",
+      "canonical_route_id": "trc.adapters.latent_oracle.verify_model_witness",
+      "canonical_verifier_route": "trc.adapters.latent_oracle.verify_model_witness",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "latent-model-card": "latent-model-card",
+        "oracle-certificate": "oracle-certificate",
+        "submodular-proof-witness": "submodular-proof-witness"
+      },
+      "implemented_route_id": "trc.adapters.latent_oracle.verify_model_witness",
+      "implemented_verifier_route": "trc.adapters.latent_oracle.verify_model_witness",
+      "obligation_category": "latent-oracle-model",
+      "residual_external_obligation_refs": [
+        "latent-model-replay",
+        "oracle-witness"
+      ],
+      "residual_policy": "charge-oracle-residual-until-replayable-witness-exists",
+      "safe_default": "diagnostic-with-oracle-obligation",
+      "settlement_scope": [
+        "routing-contract:trc.adapters.latent_oracle.verify_model_witness"
+      ],
+      "unresolved_domain_obligations": [
+        "latent-model-replay",
+        "oracle-witness"
+      ]
+    },
+    {
+      "binding_id": "binding:trc.adapters.metric.verify_distributionally_robust_dual->trc.adapters.metric.verify_distributionally_robust_dual",
+      "canonical_route_id": "trc.adapters.metric.verify_distributionally_robust_dual",
+      "canonical_verifier_route": "trc.adapters.metric.verify_distributionally_robust_dual",
+      "discharge_level": "contract_enforced",
+      "evidence_kind_map": {
+        "ambiguity-set-audit": "ambiguity-set-audit",
+        "dual-witness": "dual-witness",
+        "ground-metric-certificate": "ground-metric-certificate"
+      },
+      "implemented_route_id": "trc.adapters.metric.verify_distributionally_robust_dual",
+      "implemented_verifier_route": "trc.adapters.metric.verify_distributionally_robust_dual",
+      "obligation_category": "distributionally-robust-metric",
+      "residual_external_obligation_refs": [
+        "dual-risk-domain-witness"
+      ],
+      "residual_policy": "charge-metric-dual-residual-until-dual-witness-accepted",
+      "safe_default": "diagnostic-with-metric-dual-obligation",
+      "settlement_scope": [
+        "contract-envelope:trc.adapters.metric.verify_distributionally_robust_dual"
+      ],
+      "unresolved_domain_obligations": [
+        "dual-risk-domain-witness"
+      ]
+    },
+    {
+      "binding_id": "binding:trc.adapters.observation.verify_partition_cover->trc.adapters.observation.verify_partition_cover",
+      "canonical_route_id": "trc.adapters.observation.verify_partition_cover",
+      "canonical_verifier_route": "trc.adapters.observation.verify_partition_cover",
+      "discharge_level": "contract_enforced",
+      "evidence_kind_map": {
+        "coverage-certificate": "coverage-certificate",
+        "partition-cover-proof": "partition-cover-proof",
+        "purification-trace": "purification-trace"
+      },
+      "implemented_route_id": "trc.adapters.observation.verify_partition_cover",
+      "implemented_verifier_route": "trc.adapters.observation.verify_partition_cover",
+      "obligation_category": "observation-partition",
+      "residual_external_obligation_refs": [
+        "partition-cover-domain-proof"
+      ],
+      "residual_policy": "charge-partition-residual-until-cover-certified",
+      "safe_default": "diagnostic-with-partition-obligation",
+      "settlement_scope": [
+        "contract-envelope:trc.adapters.observation.verify_partition_cover"
+      ],
+      "unresolved_domain_obligations": [
+        "partition-cover-domain-proof"
+      ]
+    },
+    {
+      "binding_id": "binding:trc.adapters.physical_hybrid.verify_envelope->adapters.domain.replay_trc_physical_trace",
+      "canonical_route_id": "trc.adapters.physical_hybrid.verify_envelope",
+      "canonical_verifier_route": "trc.adapters.physical_hybrid.verify_envelope",
+      "discharge_level": "replay_check",
+      "evidence_kind_map": {
+        "instrumented-trace": "finite-physical-trace",
+        "physics-simulator-certificate": "physics-simulator-certificate",
+        "resource-calendar": "resource-calendar"
+      },
+      "implemented_route_id": "adapters.domain.replay_trc_physical_trace",
+      "implemented_verifier_route": "percolation_inversion_compiler.adapters.domain.replay_trc_physical_trace",
+      "obligation_category": "physical-hybrid-system",
+      "residual_external_obligation_refs": [
+        "continuous-physics-envelope",
+        "resource-calendar-domain-witness"
+      ],
+      "residual_policy": "charge-physical-residual-until-verifier-accepts",
+      "safe_default": "diagnostic-with-physical-obligation",
+      "settlement_scope": [
+        "finite-replay:adapters.domain.replay_trc_physical_trace"
+      ],
+      "unresolved_domain_obligations": [
+        "continuous-physics-envelope",
+        "resource-calendar-domain-witness"
+      ]
+    },
+    {
+      "binding_id": "binding:trc.adapters.redesign.verify_response_interval->trc.adapters.redesign.verify_response_interval",
+      "canonical_route_id": "trc.adapters.redesign.verify_response_interval",
+      "canonical_verifier_route": "trc.adapters.redesign.verify_response_interval",
+      "discharge_level": "external_domain_required",
+      "evidence_kind_map": {
+        "feasibility-certificate": "feasibility-certificate",
+        "redesign-candidate-set": "redesign-candidate-set",
+        "response-interval-proof": "response-interval-proof"
+      },
+      "implemented_route_id": "trc.adapters.redesign.verify_response_interval",
+      "implemented_verifier_route": "trc.adapters.redesign.verify_response_interval",
+      "obligation_category": "redesign-response",
+      "residual_external_obligation_refs": [
+        "redesign-domain-oracle"
+      ],
+      "residual_policy": "charge-redesign-response-residual-until-interval-certified",
+      "safe_default": "diagnostic-with-redesign-obligation",
+      "settlement_scope": [
+        "routing-contract:trc.adapters.redesign.verify_response_interval"
+      ],
+      "unresolved_domain_obligations": [
+        "redesign-domain-oracle"
+      ]
+    },
+    {
+      "binding_id": "binding:trc.adapters.telemetry.verify_calibration_window->adapters.domain.verify_trc_telemetry_calibration",
+      "canonical_route_id": "trc.adapters.telemetry.verify_calibration_window",
+      "canonical_verifier_route": "trc.adapters.telemetry.verify_calibration_window",
+      "discharge_level": "finite_value_check",
+      "evidence_kind_map": {
+        "calibration-report": "finite-telemetry-calibration",
+        "drift-bound-certificate": "drift-bound-certificate",
+        "signed-telemetry-window": "signed-telemetry-window"
+      },
+      "implemented_route_id": "adapters.domain.verify_trc_telemetry_calibration",
+      "implemented_verifier_route": "percolation_inversion_compiler.adapters.domain.verify_trc_telemetry_calibration",
+      "obligation_category": "telemetry-calibration",
+      "residual_external_obligation_refs": [],
+      "residual_policy": "charge-telemetry-drift-residual-until-window-validated",
+      "safe_default": "diagnostic-with-telemetry-obligation",
+      "settlement_scope": [
+        "finite-value:adapters.domain.verify_trc_telemetry_calibration"
+      ],
+      "unresolved_domain_obligations": []
+    }
+  ]
+}

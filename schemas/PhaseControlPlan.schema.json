@@ -1,0 +1,377 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "InterventionCandidate": {
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/PhaseControlAction"
+        },
+        "baseline_proxy_mass": {
+          "default": 0.0,
+          "title": "Baseline Proxy Mass",
+          "type": "number"
+        },
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "controlled_proxy_mass": {
+          "default": 0.0,
+          "title": "Controlled Proxy Mass",
+          "type": "number"
+        },
+        "finite_proxy_gain": {
+          "default": 0.0,
+          "title": "Finite Proxy Gain",
+          "type": "number"
+        },
+        "finite_scope_usable": {
+          "default": false,
+          "title": "Finite Scope Usable",
+          "type": "boolean"
+        },
+        "missing_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Obligations",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "required_evidence_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Evidence Routes",
+          "type": "array"
+        },
+        "residual_charge": {
+          "default": 0.0,
+          "title": "Residual Charge",
+          "type": "number"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "resource_cost": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Resource Cost",
+          "type": "object"
+        },
+        "risk_charge": {
+          "default": 0.0,
+          "title": "Risk Charge",
+          "type": "number"
+        },
+        "score": {
+          "default": 0.0,
+          "title": "Score",
+          "type": "number"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "action"
+      ],
+      "title": "InterventionCandidate",
+      "type": "object"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "PhaseControlAction": {
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "activation_delta": {
+          "default": 0.0,
+          "title": "Activation Delta",
+          "type": "number"
+        },
+        "burden_delta": {
+          "default": 0.0,
+          "title": "Burden Delta",
+          "type": "number"
+        },
+        "postconditions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Postconditions",
+          "type": "array"
+        },
+        "preconditions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preconditions",
+          "type": "array"
+        },
+        "required_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Obligations",
+          "type": "array"
+        },
+        "residual_charge": {
+          "default": 0.0,
+          "title": "Residual Charge",
+          "type": "number"
+        },
+        "resource_cost": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Resource Cost",
+          "type": "object"
+        },
+        "risk_charge": {
+          "default": 0.0,
+          "title": "Risk Charge",
+          "type": "number"
+        },
+        "source_nodes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Nodes",
+          "type": "array"
+        },
+        "target_node": {
+          "title": "Target Node",
+          "type": "string"
+        },
+        "verifier_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verifier Routes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "action_id",
+        "target_node"
+      ],
+      "title": "PhaseControlAction",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/InterventionCandidate"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "finite_proxy_gain_total": {
+      "default": 0.0,
+      "title": "Finite Proxy Gain Total",
+      "type": "number"
+    },
+    "missing_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Obligations",
+      "type": "array"
+    },
+    "objective_id": {
+      "title": "Objective Id",
+      "type": "string"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "partial": {
+      "default": true,
+      "title": "Partial",
+      "type": "boolean"
+    },
+    "plan_id": {
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "required_evidence_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Evidence Routes",
+      "type": "array"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "score": {
+      "default": 0.0,
+      "title": "Score",
+      "type": "number"
+    },
+    "selected_actions": {
+      "items": {
+        "$ref": "#/$defs/PhaseControlAction"
+      },
+      "title": "Selected Actions",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "status": {
+      "$ref": "#/$defs/ClaimStatus",
+      "default": "diagnostic"
+    }
+  },
+  "required": [
+    "plan_id",
+    "objective_id"
+  ],
+  "title": "PhaseControlPlan",
+  "type": "object"
+}

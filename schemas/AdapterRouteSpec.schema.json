@@ -1,0 +1,110 @@
+{
+  "$defs": {
+    "DischargeLevel": {
+      "enum": [
+        "finite_value_check",
+        "replay_check",
+        "contract_enforced",
+        "external_domain_required"
+      ],
+      "title": "DischargeLevel",
+      "type": "string"
+    }
+  },
+  "description": "Language-neutral adapter boundary for an external proof obligation.",
+  "properties": {
+    "availability": {
+      "default": "contract",
+      "title": "Availability",
+      "type": "string"
+    },
+    "canonical_route_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Canonical Route Id"
+    },
+    "discharge_level": {
+      "$ref": "#/$defs/DischargeLevel",
+      "default": "external_domain_required"
+    },
+    "license_note": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "License Note"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    },
+    "obligation_category": {
+      "title": "Obligation Category",
+      "type": "string"
+    },
+    "optional_dependency": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Optional Dependency"
+    },
+    "required_evidence_kind": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Evidence Kind",
+      "type": "array"
+    },
+    "residual_policy": {
+      "title": "Residual Policy",
+      "type": "string"
+    },
+    "route_id": {
+      "title": "Route Id",
+      "type": "string"
+    },
+    "safe_default": {
+      "title": "Safe Default",
+      "type": "string"
+    },
+    "status_non_promotion_rule": {
+      "default": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "title": "Status Non Promotion Rule",
+      "type": "string"
+    },
+    "verifier_route": {
+      "title": "Verifier Route",
+      "type": "string"
+    }
+  },
+  "required": [
+    "route_id",
+    "verifier_route",
+    "obligation_category",
+    "residual_policy",
+    "safe_default"
+  ],
+  "title": "AdapterRouteSpec",
+  "type": "object"
+}

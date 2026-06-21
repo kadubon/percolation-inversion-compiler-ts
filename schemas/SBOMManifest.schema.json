@@ -1,0 +1,67 @@
+{
+  "$defs": {
+    "SBOMComponent": {
+      "description": "One Python distribution component in a deterministic SBOM.",
+      "properties": {
+        "license": {
+          "default": "UNKNOWN",
+          "title": "License",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "purl": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Purl"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "SBOMComponent",
+      "type": "object"
+    }
+  },
+  "description": "Backward-compatible PIC SBOM manifest.",
+  "properties": {
+    "bomFormat": {
+      "default": "PIC-SBOM",
+      "title": "Bomformat",
+      "type": "string"
+    },
+    "components": {
+      "items": {
+        "$ref": "#/$defs/SBOMComponent"
+      },
+      "title": "Components",
+      "type": "array"
+    },
+    "packageVersion": {
+      "default": "0.4.4",
+      "title": "Packageversion",
+      "type": "string"
+    },
+    "schemaVersion": {
+      "default": "1.1",
+      "title": "Schemaversion",
+      "type": "string"
+    }
+  },
+  "title": "SBOMManifest",
+  "type": "object"
+}

@@ -1,0 +1,99 @@
+{
+  "description": "Signed statement that binds an agent identity to finite evidence.",
+  "properties": {
+    "agent_id": {
+      "title": "Agent Id",
+      "type": "string"
+    },
+    "attestation_id": {
+      "title": "Attestation Id",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expires At"
+    },
+    "issued_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Issued At"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Metadata",
+      "type": "object"
+    },
+    "nonce": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Nonce"
+    },
+    "payload_digest": {
+      "title": "Payload Digest",
+      "type": "string"
+    },
+    "public_key_id": {
+      "title": "Public Key Id",
+      "type": "string"
+    },
+    "revoked": {
+      "default": false,
+      "title": "Revoked",
+      "type": "boolean"
+    },
+    "signature_b64": {
+      "title": "Signature B64",
+      "type": "string"
+    },
+    "signature_payload_sha256": {
+      "title": "Signature Payload Sha256",
+      "type": "string"
+    },
+    "signature_suite": {
+      "default": "ed25519",
+      "title": "Signature Suite",
+      "type": "string"
+    }
+  },
+  "required": [
+    "attestation_id",
+    "agent_id",
+    "public_key_id",
+    "payload_digest",
+    "signature_b64",
+    "signature_payload_sha256"
+  ],
+  "title": "AgentIdentityAttestation",
+  "type": "object"
+}

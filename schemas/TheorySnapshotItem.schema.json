@@ -1,0 +1,60 @@
+{
+  "description": "Small item-id implementation mapping derived from a canonical source.",
+  "properties": {
+    "coverage_status": {
+      "title": "Coverage Status",
+      "type": "string"
+    },
+    "implementation_maturity": {
+      "default": "snapshot_metadata_only",
+      "title": "Implementation Maturity",
+      "type": "string"
+    },
+    "implementation_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Implementation Refs",
+      "type": "array"
+    },
+    "item_id": {
+      "title": "Item Id",
+      "type": "string"
+    },
+    "label": {
+      "title": "Label",
+      "type": "string"
+    },
+    "obligation_category": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Obligation Category"
+    },
+    "verifier_route": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verifier Route"
+    }
+  },
+  "required": [
+    "item_id",
+    "label",
+    "coverage_status"
+  ],
+  "title": "TheorySnapshotItem",
+  "type": "object"
+}

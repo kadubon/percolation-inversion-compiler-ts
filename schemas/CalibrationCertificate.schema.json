@@ -1,0 +1,252 @@
+{
+  "$defs": {
+    "ConfidenceLedger": {
+      "description": "Finite confidence ledger for a statistical certificate.",
+      "properties": {
+        "alpha": {
+          "title": "Alpha",
+          "type": "number"
+        },
+        "residual_coordinates": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Residual Coordinates",
+          "type": "object"
+        },
+        "sample_size": {
+          "title": "Sample Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "alpha",
+        "sample_size"
+      ],
+      "title": "ConfidenceLedger",
+      "type": "object"
+    },
+    "DKWCertificate": {
+      "description": "Finite DKW calibration certificate.",
+      "properties": {
+        "alpha": {
+          "title": "Alpha",
+          "type": "number"
+        },
+        "observed_radius": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed Radius"
+        },
+        "sample_size": {
+          "title": "Sample Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sample_size",
+        "alpha"
+      ],
+      "title": "DKWCertificate",
+      "type": "object"
+    },
+    "EProcessCertificate": {
+      "description": "Finite e-process hook for time-uniform evidence.",
+      "properties": {
+        "alpha": {
+          "title": "Alpha",
+          "type": "number"
+        },
+        "e_values": {
+          "items": {
+            "type": "number"
+          },
+          "title": "E Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "e_values",
+        "alpha"
+      ],
+      "title": "EProcessCertificate",
+      "type": "object"
+    },
+    "GoodTuringCertificate": {
+      "description": "Good-Turing unseen-mass certificate with explicit charges.",
+      "properties": {
+        "duplicate_rate": {
+          "default": 0.0,
+          "title": "Duplicate Rate",
+          "type": "number"
+        },
+        "false_entry_rate": {
+          "default": 0.0,
+          "title": "False Entry Rate",
+          "type": "number"
+        },
+        "species_counts": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Species Counts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "species_counts"
+      ],
+      "title": "GoodTuringCertificate",
+      "type": "object"
+    },
+    "MartingaleBlockResidual": {
+      "description": "Self-normalized martingale block residual certificate.",
+      "properties": {
+        "alpha": {
+          "title": "Alpha",
+          "type": "number"
+        },
+        "block_bounds": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Block Bounds",
+          "type": "array"
+        },
+        "drift_charge": {
+          "default": 0.0,
+          "title": "Drift Charge",
+          "type": "number"
+        },
+        "quadratic_variation": {
+          "title": "Quadratic Variation",
+          "type": "number"
+        }
+      },
+      "required": [
+        "block_bounds",
+        "quadratic_variation",
+        "alpha"
+      ],
+      "title": "MartingaleBlockResidual",
+      "type": "object"
+    },
+    "SplitCertificate": {
+      "description": "Training/holdout split certificate.",
+      "properties": {
+        "certificate_id": {
+          "title": "Certificate Id",
+          "type": "string"
+        },
+        "checked_on_holdout": {
+          "default": false,
+          "title": "Checked On Holdout",
+          "type": "boolean"
+        },
+        "holdout_size": {
+          "title": "Holdout Size",
+          "type": "integer"
+        },
+        "selected_on_train": {
+          "default": false,
+          "title": "Selected On Train",
+          "type": "boolean"
+        },
+        "selection_residual": {
+          "default": 0.0,
+          "title": "Selection Residual",
+          "type": "number"
+        },
+        "train_size": {
+          "title": "Train Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "certificate_id",
+        "train_size",
+        "holdout_size"
+      ],
+      "title": "SplitCertificate",
+      "type": "object"
+    }
+  },
+  "description": "Aggregate finite calibration certificate.",
+  "properties": {
+    "confidence": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ConfidenceLedger"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "dkw": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DKWCertificate"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "e_process": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EProcessCertificate"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "good_turing": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/GoodTuringCertificate"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "martingale": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/MartingaleBlockResidual"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "split": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SplitCertificate"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "title": "CalibrationCertificate",
+  "type": "object"
+}

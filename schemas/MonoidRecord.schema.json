@@ -1,0 +1,30 @@
+{
+  "description": "A finite monoid table.",
+  "properties": {
+    "elements": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Elements",
+      "type": "array"
+    },
+    "identity": {
+      "title": "Identity",
+      "type": "string"
+    },
+    "operation_table": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Operation Table",
+      "type": "object"
+    }
+  },
+  "required": [
+    "elements",
+    "identity",
+    "operation_table"
+  ],
+  "title": "MonoidRecord",
+  "type": "object"
+}

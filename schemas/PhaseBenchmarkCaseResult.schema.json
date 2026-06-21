@@ -1,0 +1,164 @@
+{
+  "$defs": {
+    "PhaseBenchmarkTask": {
+      "description": "Bundled benchmark task that can run from an installed package.",
+      "properties": {
+        "agent_output": {
+          "title": "Agent Output",
+          "type": "string"
+        },
+        "candidate_only": {
+          "default": true,
+          "title": "Candidate Only",
+          "type": "boolean"
+        },
+        "execution_authority_granted": {
+          "default": false,
+          "title": "Execution Authority Granted",
+          "type": "boolean"
+        },
+        "expected_properties": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Expected Properties",
+          "type": "array"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task_id",
+        "agent_output"
+      ],
+      "title": "PhaseBenchmarkTask",
+      "type": "object"
+    },
+    "ProtocolRelativeBenchmarkMetric": {
+      "description": "One diagnostic metric for protocol-relative sidecar benchmarking.",
+      "properties": {
+        "interpretation": {
+          "default": "diagnostic-only metric; does not settle claims",
+          "title": "Interpretation",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "maximum": {
+          "default": 1.0,
+          "title": "Maximum",
+          "type": "number"
+        },
+        "metric_id": {
+          "title": "Metric Id",
+          "type": "string"
+        },
+        "passed": {
+          "default": false,
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "value": {
+          "default": 0.0,
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "metric_id",
+        "label"
+      ],
+      "title": "ProtocolRelativeBenchmarkMetric",
+      "type": "object"
+    }
+  },
+  "description": "Result for one phase benchmark-suite task.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "bottleneck_count": {
+      "default": 0,
+      "title": "Bottleneck Count",
+      "type": "integer"
+    },
+    "candidate_only_reason_count": {
+      "default": 0,
+      "title": "Candidate Only Reason Count",
+      "type": "integer"
+    },
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "metric_results": {
+      "items": {
+        "$ref": "#/$defs/ProtocolRelativeBenchmarkMetric"
+      },
+      "title": "Metric Results",
+      "type": "array"
+    },
+    "missing_obligation_count": {
+      "default": 0,
+      "title": "Missing Obligation Count",
+      "type": "integer"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "phase_gap_visible": {
+      "default": false,
+      "title": "Phase Gap Visible",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_coordinate_count": {
+      "default": 0,
+      "title": "Residual Coordinate Count",
+      "type": "integer"
+    },
+    "safe_command_count": {
+      "default": 0,
+      "title": "Safe Command Count",
+      "type": "integer"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "settled_blocker_count": {
+      "default": 0,
+      "title": "Settled Blocker Count",
+      "type": "integer"
+    },
+    "task": {
+      "$ref": "#/$defs/PhaseBenchmarkTask"
+    },
+    "workflow_usable": {
+      "default": false,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "case_id",
+    "task"
+  ],
+  "title": "PhaseBenchmarkCaseResult",
+  "type": "object"
+}

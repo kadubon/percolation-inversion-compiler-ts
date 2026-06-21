@@ -1,0 +1,85 @@
+{
+  "$defs": {
+    "PacketSourceKind": {
+      "enum": [
+        "local",
+        "github",
+        "zenodo",
+        "arxiv",
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "agent-message",
+        "agent-inbox",
+        "web-crawl",
+        "agent-output",
+        "auto"
+      ],
+      "title": "PacketSourceKind",
+      "type": "string"
+    }
+  },
+  "description": "One deterministic policy decision for a general-intake source.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "allow_live_connectors": {
+      "default": false,
+      "title": "Allow Live Connectors",
+      "type": "boolean"
+    },
+    "candidate_only": {
+      "default": true,
+      "title": "Candidate Only",
+      "type": "boolean"
+    },
+    "decision_id": {
+      "title": "Decision Id",
+      "type": "string"
+    },
+    "ecpt_phase_contribution_allowed": {
+      "default": false,
+      "title": "Ecpt Phase Contribution Allowed",
+      "type": "boolean"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_coordinates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual Coordinates",
+      "type": "array"
+    },
+    "source_kind": {
+      "$ref": "#/$defs/PacketSourceKind",
+      "default": "auto"
+    },
+    "source_ref": {
+      "title": "Source Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "decision_id",
+    "source_ref"
+  ],
+  "title": "GeneralIntakePolicyDecision",
+  "type": "object"
+}

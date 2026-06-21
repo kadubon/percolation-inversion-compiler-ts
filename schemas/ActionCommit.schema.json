@@ -1,0 +1,67 @@
+{
+  "$defs": {
+    "ActionCommitPolicy": {
+      "description": "How aggressively a runtime may turn ranked advice into agent commitments.",
+      "enum": [
+        "recommend_only",
+        "require_verifier_resolution",
+        "allow_finite_scope_commit"
+      ],
+      "title": "ActionCommitPolicy",
+      "type": "string"
+    }
+  },
+  "description": "Commit decision for a planned action under the configured policy.",
+  "properties": {
+    "action_id": {
+      "title": "Action Id",
+      "type": "string"
+    },
+    "committed": {
+      "default": false,
+      "title": "Committed",
+      "type": "boolean"
+    },
+    "finite_scope_usable": {
+      "default": false,
+      "title": "Finite Scope Usable",
+      "type": "boolean"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "policy": {
+      "$ref": "#/$defs/ActionCommitPolicy"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "recommended": {
+      "default": true,
+      "title": "Recommended",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "verifier_resolution_required": {
+      "default": true,
+      "title": "Verifier Resolution Required",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "action_id",
+    "policy"
+  ],
+  "title": "ActionCommit",
+  "type": "object"
+}

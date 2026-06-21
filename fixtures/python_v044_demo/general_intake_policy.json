@@ -1,0 +1,58 @@
+{
+  "allow_live_connectors": true,
+  "allowed_source_kinds": [
+    "web-page",
+    "rss",
+    "atom",
+    "json-feed",
+    "ndjson",
+    "agent-message",
+    "agent-inbox",
+    "web-crawl"
+  ],
+  "max_agent_messages_per_inbox": 256,
+  "max_feed_entries": 256,
+  "policy_id": "general-intake-policy:controlled-web",
+  "profile": "controlled_web",
+  "reject_replay_nonce": true,
+  "require_message_identity_context": false,
+  "require_signed_agent_messages": false,
+  "residual_behavior": "external intake failures become diagnostic residual ledger entries",
+  "seen_message_nonces": [],
+  "web_policy": {
+    "allow_http": false,
+    "allow_live_connectors": true,
+    "allowed_content_types": [
+      "application/atom+xml",
+      "application/feed+json",
+      "application/json",
+      "application/rss+xml",
+      "application/x-ndjson",
+      "application/xml",
+      "text/html",
+      "text/plain",
+      "text/xml"
+    ],
+    "allowed_hosts": [],
+    "allowed_path_prefixes": [],
+    "allowed_schemes": [
+      "https"
+    ],
+    "blocked_hosts": [],
+    "diagnose_rate_limits": true,
+    "max_bytes_per_resource": 1000000,
+    "max_depth": 1,
+    "max_pages": 8,
+    "max_redirects": 3,
+    "max_total_bytes_per_run": 4000000,
+    "max_total_packets_per_run": 128,
+    "prefer_https": true,
+    "reject_private_networks": true,
+    "require_https_for_live": true,
+    "require_robots_decision": false,
+    "respect_robots": true,
+    "robots_uncertainty_is_diagnostic": false,
+    "timeout_seconds": 20.0,
+    "user_agent": "percolation-inversion-compiler-agent-intake/0.4.4"
+  }
+}

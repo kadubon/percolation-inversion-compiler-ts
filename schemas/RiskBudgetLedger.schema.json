@@ -1,0 +1,19 @@
+{
+  "description": "Finite SQOT risk budget ledger.",
+  "properties": {
+    "risk_budget": {
+      "default": 0.0,
+      "title": "Risk Budget",
+      "type": "number"
+    },
+    "risk_charges": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Risk Charges",
+      "type": "object"
+    }
+  },
+  "title": "RiskBudgetLedger",
+  "type": "object"
+}

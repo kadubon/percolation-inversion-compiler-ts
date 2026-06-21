@@ -1,0 +1,298 @@
+{
+  "$defs": {
+    "CanonicalTheorySnapshotSummary": {
+      "description": "Portable summary for one bundled canonical-theory snapshot.",
+      "properties": {
+        "artifact": {
+          "title": "Artifact",
+          "type": "string"
+        },
+        "artifact_key": {
+          "title": "Artifact Key",
+          "type": "string"
+        },
+        "claims": {
+          "default": 0,
+          "title": "Claims",
+          "type": "integer"
+        },
+        "coverage_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Coverage Counts",
+          "type": "object"
+        },
+        "definitions": {
+          "default": 0,
+          "title": "Definitions",
+          "type": "integer"
+        },
+        "doi": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Doi"
+        },
+        "external_obligation_category_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "External Obligation Category Summary",
+          "type": "object"
+        },
+        "external_obligation_total": {
+          "default": 0,
+          "title": "External Obligation Total",
+          "type": "integer"
+        },
+        "finite_upgrade_candidate_count": {
+          "default": 0,
+          "title": "Finite Upgrade Candidate Count",
+          "type": "integer"
+        },
+        "implemented_total": {
+          "default": 0,
+          "title": "Implemented Total",
+          "type": "integer"
+        },
+        "mr_records": {
+          "default": 0,
+          "title": "Mr Records",
+          "type": "integer"
+        },
+        "partial_total": {
+          "default": 0,
+          "title": "Partial Total",
+          "type": "integer"
+        },
+        "portability_status": {
+          "default": "schema-first",
+          "title": "Portability Status",
+          "type": "string"
+        },
+        "source_tex_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Tex Sha256"
+        },
+        "unsupported_total": {
+          "default": 0,
+          "title": "Unsupported Total",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "artifact_key",
+        "artifact"
+      ],
+      "title": "CanonicalTheorySnapshotSummary",
+      "type": "object"
+    }
+  },
+  "description": "Pip-safe canonical readiness report derived from bundled snapshots.",
+  "properties": {
+    "acceleration_levers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Acceleration Levers",
+      "type": "array"
+    },
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "adoption_required_for_core": {
+      "default": false,
+      "title": "Adoption Required For Core",
+      "type": "boolean"
+    },
+    "approval_gate_present": {
+      "default": false,
+      "title": "Approval Gate Present",
+      "type": "boolean"
+    },
+    "asi_proxy_acceleration_objective": {
+      "default": "protocol-relative ASI-proxy acceleration through packet percolation, verifier throughput, residual preservation, SQOT queue visibility, and ALT abstraction-liquidity reuse",
+      "title": "Asi Proxy Acceleration Objective",
+      "type": "string"
+    },
+    "automatic_execution_present": {
+      "default": false,
+      "title": "Automatic Execution Present",
+      "type": "boolean"
+    },
+    "canonical_tex_required_for_this_report": {
+      "default": false,
+      "title": "Canonical Tex Required For This Report",
+      "type": "boolean"
+    },
+    "compact_mode_available": {
+      "default": true,
+      "title": "Compact Mode Available",
+      "type": "boolean"
+    },
+    "cross_language_portability_ready": {
+      "default": true,
+      "title": "Cross Language Portability Ready",
+      "type": "boolean"
+    },
+    "expected_theory_keys": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Expected Theory Keys",
+      "type": "array"
+    },
+    "finite_upgrade_candidates": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Finite Upgrade Candidates",
+      "type": "object"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "partial_total": {
+      "default": 0,
+      "title": "Partial Total",
+      "type": "integer"
+    },
+    "pip_installable": {
+      "default": true,
+      "title": "Pip Installable",
+      "type": "boolean"
+    },
+    "portability_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Portability Invariants",
+      "type": "array"
+    },
+    "portable_schema_first_contract": {
+      "default": true,
+      "title": "Portable Schema First Contract",
+      "type": "boolean"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "recommended_invocations": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Recommended Invocations",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "pic-canonical-implementation-readiness",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_category_totals": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Residual Category Totals",
+      "type": "object"
+    },
+    "safe_commands_executable_by_pic": {
+      "default": false,
+      "title": "Safe Commands Executable By Pic",
+      "type": "boolean"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "snapshot_count": {
+      "default": 0,
+      "title": "Snapshot Count",
+      "type": "integer"
+    },
+    "source": {
+      "default": "bundled-derived-snapshots",
+      "title": "Source",
+      "type": "string"
+    },
+    "source_checkout_required": {
+      "default": false,
+      "title": "Source Checkout Required",
+      "type": "boolean"
+    },
+    "source_tex_vendored": {
+      "default": false,
+      "title": "Source Tex Vendored",
+      "type": "boolean"
+    },
+    "theory_summaries": {
+      "additionalProperties": {
+        "$ref": "#/$defs/CanonicalTheorySnapshotSummary"
+      },
+      "title": "Theory Summaries",
+      "type": "object"
+    },
+    "total_external_obligations": {
+      "default": 0,
+      "title": "Total External Obligations",
+      "type": "integer"
+    },
+    "total_implemented_items": {
+      "default": 0,
+      "title": "Total Implemented Items",
+      "type": "integer"
+    },
+    "unsupported_total": {
+      "default": 0,
+      "title": "Unsupported Total",
+      "type": "integer"
+    },
+    "workflow_usable": {
+      "default": false,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "title": "CanonicalImplementationReadinessReport",
+  "type": "object"
+}

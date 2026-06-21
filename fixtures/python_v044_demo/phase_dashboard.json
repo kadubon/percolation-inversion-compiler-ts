@@ -1,0 +1,175 @@
+{
+  "accepted": true,
+  "accepted_packet_count": 0,
+  "alt_liquidity_candidate_count": 0,
+  "bottleneck_count_by_type": {
+    "bottleneck-intervention": 2,
+    "phase-component-gap": 3,
+    "verifier-route": 3
+  },
+  "candidate_only_reason_count": 1,
+  "dashboard_id": "phase-dashboard:development",
+  "dashboard_safety_boundary": [
+    "phase dashboard is observational only",
+    "phase dashboard does not claim a real ASI phase transition",
+    "raw external volume is not positive phase progress",
+    "phase dashboard does not alter runtime state",
+    "phase dashboard does not introduce approval requirements"
+  ],
+  "external_volume_candidate_only_count": 0,
+  "identity_blocker_count": 0,
+  "missing_obligation_count": 3,
+  "operationally_usable": true,
+  "packet_candidate_count": 2,
+  "phase_gap_vector": {
+    "accepted": true,
+    "aggregate_gap": 0.8216216216216216,
+    "components": [
+      {
+        "component": "AC",
+        "current_value": 0.0,
+        "gap": 0.5,
+        "limiting": true,
+        "reasons": [
+          "component is below finite threshold",
+          "component is listed as limiting by PsiDashboard"
+        ],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "BR",
+        "current_value": 0.5,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.1
+      },
+      {
+        "component": "CV",
+        "current_value": 0.5,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "DE",
+        "current_value": 0.5,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "FR",
+        "current_value": 1.0,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "G",
+        "current_value": 1.0,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.7
+      },
+      {
+        "component": "HZ",
+        "current_value": 1.0,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "LX",
+        "current_value": 1.0,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "QS",
+        "current_value": 0.884,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "SD",
+        "current_value": 0.3783783783783784,
+        "gap": 0.1216216216216216,
+        "limiting": true,
+        "reasons": [
+          "component is below finite threshold",
+          "component is listed as limiting by PsiDashboard"
+        ],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "VT",
+        "current_value": 0.5,
+        "gap": 0.19999999999999996,
+        "limiting": true,
+        "reasons": [
+          "component is below finite threshold",
+          "component is listed as limiting by PsiDashboard"
+        ],
+        "source": "PsiDashboard",
+        "threshold_value": 0.7
+      }
+    ],
+    "limiting_components": [
+      "AC",
+      "SD",
+      "VT"
+    ],
+    "operationally_usable": true,
+    "reasons": [],
+    "settled": false,
+    "vector_id": "phase-gap-vector:runtime-step:runtime-demo:0:runtime-step-1"
+  },
+  "profile": "development",
+  "promotion_blocker_summary": [
+    "ECPT split-certified quotient readiness is not established",
+    "TRC frontier debt remains",
+    "missing obligations remain",
+    "runtime residual ledger has unresolved burden",
+    "verifier route execution requests remain unresolved"
+  ],
+  "reasons": [
+    "ECPT split-certified quotient readiness is not established",
+    "TRC frontier debt remains",
+    "dashboard metrics are diagnostic-only",
+    "missing obligations remain",
+    "one or more packet candidates were rejected by promotion policy",
+    "runtime residual ledger has unresolved burden",
+    "verifier route execution requests remain unresolved"
+  ],
+  "residual_debt_count": 2,
+  "rollback_blocker_count": 0,
+  "route_blocker_count": 2,
+  "safe_command_count": 4,
+  "settled": false,
+  "settled_blocker_count": 9,
+  "settled_packet_count": 0,
+  "sqot_queue_pressure": 4.165,
+  "unsettled_candidate_count": 2,
+  "workflow_usable": true,
+  "workflow_usable_packet_count": 2
+}

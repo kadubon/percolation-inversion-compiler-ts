@@ -1,0 +1,434 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "DiagnosticReservePolicy": {
+      "description": "Reserve rule for diagnostic work and audit recursion.",
+      "properties": {
+        "audit_depth": {
+          "default": 1,
+          "title": "Audit Depth",
+          "type": "integer"
+        },
+        "minimum_reserve": {
+          "default": 0.0,
+          "title": "Minimum Reserve",
+          "type": "number"
+        },
+        "reserve_fraction": {
+          "default": 0.1,
+          "title": "Reserve Fraction",
+          "type": "number"
+        }
+      },
+      "title": "DiagnosticReservePolicy",
+      "type": "object"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "OccupationLedger": {
+      "description": "Finite attention occupation by queue class.",
+      "properties": {
+        "attention_budget": {
+          "title": "Attention Budget",
+          "type": "number"
+        },
+        "occupied": {
+          "default": 0.0,
+          "title": "Occupied",
+          "type": "number"
+        },
+        "occupied_by_class": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Occupied By Class",
+          "type": "object"
+        },
+        "unknown_occupation": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unknown Occupation",
+          "type": "array"
+        }
+      },
+      "required": [
+        "attention_budget"
+      ],
+      "title": "OccupationLedger",
+      "type": "object"
+    },
+    "QuarantineLedger": {
+      "description": "Fail-closed quarantine and rollback ledger.",
+      "properties": {
+        "quarantined_items": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Quarantined Items",
+          "type": "array"
+        },
+        "reasons": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Reasons",
+          "type": "object"
+        },
+        "rollback_items": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rollback Items",
+          "type": "array"
+        }
+      },
+      "title": "QuarantineLedger",
+      "type": "object"
+    },
+    "RiskBudgetLedger": {
+      "description": "Finite SQOT risk budget ledger.",
+      "properties": {
+        "risk_budget": {
+          "default": 0.0,
+          "title": "Risk Budget",
+          "type": "number"
+        },
+        "risk_charges": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Risk Charges",
+          "type": "object"
+        }
+      },
+      "title": "RiskBudgetLedger",
+      "type": "object"
+    },
+    "SalienceDecision": {
+      "enum": [
+        "run",
+        "defer",
+        "quarantine",
+        "rollback",
+        "abstain"
+      ],
+      "title": "SalienceDecision",
+      "type": "string"
+    },
+    "SalienceSchedulingDecision": {
+      "description": "One scheduler decision with explicit residual accounting.",
+      "properties": {
+        "decision": {
+          "$ref": "#/$defs/SalienceDecision"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "priority_score": {
+          "title": "Priority Score",
+          "type": "number"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "diagnostic"
+        }
+      },
+      "required": [
+        "record_id",
+        "decision",
+        "priority_score"
+      ],
+      "title": "SalienceSchedulingDecision",
+      "type": "object"
+    }
+  },
+  "description": "Deterministic SQOT scheduling output for agent runners.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "adversarial_transfer_charge": {
+      "default": 0.0,
+      "title": "Adversarial Transfer Charge",
+      "type": "number"
+    },
+    "aggregation_group_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Aggregation Group Counts",
+      "type": "object"
+    },
+    "aggregation_group_occupation": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Aggregation Group Occupation",
+      "type": "object"
+    },
+    "audit_recursion_violations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Audit Recursion Violations",
+      "type": "array"
+    },
+    "decisions": {
+      "items": {
+        "$ref": "#/$defs/SalienceSchedulingDecision"
+      },
+      "title": "Decisions",
+      "type": "array"
+    },
+    "diagnostic_reserve": {
+      "$ref": "#/$defs/DiagnosticReservePolicy"
+    },
+    "distributed_origin_count": {
+      "default": 0,
+      "title": "Distributed Origin Count",
+      "type": "integer"
+    },
+    "effective_diagnostic_reserve": {
+      "default": 0.0,
+      "title": "Effective Diagnostic Reserve",
+      "type": "number"
+    },
+    "false_liquidity_rate": {
+      "default": 0.0,
+      "title": "False Liquidity Rate",
+      "type": "number"
+    },
+    "label_laundering_suspicions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Label Laundering Suspicions",
+      "type": "array"
+    },
+    "latency_deadline_loss": {
+      "default": 0.0,
+      "title": "Latency Deadline Loss",
+      "type": "number"
+    },
+    "low_contribution_occupation": {
+      "default": 0.0,
+      "title": "Low Contribution Occupation",
+      "type": "number"
+    },
+    "occupation_ledger": {
+      "$ref": "#/$defs/OccupationLedger"
+    },
+    "privacy_rejoin_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Privacy Rejoin Refs",
+      "type": "array"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "protocol_integrity_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Protocol Integrity Refs",
+      "type": "array"
+    },
+    "quarantine_ledger": {
+      "$ref": "#/$defs/QuarantineLedger"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_debt_growth": {
+      "default": 0.0,
+      "title": "Residual Debt Growth",
+      "type": "number"
+    },
+    "risk_ledger": {
+      "$ref": "#/$defs/RiskBudgetLedger"
+    },
+    "rollback_class_summary": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Rollback Class Summary",
+      "type": "object"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "sovereignty_kernel_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sovereignty Kernel Refs",
+      "type": "array"
+    },
+    "stale_packet_ratio": {
+      "default": 0.0,
+      "title": "Stale Packet Ratio",
+      "type": "number"
+    },
+    "thermodynamic_discharge_charge": {
+      "default": 0.0,
+      "title": "Thermodynamic Discharge Charge",
+      "type": "number"
+    },
+    "unresolved_obligation_backlog": {
+      "default": 0,
+      "title": "Unresolved Obligation Backlog",
+      "type": "integer"
+    },
+    "verifier_latency_proxy": {
+      "default": 0.0,
+      "title": "Verifier Latency Proxy",
+      "type": "number"
+    }
+  },
+  "required": [
+    "report_id",
+    "occupation_ledger"
+  ],
+  "title": "SalienceScheduleReport",
+  "type": "object"
+}

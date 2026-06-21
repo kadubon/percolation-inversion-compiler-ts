@@ -1,0 +1,78 @@
+{
+  "bundle_id": "percolation-inversion-compiler-installed-demo",
+  "candidate_only": true,
+  "description": "Practical install-time demo assets for PyPI users. These files support residual-preserving agent checking, phase acceleration planning, runtime steps, schema validation, local agent relay, ALT admission, and optional sidecar diagnostics without cloning the repository.",
+  "files": [
+    {
+      "media_type": "application/json",
+      "path": "runtime_state.json",
+      "purpose": "Minimal RuntimeState for pic runtime step."
+    },
+    {
+      "media_type": "application/json",
+      "path": "runtime_step_input.json",
+      "purpose": "Minimal RuntimeStepInput for runtime step and pic phase plan."
+    },
+    {
+      "media_type": "application/json",
+      "path": "runtime_step_report.json",
+      "purpose": "Generated RuntimeStepReport for packet export, dashboard, and phase observation sidecar smoke."
+    },
+    {
+      "media_type": "application/json",
+      "path": "phase_dashboard.json",
+      "purpose": "Generated PhaseDashboardReport for installed-package phase observe smoke."
+    },
+    {
+      "media_type": "application/json",
+      "path": "packet_envelope.json",
+      "purpose": "Generated PacketExchangeEnvelope for installed-package packet inspect, merge, and lineage smoke."
+    },
+    {
+      "media_type": "text/plain",
+      "path": "agent_output.txt",
+      "purpose": "Inline agent-output text for pic agent intake."
+    },
+    {
+      "media_type": "application/json",
+      "path": "general_intake_policy.json",
+      "purpose": "Controlled-web GeneralIntakePolicy with bounded live source intake enabled."
+    },
+    {
+      "media_type": "application/json",
+      "path": "agent_message.json",
+      "purpose": "Local AgentMessageEnvelope fixture for pic agent message send/receive/verify workflows."
+    },
+    {
+      "media_type": "application/json",
+      "path": "agent_inbox.json",
+      "purpose": "Local AgentInboxRecord fixture for installed-package relay verification."
+    },
+    {
+      "media_type": "application/json",
+      "path": "alt_admission_packet.json",
+      "purpose": "ALT admission packet fixture for abstraction-liquidity CLI smoke."
+    }
+  ],
+  "license": "Apache-2.0 for repository demo JSON and text files",
+  "provenance": "Derived from repository examples for v0.4.4 practical installed-package workflows; no canonical TeX or PDF is vendored.",
+  "recommended_phase_commands": [
+    "pic phase plan --compact --text \"Candidate packet: preserve residuals.\" --profile development",
+    "pic agent accelerate --compact --text \"Candidate packet: preserve residuals.\" --profile development",
+    "pic phase benchmark-suite --profile development --format json",
+    "pic phase dashboard --runtime-report pic-demo/runtime_step_report.json --profile development",
+    "pic packet inspect --packet pic-demo/packet_envelope.json",
+    "pic packet merge --packets pic-demo/packet*.json --output pic-demo/merged-packets.json",
+    "pic packet lineage --packet pic-demo/merged-packets.json",
+    "pic phase observe --reports pic-demo/phase_dashboard.json --output pic-demo/observation.json",
+    "pic audit canonical-readiness --profile development --format json",
+    "pic schema --type PhaseAccelerationPlan"
+  ],
+  "safety_invariants": [
+    "demo output does not prove real ASI, physical outcomes, oracle truth, legal identity, or global Sybil uniqueness",
+    "external content and ALT tokens remain candidate-only until finite verifier and residual-policy checks pass",
+    "live connectors are bounded and candidate-only by default when an explicit source is supplied",
+    "settled=false is expected when residual obligations remain"
+  ],
+  "version": "0.4.4"
+}

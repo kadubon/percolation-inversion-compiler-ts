@@ -1,0 +1,428 @@
+{
+  "accepted": true,
+  "aggregate_metrics": [
+    {
+      "interpretation": "case pass count; diagnostic only and not a settlement signal",
+      "label": "bottleneck ranking coverage",
+      "maximum": 3.0,
+      "metric_id": "bottleneck-ranking-coverage",
+      "passed": true,
+      "value": 3.0
+    },
+    {
+      "interpretation": "case pass count; diagnostic only and not a settlement signal",
+      "label": "candidate-only false-promotion prevention",
+      "maximum": 3.0,
+      "metric_id": "candidate-only-false-promotion-prevention",
+      "passed": true,
+      "value": 3.0
+    },
+    {
+      "interpretation": "case pass count; diagnostic only and not a settlement signal",
+      "label": "missing obligation visibility",
+      "maximum": 3.0,
+      "metric_id": "missing-obligation-visibility",
+      "passed": true,
+      "value": 3.0
+    },
+    {
+      "interpretation": "case pass count; diagnostic only and not a settlement signal",
+      "label": "next action specificity",
+      "maximum": 3.0,
+      "metric_id": "next-action-specificity",
+      "passed": true,
+      "value": 3.0
+    },
+    {
+      "interpretation": "case pass count; diagnostic only and not a settlement signal",
+      "label": "phase gap visibility",
+      "maximum": 3.0,
+      "metric_id": "phase-gap-visibility",
+      "passed": true,
+      "value": 3.0
+    },
+    {
+      "interpretation": "case pass count; diagnostic only and not a settlement signal",
+      "label": "residual preservation",
+      "maximum": 3.0,
+      "metric_id": "residual-preservation",
+      "passed": true,
+      "value": 3.0
+    },
+    {
+      "interpretation": "case pass count; diagnostic only and not a settlement signal",
+      "label": "reusable packet candidate visibility",
+      "maximum": 3.0,
+      "metric_id": "reusable-packet-candidate-visibility",
+      "passed": true,
+      "value": 3.0
+    },
+    {
+      "interpretation": "case pass count; diagnostic only and not a settlement signal",
+      "label": "settled blocker visibility",
+      "maximum": 3.0,
+      "metric_id": "settled-blocker-visibility",
+      "passed": true,
+      "value": 3.0
+    },
+    {
+      "interpretation": "case pass count; diagnostic only and not a settlement signal",
+      "label": "unsafe promotion prevention",
+      "maximum": 3.0,
+      "metric_id": "unsafe-promotion-prevention",
+      "passed": true,
+      "value": 3.0
+    }
+  ],
+  "aggregate_score": 1.0,
+  "cases": [
+    {
+      "accepted": true,
+      "bottleneck_count": 7,
+      "candidate_only_reason_count": 1,
+      "case_id": "phase-benchmark-case:missing-obligation-visibility",
+      "metric_results": [
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "missing obligation visibility",
+          "maximum": 1.0,
+          "metric_id": "missing-obligation-visibility",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "unsafe promotion prevention",
+          "maximum": 1.0,
+          "metric_id": "unsafe-promotion-prevention",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "residual preservation",
+          "maximum": 1.0,
+          "metric_id": "residual-preservation",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "settled blocker visibility",
+          "maximum": 1.0,
+          "metric_id": "settled-blocker-visibility",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "next action specificity",
+          "maximum": 1.0,
+          "metric_id": "next-action-specificity",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "reusable packet candidate visibility",
+          "maximum": 1.0,
+          "metric_id": "reusable-packet-candidate-visibility",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "candidate-only false-promotion prevention",
+          "maximum": 1.0,
+          "metric_id": "candidate-only-false-promotion-prevention",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "phase gap visibility",
+          "maximum": 1.0,
+          "metric_id": "phase-gap-visibility",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "bottleneck ranking coverage",
+          "maximum": 1.0,
+          "metric_id": "bottleneck-ranking-coverage",
+          "passed": true,
+          "value": 1.0
+        }
+      ],
+      "missing_obligation_count": 2,
+      "operationally_usable": true,
+      "phase_gap_visible": true,
+      "reasons": [
+        "ECPT split-certified quotient readiness is not established",
+        "TRC frontier debt remains",
+        "missing obligations remain",
+        "one or more packet candidates were rejected by promotion policy",
+        "runtime residual ledger has unresolved burden",
+        "verifier route execution requests remain unresolved"
+      ],
+      "residual_coordinate_count": 2,
+      "safe_command_count": 4,
+      "settled": false,
+      "settled_blocker_count": 9,
+      "task": {
+        "agent_output": "Candidate packet: route evidence and preserve residuals.",
+        "candidate_only": true,
+        "execution_authority_granted": false,
+        "expected_properties": [
+          "missing obligation visibility",
+          "settled blocker visibility",
+          "residual preservation"
+        ],
+        "task_id": "missing-obligation-visibility"
+      },
+      "workflow_usable": true
+    },
+    {
+      "accepted": true,
+      "bottleneck_count": 7,
+      "candidate_only_reason_count": 1,
+      "case_id": "phase-benchmark-case:false-promotion-prevention",
+      "metric_results": [
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "missing obligation visibility",
+          "maximum": 1.0,
+          "metric_id": "missing-obligation-visibility",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "unsafe promotion prevention",
+          "maximum": 1.0,
+          "metric_id": "unsafe-promotion-prevention",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "residual preservation",
+          "maximum": 1.0,
+          "metric_id": "residual-preservation",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "settled blocker visibility",
+          "maximum": 1.0,
+          "metric_id": "settled-blocker-visibility",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "next action specificity",
+          "maximum": 1.0,
+          "metric_id": "next-action-specificity",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "reusable packet candidate visibility",
+          "maximum": 1.0,
+          "metric_id": "reusable-packet-candidate-visibility",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "candidate-only false-promotion prevention",
+          "maximum": 1.0,
+          "metric_id": "candidate-only-false-promotion-prevention",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "phase gap visibility",
+          "maximum": 1.0,
+          "metric_id": "phase-gap-visibility",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "bottleneck ranking coverage",
+          "maximum": 1.0,
+          "metric_id": "bottleneck-ranking-coverage",
+          "passed": true,
+          "value": 1.0
+        }
+      ],
+      "missing_obligation_count": 2,
+      "operationally_usable": true,
+      "phase_gap_visible": true,
+      "reasons": [
+        "ECPT split-certified quotient readiness is not established",
+        "TRC frontier debt remains",
+        "missing obligations remain",
+        "one or more packet candidates were rejected by promotion policy",
+        "runtime residual ledger has unresolved burden",
+        "verifier route execution requests remain unresolved"
+      ],
+      "residual_coordinate_count": 2,
+      "safe_command_count": 4,
+      "settled": false,
+      "settled_blocker_count": 9,
+      "task": {
+        "agent_output": "Candidate packet: claim reusable work, but preserve candidate-only status until verifier routes pass.",
+        "candidate_only": true,
+        "execution_authority_granted": false,
+        "expected_properties": [
+          "unsafe promotion prevention",
+          "candidate-only false-promotion prevention",
+          "safe command non-authority"
+        ],
+        "task_id": "false-promotion-prevention"
+      },
+      "workflow_usable": true
+    },
+    {
+      "accepted": true,
+      "bottleneck_count": 7,
+      "candidate_only_reason_count": 1,
+      "case_id": "phase-benchmark-case:phase-gap-and-bottleneck-ranking",
+      "metric_results": [
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "missing obligation visibility",
+          "maximum": 1.0,
+          "metric_id": "missing-obligation-visibility",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "unsafe promotion prevention",
+          "maximum": 1.0,
+          "metric_id": "unsafe-promotion-prevention",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "residual preservation",
+          "maximum": 1.0,
+          "metric_id": "residual-preservation",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "settled blocker visibility",
+          "maximum": 1.0,
+          "metric_id": "settled-blocker-visibility",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "next action specificity",
+          "maximum": 1.0,
+          "metric_id": "next-action-specificity",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "reusable packet candidate visibility",
+          "maximum": 1.0,
+          "metric_id": "reusable-packet-candidate-visibility",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "candidate-only false-promotion prevention",
+          "maximum": 1.0,
+          "metric_id": "candidate-only-false-promotion-prevention",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "phase gap visibility",
+          "maximum": 1.0,
+          "metric_id": "phase-gap-visibility",
+          "passed": true,
+          "value": 1.0
+        },
+        {
+          "interpretation": "diagnostic-only metric; does not settle claims",
+          "label": "bottleneck ranking coverage",
+          "maximum": 1.0,
+          "metric_id": "bottleneck-ranking-coverage",
+          "passed": true,
+          "value": 1.0
+        }
+      ],
+      "missing_obligation_count": 2,
+      "operationally_usable": true,
+      "phase_gap_visible": true,
+      "reasons": [
+        "ECPT split-certified quotient readiness is not established",
+        "TRC frontier debt remains",
+        "missing obligations remain",
+        "one or more packet candidates were rejected by promotion policy",
+        "runtime residual ledger has unresolved burden",
+        "verifier route execution requests remain unresolved"
+      ],
+      "residual_coordinate_count": 2,
+      "safe_command_count": 4,
+      "settled": false,
+      "settled_blocker_count": 9,
+      "task": {
+        "agent_output": "Candidate packet: identify phase gaps and rank bottlenecks.",
+        "candidate_only": true,
+        "execution_authority_granted": false,
+        "expected_properties": [
+          "phase gap visibility",
+          "bottleneck ranking coverage",
+          "next action specificity"
+        ],
+        "task_id": "phase-gap-and-bottleneck-ranking"
+      },
+      "workflow_usable": true
+    }
+  ],
+  "operationally_usable": true,
+  "profile": "development",
+  "reasons": [
+    "benchmark suite is diagnostic-only",
+    "protocol-relative metrics measure visibility and non-promotion behavior"
+  ],
+  "report_id": "phase-benchmark-suite",
+  "safety_invariants": [
+    "phase acceleration planning is recommendation-only and does not execute actions",
+    "raw external candidate volume cannot improve Psi, BR, AC, or settled status",
+    "candidate packets, agent messages, and proxy-only ALT reports remain candidates",
+    "settled remains false unless scoped finite verifier rules discharge all obligations",
+    "residual ledgers and missing obligations must be preserved into downstream loops",
+    "ASI-proxy phase is protocol-relative workflow coordination, not real ASI proof",
+    "no physical, simulator, oracle, legal, or policy outcome is proven by this report",
+    "live connectors are bounded and candidate-only by default when an explicit source is supplied",
+    "no background crawling",
+    "no autonomous polling",
+    "no arbitrary shell execution",
+    "no repository mutation",
+    "no hidden promotion from accepted or workflow_usable to settled",
+    "benchmark scores do not set settled=true",
+    "benchmark scores do not approve execution",
+    "benchmark scores do not promote packets"
+  ],
+  "settled": false,
+  "workflow_usable": true
+}

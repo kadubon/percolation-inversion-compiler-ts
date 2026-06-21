@@ -1,0 +1,77 @@
+{
+  "properties": {
+    "commuting_pairs": {
+      "items": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Commuting Pairs",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "confluence_witness": {
+      "default": false,
+      "title": "Confluence Witness",
+      "type": "boolean"
+    },
+    "normalized_word": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Normalized Word",
+      "type": "array"
+    },
+    "residual": {
+      "default": 0.0,
+      "title": "Residual",
+      "type": "number"
+    },
+    "rewrite_steps": {
+      "items": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Rewrite Steps",
+      "type": "array"
+    },
+    "source_word": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Word",
+      "type": "array"
+    },
+    "termination_witness": {
+      "default": false,
+      "title": "Termination Witness",
+      "type": "boolean"
+    },
+    "trace_id": {
+      "title": "Trace Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "trace_id"
+  ],
+  "title": "TraceNormalizationCertificate",
+  "type": "object"
+}

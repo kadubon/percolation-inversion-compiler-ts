@@ -1,0 +1,42 @@
+{
+  "description": "Finite resource envelope for protocol-competitive runtime comparison.",
+  "properties": {
+    "compute_cost": {
+      "default": 0.0,
+      "title": "Compute Cost",
+      "type": "number"
+    },
+    "human_review_budget": {
+      "default": 0.0,
+      "title": "Human Review Budget",
+      "type": "number"
+    },
+    "network_calls": {
+      "default": 0,
+      "title": "Network Calls",
+      "type": "integer"
+    },
+    "risk_budget": {
+      "default": 0.0,
+      "title": "Risk Budget",
+      "type": "number"
+    },
+    "token_budget": {
+      "default": 0,
+      "title": "Token Budget",
+      "type": "integer"
+    },
+    "verifier_calls": {
+      "default": 0,
+      "title": "Verifier Calls",
+      "type": "integer"
+    },
+    "wall_time_seconds": {
+      "default": 0.0,
+      "title": "Wall Time Seconds",
+      "type": "number"
+    }
+  },
+  "title": "ResourceEnvelope",
+  "type": "object"
+}

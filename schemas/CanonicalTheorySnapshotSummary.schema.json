@@ -1,0 +1,102 @@
+{
+  "description": "Portable summary for one bundled canonical-theory snapshot.",
+  "properties": {
+    "artifact": {
+      "title": "Artifact",
+      "type": "string"
+    },
+    "artifact_key": {
+      "title": "Artifact Key",
+      "type": "string"
+    },
+    "claims": {
+      "default": 0,
+      "title": "Claims",
+      "type": "integer"
+    },
+    "coverage_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Coverage Counts",
+      "type": "object"
+    },
+    "definitions": {
+      "default": 0,
+      "title": "Definitions",
+      "type": "integer"
+    },
+    "doi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Doi"
+    },
+    "external_obligation_category_summary": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "External Obligation Category Summary",
+      "type": "object"
+    },
+    "external_obligation_total": {
+      "default": 0,
+      "title": "External Obligation Total",
+      "type": "integer"
+    },
+    "finite_upgrade_candidate_count": {
+      "default": 0,
+      "title": "Finite Upgrade Candidate Count",
+      "type": "integer"
+    },
+    "implemented_total": {
+      "default": 0,
+      "title": "Implemented Total",
+      "type": "integer"
+    },
+    "mr_records": {
+      "default": 0,
+      "title": "Mr Records",
+      "type": "integer"
+    },
+    "partial_total": {
+      "default": 0,
+      "title": "Partial Total",
+      "type": "integer"
+    },
+    "portability_status": {
+      "default": "schema-first",
+      "title": "Portability Status",
+      "type": "string"
+    },
+    "source_tex_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Tex Sha256"
+    },
+    "unsupported_total": {
+      "default": 0,
+      "title": "Unsupported Total",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "artifact_key",
+    "artifact"
+  ],
+  "title": "CanonicalTheorySnapshotSummary",
+  "type": "object"
+}

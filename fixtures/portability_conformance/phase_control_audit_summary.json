@@ -1,0 +1,16 @@
+{
+  "baseline_comparison_ready": true,
+  "candidate_count": 1,
+  "controlled_proxy_mass": 0.6,
+  "duplicate_mass_excluded": true,
+  "finite_proxy_gain_total": 0.4,
+  "operationally_usable": false,
+  "proxy_bundle_coordinate_count": 1,
+  "proxy_bundle_mass": 1.0,
+  "selected_action_count": 1,
+  "settled": false,
+  "split_certified_quotient_ready": false,
+  "summary_id": "phase-control-audit:portability",
+  "target_id": "portability-target",
+  "target_node_count": 1
+}

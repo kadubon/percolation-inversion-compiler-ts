@@ -1,0 +1,143 @@
+{
+  "packet_registry": {
+    "edges": [],
+    "packets": [
+      {
+        "claim": "Seed packet for ECPT proxy phase-control routing.",
+        "content_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "evidence_refs": [
+          "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        ],
+        "expected_downstream_gain": 0.4,
+        "packet_id": "packet:runtime-seed",
+        "receiver_family": [
+          "agent",
+          "verifier"
+        ],
+        "reuse_context": "runtime-demo",
+        "salience_class": "packet",
+        "source_kind": "agent-output",
+        "source_ref": "seed",
+        "tags": [
+          "ecpt",
+          "phase"
+        ],
+        "verification_cost": 0.1,
+        "verifier_routes": [
+          "adapters.domain.verify_ecpt_proxy_target_contract"
+        ]
+      }
+    ],
+    "registry_id": "runtime-demo-registry"
+  },
+  "phase_actions": [
+    {
+      "action_id": "route-proxy-target-evidence",
+      "activation_delta": 0.8,
+      "burden_delta": 0.1,
+      "postconditions": [
+        "proxy-frontier-observed"
+      ],
+      "preconditions": [
+        "compute",
+        "models"
+      ],
+      "required_obligations": [
+        "obligation:baseline-safety"
+      ],
+      "residual_charge": 0.02,
+      "resource_cost": {
+        "compute": 0.2
+      },
+      "risk_charge": 0.03,
+      "source_nodes": [
+        "compute",
+        "models"
+      ],
+      "target_node": "phase-transition-proxy",
+      "verifier_routes": [
+        "adapters.domain.verify_ecpt_proxy_target_contract"
+      ]
+    }
+  ],
+  "phase_objective": {
+    "horizon": 2,
+    "objective_id": "runtime-demo-objective",
+    "residual_budget": 0.5,
+    "risk_tolerance": 0.4,
+    "route_preferences": [
+      "adapters.domain.verify_ecpt_proxy_target_contract"
+    ],
+    "target": {
+      "minimum_proxy_mass": 0.05,
+      "proxy_coordinates": {
+        "phase-transition-proxy": 1.0
+      },
+      "required_obligations": [
+        "obligation:baseline-safety"
+      ],
+      "target_id": "runtime-demo-asi-proxy-target",
+      "target_nodes": [
+        "phase-transition-proxy"
+      ]
+    }
+  },
+  "phase_state": {
+    "budgets": {
+      "compute": 1.0
+    },
+    "constraint_frame": {
+      "hard_gates": {
+        "operator-review": true,
+        "safety-ledger-live": true
+      }
+    },
+    "graph": {
+      "edges": [
+        {
+          "activation_weight": 0.7,
+          "burden": 0.05,
+          "edge_id": "baseline-model-stack",
+          "sources": [
+            "compute"
+          ],
+          "status": "provisional",
+          "target": "models"
+        }
+      ],
+      "nodes": [
+        "compute",
+        "models"
+      ],
+      "seed_mass": {
+        "compute": 1.0
+      }
+    },
+    "present_obligations": [
+      "obligation:baseline-safety"
+    ],
+    "route_ids": [
+      "adapters.domain.verify_ecpt_proxy_target_contract"
+    ],
+    "state_id": "runtime-demo-phase-state",
+    "state_vector": {
+      "packets": [
+        {
+          "coordinates": {
+            "compute": 1.0
+          },
+          "packet_id": "compute-seed",
+          "status": "provisional",
+          "validity_domain": "demo"
+        }
+      ],
+      "validity_domain": "demo"
+    }
+  },
+  "psi_threshold": {
+    "BR": 0.1,
+    "G": 0.7,
+    "VT": 0.7
+  },
+  "state_id": "runtime-demo"
+}

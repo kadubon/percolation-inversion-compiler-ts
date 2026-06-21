@@ -1,0 +1,109 @@
+{
+  "description": "Network and external-communication readiness for agent workflows.",
+  "properties": {
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "allow_live_connectors": {
+      "title": "Allow Live Connectors",
+      "type": "boolean"
+    },
+    "allowed_source_kinds": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Source Kinds",
+      "type": "array"
+    },
+    "bounded_candidate_intake": {
+      "default": true,
+      "title": "Bounded Candidate Intake",
+      "type": "boolean"
+    },
+    "connector_dependency_present": {
+      "default": false,
+      "title": "Connector Dependency Present",
+      "type": "boolean"
+    },
+    "failure_modes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Failure Modes",
+      "type": "array"
+    },
+    "github_token_present": {
+      "default": false,
+      "title": "Github Token Present",
+      "type": "boolean"
+    },
+    "live_default_mode": {
+      "title": "Live Default Mode",
+      "type": "string"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "opt_out_available": {
+      "default": true,
+      "title": "Opt Out Available",
+      "type": "boolean"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "readiness": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Readiness",
+      "type": "object"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "recommended_next_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Recommended Next Commands",
+      "type": "array"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "runtime_token_present": {
+      "default": false,
+      "title": "Runtime Token Present",
+      "type": "boolean"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "report_id"
+  ],
+  "title": "AgentNetworkReadinessReport",
+  "type": "object"
+}

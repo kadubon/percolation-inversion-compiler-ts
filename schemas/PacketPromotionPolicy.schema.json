@@ -1,0 +1,47 @@
+{
+  "description": "Fail-closed policy for candidate-to-verified packet promotion.",
+  "properties": {
+    "allow_residual_external_obligations": {
+      "default": true,
+      "title": "Allow Residual External Obligations",
+      "type": "boolean"
+    },
+    "minimum_confidence_lower_bound": {
+      "default": 0.2,
+      "title": "Minimum Confidence Lower Bound",
+      "type": "number"
+    },
+    "require_agent_identity_attestation": {
+      "default": false,
+      "title": "Require Agent Identity Attestation",
+      "type": "boolean"
+    },
+    "require_edge_certificate": {
+      "default": false,
+      "title": "Require Edge Certificate",
+      "type": "boolean"
+    },
+    "require_issuer_in_population": {
+      "default": false,
+      "title": "Require Issuer In Population",
+      "type": "boolean"
+    },
+    "require_receiver_compatibility": {
+      "default": true,
+      "title": "Require Receiver Compatibility",
+      "type": "boolean"
+    },
+    "require_rollback_available": {
+      "default": true,
+      "title": "Require Rollback Available",
+      "type": "boolean"
+    },
+    "require_route_resolution": {
+      "default": true,
+      "title": "Require Route Resolution",
+      "type": "boolean"
+    }
+  },
+  "title": "PacketPromotionPolicy",
+  "type": "object"
+}

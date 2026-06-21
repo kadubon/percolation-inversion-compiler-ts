@@ -1,0 +1,76 @@
+{
+  "$defs": {
+    "MartingalePartitionAudit": {
+      "properties": {
+        "block_bounds": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Block Bounds",
+          "type": "array"
+        },
+        "boundary_drift": {
+          "default": 0.0,
+          "title": "Boundary Drift",
+          "type": "number"
+        },
+        "carved_splits": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Carved Splits",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "confidence_radius": {
+          "default": 0.0,
+          "title": "Confidence Radius",
+          "type": "number"
+        },
+        "selection_charge": {
+          "default": 0.0,
+          "title": "Selection Charge",
+          "type": "number"
+        },
+        "uncarved_splits": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Uncarved Splits",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "block_bounds"
+      ],
+      "title": "MartingalePartitionAudit",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "audit": {
+      "$ref": "#/$defs/MartingalePartitionAudit"
+    },
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "lower_mass_floor": {
+      "default": 0.0,
+      "title": "Lower Mass Floor",
+      "type": "number"
+    },
+    "residual_tolerance": {
+      "default": 0.0,
+      "title": "Residual Tolerance",
+      "type": "number"
+    }
+  },
+  "required": [
+    "certificate_id",
+    "audit"
+  ],
+  "title": "MartingaleDeficiencyCertificate",
+  "type": "object"
+}

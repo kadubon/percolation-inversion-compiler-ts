@@ -1,0 +1,12 @@
+{
+  "enum": [
+    "development",
+    "research",
+    "controlled",
+    "federated",
+    "production",
+    "adversarial"
+  ],
+  "title": "IdentityTrustProfile",
+  "type": "string"
+}

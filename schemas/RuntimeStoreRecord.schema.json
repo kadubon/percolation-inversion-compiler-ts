@@ -1,0 +1,106 @@
+{
+  "description": "Portable runtime store description.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "attestation_count": {
+      "default": 0,
+      "title": "Attestation Count",
+      "type": "integer"
+    },
+    "certificate_count": {
+      "default": 0,
+      "title": "Certificate Count",
+      "type": "integer"
+    },
+    "collective_certificate_count": {
+      "default": 0,
+      "title": "Collective Certificate Count",
+      "type": "integer"
+    },
+    "edge_certificate_count": {
+      "default": 0,
+      "title": "Edge Certificate Count",
+      "type": "integer"
+    },
+    "event_count": {
+      "default": 0,
+      "title": "Event Count",
+      "type": "integer"
+    },
+    "execution_report_count": {
+      "default": 0,
+      "title": "Execution Report Count",
+      "type": "integer"
+    },
+    "identity_count": {
+      "default": 0,
+      "title": "Identity Count",
+      "type": "integer"
+    },
+    "packet_lineage_count": {
+      "default": 0,
+      "title": "Packet Lineage Count",
+      "type": "integer"
+    },
+    "population_snapshot_count": {
+      "default": 0,
+      "title": "Population Snapshot Count",
+      "type": "integer"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "route_batch_count": {
+      "default": 0,
+      "title": "Route Batch Count",
+      "type": "integer"
+    },
+    "run_count": {
+      "default": 0,
+      "title": "Run Count",
+      "type": "integer"
+    },
+    "state_count": {
+      "default": 0,
+      "title": "State Count",
+      "type": "integer"
+    },
+    "store_id": {
+      "title": "Store Id",
+      "type": "string"
+    },
+    "store_kind": {
+      "default": "sqlite",
+      "title": "Store Kind",
+      "type": "string"
+    },
+    "store_ref": {
+      "title": "Store Ref",
+      "type": "string"
+    },
+    "sybil_ledger_count": {
+      "default": 0,
+      "title": "Sybil Ledger Count",
+      "type": "integer"
+    },
+    "verified_packet_count": {
+      "default": 0,
+      "title": "Verified Packet Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "store_id",
+    "store_ref"
+  ],
+  "title": "RuntimeStoreRecord",
+  "type": "object"
+}

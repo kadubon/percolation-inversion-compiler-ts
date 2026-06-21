@@ -1,0 +1,36 @@
+{
+  "properties": {
+    "actions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Actions",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "postconditions": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array",
+        "uniqueItems": true
+      },
+      "title": "Postconditions",
+      "type": "object"
+    },
+    "preconditions": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array",
+        "uniqueItems": true
+      },
+      "title": "Preconditions",
+      "type": "object"
+    }
+  },
+  "title": "ActionGrammar",
+  "type": "object"
+}

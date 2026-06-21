@@ -1,0 +1,32 @@
+{
+  "description": "Self-normalized martingale block residual certificate.",
+  "properties": {
+    "alpha": {
+      "title": "Alpha",
+      "type": "number"
+    },
+    "block_bounds": {
+      "items": {
+        "type": "number"
+      },
+      "title": "Block Bounds",
+      "type": "array"
+    },
+    "drift_charge": {
+      "default": 0.0,
+      "title": "Drift Charge",
+      "type": "number"
+    },
+    "quadratic_variation": {
+      "title": "Quadratic Variation",
+      "type": "number"
+    }
+  },
+  "required": [
+    "block_bounds",
+    "quadratic_variation",
+    "alpha"
+  ],
+  "title": "MartingaleBlockResidual",
+  "type": "object"
+}

@@ -1,0 +1,176 @@
+{
+  "$defs": {
+    "AgentIdentityStrength": {
+      "description": "Protocol-relative strength of an agent identity assertion.",
+      "enum": [
+        "declared",
+        "public-key-attested",
+        "hardware-attested",
+        "institutionally-attested",
+        "revoked"
+      ],
+      "title": "AgentIdentityStrength",
+      "type": "string"
+    },
+    "IdentityTrustProfile": {
+      "description": "Operational trust profile for protocol-relative identity checks.",
+      "enum": [
+        "development",
+        "research",
+        "controlled",
+        "federated",
+        "production",
+        "adversarial"
+      ],
+      "title": "IdentityTrustProfile",
+      "type": "string"
+    }
+  },
+  "description": "Population-level policy for protocol-relative Sybil resistance.",
+  "properties": {
+    "allow_homogeneous_fleet_with_unique_keys": {
+      "default": true,
+      "title": "Allow Homogeneous Fleet With Unique Keys",
+      "type": "boolean"
+    },
+    "max_agents_per_fleet": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Agents Per Fleet"
+    },
+    "max_agents_per_issuer": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Agents Per Issuer"
+    },
+    "max_agents_per_model_digest": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Agents Per Model Digest"
+    },
+    "max_agents_per_policy_digest": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Agents Per Policy Digest"
+    },
+    "max_clone_fanout": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Max Clone Fanout"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Metadata",
+      "type": "object"
+    },
+    "minimum_identity_strength": {
+      "$ref": "#/$defs/AgentIdentityStrength",
+      "default": "public-key-attested"
+    },
+    "policy_id": {
+      "default": "default-sybil-policy",
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "reject_expired": {
+      "default": true,
+      "title": "Reject Expired",
+      "type": "boolean"
+    },
+    "reject_failed_signatures": {
+      "default": true,
+      "title": "Reject Failed Signatures",
+      "type": "boolean"
+    },
+    "reject_revoked": {
+      "default": true,
+      "title": "Reject Revoked",
+      "type": "boolean"
+    },
+    "require_credential_ref": {
+      "default": false,
+      "title": "Require Credential Ref",
+      "type": "boolean"
+    },
+    "require_distinct_role_or_worker_index_for_fleet": {
+      "default": false,
+      "title": "Require Distinct Role Or Worker Index For Fleet",
+      "type": "boolean"
+    },
+    "require_issuer_id": {
+      "default": false,
+      "title": "Require Issuer Id",
+      "type": "boolean"
+    },
+    "require_unique_agent_id": {
+      "default": true,
+      "title": "Require Unique Agent Id",
+      "type": "boolean"
+    },
+    "require_unique_credential_ref": {
+      "default": false,
+      "title": "Require Unique Credential Ref",
+      "type": "boolean"
+    },
+    "require_unique_public_key_fingerprint": {
+      "default": true,
+      "title": "Require Unique Public Key Fingerprint",
+      "type": "boolean"
+    },
+    "require_unique_public_key_id": {
+      "default": true,
+      "title": "Require Unique Public Key Id",
+      "type": "boolean"
+    },
+    "required_identity_evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Identity Evidence Refs",
+      "type": "array"
+    },
+    "trust_profile": {
+      "$ref": "#/$defs/IdentityTrustProfile",
+      "default": "production"
+    }
+  },
+  "title": "SybilResistancePolicy",
+  "type": "object"
+}

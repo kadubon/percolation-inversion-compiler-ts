@@ -1,0 +1,70 @@
+{
+  "description": "Registry-vs-extractor projection audit.",
+  "properties": {
+    "accepted": {
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "checked_claims": {
+      "default": 0,
+      "title": "Checked Claims",
+      "type": "integer"
+    },
+    "extractor_artifact": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Extractor Artifact"
+    },
+    "mismatches": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Mismatches",
+      "type": "array"
+    },
+    "missing_in_extractor": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing In Extractor",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "registry_artifact": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Registry Artifact"
+    },
+    "strict": {
+      "default": false,
+      "title": "Strict",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "accepted"
+  ],
+  "title": "ProjectionAudit",
+  "type": "object"
+}

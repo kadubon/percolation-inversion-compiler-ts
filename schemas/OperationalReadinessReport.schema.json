@@ -1,0 +1,216 @@
+{
+  "$defs": {
+    "CommercialReadinessSummary": {
+      "description": "Practical onboarding readiness summary for commercial and OSS users.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "bounded_intake_default": {
+          "default": true,
+          "title": "Bounded Intake Default",
+          "type": "boolean"
+        },
+        "checks": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Checks",
+          "type": "object"
+        },
+        "connector_dependency_ready": {
+          "default": false,
+          "title": "Connector Dependency Ready",
+          "type": "boolean"
+        },
+        "curated_demo_available": {
+          "default": false,
+          "title": "Curated Demo Available",
+          "type": "boolean"
+        },
+        "identity_ready": {
+          "default": false,
+          "title": "Identity Ready",
+          "type": "boolean"
+        },
+        "install_mode": {
+          "default": "unknown",
+          "title": "Install Mode",
+          "type": "string"
+        },
+        "live_connector_opt_out_available": {
+          "default": true,
+          "title": "Live Connector Opt Out Available",
+          "type": "boolean"
+        },
+        "live_connectors_default_enabled": {
+          "title": "Live Connectors Default Enabled",
+          "type": "boolean"
+        },
+        "live_connectors_default_off": {
+          "default": false,
+          "title": "Live Connectors Default Off",
+          "type": "boolean"
+        },
+        "live_default_mode": {
+          "title": "Live Default Mode",
+          "type": "string"
+        },
+        "onboarding_status": {
+          "default": "diagnostic",
+          "title": "Onboarding Status",
+          "type": "string"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "package_version": {
+          "default": "",
+          "title": "Package Version",
+          "type": "string"
+        },
+        "production_identity_required": {
+          "default": false,
+          "title": "Production Identity Required",
+          "type": "boolean"
+        },
+        "provenance_verified": {
+          "default": false,
+          "title": "Provenance Verified",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "schema_count": {
+          "default": 0,
+          "title": "Schema Count",
+          "type": "integer"
+        },
+        "schema_registry_ready": {
+          "default": false,
+          "title": "Schema Registry Ready",
+          "type": "boolean"
+        },
+        "security_metadata_present": {
+          "default": false,
+          "title": "Security Metadata Present",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "snapshot_bundle_ready": {
+          "default": false,
+          "title": "Snapshot Bundle Ready",
+          "type": "boolean"
+        },
+        "snapshot_count": {
+          "default": 0,
+          "title": "Snapshot Count",
+          "type": "integer"
+        },
+        "summary_id": {
+          "default": "pic-commercial-readiness",
+          "title": "Summary Id",
+          "type": "string"
+        },
+        "token_ready": {
+          "default": false,
+          "title": "Token Ready",
+          "type": "boolean"
+        }
+      },
+      "title": "CommercialReadinessSummary",
+      "type": "object"
+    },
+    "OperationalCheck": {
+      "description": "One deterministic operational readiness check.",
+      "properties": {
+        "check_id": {
+          "title": "Check Id",
+          "type": "string"
+        },
+        "details": {
+          "additionalProperties": true,
+          "title": "Details",
+          "type": "object"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "check_id",
+        "status",
+        "message"
+      ],
+      "title": "OperationalCheck",
+      "type": "object"
+    }
+  },
+  "description": "Machine-readable environment report for CI and autonomous agents.",
+  "properties": {
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/OperationalCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "commercial_readiness": {
+      "$ref": "#/$defs/CommercialReadinessSummary"
+    },
+    "overall_status": {
+      "title": "Overall Status",
+      "type": "string"
+    },
+    "package_version": {
+      "title": "Package Version",
+      "type": "string"
+    },
+    "python_version": {
+      "title": "Python Version",
+      "type": "string"
+    },
+    "report_id": {
+      "default": "pic-operational-readiness",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "summary": {
+      "additionalProperties": true,
+      "title": "Summary",
+      "type": "object"
+    }
+  },
+  "required": [
+    "package_version",
+    "python_version",
+    "overall_status"
+  ],
+  "title": "OperationalReadinessReport",
+  "type": "object"
+}

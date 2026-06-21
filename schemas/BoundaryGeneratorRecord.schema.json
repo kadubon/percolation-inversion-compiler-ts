@@ -1,0 +1,57 @@
+{
+  "properties": {
+    "allowed_edges": {
+      "items": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Allowed Edges",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "alphabet": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Alphabet",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "generated_prefixes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Generated Prefixes",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "generator_id": {
+      "title": "Generator Id",
+      "type": "string"
+    },
+    "max_depth": {
+      "default": 0,
+      "title": "Max Depth",
+      "type": "integer"
+    },
+    "residual": {
+      "default": 0.0,
+      "title": "Residual",
+      "type": "number"
+    }
+  },
+  "required": [
+    "generator_id"
+  ],
+  "title": "BoundaryGeneratorRecord",
+  "type": "object"
+}

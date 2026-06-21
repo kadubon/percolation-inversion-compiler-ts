@@ -1,0 +1,926 @@
+{
+  "routes": [
+    {
+      "availability": "implemented",
+      "canonical_route_id": null,
+      "discharge_level": "replay_check",
+      "license_note": "core deterministic implementation, Apache-2.0",
+      "notes": [],
+      "obligation_category": "physical-trace-replay",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-physical-trace"
+      ],
+      "residual_policy": "charge-physical-residual-until-replay-matches-transition-log",
+      "route_id": "adapters.domain.replay_trc_physical_trace",
+      "safe_default": "diagnostic-with-physical-trace-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.domain.replay_trc_physical_trace"
+    },
+    {
+      "availability": "implemented",
+      "canonical_route_id": null,
+      "discharge_level": "finite_value_check",
+      "license_note": "core deterministic implementation, Apache-2.0",
+      "notes": [],
+      "obligation_category": "archive-domain-evidence",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-archive-domain"
+      ],
+      "residual_policy": "charge-archive-domain-residual-until-domain-membership-is-checked",
+      "route_id": "adapters.domain.verify_archive_domain_evidence",
+      "safe_default": "diagnostic-with-archive-domain-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.domain.verify_archive_domain_evidence"
+    },
+    {
+      "availability": "implemented",
+      "canonical_route_id": null,
+      "discharge_level": "contract_enforced",
+      "license_note": "core deterministic implementation, Apache-2.0",
+      "notes": [],
+      "obligation_category": "ecpt-bridge-reserve",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-bridge-reserve"
+      ],
+      "residual_policy": "charge-cross-theory-residual-until-bridge-relations-are-validated",
+      "route_id": "adapters.domain.verify_ecpt_bridge_reserve",
+      "safe_default": "diagnostic-with-bridge-reserve-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_bridge_reserve"
+    },
+    {
+      "availability": "implemented",
+      "canonical_route_id": null,
+      "discharge_level": "external_domain_required",
+      "license_note": "core deterministic implementation, Apache-2.0",
+      "notes": [],
+      "obligation_category": "ecpt-ecology-ontology",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-domain-abstraction"
+      ],
+      "residual_policy": "charge-ontology-residual-until-domain-abstraction-is-validated",
+      "route_id": "adapters.domain.verify_ecpt_domain_abstraction",
+      "safe_default": "diagnostic-with-ecology-ontology-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_domain_abstraction"
+    },
+    {
+      "availability": "implemented",
+      "canonical_route_id": null,
+      "discharge_level": "external_domain_required",
+      "license_note": "core deterministic implementation, Apache-2.0",
+      "notes": [],
+      "obligation_category": "ecpt-economics-policy",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-execution-policy-envelope"
+      ],
+      "residual_policy": "charge-policy-residual-until-counterfactual-envelope-is-validated",
+      "route_id": "adapters.domain.verify_ecpt_execution_policy",
+      "safe_default": "diagnostic-with-economics-policy-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_execution_policy"
+    },
+    {
+      "availability": "implemented",
+      "canonical_route_id": null,
+      "discharge_level": "finite_value_check",
+      "license_note": "core deterministic implementation, Apache-2.0",
+      "notes": [],
+      "obligation_category": "generator-limit",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-generator-limit"
+      ],
+      "residual_policy": "charge-generator-residual-until-limit-certificate-is-validated",
+      "route_id": "adapters.domain.verify_ecpt_generator_limit",
+      "safe_default": "diagnostic-with-generator-limit-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_generator_limit"
+    },
+    {
+      "availability": "implemented",
+      "canonical_route_id": null,
+      "discharge_level": "finite_value_check",
+      "license_note": "core deterministic implementation, Apache-2.0",
+      "notes": [],
+      "obligation_category": "numerical-envelope",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-numerical-envelope"
+      ],
+      "residual_policy": "charge-numerical-residual-until-envelope-bound-is-certified",
+      "route_id": "adapters.domain.verify_ecpt_numerical_envelope",
+      "safe_default": "diagnostic-with-numerical-envelope-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_numerical_envelope"
+    },
+    {
+      "availability": "implemented",
+      "canonical_route_id": null,
+      "discharge_level": "external_domain_required",
+      "license_note": "core deterministic implementation, Apache-2.0",
+      "notes": [],
+      "obligation_category": "ecpt-proxy-target",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-proxy-target-contract"
+      ],
+      "residual_policy": "charge-proxy-grounding-residual-until-target-contract-is-validated",
+      "route_id": "adapters.domain.verify_ecpt_proxy_target_contract",
+      "safe_default": "diagnostic-with-proxy-target-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_proxy_target_contract"
+    },
+    {
+      "availability": "implemented",
+      "canonical_route_id": null,
+      "discharge_level": "external_domain_required",
+      "license_note": "core deterministic implementation, Apache-2.0",
+      "notes": [],
+      "obligation_category": "ecpt-speculative-channel",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-speculative-channel-repair"
+      ],
+      "residual_policy": "charge-speculative-channel-residual-until-repair-envelope-is-validated",
+      "route_id": "adapters.domain.verify_ecpt_speculative_channel_repair",
+      "safe_default": "diagnostic-with-speculative-channel-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_speculative_channel_repair"
+    },
+    {
+      "availability": "implemented",
+      "canonical_route_id": null,
+      "discharge_level": "contract_enforced",
+      "license_note": "core deterministic implementation, Apache-2.0",
+      "notes": [],
+      "obligation_category": "ecpt-trace-diagnostic",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-trace-diagnostic-projection"
+      ],
+      "residual_policy": "charge-trace-complex-residual-until-projection-is-validated",
+      "route_id": "adapters.domain.verify_ecpt_trace_diagnostic_projection",
+      "safe_default": "diagnostic-with-trace-diagnostic-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_trace_diagnostic_projection"
+    },
+    {
+      "availability": "implemented",
+      "canonical_route_id": null,
+      "discharge_level": "finite_value_check",
+      "license_note": "core deterministic implementation, Apache-2.0",
+      "notes": [],
+      "obligation_category": "telemetry-calibration",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-telemetry-calibration"
+      ],
+      "residual_policy": "charge-telemetry-residual-until-calibration-error-is-bounded",
+      "route_id": "adapters.domain.verify_trc_telemetry_calibration",
+      "safe_default": "diagnostic-with-telemetry-calibration-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.domain.verify_trc_telemetry_calibration"
+    },
+    {
+      "availability": "optional",
+      "canonical_route_id": null,
+      "discharge_level": "finite_value_check",
+      "license_note": "NetworkX BSD-3-Clause",
+      "notes": [],
+      "obligation_category": "finite-graph-adapter",
+      "optional_dependency": "networkx",
+      "required_evidence_kind": [
+        "finite-edge-list"
+      ],
+      "residual_policy": "no-external-residual-when-finite-graph-input-is-validated",
+      "route_id": "adapters.graphs.shortest_path_lengths",
+      "safe_default": "diagnostic-with-missing-networkx",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.graphs.shortest_path_lengths"
+    },
+    {
+      "availability": "implemented",
+      "canonical_route_id": null,
+      "discharge_level": "finite_value_check",
+      "license_note": "core deterministic implementation, Apache-2.0",
+      "notes": [],
+      "obligation_category": "linear-optimization-adapter",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "bounded-linear-release-program"
+      ],
+      "residual_policy": "no-external-residual-for-validated-bounded-separable-lp",
+      "route_id": "adapters.optimization.solve_linear_release",
+      "safe_default": "diagnostic-with-invalid-linear-program",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.optimization.solve_linear_release"
+    },
+    {
+      "availability": "optional",
+      "canonical_route_id": null,
+      "discharge_level": "finite_value_check",
+      "license_note": "POT MIT",
+      "notes": [],
+      "obligation_category": "transport-adapter",
+      "optional_dependency": "ot",
+      "required_evidence_kind": [
+        "finite-marginals",
+        "finite-cost-matrix"
+      ],
+      "residual_policy": "charge-sinkhorn-residual-until-plan-gap-is-certified",
+      "route_id": "adapters.transport.sinkhorn_transport",
+      "safe_default": "diagnostic-with-missing-pot",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.transport.sinkhorn_transport"
+    },
+    {
+      "availability": "optional",
+      "canonical_route_id": null,
+      "discharge_level": "finite_value_check",
+      "license_note": "Pint BSD-3-Clause",
+      "notes": [],
+      "obligation_category": "unit-validation-adapter",
+      "optional_dependency": "pint",
+      "required_evidence_kind": [
+        "unit-tags"
+      ],
+      "residual_policy": "charge-unit-ledger-until-compatible-units-are-validated",
+      "route_id": "adapters.units.assert_compatible_units",
+      "safe_default": "diagnostic-with-missing-pint",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "percolation_inversion_compiler.adapters.units.assert_compatible_units"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "alt.adapters.causal.verify_token_effect",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "causal-effect-witness-missing",
+        "counterfactual-report-missing",
+        "mechanism-ablation-unverified"
+      ],
+      "obligation_category": "alt-causal-effect",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "causal-effect-witness",
+        "counterfactual-report",
+        "mechanism-ablation-contrast"
+      ],
+      "residual_policy": "charge-alt-causal-residual-until-token-effect-certified",
+      "route_id": "alt.adapters.causal.verify_token_effect",
+      "safe_default": "diagnostic-with-alt-causal-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "alt.adapters.causal.verify_token_effect"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "alt.adapters.hazard.verify_adversarial_token_clearance",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "contamination-bound-missing",
+        "hazard-envelope-missing",
+        "misapplication-audit-unverified"
+      ],
+      "obligation_category": "alt-hazard",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "contamination-bound",
+        "hazard-envelope",
+        "misapplication-audit"
+      ],
+      "residual_policy": "charge-alt-hazard-residual-until-token-clearance-accepted",
+      "route_id": "alt.adapters.hazard.verify_adversarial_token_clearance",
+      "safe_default": "diagnostic-with-alt-hazard-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "alt.adapters.hazard.verify_adversarial_token_clearance"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "alt.adapters.reproduction.verify_capital_reproduction_matrix",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "capacity-bound-not-certified",
+        "recombination-witness-unverified",
+        "reproduction-matrix-certificate-missing"
+      ],
+      "obligation_category": "alt-reproduction",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "capacity-bound",
+        "recombination-witness",
+        "reproduction-matrix-certificate"
+      ],
+      "residual_policy": "charge-alt-reproduction-residual-until-matrix-certified",
+      "route_id": "alt.adapters.reproduction.verify_capital_reproduction_matrix",
+      "safe_default": "diagnostic-with-alt-reproduction-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "alt.adapters.reproduction.verify_capital_reproduction_matrix"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "alt.adapters.root.verify_role_separated_quorum",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "evaluator-capture-not-excluded",
+        "role-separation-not-certified",
+        "root-of-trust-packet-missing"
+      ],
+      "obligation_category": "alt-root-trust",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "quorum-signature-report",
+        "role-separation-ledger",
+        "root-of-trust-packet"
+      ],
+      "residual_policy": "charge-alt-root-residual-until-quorum-accepted",
+      "route_id": "alt.adapters.root.verify_role_separated_quorum",
+      "safe_default": "diagnostic-with-alt-root-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "alt.adapters.root.verify_role_separated_quorum"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "alt.adapters.target.verify_alt_cara_target",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "baseline-upper-envelope-unverified",
+        "resource-matched-report-missing",
+        "target-validity-certificate-missing"
+      ],
+      "obligation_category": "alt-cara-target",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "baseline-upper-envelope",
+        "resource-matched-report",
+        "target-validity-certificate"
+      ],
+      "residual_policy": "charge-alt-cara-residual-until-target-contract-accepted",
+      "route_id": "alt.adapters.target.verify_alt_cara_target",
+      "safe_default": "diagnostic-with-alt-cara-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "alt.adapters.target.verify_alt_cara_target"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "alt.adapters.telemetry.verify_cost_instrumentation",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "hidden-resource-audit-missing",
+        "instrumentation-contract-unverified",
+        "telemetry-ledger-missing"
+      ],
+      "obligation_category": "alt-telemetry",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "hidden-resource-audit",
+        "instrumentation-contract",
+        "telemetry-ledger"
+      ],
+      "residual_policy": "charge-alt-telemetry-residual-until-instrumentation-accepted",
+      "route_id": "alt.adapters.telemetry.verify_cost_instrumentation",
+      "safe_default": "diagnostic-with-alt-telemetry-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "alt.adapters.telemetry.verify_cost_instrumentation"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "alt.adapters.transport.verify_density_ratio_support",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "density-ratio-bound-unverified",
+        "support-coverage-witness-missing",
+        "transport-domain-shift-unresolved"
+      ],
+      "obligation_category": "alt-transport",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "density-ratio-bound",
+        "support-coverage-witness",
+        "transport-certificate"
+      ],
+      "residual_policy": "charge-alt-transport-residual-until-support-and-density-accepted",
+      "route_id": "alt.adapters.transport.verify_density_ratio_support",
+      "safe_default": "diagnostic-with-alt-transport-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "alt.adapters.transport.verify_density_ratio_support"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "core.adapters.envelope.verify_finite_bound",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "finite-envelope-proof-missing",
+        "residual-bound-not-certified",
+        "tail-bound-unverified"
+      ],
+      "obligation_category": "numerical-envelope",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-bound-table",
+        "residual-envelope-proof",
+        "tail-bound-certificate"
+      ],
+      "residual_policy": "charge-envelope-residual-until-bound-certified",
+      "route_id": "core.adapters.envelope.verify_finite_bound",
+      "safe_default": "diagnostic-with-envelope-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "core.adapters.envelope.verify_finite_bound"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "core.adapters.external.verify_domain_obligation",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "domain-certificate-missing",
+        "replayable-witness-missing",
+        "specific-verifier-route-not-configured"
+      ],
+      "obligation_category": "domain-specific-proof",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "domain-certificate",
+        "replayable-witness"
+      ],
+      "residual_policy": "charge-domain-residual-until-specific-verifier-accepted",
+      "route_id": "core.adapters.external.verify_domain_obligation",
+      "safe_default": "diagnostic-with-domain-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "core.adapters.external.verify_domain_obligation"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "ecpt.adapters.bridge.verify_cross_theory_bridge",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "bridge-map-unverified",
+        "capsule-projection-not-certified",
+        "reserve-invariance-unaccepted"
+      ],
+      "obligation_category": "ecpt-bridge-reserve",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "bridge-map",
+        "machine-readable-capsule-audit",
+        "reserve-invariance-proof"
+      ],
+      "residual_policy": "charge-bridge-residual-until-cross-theory-proof-accepted",
+      "route_id": "ecpt.adapters.bridge.verify_cross_theory_bridge",
+      "safe_default": "diagnostic-with-bridge-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "ecpt.adapters.ecology.verify_domain_abstraction",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "abstraction-refinement-unverified",
+        "domain-semantics-missing",
+        "ontology-extension-not-certified"
+      ],
+      "obligation_category": "ecpt-ecology-ontology",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "abstraction-map",
+        "domain-semantics-report",
+        "simulation-refinement-witness"
+      ],
+      "residual_policy": "charge-abstraction-residual-until-domain-witness-accepted",
+      "route_id": "ecpt.adapters.ecology.verify_domain_abstraction",
+      "safe_default": "diagnostic-with-abstraction-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "ecpt.adapters.ecology.verify_domain_abstraction"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "ecpt.adapters.generators.verify_limit_envelope",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "generator-calibration-missing",
+        "limit-envelope-unverified",
+        "transition-kernel-not-certified"
+      ],
+      "obligation_category": "ecpt-generator-limit",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-envelope",
+        "generator-identification-report",
+        "transition-kernel-audit"
+      ],
+      "residual_policy": "charge-generator-limit-residual-until-calibration-accepted",
+      "route_id": "ecpt.adapters.generators.verify_limit_envelope",
+      "safe_default": "diagnostic-with-generator-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "ecpt.adapters.generators.verify_limit_envelope"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "ecpt.adapters.policy.verify_execution_policy",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "execution-availability-unverified",
+        "policy-counterfactual-missing",
+        "value-bound-not-certified"
+      ],
+      "obligation_category": "ecpt-economics-policy",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "execution-availability-audit",
+        "policy-counterfactual-report",
+        "value-bound"
+      ],
+      "residual_policy": "charge-policy-residual-until-counterfactual-accepted",
+      "route_id": "ecpt.adapters.policy.verify_execution_policy",
+      "safe_default": "diagnostic-with-policy-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "ecpt.adapters.proxy.verify_target_contract",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "protocol-comparison-not-certified",
+        "proxy-grounding-missing",
+        "target-contract-unaccepted"
+      ],
+      "obligation_category": "ecpt-proxy-target",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "protocol-comparison-certificate",
+        "proxy-grounding-report",
+        "target-contract"
+      ],
+      "residual_policy": "charge-proxy-target-residual-until-contract-accepted",
+      "route_id": "ecpt.adapters.proxy.verify_target_contract",
+      "safe_default": "diagnostic-with-proxy-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "ecpt.adapters.proxy.verify_target_contract"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "ecpt.adapters.speculative.verify_channel_and_repair",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "repair-route-missing",
+        "speculative-channel-unverified",
+        "synergy-bound-not-certified"
+      ],
+      "obligation_category": "ecpt-speculative-channel",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "repair-route-certificate",
+        "speculative-channel-audit",
+        "synergy-lower-bound"
+      ],
+      "residual_policy": "charge-speculative-residual-until-channel-certified",
+      "route_id": "ecpt.adapters.speculative.verify_channel_and_repair",
+      "safe_default": "diagnostic-with-speculative-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "ecpt.adapters.speculative.verify_channel_and_repair"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "ecpt.adapters.trace_complex.verify_diagnostic_projection",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "diagnostic-projection-unverified",
+        "residual-trace-ledger-incomplete",
+        "trace-complex-audit-missing"
+      ],
+      "obligation_category": "ecpt-trace-diagnostic",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "diagnostic-projection-certificate",
+        "residual-trace-ledger",
+        "trace-complex-audit"
+      ],
+      "residual_policy": "charge-trace-diagnostic-residual-until-projection-certified",
+      "route_id": "ecpt.adapters.trace_complex.verify_diagnostic_projection",
+      "safe_default": "diagnostic-with-trace-complex-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "ecpt.adapters.trace_complex.verify_diagnostic_projection"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "sqot.adapters.adversarial.verify_transfer_game",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "counterfactual-probe-log-unverified",
+        "finite-game-certificate-missing",
+        "transfer-bound-not-certified"
+      ],
+      "obligation_category": "sqot-adversarial-transfer",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "counterfactual-probe-log",
+        "finite-game-certificate",
+        "transfer-bound"
+      ],
+      "residual_policy": "charge-adversarial-transfer-residual-until-game-certificate-accepted",
+      "route_id": "sqot.adapters.adversarial.verify_transfer_game",
+      "safe_default": "diagnostic-with-adversarial-transfer-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "sqot.adapters.adversarial.verify_transfer_game"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "sqot.adapters.integrity.verify_protocol_kernel",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "authority-ledger-unverified",
+        "protocol-kernel-certificate-missing",
+        "source-attribution-proof-missing"
+      ],
+      "obligation_category": "sqot-protocol-integrity",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "authority-ledger",
+        "protocol-kernel-certificate",
+        "source-attribution-proof"
+      ],
+      "residual_policy": "charge-protocol-integrity-residual-until-kernel-certified",
+      "route_id": "sqot.adapters.integrity.verify_protocol_kernel",
+      "safe_default": "diagnostic-with-protocol-integrity-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "sqot.adapters.integrity.verify_protocol_kernel"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "sqot.adapters.privacy.verify_rejoin_transcript",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "privacy-leakage-bound-unverified",
+        "queue-membership-proof-missing",
+        "zk-rejoin-transcript-missing"
+      ],
+      "obligation_category": "sqot-private-rejoin",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "privacy-leakage-bound",
+        "queue-membership-proof",
+        "zk-rejoin-transcript"
+      ],
+      "residual_policy": "charge-privacy-residual-until-rejoin-transcript-accepted",
+      "route_id": "sqot.adapters.privacy.verify_rejoin_transcript",
+      "safe_default": "diagnostic-with-private-rejoin-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "sqot.adapters.privacy.verify_rejoin_transcript"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "sqot.adapters.salience.verify_queue_policy",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "attention-budget-ledger-unverified",
+        "priority-trace-incomplete",
+        "queue-policy-certificate-missing"
+      ],
+      "obligation_category": "sqot-salience-queue",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "attention-budget-ledger",
+        "priority-trace",
+        "queue-policy-certificate"
+      ],
+      "residual_policy": "charge-salience-queue-residual-until-policy-certified",
+      "route_id": "sqot.adapters.salience.verify_queue_policy",
+      "safe_default": "diagnostic-with-salience-queue-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "sqot.adapters.salience.verify_queue_policy"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "sqot.adapters.thermodynamic.verify_discharge_envelope",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "finite-discharge-envelope-missing",
+        "limit-residual-not-certified",
+        "regularity-regime-certificate-unverified"
+      ],
+      "obligation_category": "sqot-thermodynamic-discharge",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "finite-discharge-envelope",
+        "limit-residual",
+        "regularity-regime-certificate"
+      ],
+      "residual_policy": "charge-thermodynamic-discharge-residual-until-envelope-certified",
+      "route_id": "sqot.adapters.thermodynamic.verify_discharge_envelope",
+      "safe_default": "diagnostic-with-thermodynamic-discharge-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "sqot.adapters.thermodynamic.verify_discharge_envelope"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "trc.adapters.archive.verify_domain_cover",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "archive-cover-missing",
+        "distortion-bound-unverified",
+        "fidelity-loop-not-certified"
+      ],
+      "obligation_category": "archive-domain-cover",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "archive-replay-log",
+        "cover-certificate",
+        "distortion-bound"
+      ],
+      "residual_policy": "charge-archive-distortion-residual-until-cover-certified",
+      "route_id": "trc.adapters.archive.verify_domain_cover",
+      "safe_default": "diagnostic-with-archive-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "trc.adapters.archive.verify_domain_cover"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "trc.adapters.contracts.verify_assume_guarantee_library",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "composition-proof-unaccepted",
+        "contract-library-missing",
+        "domain-contract-incomplete"
+      ],
+      "obligation_category": "assume-guarantee-contract",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "composition-proof",
+        "contract-library",
+        "counterexample-search-report"
+      ],
+      "residual_policy": "charge-contract-gap-until-composition-proof-accepted",
+      "route_id": "trc.adapters.contracts.verify_assume_guarantee_library",
+      "safe_default": "diagnostic-with-contract-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "trc.adapters.contracts.verify_assume_guarantee_library"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "trc.adapters.latent_oracle.verify_model_witness",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "latent-model-not-replayable",
+        "oracle-witness-missing",
+        "submodular-certificate-unverified"
+      ],
+      "obligation_category": "latent-oracle-model",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "latent-model-card",
+        "oracle-certificate",
+        "submodular-proof-witness"
+      ],
+      "residual_policy": "charge-oracle-residual-until-replayable-witness-exists",
+      "route_id": "trc.adapters.latent_oracle.verify_model_witness",
+      "safe_default": "diagnostic-with-oracle-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "trc.adapters.metric.verify_distributionally_robust_dual",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "ambiguity-set-audit-incomplete",
+        "dual-witness-unaccepted",
+        "ground-metric-certificate-missing"
+      ],
+      "obligation_category": "distributionally-robust-metric",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "ambiguity-set-audit",
+        "dual-witness",
+        "ground-metric-certificate"
+      ],
+      "residual_policy": "charge-metric-dual-residual-until-dual-witness-accepted",
+      "route_id": "trc.adapters.metric.verify_distributionally_robust_dual",
+      "safe_default": "diagnostic-with-metric-dual-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "trc.adapters.metric.verify_distributionally_robust_dual"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "trc.adapters.observation.verify_partition_cover",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "coverage-certificate-unaccepted",
+        "partition-cover-missing",
+        "purification-trace-unverified"
+      ],
+      "obligation_category": "observation-partition",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "coverage-certificate",
+        "partition-cover-proof",
+        "purification-trace"
+      ],
+      "residual_policy": "charge-partition-residual-until-cover-certified",
+      "route_id": "trc.adapters.observation.verify_partition_cover",
+      "safe_default": "diagnostic-with-partition-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "trc.adapters.observation.verify_partition_cover"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "trc.adapters.physical_hybrid.verify_envelope",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "hybrid-envelope-not-certified",
+        "physical-system-witness-missing",
+        "resource-calendar-or-null-channel-unresolved"
+      ],
+      "obligation_category": "physical-hybrid-system",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "instrumented-trace",
+        "physics-simulator-certificate",
+        "resource-calendar"
+      ],
+      "residual_policy": "charge-physical-residual-until-verifier-accepts",
+      "route_id": "trc.adapters.physical_hybrid.verify_envelope",
+      "safe_default": "diagnostic-with-physical-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "trc.adapters.redesign.verify_response_interval",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "redesign-candidate-space-unbounded",
+        "response-interval-unverified",
+        "topology-redesign-oracle-missing"
+      ],
+      "obligation_category": "redesign-response",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "feasibility-certificate",
+        "redesign-candidate-set",
+        "response-interval-proof"
+      ],
+      "residual_policy": "charge-redesign-response-residual-until-interval-certified",
+      "route_id": "trc.adapters.redesign.verify_response_interval",
+      "safe_default": "diagnostic-with-redesign-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "trc.adapters.redesign.verify_response_interval"
+    },
+    {
+      "availability": "contract",
+      "canonical_route_id": "trc.adapters.telemetry.verify_calibration_window",
+      "discharge_level": "contract_enforced",
+      "license_note": "domain adapter contract only; no upstream code vendored",
+      "notes": [
+        "calibration-drift-unbounded",
+        "rebasing-certificate-unaccepted",
+        "telemetry-window-missing"
+      ],
+      "obligation_category": "telemetry-calibration",
+      "optional_dependency": null,
+      "required_evidence_kind": [
+        "calibration-report",
+        "drift-bound-certificate",
+        "signed-telemetry-window"
+      ],
+      "residual_policy": "charge-telemetry-drift-residual-until-window-validated",
+      "route_id": "trc.adapters.telemetry.verify_calibration_window",
+      "safe_default": "diagnostic-with-telemetry-obligation",
+      "status_non_promotion_rule": "adapter output may discharge listed obligations but cannot bypass checker-derived status",
+      "verifier_route": "trc.adapters.telemetry.verify_calibration_window"
+    }
+  ]
+}

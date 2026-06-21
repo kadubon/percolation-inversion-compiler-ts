@@ -1,0 +1,62 @@
+{
+  "properties": {
+    "budget": {
+      "title": "Budget",
+      "type": "number"
+    },
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "dual_bound": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dual Bound"
+    },
+    "integer_feasible": {
+      "default": true,
+      "title": "Integer Feasible",
+      "type": "boolean"
+    },
+    "objective_value": {
+      "title": "Objective Value",
+      "type": "number"
+    },
+    "residual_charge": {
+      "default": 0.0,
+      "title": "Residual Charge",
+      "type": "number"
+    },
+    "selected_items": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Selected Items",
+      "type": "object"
+    },
+    "solver": {
+      "default": "finite-bruteforce",
+      "title": "Solver",
+      "type": "string"
+    },
+    "solver_gap": {
+      "default": 0.0,
+      "title": "Solver Gap",
+      "type": "number"
+    }
+  },
+  "required": [
+    "certificate_id",
+    "budget",
+    "objective_value"
+  ],
+  "title": "ToleranceAllocationCertificate",
+  "type": "object"
+}

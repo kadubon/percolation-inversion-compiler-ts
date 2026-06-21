@@ -1,0 +1,57 @@
+{
+  "description": "Residual data that must remain attached during packet exchange.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "candidate_only_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Candidate Only Reasons",
+      "type": "array"
+    },
+    "missing_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Obligations",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "residual-carry-forward",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_summary": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residual Summary",
+      "type": "object"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "settled_blockers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Settled Blockers",
+      "type": "array"
+    }
+  },
+  "title": "ResidualCarryForwardReport",
+  "type": "object"
+}

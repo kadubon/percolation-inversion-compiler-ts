@@ -1,0 +1,125 @@
+{
+  "description": "Readiness report for local agent-to-agent inbox relay workflows.",
+  "properties": {
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "allow_live_connectors": {
+      "title": "Allow Live Connectors",
+      "type": "boolean"
+    },
+    "bounded_candidate_intake": {
+      "default": true,
+      "title": "Bounded Candidate Intake",
+      "type": "boolean"
+    },
+    "candidate_only": {
+      "default": true,
+      "title": "Candidate Only",
+      "type": "boolean"
+    },
+    "identity_context_accepted": {
+      "default": false,
+      "title": "Identity Context Accepted",
+      "type": "boolean"
+    },
+    "identity_context_required": {
+      "default": false,
+      "title": "Identity Context Required",
+      "type": "boolean"
+    },
+    "inbox_exists": {
+      "default": false,
+      "title": "Inbox Exists",
+      "type": "boolean"
+    },
+    "inbox_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inbox Ref"
+    },
+    "live_default_mode": {
+      "title": "Live Default Mode",
+      "type": "string"
+    },
+    "loopback_ready": {
+      "default": false,
+      "title": "Loopback Ready",
+      "type": "boolean"
+    },
+    "message_count": {
+      "default": 0,
+      "title": "Message Count",
+      "type": "integer"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "readiness": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Readiness",
+      "type": "object"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "recommended_next_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Recommended Next Commands",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "agent-relay-readiness",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "seen_nonce_count": {
+      "default": 0,
+      "title": "Seen Nonce Count",
+      "type": "integer"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "signature_required": {
+      "default": false,
+      "title": "Signature Required",
+      "type": "boolean"
+    }
+  },
+  "title": "AgentRelayReadinessReport",
+  "type": "object"
+}

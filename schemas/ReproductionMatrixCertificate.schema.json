@@ -1,0 +1,190 @@
+{
+  "$defs": {
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "description": "Finite certificate for abstraction-capital reproduction diagnostics.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "capacity_feasible": {
+      "default": false,
+      "title": "Capacity Feasible",
+      "type": "boolean"
+    },
+    "causal_identification_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Causal Identification Refs",
+      "type": "array"
+    },
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "finite_checks_passed": {
+      "default": false,
+      "title": "Finite Checks Passed",
+      "type": "boolean"
+    },
+    "foundry_id": {
+      "title": "Foundry Id",
+      "type": "string"
+    },
+    "gauge_compatible": {
+      "default": false,
+      "title": "Gauge Compatible",
+      "type": "boolean"
+    },
+    "matrix_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Matrix Refs",
+      "type": "array"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_external_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual External Obligations",
+      "type": "array"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "spectral_radius_lower_bound": {
+      "default": 0.0,
+      "title": "Spectral Radius Lower Bound",
+      "type": "number"
+    },
+    "spectral_radius_upper_bound": {
+      "default": 0.0,
+      "title": "Spectral Radius Upper Bound",
+      "type": "number"
+    },
+    "transport_validity_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Transport Validity Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "certificate_id",
+    "foundry_id"
+  ],
+  "title": "ReproductionMatrixCertificate",
+  "type": "object"
+}

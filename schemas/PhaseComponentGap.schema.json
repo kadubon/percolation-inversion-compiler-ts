@@ -1,0 +1,46 @@
+{
+  "description": "One finite gap between a phase proxy component and its threshold.",
+  "properties": {
+    "component": {
+      "title": "Component",
+      "type": "string"
+    },
+    "current_value": {
+      "default": 0.0,
+      "title": "Current Value",
+      "type": "number"
+    },
+    "gap": {
+      "default": 0.0,
+      "title": "Gap",
+      "type": "number"
+    },
+    "limiting": {
+      "default": false,
+      "title": "Limiting",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "source": {
+      "default": "PsiDashboard",
+      "title": "Source",
+      "type": "string"
+    },
+    "threshold_value": {
+      "default": 0.0,
+      "title": "Threshold Value",
+      "type": "number"
+    }
+  },
+  "required": [
+    "component"
+  ],
+  "title": "PhaseComponentGap",
+  "type": "object"
+}

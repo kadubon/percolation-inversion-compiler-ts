@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "automaton_id": {
+      "title": "Automaton Id",
+      "type": "string"
+    },
+    "ground_metric_residual": {
+      "default": 0.0,
+      "title": "Ground Metric Residual",
+      "type": "number"
+    },
+    "script_id": {
+      "title": "Script Id",
+      "type": "string"
+    },
+    "tokens": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tokens",
+      "type": "array"
+    }
+  },
+  "required": [
+    "script_id",
+    "automaton_id"
+  ],
+  "title": "BoundaryScriptRecord",
+  "type": "object"
+}

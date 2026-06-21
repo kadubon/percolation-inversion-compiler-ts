@@ -1,0 +1,48 @@
+{
+  "description": "Content-addressed reference to a verifier evidence envelope.",
+  "properties": {
+    "media_type": {
+      "default": "application/json",
+      "title": "Media Type",
+      "type": "string"
+    },
+    "provenance_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Provenance Ref"
+    },
+    "ref": {
+      "title": "Ref",
+      "type": "string"
+    },
+    "schema_uri": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Schema Uri"
+    },
+    "sha256": {
+      "title": "Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ref",
+    "sha256"
+  ],
+  "title": "ContentAddressedEvidenceRef",
+  "type": "object"
+}

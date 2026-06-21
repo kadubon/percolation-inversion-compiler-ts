@@ -1,0 +1,2741 @@
+{
+  "artifact": "Executable Capability Percolation Theory.tex",
+  "artifact_key": "ecpt",
+  "attribution": {
+    "author": "K. Takahashi",
+    "derived_from": "canonical TeX metadata extraction; TeX/PDF source is not vendored",
+    "doi": "10.5281/zenodo.20535654",
+    "license_id": "cc-by-4.0",
+    "source_tex_md5": "c4614418ce96155c605a5b0337b3e99c",
+    "title": "Executable Capability Percolation Theory",
+    "year": 2026
+  },
+  "claims": 35,
+  "coverage_counts": {
+    "external_obligation": 30,
+    "implemented_checker": 48,
+    "implemented_constructive": 18,
+    "implemented_schema": 18,
+    "partial": 0,
+    "unsupported": 0
+  },
+  "coverage_delta": {
+    "external_obligation_total": 30,
+    "implemented_total": 84,
+    "unimplemented_total": 30,
+    "unsupported_total": 0
+  },
+  "definitions": 79,
+  "external_obligation_catalog": {
+    "artifact": "Executable Capability Percolation Theory.tex",
+    "category_summary": {
+      "ecpt-bridge-reserve": 6,
+      "ecpt-ecology-ontology": 3,
+      "ecpt-economics-policy": 6,
+      "ecpt-generator-limit": 5,
+      "ecpt-proxy-target": 3,
+      "ecpt-speculative-channel": 4,
+      "ecpt-trace-diagnostic": 1,
+      "numerical-envelope": 2
+    },
+    "obligations": [
+      {
+        "accepted_evidence_kind": [
+          "diagnostic-projection-certificate",
+          "residual-trace-ledger",
+          "trace-complex-audit"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "diagnostic-projection-unverified",
+          "residual-trace-ledger-incomplete",
+          "trace-complex-audit-missing",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "diagnostic-projection-unverified",
+          "residual-trace-ledger-incomplete",
+          "trace-complex-audit-missing"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:15",
+        "label": "Auxiliary trace-complex diagnostic",
+        "obligation_category": "ecpt-trace-diagnostic",
+        "proof_obligation_ids": [
+          "obligation:definition:15"
+        ],
+        "residual_coordinates": [
+          "residual:definition:15"
+        ],
+        "residual_policy": "charge-trace-diagnostic-residual-until-projection-certified",
+        "safe_default": "diagnostic-with-trace-complex-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.trace_complex.verify_diagnostic_projection"
+      },
+      {
+        "accepted_evidence_kind": [
+          "execution-availability-audit",
+          "policy-counterfactual-report",
+          "value-bound"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "execution-availability-unverified",
+          "policy-counterfactual-missing",
+          "value-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "execution-availability-unverified",
+          "policy-counterfactual-missing",
+          "value-bound-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:18",
+        "label": "Accumulation, availability, liquidity, and execution availability",
+        "obligation_category": "ecpt-economics-policy",
+        "proof_obligation_ids": [
+          "obligation:definition:18"
+        ],
+        "residual_coordinates": [
+          "residual:definition:18"
+        ],
+        "residual_policy": "charge-policy-residual-until-counterfactual-accepted",
+        "safe_default": "diagnostic-with-policy-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+      },
+      {
+        "accepted_evidence_kind": [
+          "repair-route-certificate",
+          "speculative-channel-audit",
+          "synergy-lower-bound"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "repair-route-missing",
+          "speculative-channel-unverified",
+          "synergy-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "repair-route-missing",
+          "speculative-channel-unverified",
+          "synergy-bound-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:31",
+        "label": "Speculative execution channel",
+        "obligation_category": "ecpt-speculative-channel",
+        "proof_obligation_ids": [
+          "obligation:definition:31"
+        ],
+        "residual_coordinates": [
+          "residual:definition:31"
+        ],
+        "residual_policy": "charge-speculative-residual-until-channel-certified",
+        "safe_default": "diagnostic-with-speculative-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.speculative.verify_channel_and_repair"
+      },
+      {
+        "accepted_evidence_kind": [
+          "abstraction-map",
+          "domain-semantics-report",
+          "simulation-refinement-witness"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "abstraction-refinement-unverified",
+          "domain-semantics-missing",
+          "ontology-extension-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "abstraction-refinement-unverified",
+          "domain-semantics-missing",
+          "ontology-extension-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:37",
+        "label": "Concrete ecology semantics",
+        "obligation_category": "ecpt-ecology-ontology",
+        "proof_obligation_ids": [
+          "obligation:definition:37"
+        ],
+        "residual_coordinates": [
+          "residual:definition:37"
+        ],
+        "residual_policy": "charge-abstraction-residual-until-domain-witness-accepted",
+        "safe_default": "diagnostic-with-abstraction-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.ecology.verify_domain_abstraction"
+      },
+      {
+        "accepted_evidence_kind": [
+          "abstraction-map",
+          "domain-semantics-report",
+          "simulation-refinement-witness"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "abstraction-refinement-unverified",
+          "domain-semantics-missing",
+          "ontology-extension-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "abstraction-refinement-unverified",
+          "domain-semantics-missing",
+          "ontology-extension-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:38",
+        "label": "Sound finite abstraction",
+        "obligation_category": "ecpt-ecology-ontology",
+        "proof_obligation_ids": [
+          "obligation:definition:38"
+        ],
+        "residual_coordinates": [
+          "residual:definition:38"
+        ],
+        "residual_policy": "charge-abstraction-residual-until-domain-witness-accepted",
+        "safe_default": "diagnostic-with-abstraction-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.ecology.verify_domain_abstraction"
+      },
+      {
+        "accepted_evidence_kind": [
+          "abstraction-map",
+          "domain-semantics-report",
+          "simulation-refinement-witness"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "abstraction-refinement-unverified",
+          "domain-semantics-missing",
+          "ontology-extension-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "abstraction-refinement-unverified",
+          "domain-semantics-missing",
+          "ontology-extension-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:abstraction-soundness",
+        "label": "Abstraction soundness",
+        "obligation_category": "ecpt-ecology-ontology",
+        "proof_obligation_ids": [
+          "obligation:prop:abstraction-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:prop:abstraction-soundness"
+        ],
+        "residual_policy": "charge-abstraction-residual-until-domain-witness-accepted",
+        "safe_default": "diagnostic-with-abstraction-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.ecology.verify_domain_abstraction"
+      },
+      {
+        "accepted_evidence_kind": [
+          "finite-bound-table",
+          "residual-envelope-proof",
+          "tail-bound-certificate"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "finite-envelope-proof-missing",
+          "residual-bound-not-certified",
+          "tail-bound-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "finite-envelope-proof-missing",
+          "residual-bound-not-certified",
+          "tail-bound-unverified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "cor:light-tail-exponential-witness",
+        "label": "Light-tail exponential witness",
+        "obligation_category": "numerical-envelope",
+        "proof_obligation_ids": [
+          "obligation:cor:light-tail-exponential-witness"
+        ],
+        "residual_coordinates": [
+          "residual:cor:light-tail-exponential-witness"
+        ],
+        "residual_policy": "charge-envelope-residual-until-bound-certified",
+        "safe_default": "diagnostic-with-envelope-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "core.adapters.envelope.verify_finite_bound"
+      },
+      {
+        "accepted_evidence_kind": [
+          "execution-availability-audit",
+          "policy-counterfactual-report",
+          "value-bound"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "execution-availability-unverified",
+          "policy-counterfactual-missing",
+          "value-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "execution-availability-unverified",
+          "policy-counterfactual-missing",
+          "value-bound-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:48",
+        "label": "Natural accelerator policy",
+        "obligation_category": "ecpt-economics-policy",
+        "proof_obligation_ids": [
+          "obligation:definition:48"
+        ],
+        "residual_coordinates": [
+          "residual:definition:48"
+        ],
+        "residual_policy": "charge-policy-residual-until-counterfactual-accepted",
+        "safe_default": "diagnostic-with-policy-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+      },
+      {
+        "accepted_evidence_kind": [
+          "execution-availability-audit",
+          "policy-counterfactual-report",
+          "value-bound"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "execution-availability-unverified",
+          "policy-counterfactual-missing",
+          "value-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "execution-availability-unverified",
+          "policy-counterfactual-missing",
+          "value-bound-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:49",
+        "label": "Search-friction ledger",
+        "obligation_category": "ecpt-economics-policy",
+        "proof_obligation_ids": [
+          "obligation:definition:49"
+        ],
+        "residual_coordinates": [
+          "residual:definition:49"
+        ],
+        "residual_policy": "charge-policy-residual-until-counterfactual-accepted",
+        "safe_default": "diagnostic-with-policy-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+      },
+      {
+        "accepted_evidence_kind": [
+          "execution-availability-audit",
+          "policy-counterfactual-report",
+          "value-bound"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "execution-availability-unverified",
+          "policy-counterfactual-missing",
+          "value-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "execution-availability-unverified",
+          "policy-counterfactual-missing",
+          "value-bound-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:50",
+        "label": "Friction-adjusted action value",
+        "obligation_category": "ecpt-economics-policy",
+        "proof_obligation_ids": [
+          "obligation:definition:50"
+        ],
+        "residual_coordinates": [
+          "residual:definition:50"
+        ],
+        "residual_policy": "charge-policy-residual-until-counterfactual-accepted",
+        "safe_default": "diagnostic-with-policy-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+      },
+      {
+        "accepted_evidence_kind": [
+          "execution-availability-audit",
+          "policy-counterfactual-report",
+          "value-bound"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "execution-availability-unverified",
+          "policy-counterfactual-missing",
+          "value-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "execution-availability-unverified",
+          "policy-counterfactual-missing",
+          "value-bound-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "lem:evsi-admission",
+        "label": "EVSI admission",
+        "obligation_category": "ecpt-economics-policy",
+        "proof_obligation_ids": [
+          "obligation:lem:evsi-admission"
+        ],
+        "residual_coordinates": [
+          "residual:lem:evsi-admission"
+        ],
+        "residual_policy": "charge-policy-residual-until-counterfactual-accepted",
+        "safe_default": "diagnostic-with-policy-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+      },
+      {
+        "accepted_evidence_kind": [
+          "protocol-comparison-certificate",
+          "proxy-grounding-report",
+          "target-contract"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "protocol-comparison-not-certified",
+          "proxy-grounding-missing",
+          "target-contract-unaccepted",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "protocol-comparison-not-certified",
+          "proxy-grounding-missing",
+          "target-contract-unaccepted"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:51",
+        "label": "Proxy bundle",
+        "obligation_category": "ecpt-proxy-target",
+        "proof_obligation_ids": [
+          "obligation:definition:51"
+        ],
+        "residual_coordinates": [
+          "residual:definition:51"
+        ],
+        "residual_policy": "charge-proxy-target-residual-until-contract-accepted",
+        "safe_default": "diagnostic-with-proxy-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.proxy.verify_target_contract"
+      },
+      {
+        "accepted_evidence_kind": [
+          "protocol-comparison-certificate",
+          "proxy-grounding-report",
+          "target-contract"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "protocol-comparison-not-certified",
+          "proxy-grounding-missing",
+          "target-contract-unaccepted",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "protocol-comparison-not-certified",
+          "proxy-grounding-missing",
+          "target-contract-unaccepted"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:52",
+        "label": "ECPT target",
+        "obligation_category": "ecpt-proxy-target",
+        "proof_obligation_ids": [
+          "obligation:definition:52"
+        ],
+        "residual_coordinates": [
+          "residual:definition:52"
+        ],
+        "residual_policy": "charge-proxy-target-residual-until-contract-accepted",
+        "safe_default": "diagnostic-with-proxy-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.proxy.verify_target_contract"
+      },
+      {
+        "accepted_evidence_kind": [
+          "protocol-comparison-certificate",
+          "proxy-grounding-report",
+          "target-contract"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "protocol-comparison-not-certified",
+          "proxy-grounding-missing",
+          "target-contract-unaccepted",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "protocol-comparison-not-certified",
+          "proxy-grounding-missing",
+          "target-contract-unaccepted"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:54",
+        "label": "Protocol-competitive target acceleration",
+        "obligation_category": "ecpt-proxy-target",
+        "proof_obligation_ids": [
+          "obligation:definition:54"
+        ],
+        "residual_coordinates": [
+          "residual:definition:54"
+        ],
+        "residual_policy": "charge-proxy-target-residual-until-contract-accepted",
+        "safe_default": "diagnostic-with-proxy-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.proxy.verify_target_contract"
+      },
+      {
+        "accepted_evidence_kind": [
+          "repair-route-certificate",
+          "speculative-channel-audit",
+          "synergy-lower-bound"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "repair-route-missing",
+          "speculative-channel-unverified",
+          "synergy-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "repair-route-missing",
+          "speculative-channel-unverified",
+          "synergy-bound-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:57",
+        "label": "Paralysis and repair route",
+        "obligation_category": "ecpt-speculative-channel",
+        "proof_obligation_ids": [
+          "obligation:definition:57"
+        ],
+        "residual_coordinates": [
+          "residual:definition:57"
+        ],
+        "residual_policy": "charge-speculative-residual-until-channel-certified",
+        "safe_default": "diagnostic-with-speculative-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.speculative.verify_channel_and_repair"
+      },
+      {
+        "accepted_evidence_kind": [
+          "finite-envelope",
+          "generator-identification-report",
+          "transition-kernel-audit"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "generator-calibration-missing",
+          "limit-envelope-unverified",
+          "transition-kernel-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "generator-calibration-missing",
+          "limit-envelope-unverified",
+          "transition-kernel-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "cor:scalar-bellman",
+        "label": "Scalar Bellman interface",
+        "obligation_category": "ecpt-generator-limit",
+        "proof_obligation_ids": [
+          "obligation:cor:scalar-bellman"
+        ],
+        "residual_coordinates": [
+          "residual:cor:scalar-bellman"
+        ],
+        "residual_policy": "charge-generator-limit-residual-until-calibration-accepted",
+        "safe_default": "diagnostic-with-generator-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.generators.verify_limit_envelope"
+      },
+      {
+        "accepted_evidence_kind": [
+          "finite-envelope",
+          "generator-identification-report",
+          "transition-kernel-audit"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "generator-calibration-missing",
+          "limit-envelope-unverified",
+          "transition-kernel-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "generator-calibration-missing",
+          "limit-envelope-unverified",
+          "transition-kernel-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:markov-additive-raf",
+        "label": "Speculative RAF with Markov additive debt",
+        "obligation_category": "ecpt-generator-limit",
+        "proof_obligation_ids": [
+          "obligation:def:markov-additive-raf"
+        ],
+        "residual_coordinates": [
+          "residual:def:markov-additive-raf"
+        ],
+        "residual_policy": "charge-generator-limit-residual-until-calibration-accepted",
+        "safe_default": "diagnostic-with-generator-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.generators.verify_limit_envelope"
+      },
+      {
+        "accepted_evidence_kind": [
+          "repair-route-certificate",
+          "speculative-channel-audit",
+          "synergy-lower-bound"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "repair-route-missing",
+          "speculative-channel-unverified",
+          "synergy-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "repair-route-missing",
+          "speculative-channel-unverified",
+          "synergy-bound-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:62",
+        "label": "Sparse synergy and residual certificate",
+        "obligation_category": "ecpt-speculative-channel",
+        "proof_obligation_ids": [
+          "obligation:definition:62"
+        ],
+        "residual_coordinates": [
+          "residual:definition:62"
+        ],
+        "residual_policy": "charge-speculative-residual-until-channel-certified",
+        "safe_default": "diagnostic-with-speculative-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.speculative.verify_channel_and_repair"
+      },
+      {
+        "accepted_evidence_kind": [
+          "repair-route-certificate",
+          "speculative-channel-audit",
+          "synergy-lower-bound"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "repair-route-missing",
+          "speculative-channel-unverified",
+          "synergy-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "repair-route-missing",
+          "speculative-channel-unverified",
+          "synergy-bound-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:sparse-synergy-lower-bound",
+        "label": "Sparse synergy lower bound",
+        "obligation_category": "ecpt-speculative-channel",
+        "proof_obligation_ids": [
+          "obligation:prop:sparse-synergy-lower-bound"
+        ],
+        "residual_coordinates": [
+          "residual:prop:sparse-synergy-lower-bound"
+        ],
+        "residual_policy": "charge-speculative-residual-until-channel-certified",
+        "safe_default": "diagnostic-with-speculative-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.speculative.verify_channel_and_repair"
+      },
+      {
+        "accepted_evidence_kind": [
+          "finite-bound-table",
+          "residual-envelope-proof",
+          "tail-bound-certificate"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "finite-envelope-proof-missing",
+          "residual-bound-not-certified",
+          "tail-bound-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "finite-envelope-proof-missing",
+          "residual-bound-not-certified",
+          "tail-bound-unverified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "cor:linear-growth-lower-bound",
+        "label": "Linear growth lower bound",
+        "obligation_category": "numerical-envelope",
+        "proof_obligation_ids": [
+          "obligation:cor:linear-growth-lower-bound"
+        ],
+        "residual_coordinates": [
+          "residual:cor:linear-growth-lower-bound"
+        ],
+        "residual_policy": "charge-envelope-residual-until-bound-certified",
+        "safe_default": "diagnostic-with-envelope-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "core.adapters.envelope.verify_finite_bound"
+      },
+      {
+        "accepted_evidence_kind": [
+          "finite-envelope",
+          "generator-identification-report",
+          "transition-kernel-audit"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "generator-calibration-missing",
+          "limit-envelope-unverified",
+          "transition-kernel-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "generator-calibration-missing",
+          "limit-envelope-unverified",
+          "transition-kernel-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:density-dependent-chain",
+        "label": "Regularized density-dependent ECPT family",
+        "obligation_category": "ecpt-generator-limit",
+        "proof_obligation_ids": [
+          "obligation:def:density-dependent-chain"
+        ],
+        "residual_coordinates": [
+          "residual:def:density-dependent-chain"
+        ],
+        "residual_policy": "charge-generator-limit-residual-until-calibration-accepted",
+        "safe_default": "diagnostic-with-generator-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.generators.verify_limit_envelope"
+      },
+      {
+        "accepted_evidence_kind": [
+          "finite-envelope",
+          "generator-identification-report",
+          "transition-kernel-audit"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "generator-calibration-missing",
+          "limit-envelope-unverified",
+          "transition-kernel-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "generator-calibration-missing",
+          "limit-envelope-unverified",
+          "transition-kernel-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:identified-generator-calibration",
+        "label": "Intervention-identified generator calibration certificate",
+        "obligation_category": "ecpt-generator-limit",
+        "proof_obligation_ids": [
+          "obligation:def:identified-generator-calibration"
+        ],
+        "residual_coordinates": [
+          "residual:def:identified-generator-calibration"
+        ],
+        "residual_policy": "charge-generator-limit-residual-until-calibration-accepted",
+        "safe_default": "diagnostic-with-generator-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.generators.verify_limit_envelope"
+      },
+      {
+        "accepted_evidence_kind": [
+          "finite-envelope",
+          "generator-identification-report",
+          "transition-kernel-audit"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "generator-calibration-missing",
+          "limit-envelope-unverified",
+          "transition-kernel-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "limit-envelope-or-generator-calibration-required"
+        ],
+        "failure_modes": [
+          "generator-calibration-missing",
+          "limit-envelope-unverified",
+          "transition-kernel-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:70",
+        "label": "Regularized macroscopic percolation envelope",
+        "obligation_category": "ecpt-generator-limit",
+        "proof_obligation_ids": [
+          "obligation:definition:70"
+        ],
+        "residual_coordinates": [
+          "residual:definition:70"
+        ],
+        "residual_policy": "charge-generator-limit-residual-until-calibration-accepted",
+        "safe_default": "diagnostic-with-generator-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.generators.verify_limit_envelope"
+      },
+      {
+        "accepted_evidence_kind": [
+          "bridge-map",
+          "machine-readable-capsule-audit",
+          "reserve-invariance-proof"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:71",
+        "label": "ALT-compatible packet",
+        "obligation_category": "ecpt-bridge-reserve",
+        "proof_obligation_ids": [
+          "obligation:definition:71"
+        ],
+        "residual_coordinates": [
+          "residual:definition:71"
+        ],
+        "residual_policy": "charge-bridge-residual-until-cross-theory-proof-accepted",
+        "safe_default": "diagnostic-with-bridge-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+      },
+      {
+        "accepted_evidence_kind": [
+          "execution-availability-audit",
+          "policy-counterfactual-report",
+          "value-bound"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "execution-availability-unverified",
+          "policy-counterfactual-missing",
+          "value-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "execution-availability-unverified",
+          "policy-counterfactual-missing",
+          "value-bound-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:72",
+        "label": "Liquidity bridge",
+        "obligation_category": "ecpt-economics-policy",
+        "proof_obligation_ids": [
+          "obligation:definition:72"
+        ],
+        "residual_coordinates": [
+          "residual:definition:72"
+        ],
+        "residual_policy": "charge-policy-residual-until-counterfactual-accepted",
+        "safe_default": "diagnostic-with-policy-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+      },
+      {
+        "accepted_evidence_kind": [
+          "bridge-map",
+          "machine-readable-capsule-audit",
+          "reserve-invariance-proof"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:alt-lift",
+        "label": "ALT lift",
+        "obligation_category": "ecpt-bridge-reserve",
+        "proof_obligation_ids": [
+          "obligation:prop:alt-lift"
+        ],
+        "residual_coordinates": [
+          "residual:prop:alt-lift"
+        ],
+        "residual_policy": "charge-bridge-residual-until-cross-theory-proof-accepted",
+        "safe_default": "diagnostic-with-bridge-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+      },
+      {
+        "accepted_evidence_kind": [
+          "bridge-map",
+          "machine-readable-capsule-audit",
+          "reserve-invariance-proof"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "definition:73",
+        "label": "SQOT-compatible reserve certificate",
+        "obligation_category": "ecpt-bridge-reserve",
+        "proof_obligation_ids": [
+          "obligation:definition:73"
+        ],
+        "residual_coordinates": [
+          "residual:definition:73"
+        ],
+        "residual_policy": "charge-bridge-residual-until-cross-theory-proof-accepted",
+        "safe_default": "diagnostic-with-bridge-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+      },
+      {
+        "accepted_evidence_kind": [
+          "bridge-map",
+          "machine-readable-capsule-audit",
+          "reserve-invariance-proof"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:sqot-reserve-invariance",
+        "label": "SQOT reserve invariance",
+        "obligation_category": "ecpt-bridge-reserve",
+        "proof_obligation_ids": [
+          "obligation:prop:sqot-reserve-invariance"
+        ],
+        "residual_coordinates": [
+          "residual:prop:sqot-reserve-invariance"
+        ],
+        "residual_policy": "charge-bridge-residual-until-cross-theory-proof-accepted",
+        "safe_default": "diagnostic-with-bridge-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+      },
+      {
+        "accepted_evidence_kind": [
+          "bridge-map",
+          "machine-readable-capsule-audit",
+          "reserve-invariance-proof"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:publication-capsule",
+        "label": "Publication and machine-readable capsule",
+        "obligation_category": "ecpt-bridge-reserve",
+        "proof_obligation_ids": [
+          "obligation:def:publication-capsule"
+        ],
+        "residual_coordinates": [
+          "residual:def:publication-capsule"
+        ],
+        "residual_policy": "charge-bridge-residual-until-cross-theory-proof-accepted",
+        "safe_default": "diagnostic-with-bridge-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+      },
+      {
+        "accepted_evidence_kind": [
+          "bridge-map",
+          "machine-readable-capsule-audit",
+          "reserve-invariance-proof"
+        ],
+        "artifact": "Executable Capability Percolation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "thm:protocol-relative-soundness",
+        "label": "Protocol-relative soundness",
+        "obligation_category": "ecpt-bridge-reserve",
+        "proof_obligation_ids": [
+          "obligation:thm:protocol-relative-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:thm:protocol-relative-soundness"
+        ],
+        "residual_policy": "charge-bridge-residual-until-cross-theory-proof-accepted",
+        "safe_default": "diagnostic-with-bridge-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+      }
+    ],
+    "verifier_route_summary": {
+      "core.adapters.envelope.verify_finite_bound": 2,
+      "ecpt.adapters.bridge.verify_cross_theory_bridge": 6,
+      "ecpt.adapters.ecology.verify_domain_abstraction": 3,
+      "ecpt.adapters.generators.verify_limit_envelope": 5,
+      "ecpt.adapters.policy.verify_execution_policy": 6,
+      "ecpt.adapters.proxy.verify_target_contract": 3,
+      "ecpt.adapters.speculative.verify_channel_and_repair": 4,
+      "ecpt.adapters.trace_complex.verify_diagnostic_projection": 1
+    }
+  },
+  "external_obligation_category_summary": {
+    "ecpt-bridge-reserve": 6,
+    "ecpt-ecology-ontology": 3,
+    "ecpt-economics-policy": 6,
+    "ecpt-generator-limit": 5,
+    "ecpt-proxy-target": 3,
+    "ecpt-speculative-channel": 4,
+    "ecpt-trace-diagnostic": 1,
+    "numerical-envelope": 2
+  },
+  "external_verifier_route_summary": {
+    "core.adapters.envelope.verify_finite_bound": 2,
+    "ecpt.adapters.bridge.verify_cross_theory_bridge": 6,
+    "ecpt.adapters.ecology.verify_domain_abstraction": 3,
+    "ecpt.adapters.generators.verify_limit_envelope": 5,
+    "ecpt.adapters.policy.verify_execution_policy": 6,
+    "ecpt.adapters.proxy.verify_target_contract": 3,
+    "ecpt.adapters.speculative.verify_channel_and_repair": 4,
+    "ecpt.adapters.trace_complex.verify_diagnostic_projection": 1
+  },
+  "item_mappings": [
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.ObservationProtocol"
+      ],
+      "item_id": "definition:1",
+      "label": "Observation protocol",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.ConstraintFrame"
+      ],
+      "item_id": "definition:2",
+      "label": "Constraint frame",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.DiagnosticOrder"
+      ],
+      "item_id": "definition:3",
+      "label": "Diagnostic order",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_admissibility_grade"
+      ],
+      "item_id": "definition:4",
+      "label": "Admissibility grade",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "core.CertificateShell"
+      ],
+      "item_id": "definition:5",
+      "label": "Operable certificate shell",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.TargetValidityStatus"
+      ],
+      "item_id": "definition:6",
+      "label": "Target-validity status",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.ObservationProtocol"
+      ],
+      "item_id": "definition:7",
+      "label": "Baseline protocol",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_protocol_functor_certificate"
+      ],
+      "item_id": "definition:8",
+      "label": "Protocol functor and ontology-extension certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_protocol_functor_certificate"
+      ],
+      "item_id": "prop:protocol-functor-soundness",
+      "label": "Protocol-functor soundness",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_finite_phase_control_certificate"
+      ],
+      "item_id": "def:phase-control-system",
+      "label": "Finite and thermodynamic phase-control system",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_phase_control_envelope"
+      ],
+      "item_id": "definition:10",
+      "label": "Control surface and phase response",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.CapabilityPacket"
+      ],
+      "item_id": "definition:11",
+      "label": "Capability packet",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_capability_state_vector"
+      ],
+      "item_id": "definition:12",
+      "label": "Capability-state vector",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.FiniteTraceLaw"
+      ],
+      "item_id": "definition:13",
+      "label": "Finite trace law",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.split_certified_quotient_error"
+      ],
+      "item_id": "def:variational-relaxation-quotient",
+      "label": "Split-certified empirical quotient",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.split_certified_quotient_error"
+      ],
+      "item_id": "proposition:2",
+      "label": "Finite quotient construction interface",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:15",
+      "label": "Auxiliary trace-complex diagnostic",
+      "obligation_category": "ecpt-trace-diagnostic",
+      "verifier_route": "ecpt.adapters.trace_complex.verify_diagnostic_projection"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_capability_state_vector"
+      ],
+      "item_id": "definition:16",
+      "label": "Empirical relaxed density and duplicate mass",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.split_certified_quotient_error"
+      ],
+      "item_id": "def:boundary-aware-quotient",
+      "label": "Split-certified boundary-aware quotient witness",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:18",
+      "label": "Accumulation, availability, liquidity, and execution availability",
+      "obligation_category": "ecpt-economics-policy",
+      "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.split_certified_quotient_error"
+      ],
+      "item_id": "thm:boundary-aware-quotient",
+      "label": "Split-certified boundary-aware quotient error",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_capability_state_vector"
+      ],
+      "item_id": "lem:no-probabilistic-duplicate-inflation",
+      "label": "No probabilistic duplicate inflation",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_packet_atlas"
+      ],
+      "item_id": "definition:19",
+      "label": "Stratified statistical packet atlas",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_information_projection_quotient"
+      ],
+      "item_id": "definition:20",
+      "label": "Stratified information-projection quotient",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_information_projection_quotient"
+      ],
+      "item_id": "prop:information-projection-distortion",
+      "label": "Stratified information-projection distortion",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.CapabilityPacket"
+      ],
+      "item_id": "definition:21",
+      "label": "Capability packet hypergraph",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.CapabilityEdge"
+      ],
+      "item_id": "definition:22",
+      "label": "Edge types",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_constraint_frame"
+      ],
+      "item_id": "definition:23",
+      "label": "Hard-domain edge",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_activation_threshold_certificate"
+      ],
+      "item_id": "def:free-energy-activation",
+      "label": "Global free-energy activation problem",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_activation_threshold_certificate"
+      ],
+      "item_id": "prop:free-energy-activation-optimality",
+      "label": "Global free-energy activation optimality",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_activation_construction"
+      ],
+      "item_id": "def:activation-construction",
+      "label": "Activation construction certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.finite_gibbs_phase_response"
+      ],
+      "item_id": "thm:finite-gibbs-phase-response",
+      "label": "Finite Gibbs phase-response",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_phase_control_envelope"
+      ],
+      "item_id": "def:phase-response-control-step",
+      "label": "Certified phase-response control step",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.finite_gibbs_phase_response"
+      ],
+      "item_id": "thm:finite-gibbs-response-control",
+      "label": "Finite Gibbs response-control improvement",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_path_law_policy"
+      ],
+      "item_id": "def:response-policy-certificate",
+      "label": "Constructed path-law response policy certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_path_law_policy"
+      ],
+      "item_id": "thm:response-policy-improvement",
+      "label": "Constructed path-law response-policy improvement",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_activation_threshold_certificate"
+      ],
+      "item_id": "definition:28",
+      "label": "Activation field",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.reachable_mass"
+      ],
+      "item_id": "definition:29",
+      "label": "Activated closure law",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.reachable_mass"
+      ],
+      "item_id": "definition:30",
+      "label": "Execution-available hyperpath",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:31",
+      "label": "Speculative execution channel",
+      "obligation_category": "ecpt-speculative-channel",
+      "verifier_route": "ecpt.adapters.speculative.verify_channel_and_repair"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_cycle_monitor"
+      ],
+      "item_id": "definition:32",
+      "label": "Seed and cyclic support",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_queue_certificate"
+      ],
+      "item_id": "definition:33",
+      "label": "Queue layer",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.CapabilityHypergraph"
+      ],
+      "item_id": "definition:34",
+      "label": "Effective packet hypergraph",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.DiagnosticOrder"
+      ],
+      "item_id": "definition:35",
+      "label": "Waste, false liquidity, obstruction, and paralysis",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_inner_viability_kernel"
+      ],
+      "item_id": "definition:36",
+      "label": "Constraint viability band",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_constraint_frame"
+      ],
+      "item_id": "prop:constraint-band-requirement",
+      "label": "Constraint-band requirement",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:37",
+      "label": "Concrete ecology semantics",
+      "obligation_category": "ecpt-ecology-ontology",
+      "verifier_route": "ecpt.adapters.ecology.verify_domain_abstraction"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:38",
+      "label": "Sound finite abstraction",
+      "obligation_category": "ecpt-ecology-ontology",
+      "verifier_route": "ecpt.adapters.ecology.verify_domain_abstraction"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:abstraction-soundness",
+      "label": "Abstraction soundness",
+      "obligation_category": "ecpt-ecology-ontology",
+      "verifier_route": "ecpt.adapters.ecology.verify_domain_abstraction"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_capability_state_vector"
+      ],
+      "item_id": "definition:39",
+      "label": "ECPT state",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_inner_viability_kernel"
+      ],
+      "item_id": "definition:40",
+      "label": "Local viability set",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.ActionGrammar"
+      ],
+      "item_id": "definition:41",
+      "label": "Action grammar",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.PostconditionObligation"
+      ],
+      "item_id": "definition:42",
+      "label": "Postcondition obligations",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_controlled_transition"
+      ],
+      "item_id": "definition:43",
+      "label": "Operable action correspondence",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_controlled_transition"
+      ],
+      "item_id": "definition:44",
+      "label": "Controlled transition",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_inner_viability_kernel"
+      ],
+      "item_id": "definition:45",
+      "label": "Exact and inner viability kernels",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_inner_viability_kernel"
+      ],
+      "item_id": "prop:inner-kernel-invariance",
+      "label": "Inner-kernel invariance",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.self_normalized_margin_risk"
+      ],
+      "item_id": "definition:46",
+      "label": "Self-normalized margin witness",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_risk_gate"
+      ],
+      "item_id": "definition:47",
+      "label": "Risk margin process",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_risk_gate"
+      ],
+      "item_id": "thm:self-normalized-margin-risk",
+      "label": "Self-normalized margin risk",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "cor:light-tail-exponential-witness",
+      "label": "Light-tail exponential witness",
+      "obligation_category": "numerical-envelope",
+      "verifier_route": "core.adapters.envelope.verify_finite_bound"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:48",
+      "label": "Natural accelerator policy",
+      "obligation_category": "ecpt-economics-policy",
+      "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "trc.ExecutableTraceNormalForm"
+      ],
+      "item_id": "prop:typed-trace-accounting",
+      "label": "Typed trace accounting",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:49",
+      "label": "Search-friction ledger",
+      "obligation_category": "ecpt-economics-policy",
+      "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:50",
+      "label": "Friction-adjusted action value",
+      "obligation_category": "ecpt-economics-policy",
+      "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "lem:evsi-admission",
+      "label": "EVSI admission",
+      "obligation_category": "ecpt-economics-policy",
+      "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:51",
+      "label": "Proxy bundle",
+      "obligation_category": "ecpt-proxy-target",
+      "verifier_route": "ecpt.adapters.proxy.verify_target_contract"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:52",
+      "label": "ECPT target",
+      "obligation_category": "ecpt-proxy-target",
+      "verifier_route": "ecpt.adapters.proxy.verify_target_contract"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.hitting_time_acceleration"
+      ],
+      "item_id": "definition:53",
+      "label": "Target hitting time",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:54",
+      "label": "Protocol-competitive target acceleration",
+      "obligation_category": "ecpt-proxy-target",
+      "verifier_route": "ecpt.adapters.proxy.verify_target_contract"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.hitting_time_acceleration"
+      ],
+      "item_id": "prop:hitting-time-acceleration",
+      "label": "Hitting-time acceleration certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "core.FrontierRecord"
+      ],
+      "item_id": "definition:55",
+      "label": "Certified value vector",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "core.pareto_frontier"
+      ],
+      "item_id": "definition:56",
+      "label": "Pareto frontier recursion",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "core.pareto_frontier"
+      ],
+      "item_id": "prop:pareto-operability",
+      "label": "Pareto operability",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:57",
+      "label": "Paralysis and repair route",
+      "obligation_category": "ecpt-speculative-channel",
+      "verifier_route": "ecpt.adapters.speculative.verify_channel_and_repair"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "core.pareto_frontier"
+      ],
+      "item_id": "prop:pareto-empty-suspension",
+      "label": "Pareto-empty suspension",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "cor:scalar-bellman",
+      "label": "Scalar Bellman interface",
+      "obligation_category": "ecpt-generator-limit",
+      "verifier_route": "ecpt.adapters.generators.verify_limit_envelope"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.ProjectionAudit"
+      ],
+      "item_id": "prop:raw-relaxed-separation",
+      "label": "Raw-relaxed separation",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.MonotoneMap"
+      ],
+      "item_id": "prop:friction-charged-monotone-intervention",
+      "label": "Friction-charged monotone intervention",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:markov-additive-raf",
+      "label": "Speculative RAF with Markov additive debt",
+      "obligation_category": "ecpt-generator-limit",
+      "verifier_route": "ecpt.adapters.generators.verify_limit_envelope"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_cycle_monitor"
+      ],
+      "item_id": "definition:59",
+      "label": "Cycle monitor and stopped runtime certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_settlement_return_raf_certificate"
+      ],
+      "item_id": "def:debt-solvency-kernel",
+      "label": "Settlement-return kernel",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_settlement_return_raf_certificate"
+      ],
+      "item_id": "def:settlement-event-algebra",
+      "label": "Settlement-return event algebra",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_settlement_return_raf_certificate"
+      ],
+      "item_id": "thm:debt-solvency-speculative-raf-emergence",
+      "label": "Settlement-return speculative RAF emergence",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:62",
+      "label": "Sparse synergy and residual certificate",
+      "obligation_category": "ecpt-speculative-channel",
+      "verifier_route": "ecpt.adapters.speculative.verify_channel_and_repair"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:sparse-synergy-lower-bound",
+      "label": "Sparse synergy lower bound",
+      "obligation_category": "ecpt-speculative-channel",
+      "verifier_route": "ecpt.adapters.speculative.verify_channel_and_repair"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_resource_normalized_cut"
+      ],
+      "item_id": "definition:63",
+      "label": "Resource normalization ledger",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_resource_normalized_cut"
+      ],
+      "item_id": "thm:resource-cut",
+      "label": "Resource-normalized cut bound",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_activation_threshold_certificate"
+      ],
+      "item_id": "definition:64",
+      "label": "AND-support finite-size and thermodynamic activation certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_activation_threshold_certificate"
+      ],
+      "item_id": "thm:finite-size-activation-threshold",
+      "label": "AND-support finite-size activation threshold",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.backpressure_reserve_loss"
+      ],
+      "item_id": "definition:65",
+      "label": "Verification backpressure",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.backpressure_reserve_loss"
+      ],
+      "item_id": "prop:backpressure-reserve-loss",
+      "label": "Backpressure reserve loss",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.bottleneck_shadow_price"
+      ],
+      "item_id": "prop:bottleneck-shadow-price",
+      "label": "Bottleneck shadow price",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "bit.SelectivePotentialResult"
+      ],
+      "item_id": "definition:66",
+      "label": "Linear lower-bound abstraction",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "cor:linear-growth-lower-bound",
+      "label": "Linear growth lower bound",
+      "obligation_category": "numerical-envelope",
+      "verifier_route": "core.adapters.envelope.verify_finite_bound"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:density-dependent-chain",
+      "label": "Regularized density-dependent ECPT family",
+      "obligation_category": "ecpt-generator-limit",
+      "verifier_route": "ecpt.adapters.generators.verify_limit_envelope"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:identified-generator-calibration",
+      "label": "Intervention-identified generator calibration certificate",
+      "obligation_category": "ecpt-generator-limit",
+      "verifier_route": "ecpt.adapters.generators.verify_limit_envelope"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "ecpt.reachable_mass"
+      ],
+      "item_id": "def:attainable-inclusion-response",
+      "label": "Reachable mass recursion certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:70",
+      "label": "Regularized macroscopic percolation envelope",
+      "obligation_category": "ecpt-generator-limit",
+      "verifier_route": "ecpt.adapters.generators.verify_limit_envelope"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_mean_field_envelope"
+      ],
+      "item_id": "thm:mean-field-envelope-soundness",
+      "label": "Intervention-identified generator-to-mean-field envelope soundness",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:71",
+      "label": "ALT-compatible packet",
+      "obligation_category": "ecpt-bridge-reserve",
+      "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:72",
+      "label": "Liquidity bridge",
+      "obligation_category": "ecpt-economics-policy",
+      "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:alt-lift",
+      "label": "ALT lift",
+      "obligation_category": "ecpt-bridge-reserve",
+      "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:73",
+      "label": "SQOT-compatible reserve certificate",
+      "obligation_category": "ecpt-bridge-reserve",
+      "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "ecpt.check_queue_certificate"
+      ],
+      "item_id": "definition:74",
+      "label": "Queue morphism",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:sqot-reserve-invariance",
+      "label": "SQOT reserve invariance",
+      "obligation_category": "ecpt-bridge-reserve",
+      "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.ExtractorOutput"
+      ],
+      "item_id": "definition:75",
+      "label": "Claim extractor",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "core.ClaimRecord"
+      ],
+      "item_id": "def:machine-readable-claim-record",
+      "label": "Machine-readable claim record",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:publication-capsule",
+      "label": "Publication and machine-readable capsule",
+      "obligation_category": "ecpt-bridge-reserve",
+      "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.ProjectionAudit"
+      ],
+      "item_id": "prop:capsule-projection",
+      "label": "Capsule projection",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "core.Certificate"
+      ],
+      "item_id": "definition:78",
+      "label": "ECPT certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "definition:79",
+      "label": "Checker",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.StatusRule"
+      ],
+      "item_id": "prop:no-status-promotion",
+      "label": "No status promotion",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "thm:protocol-relative-soundness",
+      "label": "Protocol-relative soundness",
+      "obligation_category": "ecpt-bridge-reserve",
+      "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+    }
+  ],
+  "mr_records": 0,
+  "representative_items": [
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:15",
+      "label": "Auxiliary trace-complex diagnostic",
+      "obligation_category": "ecpt-trace-diagnostic",
+      "verifier_route": "ecpt.adapters.trace_complex.verify_diagnostic_projection"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:18",
+      "label": "Accumulation, availability, liquidity, and execution availability",
+      "obligation_category": "ecpt-economics-policy",
+      "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:31",
+      "label": "Speculative execution channel",
+      "obligation_category": "ecpt-speculative-channel",
+      "verifier_route": "ecpt.adapters.speculative.verify_channel_and_repair"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:37",
+      "label": "Concrete ecology semantics",
+      "obligation_category": "ecpt-ecology-ontology",
+      "verifier_route": "ecpt.adapters.ecology.verify_domain_abstraction"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:38",
+      "label": "Sound finite abstraction",
+      "obligation_category": "ecpt-ecology-ontology",
+      "verifier_route": "ecpt.adapters.ecology.verify_domain_abstraction"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:abstraction-soundness",
+      "label": "Abstraction soundness",
+      "obligation_category": "ecpt-ecology-ontology",
+      "verifier_route": "ecpt.adapters.ecology.verify_domain_abstraction"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "cor:light-tail-exponential-witness",
+      "label": "Light-tail exponential witness",
+      "obligation_category": "numerical-envelope",
+      "verifier_route": "core.adapters.envelope.verify_finite_bound"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "definition:48",
+      "label": "Natural accelerator policy",
+      "obligation_category": "ecpt-economics-policy",
+      "verifier_route": "ecpt.adapters.policy.verify_execution_policy"
+    }
+  ],
+  "schema_version": "theory-snapshot-1.0"
+}

@@ -1,0 +1,63 @@
+{
+  "$defs": {
+    "FiniteOrder": {
+      "description": "A finite preorder/partial order represented by a finite relation.",
+      "properties": {
+        "elements": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Elements",
+          "type": "array"
+        },
+        "leq_pairs": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Leq Pairs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "elements"
+      ],
+      "title": "FiniteOrder",
+      "type": "object"
+    }
+  },
+  "description": "Finite meet/join witness tables for a partial order.",
+  "properties": {
+    "join_table": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Join Table",
+      "type": "object"
+    },
+    "meet_table": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Meet Table",
+      "type": "object"
+    },
+    "order": {
+      "$ref": "#/$defs/FiniteOrder"
+    }
+  },
+  "required": [
+    "order"
+  ],
+  "title": "LatticeWitness",
+  "type": "object"
+}

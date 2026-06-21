@@ -1,0 +1,128 @@
+{
+  "description": "Portable BIT witness task extracted from runtime bottleneck diagnostics.",
+  "properties": {
+    "action_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Action Id"
+    },
+    "action_kind": {
+      "default": "",
+      "title": "Action Kind",
+      "type": "string"
+    },
+    "burden_delta": {
+      "default": 0.0,
+      "title": "Burden Delta",
+      "type": "number"
+    },
+    "next_verifier_route": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Next Verifier Route"
+    },
+    "next_verifier_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Next Verifier Routes",
+      "type": "array"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "portable_task_kind": {
+      "default": "runtime-bottleneck-verifier-task",
+      "title": "Portable Task Kind",
+      "type": "string"
+    },
+    "priority_score": {
+      "default": 0.0,
+      "title": "Priority Score",
+      "type": "number"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "release_delta": {
+      "default": 0.0,
+      "title": "Release Delta",
+      "type": "number"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "required_evidence_kind": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Evidence Kind",
+      "type": "array"
+    },
+    "residual_coordinates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual Coordinates",
+      "type": "array"
+    },
+    "rollback_condition": {
+      "default": "runtime-score-nonpositive",
+      "title": "Rollback Condition",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "simulation_barrier_residuals": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Simulation Barrier Residuals",
+      "type": "array"
+    },
+    "target_component": {
+      "default": "",
+      "title": "Target Component",
+      "type": "string"
+    },
+    "task_id": {
+      "default": "",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "witness_kind": {
+      "default": "bottleneck-intervention",
+      "title": "Witness Kind",
+      "type": "string"
+    }
+  },
+  "required": [
+    "report_id"
+  ],
+  "title": "BottleneckWitnessReport",
+  "type": "object"
+}

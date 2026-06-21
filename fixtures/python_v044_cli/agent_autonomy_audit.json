@@ -1,0 +1,254 @@
+{
+  "accepted": true,
+  "adoption_required_for_core": false,
+  "agent_full_extra_available": true,
+  "approval_gate_present": false,
+  "approval_persistence_created": false,
+  "autonomy_enablers": [
+    "compact reports keep the first workflow machine-readable",
+    "operator adoption sidecars are optional documentation",
+    "packet exchange, dashboard, and benchmark sidecars are diagnostic-only",
+    "canonical readiness is available from pip through bundled snapshot metadata",
+    "argv arrays avoid shell-specific quoting and glob expansion",
+    "agent-full extra exposes connector, identity, and service dependencies via pip"
+  ],
+  "background_crawling_allowed": false,
+  "command_execution_allowed_by_pic": false,
+  "compact_mode_available": true,
+  "operationally_usable": true,
+  "pip_agent_full_commands": [
+    "python -m pip install \"percolation-inversion-compiler[agent-full]\"",
+    "pic agent network-readiness --profile development",
+    "pic agent communication-guide --profile development",
+    "pic agent communication-guide --profile development --no-allow-live-connectors",
+    "pic agent relay-readiness --profile development"
+  ],
+  "pip_core_commands": [
+    "python -m pip install percolation-inversion-compiler",
+    "pic agent explain",
+    "pic agent autonomy-audit --profile development --format json",
+    "pic agent check --compact --text \"Candidate packet: preserve residuals.\" --profile development",
+    "pic phase plan --compact --text \"Candidate packet: preserve residuals.\" --profile development",
+    "pic agent accelerate --compact --text \"Candidate packet: preserve residuals.\" --profile development",
+    "pic demo installed-smoke --profile development",
+    "pic demo bootstrap --output-dir pic-demo",
+    "pic runtime step --state pic-demo/runtime_state.json --input pic-demo/runtime_step_input.json --profile development",
+    "pic phase benchmark-suite --profile development --format json",
+    "pic phase dashboard --profile development --format json",
+    "pic packet inspect --packet pic-demo/packet_envelope.json",
+    "pic packet merge --packets pic-demo/packet*.json --output pic-demo/merged-packets.json",
+    "pic packet lineage --packet pic-demo/merged-packets.json",
+    "pic phase observe --reports pic-demo/phase_dashboard.json --output pic-demo/observation.json",
+    "pic snapshot list",
+    "pic audit canonical-readiness --profile development --format json",
+    "pic schema --type AgentAutonomyAuditReport",
+    "pic schema --type CanonicalImplementationReadinessReport"
+  ],
+  "pip_core_workflow_available": true,
+  "profile": "development",
+  "reasons": [
+    "core PIC activity is not gated by operator adoption state",
+    "autonomy is increased through portable records and sidecar diagnostics"
+  ],
+  "recommended_next_invocations": [
+    {
+      "argv": [
+        "python",
+        "-m",
+        "pip",
+        "install",
+        "percolation-inversion-compiler"
+      ],
+      "executes_shell_commands_by_pic": false,
+      "invocation_id": "pip-core-install",
+      "mutates_environment_if_operator_runs_it": true,
+      "purpose": "Install the bare package when local environment mutation is authorized.",
+      "requires_agent_full_extra": false,
+      "requires_operator_authority": true,
+      "requires_source_checkout": false,
+      "safety_notes": [
+        "argv is the portable invocation; shell_command is display text",
+        "PIC emits this command as data and does not execute it"
+      ],
+      "shell_command": "python -m pip install percolation-inversion-compiler"
+    },
+    {
+      "argv": [
+        "pic",
+        "agent",
+        "check",
+        "--compact",
+        "--text",
+        "Candidate packet: preserve residuals.",
+        "--profile",
+        "development"
+      ],
+      "executes_shell_commands_by_pic": false,
+      "invocation_id": "compact-agent-check",
+      "mutates_environment_if_operator_runs_it": false,
+      "purpose": "Run the shortest compact candidate-output check.",
+      "requires_agent_full_extra": false,
+      "requires_operator_authority": false,
+      "requires_source_checkout": false,
+      "safety_notes": [
+        "argv is the portable invocation; shell_command is display text",
+        "PIC emits this command as data and does not execute it"
+      ],
+      "shell_command": "pic agent check --compact --text \"Candidate packet: preserve residuals.\" --profile development"
+    },
+    {
+      "argv": [
+        "pic",
+        "phase",
+        "plan",
+        "--compact",
+        "--text",
+        "Candidate packet: preserve residuals.",
+        "--profile",
+        "development"
+      ],
+      "executes_shell_commands_by_pic": false,
+      "invocation_id": "compact-phase-plan",
+      "mutates_environment_if_operator_runs_it": false,
+      "purpose": "Rank phase gaps and bottlenecks without adoption state.",
+      "requires_agent_full_extra": false,
+      "requires_operator_authority": false,
+      "requires_source_checkout": false,
+      "safety_notes": [
+        "argv is the portable invocation; shell_command is display text",
+        "PIC emits this command as data and does not execute it"
+      ],
+      "shell_command": "pic phase plan --compact --text \"Candidate packet: preserve residuals.\" --profile development"
+    },
+    {
+      "argv": [
+        "pic",
+        "agent",
+        "accelerate",
+        "--compact",
+        "--text",
+        "Candidate packet: preserve residuals.",
+        "--profile",
+        "development"
+      ],
+      "executes_shell_commands_by_pic": false,
+      "invocation_id": "compact-agent-accelerate",
+      "mutates_environment_if_operator_runs_it": false,
+      "purpose": "Build an agent-facing acceleration plan without changing settled semantics.",
+      "requires_agent_full_extra": false,
+      "requires_operator_authority": false,
+      "requires_source_checkout": false,
+      "safety_notes": [
+        "argv is the portable invocation; shell_command is display text",
+        "PIC emits this command as data and does not execute it"
+      ],
+      "shell_command": "pic agent accelerate --compact --text \"Candidate packet: preserve residuals.\" --profile development"
+    },
+    {
+      "argv": [
+        "pic",
+        "audit",
+        "canonical-readiness",
+        "--profile",
+        "development",
+        "--format",
+        "json"
+      ],
+      "executes_shell_commands_by_pic": false,
+      "invocation_id": "canonical-readiness",
+      "mutates_environment_if_operator_runs_it": false,
+      "purpose": "Inspect canonical implementation coverage from bundled snapshots without TeX files.",
+      "requires_agent_full_extra": false,
+      "requires_operator_authority": false,
+      "requires_source_checkout": false,
+      "safety_notes": [
+        "argv is the portable invocation; shell_command is display text",
+        "PIC emits this command as data and does not execute it"
+      ],
+      "shell_command": "pic audit canonical-readiness --profile development --format json"
+    },
+    {
+      "argv": [
+        "pic",
+        "packet",
+        "merge",
+        "--packets",
+        "pic-demo/packet*.json",
+        "--output",
+        "pic-demo/merged-packets.json"
+      ],
+      "executes_shell_commands_by_pic": false,
+      "invocation_id": "sidecar-packet-merge",
+      "mutates_environment_if_operator_runs_it": false,
+      "purpose": "Merge bootstrapped packet sidecars with Python-side glob expansion.",
+      "requires_agent_full_extra": false,
+      "requires_operator_authority": false,
+      "requires_source_checkout": false,
+      "safety_notes": [
+        "argv is the portable invocation; shell_command is display text",
+        "PIC emits this command as data and does not execute it"
+      ],
+      "shell_command": "pic packet merge --packets pic-demo/packet*.json --output pic-demo/merged-packets.json"
+    },
+    {
+      "argv": [
+        "python",
+        "-m",
+        "pip",
+        "install",
+        "percolation-inversion-compiler[agent-full]"
+      ],
+      "executes_shell_commands_by_pic": false,
+      "invocation_id": "agent-full-install",
+      "mutates_environment_if_operator_runs_it": true,
+      "purpose": "Install connector, identity, and service extras when that capability is needed.",
+      "requires_agent_full_extra": true,
+      "requires_operator_authority": true,
+      "requires_source_checkout": false,
+      "safety_notes": [
+        "argv is the portable invocation; shell_command is display text",
+        "PIC emits this command as data and does not execute it"
+      ],
+      "shell_command": "python -m pip install \"percolation-inversion-compiler[agent-full]\""
+    }
+  ],
+  "remaining_friction_points": [
+    "installing packages still mutates the selected Python environment",
+    "canonical source-file audits and repository fixtures still require a source checkout",
+    "production packet promotion still requires accepted protocol-relative identity context"
+  ],
+  "report_id": "agent-autonomy-audit",
+  "safe_commands_executable_by_pic": false,
+  "safety_invariants": [
+    "settled=false is expected unless scoped finite verifier rules settle obligations",
+    "residual ledgers and missing obligations must be preserved",
+    "this package does not prove real ASI, physical, simulator, oracle, or policy outcomes",
+    "this package does not require self-rewrite, fine-tuning, or model-weight changes",
+    "agent-facing commands are recommendation-only and do not execute arbitrary shell commands",
+    "production packet promotion requires accepted identity context",
+    "live connectors are bounded and candidate-only by default when an explicit source is supplied",
+    "no background crawling",
+    "no autonomous polling",
+    "no arbitrary shell execution",
+    "no repository mutation",
+    "no hidden promotion from accepted or workflow_usable to settled",
+    "external metadata packets remain candidates until downstream checks pass",
+    "candidate-only external intake cannot improve Psi, BR, AC, or collective certificates",
+    "general web intake is bounded and does not execute scripts, forms, or repo mutation",
+    "agent-to-agent messages are packet candidates, not proof of external-world truth",
+    "adoption approval is not a phase input or settled blocker",
+    "safe_commands are not executable authority",
+    "PIC does not persist approval state"
+  ],
+  "settled": false,
+  "shell_expansion_required_for_sidecars": false,
+  "source_checkout_commands": [
+    "uv run pic ecology ingest-general --source examples/agent_network/feed.xml --kind rss",
+    "uv run pic ecology bridge-runtime --report examples/agent_network/general_intake_report.example.json",
+    "uv run pic alt admit --packet examples/alt/admission_packet.json",
+    "uv run pic agent message contract --message examples/agent_network/agent_message.json",
+    "uv run pic phase plan --request examples/phase_acceleration/phase_acceleration_request.json --compact --profile development"
+  ],
+  "source_checkout_required_for_core": false,
+  "workflow_usable": true
+}

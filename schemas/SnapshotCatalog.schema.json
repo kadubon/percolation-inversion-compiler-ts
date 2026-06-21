@@ -1,0 +1,481 @@
+{
+  "$defs": {
+    "CoverageStatus": {
+      "enum": [
+        "implemented_constructive",
+        "implemented_checker",
+        "implemented_schema",
+        "partial",
+        "external_obligation",
+        "unsupported"
+      ],
+      "title": "CoverageStatus",
+      "type": "string"
+    },
+    "ExternalObligationCatalog": {
+      "description": "Catalog of non-finite or domain-specific obligations.",
+      "properties": {
+        "artifact": {
+          "title": "Artifact",
+          "type": "string"
+        },
+        "category_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Category Summary",
+          "type": "object"
+        },
+        "obligations": {
+          "items": {
+            "$ref": "#/$defs/TheoryImplementationRecord"
+          },
+          "title": "Obligations",
+          "type": "array"
+        },
+        "verifier_route_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Verifier Route Summary",
+          "type": "object"
+        }
+      },
+      "required": [
+        "artifact"
+      ],
+      "title": "ExternalObligationCatalog",
+      "type": "object"
+    },
+    "ImplementationMaturity": {
+      "enum": [
+        "implemented_verified_algorithm",
+        "implemented_shape_checker",
+        "implemented_schema_only",
+        "external_contract_only",
+        "snapshot_metadata_only",
+        "unsupported_no_interface"
+      ],
+      "title": "ImplementationMaturity",
+      "type": "string"
+    },
+    "SnapshotAttribution": {
+      "description": "Attribution metadata for a derived non-vendored snapshot.",
+      "properties": {
+        "author": {
+          "title": "Author",
+          "type": "string"
+        },
+        "derived_from": {
+          "default": "canonical TeX metadata extraction",
+          "title": "Derived From",
+          "type": "string"
+        },
+        "doi": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Doi"
+        },
+        "license_id": {
+          "title": "License Id",
+          "type": "string"
+        },
+        "source_tex_md5": {
+          "title": "Source Tex Md5",
+          "type": "string"
+        },
+        "source_tex_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Tex Sha256"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "year": {
+          "title": "Year",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "author",
+        "year",
+        "title",
+        "license_id",
+        "source_tex_md5"
+      ],
+      "title": "SnapshotAttribution",
+      "type": "object"
+    },
+    "TheoryImplementationRecord": {
+      "description": "Portable implementation mapping for one finite theory item.",
+      "properties": {
+        "accepted_evidence_kind": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Evidence Kind",
+          "type": "array"
+        },
+        "artifact": {
+          "title": "Artifact",
+          "type": "string"
+        },
+        "checker_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Checker Ref"
+        },
+        "checker_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checker Refs",
+          "type": "array"
+        },
+        "coverage_status": {
+          "$ref": "#/$defs/CoverageStatus"
+        },
+        "external_failure_modes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "External Failure Modes",
+          "type": "array"
+        },
+        "failure_modes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Failure Modes",
+          "type": "array"
+        },
+        "implementation_maturity": {
+          "$ref": "#/$defs/ImplementationMaturity",
+          "default": "unsupported_no_interface"
+        },
+        "implementation_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Implementation Ref"
+        },
+        "implementation_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Implementation Refs",
+          "type": "array"
+        },
+        "item_id": {
+          "title": "Item Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "obligation_category": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Obligation Category"
+        },
+        "proof_obligation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Proof Obligation Ids",
+          "type": "array"
+        },
+        "residual_coordinates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual Coordinates",
+          "type": "array"
+        },
+        "residual_policy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Residual Policy"
+        },
+        "safe_default": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Safe Default"
+        },
+        "schema_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Schema Ref"
+        },
+        "schema_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Schema Refs",
+          "type": "array"
+        },
+        "verifier_contract": {
+          "additionalProperties": true,
+          "title": "Verifier Contract",
+          "type": "object"
+        },
+        "verifier_route": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verifier Route"
+        }
+      },
+      "required": [
+        "item_id",
+        "artifact",
+        "label",
+        "coverage_status"
+      ],
+      "title": "TheoryImplementationRecord",
+      "type": "object"
+    },
+    "TheorySnapshot": {
+      "description": "Portable snapshot for one canonical theory artifact.",
+      "properties": {
+        "artifact": {
+          "title": "Artifact",
+          "type": "string"
+        },
+        "artifact_key": {
+          "title": "Artifact Key",
+          "type": "string"
+        },
+        "attribution": {
+          "$ref": "#/$defs/SnapshotAttribution"
+        },
+        "claims": {
+          "title": "Claims",
+          "type": "integer"
+        },
+        "coverage_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Coverage Counts",
+          "type": "object"
+        },
+        "coverage_delta": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Coverage Delta",
+          "type": "object"
+        },
+        "definitions": {
+          "title": "Definitions",
+          "type": "integer"
+        },
+        "external_obligation_catalog": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExternalObligationCatalog"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "external_obligation_category_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "External Obligation Category Summary",
+          "type": "object"
+        },
+        "external_verifier_route_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "External Verifier Route Summary",
+          "type": "object"
+        },
+        "item_mappings": {
+          "items": {
+            "$ref": "#/$defs/TheorySnapshotItem"
+          },
+          "title": "Item Mappings",
+          "type": "array"
+        },
+        "mr_records": {
+          "title": "Mr Records",
+          "type": "integer"
+        },
+        "representative_items": {
+          "items": {
+            "$ref": "#/$defs/TheorySnapshotItem"
+          },
+          "title": "Representative Items",
+          "type": "array"
+        },
+        "schema_version": {
+          "default": "theory-snapshot-1.0",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_key",
+        "artifact",
+        "attribution",
+        "definitions",
+        "claims",
+        "mr_records",
+        "coverage_counts",
+        "coverage_delta"
+      ],
+      "title": "TheorySnapshot",
+      "type": "object"
+    },
+    "TheorySnapshotItem": {
+      "description": "Small item-id implementation mapping derived from a canonical source.",
+      "properties": {
+        "coverage_status": {
+          "title": "Coverage Status",
+          "type": "string"
+        },
+        "implementation_maturity": {
+          "default": "snapshot_metadata_only",
+          "title": "Implementation Maturity",
+          "type": "string"
+        },
+        "implementation_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Implementation Refs",
+          "type": "array"
+        },
+        "item_id": {
+          "title": "Item Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "obligation_category": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Obligation Category"
+        },
+        "verifier_route": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verifier Route"
+        }
+      },
+      "required": [
+        "item_id",
+        "label",
+        "coverage_status"
+      ],
+      "title": "TheorySnapshotItem",
+      "type": "object"
+    }
+  },
+  "description": "Named catalog of bundled derived theory snapshots.",
+  "properties": {
+    "catalog_id": {
+      "default": "percolation-inversion-compiler-derived-snapshots",
+      "title": "Catalog Id",
+      "type": "string"
+    },
+    "snapshots": {
+      "additionalProperties": {
+        "$ref": "#/$defs/TheorySnapshot"
+      },
+      "title": "Snapshots",
+      "type": "object"
+    }
+  },
+  "required": [
+    "snapshots"
+  ],
+  "title": "SnapshotCatalog",
+  "type": "object"
+}

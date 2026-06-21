@@ -1,0 +1,99 @@
+{
+  "description": "Schema-first conformance report for language ports and bundled examples.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "checked_examples": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Checked Examples",
+      "type": "object"
+    },
+    "checked_negative_examples": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Checked Negative Examples",
+      "type": "object"
+    },
+    "expected_failure_count": {
+      "default": 0,
+      "title": "Expected Failure Count",
+      "type": "integer"
+    },
+    "manifest_path": {
+      "default": "",
+      "title": "Manifest Path",
+      "type": "string"
+    },
+    "negative_example_count": {
+      "default": 0,
+      "title": "Negative Example Count",
+      "type": "integer"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "positive_example_count": {
+      "default": 0,
+      "title": "Positive Example Count",
+      "type": "integer"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "pic-portability-conformance",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "schema_digest": {
+      "default": "",
+      "title": "Schema Digest",
+      "type": "string"
+    },
+    "schema_names": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Schema Names",
+      "type": "object"
+    },
+    "semantic_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Semantic Invariants",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "sha256": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Sha256",
+      "type": "object"
+    },
+    "unexpected_failure_count": {
+      "default": 0,
+      "title": "Unexpected Failure Count",
+      "type": "integer"
+    }
+  },
+  "title": "PortabilityConformanceReport",
+  "type": "object"
+}

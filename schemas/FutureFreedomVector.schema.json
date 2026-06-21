@@ -1,0 +1,84 @@
+{
+  "$defs": {
+    "MultiHorizonOrder": {
+      "properties": {
+        "horizons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Horizons",
+          "type": "array"
+        },
+        "order_id": {
+          "title": "Order Id",
+          "type": "string"
+        },
+        "precedence": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Precedence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "order_id"
+      ],
+      "title": "MultiHorizonOrder",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "horizons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Horizons",
+      "type": "array"
+    },
+    "order": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/MultiHorizonOrder"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "residuals": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residuals",
+      "type": "object"
+    },
+    "values": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Values",
+      "type": "object"
+    },
+    "vector_id": {
+      "title": "Vector Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "vector_id"
+  ],
+  "title": "FutureFreedomVector",
+  "type": "object"
+}

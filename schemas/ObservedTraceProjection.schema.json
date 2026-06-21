@@ -1,0 +1,57 @@
+{
+  "description": "Projection of an observed trace into token-relevant coordinates.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "information_loss_bound": {
+      "default": 0.0,
+      "title": "Information Loss Bound",
+      "type": "number"
+    },
+    "omitted_fields": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Omitted Fields",
+      "type": "array"
+    },
+    "projection_id": {
+      "title": "Projection Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "retained_fields": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Retained Fields",
+      "type": "array"
+    },
+    "trace_id": {
+      "title": "Trace Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "projection_id",
+    "trace_id"
+  ],
+  "title": "ObservedTraceProjection",
+  "type": "object"
+}

@@ -1,0 +1,208 @@
+{
+  "accepted": false,
+  "evidence_refs": [
+    "packet:evidence:example"
+  ],
+  "liquidity_certificate": {
+    "certificate_id": "alt-liquidity:example",
+    "cost_ledger": {
+      "absorption_cost": 0.1,
+      "certification_cost": 0.2,
+      "contamination_cost": 0.0,
+      "deployment_cost": 0.2,
+      "depreciation_cost": 0.1,
+      "evidence_refs": [
+        "ledger:cost:example"
+      ],
+      "formation_cost": 0.4,
+      "hazard_cost": 0.1,
+      "hidden_resource_cost": 0.1,
+      "ledger_id": "formation-cost:example",
+      "maintenance_cost": 0.1,
+      "misapplication_cost": 0.1,
+      "settlement_cost": 0.1,
+      "telemetry_cost": 0.1,
+      "unit": "dimensionless",
+      "validation_cost": 0.2
+    },
+    "downstream_search_cost_reduction_lower_bound": 4.0,
+    "evaluator_quorum_refs": [
+      "quorum:example"
+    ],
+    "hazard_envelope_certificate": {
+      "authority_envelope_refs": [
+        "authority:example"
+      ],
+      "capability_envelope_refs": [
+        "capability-envelope:example"
+      ],
+      "certificate_id": "hazard-envelope:example",
+      "evidence_refs": [
+        "hazard:evidence:example"
+      ],
+      "hazard_refs": [
+        "hazard:bounded-example"
+      ],
+      "irreversible_risk_upper_bound": 0.1,
+      "noncompensable_hazard_detected": false,
+      "risk_budget_upper_bound": 0.5,
+      "rollback_refs": [
+        "rollback:example"
+      ],
+      "token_id": "alt-token:trace:alt-example"
+    },
+    "lifecycle_bounds": {
+      "accepted": true,
+      "bounds_id": "lifecycle:example",
+      "depreciation_upper_bound": 0.1,
+      "expiry_horizon": "2026-12-31T00:00:00Z",
+      "finality_record_ref": "finality:example",
+      "half_life_lower_bound": 30.0,
+      "maintenance_upper_bound": 0.1
+    },
+    "mission_validity_certificate": {
+      "accepted": true,
+      "certificate_id": "mission:example",
+      "evidence_refs": [
+        "mission:evidence:example"
+      ],
+      "mission_id": "mission:agent-intake",
+      "receiver_family": [
+        "agent",
+        "verifier"
+      ],
+      "target_basis": [
+        "external-candidate-routing"
+      ],
+      "token_id": "alt-token:trace:alt-example"
+    },
+    "opportunity_contract": {
+      "accepted": true,
+      "baseline_ref": "baseline:resource-matched-example",
+      "contract_id": "opportunity:example",
+      "evidence_refs": [
+        "opportunity:evidence:example"
+      ],
+      "horizon": "finite-2026",
+      "mission_id": "mission:agent-intake",
+      "receiver_family": [
+        "agent",
+        "verifier"
+      ],
+      "task_portfolio_refs": [
+        "portfolio:external-intake-routing"
+      ]
+    },
+    "robustness_refs": [
+      "robustness:example"
+    ],
+    "value_evidence_level": "calibrated-proxy",
+    "proxy_bridge_refs": [
+      "proxy-bridge:example"
+    ],
+    "common_estimand_refs": [
+      "estimand:mission-valid-search-cost"
+    ],
+    "root_finality_certificate": {
+      "byzantine_budget_upper_bound": 0.1,
+      "certificate_id": "root-finality:example",
+      "correlated_capture_budget_upper_bound": 0.1,
+      "evaluator_quorum_refs": [
+        "quorum:example"
+      ],
+      "evidence_refs": [
+        "root-finality:evidence:example"
+      ],
+      "finality_record_ref": "finality:example",
+      "partition_alarm": false,
+      "root_role_refs": [
+        "root:evaluator",
+        "root:settlement"
+      ],
+      "token_id": "alt-token:trace:alt-example"
+    },
+    "root_of_trust_refs": [
+      "root:example"
+    ],
+    "telemetry_cost_certificate": {
+      "certificate_id": "telemetry-cost:example",
+      "evidence_refs": [
+        "telemetry:evidence:example"
+      ],
+      "measured_cost_upper_bound": 0.2,
+      "observer_cost_upper_bound": 0.1,
+      "observer_refs": [
+        "observer:telemetry:example"
+      ],
+      "tamper_positive": false,
+      "token_id": "alt-token:trace:alt-example"
+    },
+    "telemetry_refs": [
+      "telemetry:example"
+    ],
+    "token_id": "alt-token:trace:alt-example",
+    "transport_certificate": {
+      "accepted": true,
+      "certificate_id": "transport:example",
+      "density_ratio_upper_bound": 1.5,
+      "evidence_refs": [
+        "transport:evidence:example"
+      ],
+      "max_density_ratio": 4.0,
+      "source_receiver_family": [
+        "agent"
+      ],
+      "support_coverage_lower_bound": 0.8,
+      "target_receiver_family": [
+        "agent",
+        "verifier"
+      ],
+      "token_id": "alt-token:trace:alt-example"
+    }
+  },
+  "packet_id": "alt-packet:example",
+  "token": {
+    "authority_refs": [
+      "authority:example"
+    ],
+    "candidate_only": true,
+    "capability_envelope_refs": [
+      "capability-envelope:example"
+    ],
+    "claim": "Reusable abstraction from bounded external intake into verifier work",
+    "evidence_refs": [
+      "trace:evidence:example"
+    ],
+    "interface_refs": [
+      "schema:GeneralIntakeReport",
+      "schema:GeneralIntakeRuntimeBridgeReport"
+    ],
+    "receiver_family": [
+      "agent",
+      "verifier"
+    ],
+    "token_id": "alt-token:trace:alt-example",
+    "validity_domain": "protocol-relative-finite",
+    "verifier_routes": [
+      "alt.adapters.transport.verify_density_ratio_support"
+    ]
+  },
+  "trace_sufficiency": {
+    "accepted": true,
+    "certificate_id": "trace-sufficiency:example",
+    "evidence_refs": [
+      "trace:evidence:example"
+    ],
+    "finite_checks_passed": true,
+    "operationally_usable": true,
+    "projection_id": "projection:example",
+    "required_fields": [
+      "observation_refs",
+      "action_refs",
+      "result_refs"
+    ],
+    "settled": false,
+    "sufficiency_lower_bound": 0.8,
+    "trace_id": "trace:alt-example"
+  }
+}

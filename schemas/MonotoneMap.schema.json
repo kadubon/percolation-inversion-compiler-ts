@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "FiniteOrder": {
+      "description": "A finite preorder/partial order represented by a finite relation.",
+      "properties": {
+        "elements": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Elements",
+          "type": "array"
+        },
+        "leq_pairs": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Leq Pairs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "elements"
+      ],
+      "title": "FiniteOrder",
+      "type": "object"
+    }
+  },
+  "description": "Finite monotone map between finite orders.",
+  "properties": {
+    "mapping": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Mapping",
+      "type": "object"
+    },
+    "source": {
+      "$ref": "#/$defs/FiniteOrder"
+    },
+    "target": {
+      "$ref": "#/$defs/FiniteOrder"
+    }
+  },
+  "required": [
+    "source",
+    "target",
+    "mapping"
+  ],
+  "title": "MonotoneMap",
+  "type": "object"
+}

@@ -1,0 +1,62 @@
+{
+  "$defs": {
+    "ProvenanceManifestEntry": {
+      "description": "One file entry in a deterministic provenance manifest.",
+      "properties": {
+        "media_type": {
+          "default": "application/octet-stream",
+          "title": "Media Type",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "ProvenanceManifestEntry",
+      "type": "object"
+    }
+  },
+  "description": "Release-asset manifest with deterministic local digests.",
+  "properties": {
+    "aggregate_sha256": {
+      "title": "Aggregate Sha256",
+      "type": "string"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/ProvenanceManifestEntry"
+      },
+      "title": "Entries",
+      "type": "array"
+    },
+    "manifest_id": {
+      "default": "percolation-inversion-compiler-release-artifacts",
+      "title": "Manifest Id",
+      "type": "string"
+    },
+    "package_version": {
+      "default": "0.4.4",
+      "title": "Package Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "aggregate_sha256"
+  ],
+  "title": "ReleaseArtifactManifest",
+  "type": "object"
+}

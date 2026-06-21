@@ -1,0 +1,68 @@
+{
+  "description": "Inspection report for one data-only packet envelope.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "candidate_only": {
+      "default": true,
+      "title": "Candidate Only",
+      "type": "boolean"
+    },
+    "content_digest": {
+      "title": "Content Digest",
+      "type": "string"
+    },
+    "content_treated_as_data": {
+      "default": true,
+      "title": "Content Treated As Data",
+      "type": "boolean"
+    },
+    "embedded_command_like_values": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Embedded Command Like Values",
+      "type": "array"
+    },
+    "executed_command_count": {
+      "default": 0,
+      "title": "Executed Command Count",
+      "type": "integer"
+    },
+    "packet_id": {
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "workflow_usable": {
+      "default": false,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "report_id",
+    "packet_id",
+    "content_digest"
+  ],
+  "title": "PacketImportInspectionReport",
+  "type": "object"
+}

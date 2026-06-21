@@ -1,0 +1,79 @@
+{
+  "description": "Finite digest of the declared ECPT protocol frame.\n\nThe digest fixes the observation window, validity domain, allowed packet\nsources, and route catalog used by hidden-capability-injection checks.  It\nis a protocol identity record, not a proof of physical outcomes.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "allowed_evidence_prefixes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Evidence Prefixes",
+      "type": "array"
+    },
+    "allowed_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Packet Ids",
+      "type": "array"
+    },
+    "allowed_route_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Route Ids",
+      "type": "array"
+    },
+    "allowed_source_kinds": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Source Kinds",
+      "type": "array"
+    },
+    "constraint_frame_id": {
+      "default": "default-constraint-frame",
+      "title": "Constraint Frame Id",
+      "type": "string"
+    },
+    "observation_window_id": {
+      "default": "default-observation-window",
+      "title": "Observation Window Id",
+      "type": "string"
+    },
+    "protocol_id": {
+      "title": "Protocol Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "route_catalog_digest": {
+      "default": "",
+      "title": "Route Catalog Digest",
+      "type": "string"
+    },
+    "sha256": {
+      "default": "",
+      "title": "Sha256",
+      "type": "string"
+    },
+    "validity_domain": {
+      "default": "protocol-relative-finite",
+      "title": "Validity Domain",
+      "type": "string"
+    }
+  },
+  "required": [
+    "protocol_id"
+  ],
+  "title": "ProtocolFrameDigest",
+  "type": "object"
+}

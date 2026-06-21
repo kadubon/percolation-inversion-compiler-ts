@@ -1,0 +1,53 @@
+{
+  "accepted": true,
+  "canonical_dir": "canonical-suite",
+  "external_obligation_totals": {
+    "alt": 54,
+    "bit": 0,
+    "ecpt": 30,
+    "sqot": 15,
+    "trc": 32
+  },
+  "finite_upgrade_candidates": {
+    "alt": [
+      "alt:common-estimand-bridge"
+    ],
+    "ecpt": [
+      "ecpt:proxy-target-grounding"
+    ],
+    "sqot": [
+      "sqot:reserve-adequacy"
+    ],
+    "trc": [
+      "trc:frontier-debt"
+    ]
+  },
+  "operationally_usable": true,
+  "partial_total": 0,
+  "report_id": "pic-theory-fidelity",
+  "settled": false,
+  "snapshot_health": {
+    "alt": true,
+    "bit": true,
+    "ecpt": true,
+    "sqot": true,
+    "trc": true
+  },
+  "strict_grammar_accepted": {
+    "alt": true,
+    "bit": true,
+    "ecpt": true,
+    "sqot": true,
+    "trc": true
+  },
+  "suite_status": "pass",
+  "theory_summaries": {
+    "ecpt": {
+      "external_obligation_total": 30,
+      "finite_upgrade_candidate_count": 1,
+      "snapshot_healthy": true,
+      "strict_grammar_accepted": true
+    }
+  },
+  "unsupported_total": 0
+}

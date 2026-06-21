@@ -1,0 +1,11 @@
+{
+  "enum": [
+    "local_only",
+    "controlled_web",
+    "federated_agents",
+    "production_network",
+    "adversarial_network"
+  ],
+  "title": "GeneralIntakeProfile",
+  "type": "string"
+}

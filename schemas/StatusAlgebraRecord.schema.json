@@ -1,0 +1,37 @@
+{
+  "properties": {
+    "algebra_id": {
+      "title": "Algebra Id",
+      "type": "string"
+    },
+    "allowed_transitions": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array",
+        "uniqueItems": true
+      },
+      "title": "Allowed Transitions",
+      "type": "object"
+    },
+    "non_promotion": {
+      "default": true,
+      "title": "Non Promotion",
+      "type": "boolean"
+    },
+    "settled_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Settled Obligations",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "algebra_id"
+  ],
+  "title": "StatusAlgebraRecord",
+  "type": "object"
+}

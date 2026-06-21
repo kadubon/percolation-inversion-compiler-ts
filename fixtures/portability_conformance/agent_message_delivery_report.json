@@ -1,0 +1,124 @@
+{
+  "accepted": true,
+  "action": "send",
+  "candidate_only": true,
+  "candidate_packet_ids": [
+    "packet:agent-message:agent-message:bbe9ff00252f"
+  ],
+  "delivered_message_ids": [
+    "agent-message:bbe9ff00252f"
+  ],
+  "exchange_reports": [
+    {
+      "accepted": true,
+      "candidate_packet_ids": [
+        "packet:agent-message:agent-message:bbe9ff00252f"
+      ],
+      "consumed_nonces": [
+        "nonce-portability-1"
+      ],
+      "identity_reasons": [],
+      "identity_status": "not-required",
+      "identity_verified": false,
+      "message_contract_valid": true,
+      "message_id": "agent-message:bbe9ff00252f",
+      "next_safe_commands": [
+        "uv run pic agent message contract --message <message.json>",
+        "uv run pic ecology bridge-runtime --report <general-intake-report.json>"
+      ],
+      "nonce_ledger": {
+        "accepted": true,
+        "consumed_nonces": [
+          "nonce-portability-1"
+        ],
+        "ledger_id": "agent-message-nonce-ledger",
+        "reasons": [],
+        "rejected_message_ids": [],
+        "replayed_nonces": []
+      },
+      "nonce_status": "consumed",
+      "packets": [
+        {
+          "authority_granted": true,
+          "authority_required": false,
+          "claim": "Portability relay packet: preserve residuals.",
+          "content_sha256": "bbe9ff00252faac0d01996b1ccb77a0b91762ea8f0849ca29d48b10f436a9488",
+          "dependencies": [],
+          "evidence_hash_valid": true,
+          "evidence_refs": [
+            "agent-message:agent-message:bbe9ff00252f",
+            "sha256:bbe9ff00252faac0d01996b1ccb77a0b91762ea8f0849ca29d48b10f436a9488"
+          ],
+          "expected_downstream_gain": 0.00625,
+          "expires_at": null,
+          "freshness": 1.0,
+          "hazard_charge": 0.0,
+          "identity_contribution_status": "provisional",
+          "issuer_agent_id": "agent:port",
+          "issuer_attestation_id": null,
+          "issuer_public_key_id": null,
+          "issuer_signature_ref": null,
+          "packet_id": "packet:agent-message:agent-message:bbe9ff00252f",
+          "receiver_family": [
+            "agent",
+            "verifier"
+          ],
+          "residual_charge": 0.0,
+          "reuse_context": "general",
+          "rollback_available": true,
+          "route_safe": true,
+          "salience_class": "packet",
+          "source_kind": "agent-message",
+          "source_ref": "agent-message:bbe9ff00252f",
+          "status": "provisional",
+          "tags": [
+            "agent-message",
+            "external-candidate",
+            "packet",
+            "residual"
+          ],
+          "verification_cost": 0.01,
+          "verifier_routes": []
+        }
+      ],
+      "quarantine_recommended": false,
+      "reasons": [],
+      "replay_detected": false,
+      "report_id": "agent-message-check:agent-message:bbe9ff00252f",
+      "residual_ledger": {
+        "coordinates": {}
+      },
+      "sender_agent_id": "agent:port",
+      "settled": false,
+      "signature_present": false,
+      "signature_required": false
+    }
+  ],
+  "identity_context_accepted": false,
+  "inbox_id": "relay_inbox",
+  "inbox_ref": "relay_inbox.json",
+  "message_ids": [
+    "agent-message:bbe9ff00252f"
+  ],
+  "next_safe_commands": [
+    "pic agent message contract --message <message.json>",
+    "pic agent inbox verify --inbox <inbox.json>",
+    "pic ecology bridge-runtime --report <general-intake-report.json>"
+  ],
+  "nonce_ledger": {
+    "accepted": true,
+    "consumed_nonces": [
+      "nonce-portability-1"
+    ],
+    "ledger_id": "agent-message-nonce-ledger",
+    "reasons": [],
+    "rejected_message_ids": [],
+    "replayed_nonces": []
+  },
+  "operationally_usable": true,
+  "profile": "development",
+  "reasons": [],
+  "rejected_message_ids": [],
+  "report_id": "agent-message-delivery:send:54fbca083cb0",
+  "settled": false
+}

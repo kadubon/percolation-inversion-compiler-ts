@@ -1,0 +1,39 @@
+{
+  "description": "One diagnostic metric for protocol-relative sidecar benchmarking.",
+  "properties": {
+    "interpretation": {
+      "default": "diagnostic-only metric; does not settle claims",
+      "title": "Interpretation",
+      "type": "string"
+    },
+    "label": {
+      "title": "Label",
+      "type": "string"
+    },
+    "maximum": {
+      "default": 1.0,
+      "title": "Maximum",
+      "type": "number"
+    },
+    "metric_id": {
+      "title": "Metric Id",
+      "type": "string"
+    },
+    "passed": {
+      "default": false,
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "value": {
+      "default": 0.0,
+      "title": "Value",
+      "type": "number"
+    }
+  },
+  "required": [
+    "metric_id",
+    "label"
+  ],
+  "title": "ProtocolRelativeBenchmarkMetric",
+  "type": "object"
+}

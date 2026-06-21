@@ -1,0 +1,27 @@
+{
+  "description": "Good-Turing unseen-mass certificate with explicit charges.",
+  "properties": {
+    "duplicate_rate": {
+      "default": 0.0,
+      "title": "Duplicate Rate",
+      "type": "number"
+    },
+    "false_entry_rate": {
+      "default": 0.0,
+      "title": "False Entry Rate",
+      "type": "number"
+    },
+    "species_counts": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Species Counts",
+      "type": "array"
+    }
+  },
+  "required": [
+    "species_counts"
+  ],
+  "title": "GoodTuringCertificate",
+  "type": "object"
+}

@@ -1,0 +1,543 @@
+{
+  "artifact": "Bottleneck Inversion Theory.tex",
+  "artifact_key": "bit",
+  "attribution": {
+    "author": "K. Takahashi",
+    "derived_from": "canonical TeX metadata extraction; TeX/PDF source is not vendored",
+    "doi": "10.5281/zenodo.20545356",
+    "license_id": "cc-by-4.0",
+    "source_tex_md5": "20d11630520de9ea81f886b8b731772e",
+    "title": "Bottleneck Inversion Theory: Machine-Readable Witness Calculus for Unlockable Potential",
+    "year": 2026
+  },
+  "claims": 20,
+  "coverage_counts": {
+    "external_obligation": 0,
+    "implemented_checker": 24,
+    "implemented_constructive": 15,
+    "implemented_schema": 3,
+    "partial": 0,
+    "unsupported": 0
+  },
+  "coverage_delta": {
+    "external_obligation_total": 0,
+    "implemented_total": 42,
+    "unimplemented_total": 0,
+    "unsupported_total": 0
+  },
+  "definitions": 22,
+  "external_obligation_catalog": {
+    "artifact": "Bottleneck Inversion Theory.tex",
+    "category_summary": {},
+    "obligations": [],
+    "verifier_route_summary": {}
+  },
+  "external_obligation_category_summary": {},
+  "external_verifier_route_summary": {},
+  "item_mappings": [
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.ActionGrammar"
+      ],
+      "item_id": "def:grammar",
+      "label": "Extraction grammar",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_protocol_object"
+      ],
+      "item_id": "def:protocol",
+      "label": "Protocol object",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_intervention_law"
+      ],
+      "item_id": "def:law",
+      "label": "Intervention law",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_unit_functor"
+      ],
+      "item_id": "def:unit",
+      "label": "Ordered potential cone and unit functor",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "bit.VectorCompatibleFamily"
+      ],
+      "item_id": "def:family",
+      "label": "Vector compatible family",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.selective_potential"
+      ],
+      "item_id": "def:vcup",
+      "label": "Vector-compatible selective potential",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_stopped_evidence_sheaf_certificate"
+      ],
+      "item_id": "def:sheaf",
+      "label": "Stopped evidence sheaf",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_stopped_evidence_sheaf_certificate"
+      ],
+      "item_id": "thm:sheaf",
+      "label": "Stopped evidence sheaf",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_selective_cup_certificate"
+      ],
+      "item_id": "thm:vcup",
+      "label": "Unit-compatible selective CUP",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_stopped_evidence_sheaf"
+      ],
+      "item_id": "prop:plain-product",
+      "label": "Plain evidence products",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_martingale_deficiency_certificate"
+      ],
+      "item_id": "def:mpda",
+      "label": "Martingale partition deficiency audit",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.martingale_partition_lower_bound"
+      ],
+      "item_id": "def:mpda-lower",
+      "label": "Partition lower mass",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_martingale_deficiency_certificate"
+      ],
+      "item_id": "thm:mpda",
+      "label": "Martingale partition deficiency",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_martingale_partition_audit"
+      ],
+      "item_id": "prop:fixed-partition",
+      "label": "Fixed partition certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_mechanism_cube"
+      ],
+      "item_id": "def:mech-cube",
+      "label": "Mechanism-factorized channel cube",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_mechanism_cube_certificate"
+      ],
+      "item_id": "def:mech-release",
+      "label": "Mechanism-controlled release",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_mechanism_cube_certificate"
+      ],
+      "item_id": "thm:mech",
+      "label": "Mechanism-factorized non-substitution",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_mechanism_cube_certificate"
+      ],
+      "item_id": "prop:paired-null",
+      "label": "Paired null certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_epigraph_release_program"
+      ],
+      "item_id": "def:ecep",
+      "label": "Exactness-certified epigraph program",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_epigraph_release_program"
+      ],
+      "item_id": "def:ecep-int",
+      "label": "Exactness-certified release interval",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_epigraph_release_program"
+      ],
+      "item_id": "thm:ecep",
+      "label": "Exactness-certified release duality",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_sinkhorn_plan"
+      ],
+      "item_id": "prop:finite-interface",
+      "label": "Finite Sinkhorn and hierarchy interface",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.good_turing_frontier_release"
+      ],
+      "item_id": "def:unseen",
+      "label": "Unseen-frontier mass process",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.good_turing_frontier_release"
+      ],
+      "item_id": "def:unseen-charge",
+      "label": "Unseen-frontier charge",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.good_turing_frontier_release"
+      ],
+      "item_id": "thm:unseen",
+      "label": "Unseen-frontier calibrated release",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.good_turing_frontier_release"
+      ],
+      "item_id": "prop:good",
+      "label": "Good--Turing unseen special case",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.anchor_transfer_bound"
+      ],
+      "item_id": "def:cvat",
+      "label": "Cross-validated anchor transfer",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.anchor_transfer_bound"
+      ],
+      "item_id": "def:cvat-score",
+      "label": "Cross-validated release score",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.anchor_transfer_bound"
+      ],
+      "item_id": "thm:cvat",
+      "label": "Cross-validated anchor transfer",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_fused_geometric_comparison"
+      ],
+      "item_id": "prop:fgw",
+      "label": "Geometric fused comparison",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.dynamic_regime_arrival_gain"
+      ],
+      "item_id": "def:dras",
+      "label": "Dynamic-regime acceleration surface",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.dynamic_regime_arrival_gain"
+      ],
+      "item_id": "thm:dras",
+      "label": "Dynamic-regime acceleration",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.dynamic_regime_arrival_gain"
+      ],
+      "item_id": "prop:fixed-accel",
+      "label": "Fixed-candidate acceleration identity",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_cegar_refinement_trace"
+      ],
+      "item_id": "def:cegar",
+      "label": "CEGAR simulation barrier",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_cegar_refinement_trace"
+      ],
+      "item_id": "thm:cegar",
+      "label": "CEGAR simulation-barrier",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.cegar_barrier_bound"
+      ],
+      "item_id": "prop:finite-barrier",
+      "label": "Finite transition-table barrier",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.CertificateCompilerRecord"
+      ],
+      "item_id": "def:compiler",
+      "label": "Certificate compiler",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_certificate_compiler"
+      ],
+      "item_id": "prop:compiler",
+      "label": "Compiler preservation",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.StatusRule"
+      ],
+      "item_id": "prop:no-promotion",
+      "label": "No status promotion",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.minimal_effective_conditions"
+      ],
+      "item_id": "def:mec",
+      "label": "Minimal effective condition",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.minimal_effective_conditions"
+      ],
+      "item_id": "prop:mec",
+      "label": "Finite MEC frontier extraction",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "core.CertificateFamily"
+      ],
+      "item_id": "def:schema",
+      "label": "Certificate schema",
+      "obligation_category": null,
+      "verifier_route": null
+    }
+  ],
+  "mr_records": 92,
+  "representative_items": [
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "ecpt.ActionGrammar"
+      ],
+      "item_id": "def:grammar",
+      "label": "Extraction grammar",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_protocol_object"
+      ],
+      "item_id": "def:protocol",
+      "label": "Protocol object",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_intervention_law"
+      ],
+      "item_id": "def:law",
+      "label": "Intervention law",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_unit_functor"
+      ],
+      "item_id": "def:unit",
+      "label": "Ordered potential cone and unit functor",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "bit.VectorCompatibleFamily"
+      ],
+      "item_id": "def:family",
+      "label": "Vector compatible family",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "bit.selective_potential"
+      ],
+      "item_id": "def:vcup",
+      "label": "Vector-compatible selective potential",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_stopped_evidence_sheaf_certificate"
+      ],
+      "item_id": "def:sheaf",
+      "label": "Stopped evidence sheaf",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "bit.check_stopped_evidence_sheaf_certificate"
+      ],
+      "item_id": "thm:sheaf",
+      "label": "Stopped evidence sheaf",
+      "obligation_category": null,
+      "verifier_route": null
+    }
+  ],
+  "schema_version": "theory-snapshot-1.0"
+}

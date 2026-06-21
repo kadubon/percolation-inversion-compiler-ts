@@ -1,0 +1,26 @@
+{
+  "description": "Finite confidence ledger for a statistical certificate.",
+  "properties": {
+    "alpha": {
+      "title": "Alpha",
+      "type": "number"
+    },
+    "residual_coordinates": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residual Coordinates",
+      "type": "object"
+    },
+    "sample_size": {
+      "title": "Sample Size",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "alpha",
+    "sample_size"
+  ],
+  "title": "ConfidenceLedger",
+  "type": "object"
+}

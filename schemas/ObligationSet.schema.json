@@ -1,0 +1,230 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "ExternalProofObligation": {
+      "description": "A non-finite or domain-specific proof obligation exposed to callers.",
+      "properties": {
+        "accepted_evidence_kind": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Evidence Kind",
+          "type": "array"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "failure_mode": {
+          "default": "proof-obligation-unmet",
+          "title": "Failure Mode",
+          "type": "string"
+        },
+        "failure_modes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Failure Modes",
+          "type": "array"
+        },
+        "obligation_category": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Obligation Category"
+        },
+        "obligation_id": {
+          "title": "Obligation Id",
+          "type": "string"
+        },
+        "required_for_status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "settled"
+        },
+        "residual_charge": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "residual_policy": {
+          "default": "charge-residual-until-verified",
+          "title": "Residual Policy",
+          "type": "string"
+        },
+        "safe_default": {
+          "default": "diagnostic-with-proof-obligation",
+          "title": "Safe Default",
+          "type": "string"
+        },
+        "schema_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Schema Refs",
+          "type": "array"
+        },
+        "verifier_contract": {
+          "additionalProperties": true,
+          "title": "Verifier Contract",
+          "type": "object"
+        },
+        "verifier_hint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verifier Hint"
+        }
+      },
+      "required": [
+        "obligation_id",
+        "description"
+      ],
+      "title": "ExternalProofObligation",
+      "type": "object"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "description": "Finite obligation state used to derive claim status.",
+  "properties": {
+    "expired": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Expired",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "external": {
+      "items": {
+        "$ref": "#/$defs/ExternalProofObligation"
+      },
+      "title": "External",
+      "type": "array"
+    },
+    "present": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Present",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "title": "ObligationSet",
+  "type": "object"
+}

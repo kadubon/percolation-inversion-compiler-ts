@@ -1,0 +1,23 @@
+{
+  "description": "Named JSON Schema bundle for other implementations and agents.",
+  "properties": {
+    "bundle_id": {
+      "default": "percolation-inversion-compiler-portability",
+      "title": "Bundle Id",
+      "type": "string"
+    },
+    "schemas": {
+      "additionalProperties": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Schemas",
+      "type": "object"
+    }
+  },
+  "required": [
+    "schemas"
+  ],
+  "title": "PortabilitySchemaBundle",
+  "type": "object"
+}

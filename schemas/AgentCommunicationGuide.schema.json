@@ -1,0 +1,213 @@
+{
+  "$defs": {
+    "AgentCommunicationPolicy": {
+      "description": "Bounded default-live policy for external communication guidance.",
+      "properties": {
+        "allow_live_connectors": {
+          "title": "Allow Live Connectors",
+          "type": "boolean"
+        },
+        "allowed_source_kinds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Source Kinds",
+          "type": "array"
+        },
+        "arbitrary_execution_allowed": {
+          "default": false,
+          "title": "Arbitrary Execution Allowed",
+          "type": "boolean"
+        },
+        "background_crawling_allowed": {
+          "default": false,
+          "title": "Background Crawling Allowed",
+          "type": "boolean"
+        },
+        "candidate_only_by_default": {
+          "default": true,
+          "title": "Candidate Only By Default",
+          "type": "boolean"
+        },
+        "explicit_source_required": {
+          "default": true,
+          "title": "Explicit Source Required",
+          "type": "boolean"
+        },
+        "live_connectors_default_enabled": {
+          "title": "Live Connectors Default Enabled",
+          "type": "boolean"
+        },
+        "live_default_mode": {
+          "title": "Live Default Mode",
+          "type": "string"
+        },
+        "opt_out_available": {
+          "default": true,
+          "title": "Opt Out Available",
+          "type": "boolean"
+        },
+        "profile": {
+          "default": "development",
+          "title": "Profile",
+          "type": "string"
+        },
+        "required_env_vars": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Env Vars",
+          "type": "array"
+        },
+        "residual_behavior": {
+          "default": "connector failures become diagnostic residual ledger entries",
+          "title": "Residual Behavior",
+          "type": "string"
+        },
+        "token_policy": {
+          "default": "environment-only",
+          "title": "Token Policy",
+          "type": "string"
+        }
+      },
+      "title": "AgentCommunicationPolicy",
+      "type": "object"
+    },
+    "AgentCommunicationStep": {
+      "description": "One safe external-communication workflow step for agents.",
+      "properties": {
+        "allowed_source_kinds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Source Kinds",
+          "type": "array"
+        },
+        "failure_modes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Failure Modes",
+          "type": "array"
+        },
+        "inspect_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Inspect Fields",
+          "type": "array"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "required_env_vars": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Env Vars",
+          "type": "array"
+        },
+        "residual_behavior": {
+          "default": "preserve diagnostic residuals",
+          "title": "Residual Behavior",
+          "type": "string"
+        },
+        "safe_commands": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safe Commands",
+          "type": "array"
+        },
+        "safety_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safety Notes",
+          "type": "array"
+        },
+        "schemas": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Schemas",
+          "type": "array"
+        },
+        "sdk_entrypoints": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sdk Entrypoints",
+          "type": "array"
+        },
+        "step_id": {
+          "title": "Step Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "step_id",
+        "title",
+        "purpose"
+      ],
+      "title": "AgentCommunicationStep",
+      "type": "object"
+    }
+  },
+  "description": "External communication guide for networked collective-phase workflows.",
+  "properties": {
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "allow_live_connectors": {
+      "title": "Allow Live Connectors",
+      "type": "boolean"
+    },
+    "guide_id": {
+      "default": "agent-communication-guide",
+      "title": "Guide Id",
+      "type": "string"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "policy": {
+      "$ref": "#/$defs/AgentCommunicationPolicy"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/AgentCommunicationStep"
+      },
+      "title": "Steps",
+      "type": "array"
+    }
+  },
+  "title": "AgentCommunicationGuide",
+  "type": "object"
+}

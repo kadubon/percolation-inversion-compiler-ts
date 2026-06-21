@@ -1,0 +1,17 @@
+{
+  "accepted": true,
+  "calibrated_proxy_bridge_ready": true,
+  "causal_effect_ready": false,
+  "common_estimand_ready": true,
+  "common_estimand_refs": [
+    "estimand:shared-cost-reduction"
+  ],
+  "operationally_usable": true,
+  "proxy_bridge_refs": [
+    "bridge:proxy-to-value"
+  ],
+  "proxy_only": false,
+  "report_id": "alt-value-bridge:portability",
+  "settled": false,
+  "value_evidence_level": "calibrated-proxy"
+}

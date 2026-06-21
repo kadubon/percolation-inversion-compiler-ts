@@ -1,0 +1,100 @@
+{
+  "description": "Compact deterministic command/schema/field guidance for AI agents.",
+  "properties": {
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Commands",
+      "type": "array"
+    },
+    "entrypoint": {
+      "default": "pic agent check --compact",
+      "title": "Entrypoint",
+      "type": "string"
+    },
+    "fields_to_inspect": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Fields To Inspect",
+      "type": "array"
+    },
+    "operationally_usable": {
+      "default": true,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "pip_agent_full_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Pip Agent Full Commands",
+      "type": "array"
+    },
+    "pip_core_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Pip Core Commands",
+      "type": "array"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "agent-runbook",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "runbook_steps": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Runbook Steps",
+      "type": "array"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "schemas_to_inspect": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Schemas To Inspect",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "source_checkout_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Checkout Commands",
+      "type": "array"
+    }
+  },
+  "title": "AgentRunbookReport",
+  "type": "object"
+}

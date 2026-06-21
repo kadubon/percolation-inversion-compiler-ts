@@ -1,0 +1,319 @@
+{
+  "$defs": {
+    "AgentMessageEnvelope": {
+      "description": "Protocol-relative agent-to-agent message envelope.",
+      "properties": {
+        "audience": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Audience",
+          "type": "array"
+        },
+        "content": {
+          "title": "Content",
+          "type": "string"
+        },
+        "content_sha256": {
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "declared_packet_kind": {
+          "default": "capability-packet-candidate",
+          "title": "Declared Packet Kind",
+          "type": "string"
+        },
+        "declared_receiver_family": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Declared Receiver Family",
+          "type": "array"
+        },
+        "declared_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Declared Routes",
+          "type": "array"
+        },
+        "declared_validity_domain": {
+          "default": "protocol-relative-finite",
+          "title": "Declared Validity Domain",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "expires_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expires At"
+        },
+        "issued_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issued At"
+        },
+        "issuer_attestation_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Attestation Id"
+        },
+        "issuer_public_key_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Public Key Id"
+        },
+        "message_id": {
+          "title": "Message Id",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Metadata",
+          "type": "object"
+        },
+        "nonce": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Nonce"
+        },
+        "protocol_version": {
+          "default": "pic-agent-message-v1",
+          "title": "Protocol Version",
+          "type": "string"
+        },
+        "receiver_agent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Receiver Agent Id"
+        },
+        "reply_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reply To"
+        },
+        "route_request_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Route Request Refs",
+          "type": "array"
+        },
+        "sender_agent_id": {
+          "title": "Sender Agent Id",
+          "type": "string"
+        },
+        "signature_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Signature Ref"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        },
+        "thread_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Thread Id"
+        }
+      },
+      "required": [
+        "message_id",
+        "sender_agent_id",
+        "content",
+        "content_sha256"
+      ],
+      "title": "AgentMessageEnvelope",
+      "type": "object"
+    },
+    "AgentPeerRecord": {
+      "description": "Declared peer identity and communication capability.",
+      "properties": {
+        "accepted_source_kinds": {
+          "items": {
+            "$ref": "#/$defs/PacketSourceKind"
+          },
+          "title": "Accepted Source Kinds",
+          "type": "array"
+        },
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "endpoint_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Endpoint Ref"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Metadata",
+          "type": "object"
+        },
+        "peer_id": {
+          "title": "Peer Id",
+          "type": "string"
+        },
+        "public_key_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Public Key Id"
+        },
+        "trust_profile": {
+          "default": "development",
+          "title": "Trust Profile",
+          "type": "string"
+        }
+      },
+      "required": [
+        "peer_id",
+        "agent_id"
+      ],
+      "title": "AgentPeerRecord",
+      "type": "object"
+    },
+    "PacketSourceKind": {
+      "enum": [
+        "local",
+        "github",
+        "zenodo",
+        "arxiv",
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "agent-message",
+        "agent-inbox",
+        "web-crawl",
+        "agent-output",
+        "auto"
+      ],
+      "title": "PacketSourceKind",
+      "type": "string"
+    }
+  },
+  "description": "Portable local inbox/outbox record for agent packet exchange.",
+  "properties": {
+    "inbox_id": {
+      "default": "agent-inbox",
+      "title": "Inbox Id",
+      "type": "string"
+    },
+    "messages": {
+      "items": {
+        "$ref": "#/$defs/AgentMessageEnvelope"
+      },
+      "title": "Messages",
+      "type": "array"
+    },
+    "peers": {
+      "items": {
+        "$ref": "#/$defs/AgentPeerRecord"
+      },
+      "title": "Peers",
+      "type": "array"
+    },
+    "seen_nonces": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Seen Nonces",
+      "type": "array"
+    }
+  },
+  "title": "AgentInboxRecord",
+  "type": "object"
+}

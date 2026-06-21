@@ -1,0 +1,861 @@
+{
+  "$defs": {
+    "CapabilityPacketCandidate": {
+      "description": "An observable artifact that may become an ECPT capability packet.",
+      "properties": {
+        "authority_granted": {
+          "default": true,
+          "title": "Authority Granted",
+          "type": "boolean"
+        },
+        "authority_required": {
+          "default": false,
+          "title": "Authority Required",
+          "type": "boolean"
+        },
+        "claim": {
+          "title": "Claim",
+          "type": "string"
+        },
+        "content_sha256": {
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "dependencies": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Dependencies",
+          "type": "array"
+        },
+        "evidence_hash_valid": {
+          "default": true,
+          "title": "Evidence Hash Valid",
+          "type": "boolean"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "expected_downstream_gain": {
+          "default": 0.0,
+          "title": "Expected Downstream Gain",
+          "type": "number"
+        },
+        "expires_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expires At"
+        },
+        "freshness": {
+          "default": 1.0,
+          "title": "Freshness",
+          "type": "number"
+        },
+        "hazard_charge": {
+          "default": 0.0,
+          "title": "Hazard Charge",
+          "type": "number"
+        },
+        "identity_contribution_status": {
+          "$ref": "#/$defs/IdentityContributionStatus",
+          "default": "provisional"
+        },
+        "issuer_agent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Agent Id"
+        },
+        "issuer_attestation_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Attestation Id"
+        },
+        "issuer_public_key_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Public Key Id"
+        },
+        "issuer_signature_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Signature Ref"
+        },
+        "packet_id": {
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "receiver_family": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Receiver Family",
+          "type": "array"
+        },
+        "residual_charge": {
+          "default": 0.0,
+          "title": "Residual Charge",
+          "type": "number"
+        },
+        "reuse_context": {
+          "default": "general",
+          "title": "Reuse Context",
+          "type": "string"
+        },
+        "rollback_available": {
+          "default": true,
+          "title": "Rollback Available",
+          "type": "boolean"
+        },
+        "route_safe": {
+          "default": true,
+          "title": "Route Safe",
+          "type": "boolean"
+        },
+        "salience_class": {
+          "default": "default",
+          "title": "Salience Class",
+          "type": "string"
+        },
+        "source_kind": {
+          "$ref": "#/$defs/PacketSourceKind",
+          "default": "local"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "provisional"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        },
+        "verification_cost": {
+          "default": 0.0,
+          "title": "Verification Cost",
+          "type": "number"
+        },
+        "verifier_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verifier Routes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "packet_id",
+        "source_ref",
+        "content_sha256",
+        "claim"
+      ],
+      "title": "CapabilityPacketCandidate",
+      "type": "object"
+    },
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "ExternalCandidateClassification": {
+      "description": "SQOT/runtime queue class for external packet candidates.",
+      "enum": [
+        "diagnostic_work",
+        "verifier_work",
+        "quarantine_work",
+        "candidate_only"
+      ],
+      "title": "ExternalCandidateClassification",
+      "type": "string"
+    },
+    "GeneralIntakePolicyDecision": {
+      "description": "One deterministic policy decision for a general-intake source.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "allow_live_connectors": {
+          "default": false,
+          "title": "Allow Live Connectors",
+          "type": "boolean"
+        },
+        "candidate_only": {
+          "default": true,
+          "title": "Candidate Only",
+          "type": "boolean"
+        },
+        "decision_id": {
+          "title": "Decision Id",
+          "type": "string"
+        },
+        "ecpt_phase_contribution_allowed": {
+          "default": false,
+          "title": "Ecpt Phase Contribution Allowed",
+          "type": "boolean"
+        },
+        "profile": {
+          "default": "development",
+          "title": "Profile",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_coordinates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual Coordinates",
+          "type": "array"
+        },
+        "source_kind": {
+          "$ref": "#/$defs/PacketSourceKind",
+          "default": "auto"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "decision_id",
+        "source_ref"
+      ],
+      "title": "GeneralIntakePolicyDecision",
+      "type": "object"
+    },
+    "IdentityContributionStatus": {
+      "description": "How identity evidence may contribute to runtime packet capital.",
+      "enum": [
+        "verified",
+        "provisional",
+        "diagnostic",
+        "quarantined",
+        "rejected"
+      ],
+      "title": "IdentityContributionStatus",
+      "type": "string"
+    },
+    "IntakeProvenanceRecord": {
+      "description": "Sanitized provenance for external packet candidates.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "byte_count": {
+          "default": 0,
+          "title": "Byte Count",
+          "type": "integer"
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Sha256"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Final Url"
+        },
+        "media_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Media Type"
+        },
+        "provenance_id": {
+          "title": "Provenance Id",
+          "type": "string"
+        },
+        "public_source_ref": {
+          "title": "Public Source Ref",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "redirect_chain": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Redirect Chain",
+          "type": "array"
+        },
+        "residual_coordinates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual Coordinates",
+          "type": "array"
+        },
+        "robots_decision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RobotsDecision"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "source_kind": {
+          "$ref": "#/$defs/PacketSourceKind"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "status_code": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status Code"
+        }
+      },
+      "required": [
+        "provenance_id",
+        "source_kind",
+        "source_ref",
+        "public_source_ref"
+      ],
+      "title": "IntakeProvenanceRecord",
+      "type": "object"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "PacketIngestionReport": {
+      "description": "Packet ingestion result for local, live, or agent-output sources.",
+      "properties": {
+        "accepted": {
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "packets": {
+          "items": {
+            "$ref": "#/$defs/CapabilityPacketCandidate"
+          },
+          "title": "Packets",
+          "type": "array"
+        },
+        "provenance": {
+          "items": {
+            "$ref": "#/$defs/IntakeProvenanceRecord"
+          },
+          "title": "Provenance",
+          "type": "array"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "rejected_sources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Sources",
+          "type": "array"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "source_kind": {
+          "$ref": "#/$defs/PacketSourceKind"
+        },
+        "web_fetch_reports": {
+          "items": {
+            "$ref": "#/$defs/WebFetchReport"
+          },
+          "title": "Web Fetch Reports",
+          "type": "array"
+        }
+      },
+      "required": [
+        "report_id",
+        "accepted",
+        "source_kind"
+      ],
+      "title": "PacketIngestionReport",
+      "type": "object"
+    },
+    "PacketSourceKind": {
+      "enum": [
+        "local",
+        "github",
+        "zenodo",
+        "arxiv",
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "agent-message",
+        "agent-inbox",
+        "web-crawl",
+        "agent-output",
+        "auto"
+      ],
+      "title": "PacketSourceKind",
+      "type": "string"
+    },
+    "RobotsDecision": {
+      "description": "Recorded robots/rate decision for bounded web intake.\n\nThis is an audit record, not a guarantee that the remote site authorizes\nevery downstream use.  Unknown or unavailable policy can remain diagnostic\nunder stricter profiles.",
+      "properties": {
+        "allowed": {
+          "default": true,
+          "title": "Allowed",
+          "type": "boolean"
+        },
+        "decision_id": {
+          "default": "robots:not-checked",
+          "title": "Decision Id",
+          "type": "string"
+        },
+        "mode": {
+          "default": "not-checked",
+          "title": "Mode",
+          "type": "string"
+        },
+        "reason": {
+          "default": "robots policy was recorded but not enforced",
+          "title": "Reason",
+          "type": "string"
+        },
+        "residual_coordinate": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Residual Coordinate"
+        },
+        "source_ref": {
+          "default": "",
+          "title": "Source Ref",
+          "type": "string"
+        }
+      },
+      "title": "RobotsDecision",
+      "type": "object"
+    },
+    "WebFetchReport": {
+      "description": "Portable audit record for one bounded HTTP(S) resource fetch.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "byte_count": {
+          "default": 0,
+          "title": "Byte Count",
+          "type": "integer"
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Sha256"
+        },
+        "content_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Type"
+        },
+        "final_url": {
+          "default": "",
+          "title": "Final Url",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "redirect_chain": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Redirect Chain",
+          "type": "array"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "robots_decision": {
+          "$ref": "#/$defs/RobotsDecision"
+        },
+        "status_code": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Status Code"
+        }
+      },
+      "required": [
+        "report_id",
+        "requested_url"
+      ],
+      "title": "WebFetchReport",
+      "type": "object"
+    }
+  },
+  "description": "General intake report that preserves diagnostic residuals.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "candidate_only": {
+      "default": true,
+      "title": "Candidate Only",
+      "type": "boolean"
+    },
+    "candidate_residual_coordinates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Candidate Residual Coordinates",
+      "type": "array"
+    },
+    "discovered_links": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Discovered Links",
+      "type": "array"
+    },
+    "ecpt_phase_contribution_allowed": {
+      "default": false,
+      "title": "Ecpt Phase Contribution Allowed",
+      "type": "boolean"
+    },
+    "ingestion_reports": {
+      "items": {
+        "$ref": "#/$defs/PacketIngestionReport"
+      },
+      "title": "Ingestion Reports",
+      "type": "array"
+    },
+    "intake_profile": {
+      "default": "development",
+      "title": "Intake Profile",
+      "type": "string"
+    },
+    "packets": {
+      "items": {
+        "$ref": "#/$defs/CapabilityPacketCandidate"
+      },
+      "title": "Packets",
+      "type": "array"
+    },
+    "policy_digest": {
+      "default": "",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "provenance": {
+      "items": {
+        "$ref": "#/$defs/IntakeProvenanceRecord"
+      },
+      "title": "Provenance",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "rejected_sources": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Sources",
+      "type": "array"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    },
+    "source_kind": {
+      "$ref": "#/$defs/PacketSourceKind"
+    },
+    "source_policy_decisions": {
+      "items": {
+        "$ref": "#/$defs/GeneralIntakePolicyDecision"
+      },
+      "title": "Source Policy Decisions",
+      "type": "array"
+    },
+    "sqot_queue_class": {
+      "$ref": "#/$defs/ExternalCandidateClassification",
+      "default": "candidate_only"
+    },
+    "total_bytes_read": {
+      "default": 0,
+      "title": "Total Bytes Read",
+      "type": "integer"
+    },
+    "total_candidate_packets": {
+      "default": 0,
+      "title": "Total Candidate Packets",
+      "type": "integer"
+    },
+    "web_fetch_reports": {
+      "items": {
+        "$ref": "#/$defs/WebFetchReport"
+      },
+      "title": "Web Fetch Reports",
+      "type": "array"
+    }
+  },
+  "required": [
+    "report_id",
+    "source",
+    "source_kind"
+  ],
+  "title": "GeneralIntakeReport",
+  "type": "object"
+}

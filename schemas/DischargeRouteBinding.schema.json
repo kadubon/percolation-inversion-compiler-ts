@@ -1,0 +1,93 @@
+{
+  "$defs": {
+    "DischargeLevel": {
+      "enum": [
+        "finite_value_check",
+        "replay_check",
+        "contract_enforced",
+        "external_domain_required"
+      ],
+      "title": "DischargeLevel",
+      "type": "string"
+    }
+  },
+  "description": "Reviewed binding from a canonical external route to an implementation route.",
+  "properties": {
+    "binding_id": {
+      "title": "Binding Id",
+      "type": "string"
+    },
+    "canonical_route_id": {
+      "title": "Canonical Route Id",
+      "type": "string"
+    },
+    "canonical_verifier_route": {
+      "title": "Canonical Verifier Route",
+      "type": "string"
+    },
+    "discharge_level": {
+      "$ref": "#/$defs/DischargeLevel"
+    },
+    "evidence_kind_map": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Evidence Kind Map",
+      "type": "object"
+    },
+    "implemented_route_id": {
+      "title": "Implemented Route Id",
+      "type": "string"
+    },
+    "implemented_verifier_route": {
+      "title": "Implemented Verifier Route",
+      "type": "string"
+    },
+    "obligation_category": {
+      "title": "Obligation Category",
+      "type": "string"
+    },
+    "residual_external_obligation_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual External Obligation Refs",
+      "type": "array"
+    },
+    "residual_policy": {
+      "title": "Residual Policy",
+      "type": "string"
+    },
+    "safe_default": {
+      "title": "Safe Default",
+      "type": "string"
+    },
+    "settlement_scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Settlement Scope",
+      "type": "array"
+    },
+    "unresolved_domain_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unresolved Domain Obligations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "binding_id",
+    "canonical_route_id",
+    "implemented_route_id",
+    "canonical_verifier_route",
+    "implemented_verifier_route",
+    "obligation_category",
+    "discharge_level",
+    "residual_policy",
+    "safe_default"
+  ],
+  "title": "DischargeRouteBinding",
+  "type": "object"
+}

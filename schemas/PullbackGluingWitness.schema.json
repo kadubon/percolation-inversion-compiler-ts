@@ -1,0 +1,43 @@
+{
+  "properties": {
+    "glued_section": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Glued Section",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "local_sections": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array",
+        "uniqueItems": true
+      },
+      "title": "Local Sections",
+      "type": "object"
+    },
+    "overlaps": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array",
+        "uniqueItems": true
+      },
+      "title": "Overlaps",
+      "type": "object"
+    },
+    "witness_id": {
+      "title": "Witness Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "witness_id"
+  ],
+  "title": "PullbackGluingWitness",
+  "type": "object"
+}

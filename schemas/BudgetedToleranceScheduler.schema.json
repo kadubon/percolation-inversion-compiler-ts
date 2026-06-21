@@ -1,0 +1,59 @@
+{
+  "properties": {
+    "budget": {
+      "title": "Budget",
+      "type": "number"
+    },
+    "dependency_edges": {
+      "items": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Dependency Edges",
+      "type": "array"
+    },
+    "exhausted_budget_residual": {
+      "default": 0.0,
+      "title": "Exhausted Budget Residual",
+      "type": "number"
+    },
+    "partial_frontier_on_exhaustion": {
+      "default": true,
+      "title": "Partial Frontier On Exhaustion",
+      "type": "boolean"
+    },
+    "schedule": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Schedule",
+      "type": "array"
+    },
+    "scheduler_id": {
+      "title": "Scheduler Id",
+      "type": "string"
+    },
+    "task_costs": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Task Costs",
+      "type": "object"
+    }
+  },
+  "required": [
+    "scheduler_id",
+    "budget"
+  ],
+  "title": "BudgetedToleranceScheduler",
+  "type": "object"
+}

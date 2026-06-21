@@ -1,0 +1,104 @@
+{
+  "description": "Non-authority boundary for operator-adoption sidecars.",
+  "properties": {
+    "affects_agent_accelerate": {
+      "default": false,
+      "title": "Affects Agent Accelerate",
+      "type": "boolean"
+    },
+    "affects_agent_check": {
+      "default": false,
+      "title": "Affects Agent Check",
+      "type": "boolean"
+    },
+    "affects_packet_promotion": {
+      "default": false,
+      "title": "Affects Packet Promotion",
+      "type": "boolean"
+    },
+    "affects_phase_plan": {
+      "default": false,
+      "title": "Affects Phase Plan",
+      "type": "boolean"
+    },
+    "affects_settled": {
+      "default": false,
+      "title": "Affects Settled",
+      "type": "boolean"
+    },
+    "approval_settles_truth": {
+      "default": false,
+      "title": "Approval Settles Truth",
+      "type": "boolean"
+    },
+    "boundary_id": {
+      "default": "adoption-safety-boundary",
+      "title": "Boundary Id",
+      "type": "string"
+    },
+    "calls_network": {
+      "default": false,
+      "title": "Calls Network",
+      "type": "boolean"
+    },
+    "clones_repository": {
+      "default": false,
+      "title": "Clones Repository",
+      "type": "boolean"
+    },
+    "creates_required_approval_state": {
+      "default": false,
+      "title": "Creates Required Approval State",
+      "type": "boolean"
+    },
+    "executes_shell_commands": {
+      "default": false,
+      "title": "Executes Shell Commands",
+      "type": "boolean"
+    },
+    "installs_package": {
+      "default": false,
+      "title": "Installs Package",
+      "type": "boolean"
+    },
+    "invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Invariants",
+      "type": "array"
+    },
+    "modifies_config_files": {
+      "default": false,
+      "title": "Modifies Config Files",
+      "type": "boolean"
+    },
+    "mutates_runtime_state": {
+      "default": false,
+      "title": "Mutates Runtime State",
+      "type": "boolean"
+    },
+    "pure_output_generator": {
+      "default": true,
+      "title": "Pure Output Generator",
+      "type": "boolean"
+    },
+    "safe_commands_are_execution_authority": {
+      "default": false,
+      "title": "Safe Commands Are Execution Authority",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "sidecar_only": {
+      "default": true,
+      "title": "Sidecar Only",
+      "type": "boolean"
+    }
+  },
+  "title": "AdoptionSafetyBoundary",
+  "type": "object"
+}

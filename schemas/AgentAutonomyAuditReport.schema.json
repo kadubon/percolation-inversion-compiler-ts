@@ -1,0 +1,213 @@
+{
+  "$defs": {
+    "AgentCommandInvocation": {
+      "description": "OS-independent command description for autonomous agents.",
+      "properties": {
+        "argv": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Argv",
+          "type": "array"
+        },
+        "executes_shell_commands_by_pic": {
+          "default": false,
+          "title": "Executes Shell Commands By Pic",
+          "type": "boolean"
+        },
+        "invocation_id": {
+          "title": "Invocation Id",
+          "type": "string"
+        },
+        "mutates_environment_if_operator_runs_it": {
+          "default": false,
+          "title": "Mutates Environment If Operator Runs It",
+          "type": "boolean"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "requires_agent_full_extra": {
+          "default": false,
+          "title": "Requires Agent Full Extra",
+          "type": "boolean"
+        },
+        "requires_operator_authority": {
+          "default": false,
+          "title": "Requires Operator Authority",
+          "type": "boolean"
+        },
+        "requires_source_checkout": {
+          "default": false,
+          "title": "Requires Source Checkout",
+          "type": "boolean"
+        },
+        "safety_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safety Notes",
+          "type": "array"
+        },
+        "shell_command": {
+          "default": "",
+          "title": "Shell Command",
+          "type": "string"
+        }
+      },
+      "required": [
+        "invocation_id",
+        "purpose"
+      ],
+      "title": "AgentCommandInvocation",
+      "type": "object"
+    }
+  },
+  "description": "Audit report for non-gated agent activity through installed PIC.",
+  "properties": {
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "adoption_required_for_core": {
+      "default": false,
+      "title": "Adoption Required For Core",
+      "type": "boolean"
+    },
+    "agent_full_extra_available": {
+      "default": true,
+      "title": "Agent Full Extra Available",
+      "type": "boolean"
+    },
+    "approval_gate_present": {
+      "default": false,
+      "title": "Approval Gate Present",
+      "type": "boolean"
+    },
+    "approval_persistence_created": {
+      "default": false,
+      "title": "Approval Persistence Created",
+      "type": "boolean"
+    },
+    "autonomy_enablers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Autonomy Enablers",
+      "type": "array"
+    },
+    "background_crawling_allowed": {
+      "default": false,
+      "title": "Background Crawling Allowed",
+      "type": "boolean"
+    },
+    "command_execution_allowed_by_pic": {
+      "default": false,
+      "title": "Command Execution Allowed By Pic",
+      "type": "boolean"
+    },
+    "compact_mode_available": {
+      "default": true,
+      "title": "Compact Mode Available",
+      "type": "boolean"
+    },
+    "operationally_usable": {
+      "default": true,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "pip_agent_full_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Pip Agent Full Commands",
+      "type": "array"
+    },
+    "pip_core_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Pip Core Commands",
+      "type": "array"
+    },
+    "pip_core_workflow_available": {
+      "default": true,
+      "title": "Pip Core Workflow Available",
+      "type": "boolean"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "recommended_next_invocations": {
+      "items": {
+        "$ref": "#/$defs/AgentCommandInvocation"
+      },
+      "title": "Recommended Next Invocations",
+      "type": "array"
+    },
+    "remaining_friction_points": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Remaining Friction Points",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "agent-autonomy-audit",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "safe_commands_executable_by_pic": {
+      "default": false,
+      "title": "Safe Commands Executable By Pic",
+      "type": "boolean"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "shell_expansion_required_for_sidecars": {
+      "default": false,
+      "title": "Shell Expansion Required For Sidecars",
+      "type": "boolean"
+    },
+    "source_checkout_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Checkout Commands",
+      "type": "array"
+    },
+    "source_checkout_required_for_core": {
+      "default": false,
+      "title": "Source Checkout Required For Core",
+      "type": "boolean"
+    },
+    "workflow_usable": {
+      "default": true,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "title": "AgentAutonomyAuditReport",
+  "type": "object"
+}

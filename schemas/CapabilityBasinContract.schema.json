@@ -1,0 +1,59 @@
+{
+  "description": "Finite target basin contract beyond tag-hit proxies.",
+  "properties": {
+    "basin_id": {
+      "title": "Basin Id",
+      "type": "string"
+    },
+    "max_path_cost": {
+      "default": 1.0,
+      "title": "Max Path Cost",
+      "type": "number"
+    },
+    "receiver_family": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Receiver Family",
+      "type": "array"
+    },
+    "required_edge_types": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Edge Types",
+      "type": "array"
+    },
+    "required_packet_types": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Packet Types",
+      "type": "array"
+    },
+    "required_verifier_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Verifier Routes",
+      "type": "array"
+    },
+    "target_basis": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Target Basis",
+      "type": "array"
+    },
+    "validity_domain": {
+      "default": "protocol-relative-finite",
+      "title": "Validity Domain",
+      "type": "string"
+    }
+  },
+  "required": [
+    "basin_id"
+  ],
+  "title": "CapabilityBasinContract",
+  "type": "object"
+}

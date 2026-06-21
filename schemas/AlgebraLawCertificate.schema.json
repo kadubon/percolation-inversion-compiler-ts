@@ -1,0 +1,101 @@
+{
+  "$defs": {
+    "DomainTypedSemiring": {
+      "description": "Finite semiring table with domain and coordinate metadata.",
+      "properties": {
+        "coordinate_units": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Coordinate Units",
+          "type": "object"
+        },
+        "domain_id": {
+          "title": "Domain Id",
+          "type": "string"
+        },
+        "elements": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Elements",
+          "type": "array"
+        },
+        "one": {
+          "title": "One",
+          "type": "string"
+        },
+        "plus_table": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Plus Table",
+          "type": "object"
+        },
+        "times_table": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Times Table",
+          "type": "object"
+        },
+        "zero": {
+          "title": "Zero",
+          "type": "string"
+        }
+      },
+      "required": [
+        "domain_id",
+        "elements",
+        "zero",
+        "one",
+        "plus_table",
+        "times_table"
+      ],
+      "title": "DomainTypedSemiring",
+      "type": "object"
+    },
+    "ReconstructionResidual": {
+      "description": "Residual charged when an algebraic summary is decoded to a source ledger.",
+      "properties": {
+        "coordinate": {
+          "title": "Coordinate",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "coordinate",
+        "value"
+      ],
+      "title": "ReconstructionResidual",
+      "type": "object"
+    }
+  },
+  "description": "Finite semiring-law checker with reconstruction residual accounting.",
+  "properties": {
+    "reconstruction_residuals": {
+      "items": {
+        "$ref": "#/$defs/ReconstructionResidual"
+      },
+      "title": "Reconstruction Residuals",
+      "type": "array"
+    },
+    "semiring": {
+      "$ref": "#/$defs/DomainTypedSemiring"
+    }
+  },
+  "required": [
+    "semiring"
+  ],
+  "title": "AlgebraLawCertificate",
+  "type": "object"
+}

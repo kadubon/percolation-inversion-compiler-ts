@@ -1,0 +1,42 @@
+{
+  "accepted": true,
+  "baseline_candidate_only_count": 1,
+  "baseline_label": "unstructured-candidate-sharing",
+  "baseline_phase_gap": 0.8074324324324325,
+  "candidate_label": "pic-guided-finite-routing",
+  "finite_route_count_delta": 2,
+  "invariant_checks": {
+    "candidate_only_volume_does_not_reduce_gap": true,
+    "planner_does_not_execute_commands": true,
+    "residuals_visible": true,
+    "settled_not_promoted": true
+  },
+  "operationally_usable": true,
+  "pic_guided_phase_gap": 0.8074324324324325,
+  "pic_guided_repairable_bottleneck_count": 7,
+  "profile": "development",
+  "reasons": [
+    "candidate-only sharing is kept visible but cannot reduce phase gaps",
+    "PIC-guided routing exposes finite verifier and repair work without execution"
+  ],
+  "report_id": "phase-acceleration-benchmark",
+  "residual_visibility_delta": 4,
+  "safety_invariants": [
+    "phase acceleration planning is recommendation-only and does not execute actions",
+    "raw external candidate volume cannot improve Psi, BR, AC, or settled status",
+    "candidate packets, agent messages, and proxy-only ALT reports remain candidates",
+    "settled remains false unless scoped finite verifier rules discharge all obligations",
+    "residual ledgers and missing obligations must be preserved into downstream loops",
+    "ASI-proxy phase is protocol-relative workflow coordination, not real ASI proof",
+    "no physical, simulator, oracle, legal, or policy outcome is proven by this report",
+    "live connectors are bounded and candidate-only by default when an explicit source is supplied",
+    "no background crawling",
+    "no autonomous polling",
+    "no arbitrary shell execution",
+    "no repository mutation",
+    "no hidden promotion from accepted or workflow_usable to settled"
+  ],
+  "scenario": "candidate-sharing-vs-pic-guided-routing",
+  "settled": false,
+  "workflow_usable": true
+}

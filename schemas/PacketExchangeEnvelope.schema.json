@@ -1,0 +1,213 @@
+{
+  "$defs": {
+    "ResidualCarryForwardReport": {
+      "description": "Residual data that must remain attached during packet exchange.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "candidate_only_reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Candidate Only Reasons",
+          "type": "array"
+        },
+        "missing_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Obligations",
+          "type": "array"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "report_id": {
+          "default": "residual-carry-forward",
+          "title": "Report Id",
+          "type": "string"
+        },
+        "residual_summary": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Residual Summary",
+          "type": "object"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "settled_blockers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Settled Blockers",
+          "type": "array"
+        }
+      },
+      "title": "ResidualCarryForwardReport",
+      "type": "object"
+    }
+  },
+  "description": "Data-only packet envelope for diagnostic exchange.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "candidate_only_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Candidate Only Reasons",
+      "type": "array"
+    },
+    "content": {
+      "additionalProperties": true,
+      "title": "Content",
+      "type": "object"
+    },
+    "content_digest": {
+      "title": "Content Digest",
+      "type": "string"
+    },
+    "created_timestamp": {
+      "default": "not-recorded",
+      "title": "Created Timestamp",
+      "type": "string"
+    },
+    "identity_context_summary": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer"
+          }
+        ]
+      },
+      "title": "Identity Context Summary",
+      "type": "object"
+    },
+    "issuer_agent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Issuer Agent Id"
+    },
+    "issuer_public_key_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Issuer Public Key Id"
+    },
+    "lineage_parents": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Lineage Parents",
+      "type": "array"
+    },
+    "missing_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Obligations",
+      "type": "array"
+    },
+    "packet_id": {
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "provenance_summary": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Provenance Summary",
+      "type": "object"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_carry_forward": {
+      "$ref": "#/$defs/ResidualCarryForwardReport"
+    },
+    "residual_ledger_summary": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residual Ledger Summary",
+      "type": "object"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": "pic-packet-exchange-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "settled_blockers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Settled Blockers",
+      "type": "array"
+    },
+    "source_kind": {
+      "default": "runtime-report",
+      "title": "Source Kind",
+      "type": "string"
+    },
+    "workflow_usable": {
+      "default": false,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "packet_id",
+    "content_digest"
+  ],
+  "title": "PacketExchangeEnvelope",
+  "type": "object"
+}

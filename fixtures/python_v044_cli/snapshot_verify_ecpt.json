@@ -1,0 +1,10 @@
+{
+  "artifact_key": "ecpt",
+  "canonical_manifest_schema_version": "canonical-manifest-2.0",
+  "canonical_sha256": "0a45e52c65112a93086b302e3642c85f24ca65b2f5638a1a66eac68afd4d3c7b",
+  "doi_matches": true,
+  "legacy_md5_matches": true,
+  "snapshot_is_derived_metadata": true,
+  "snapshot_schema_version": "theory-snapshot-1.0",
+  "valid": true
+}

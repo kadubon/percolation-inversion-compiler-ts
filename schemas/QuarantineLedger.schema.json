@@ -1,0 +1,31 @@
+{
+  "description": "Fail-closed quarantine and rollback ledger.",
+  "properties": {
+    "quarantined_items": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Quarantined Items",
+      "type": "array"
+    },
+    "reasons": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Reasons",
+      "type": "object"
+    },
+    "rollback_items": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rollback Items",
+      "type": "array"
+    }
+  },
+  "title": "QuarantineLedger",
+  "type": "object"
+}

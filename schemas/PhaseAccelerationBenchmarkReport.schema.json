@@ -1,0 +1,103 @@
+{
+  "description": "Deterministic comparison of unstructured sharing and PIC-guided routing.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "baseline_candidate_only_count": {
+      "default": 0,
+      "title": "Baseline Candidate Only Count",
+      "type": "integer"
+    },
+    "baseline_label": {
+      "default": "unstructured-candidate-sharing",
+      "title": "Baseline Label",
+      "type": "string"
+    },
+    "baseline_phase_gap": {
+      "default": 0.0,
+      "title": "Baseline Phase Gap",
+      "type": "number"
+    },
+    "candidate_label": {
+      "default": "pic-guided-finite-routing",
+      "title": "Candidate Label",
+      "type": "string"
+    },
+    "finite_route_count_delta": {
+      "default": 0,
+      "title": "Finite Route Count Delta",
+      "type": "integer"
+    },
+    "invariant_checks": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "title": "Invariant Checks",
+      "type": "object"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "pic_guided_phase_gap": {
+      "default": 0.0,
+      "title": "Pic Guided Phase Gap",
+      "type": "number"
+    },
+    "pic_guided_repairable_bottleneck_count": {
+      "default": 0,
+      "title": "Pic Guided Repairable Bottleneck Count",
+      "type": "integer"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "phase-acceleration-benchmark",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_visibility_delta": {
+      "default": 0,
+      "title": "Residual Visibility Delta",
+      "type": "integer"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "scenario": {
+      "default": "candidate-sharing-vs-pic-guided-routing",
+      "title": "Scenario",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "workflow_usable": {
+      "default": false,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "title": "PhaseAccelerationBenchmarkReport",
+  "type": "object"
+}

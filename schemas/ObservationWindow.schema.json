@@ -1,0 +1,48 @@
+{
+  "properties": {
+    "end_tick": {
+      "title": "End Tick",
+      "type": "integer"
+    },
+    "refresh_obligation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Refresh Obligation"
+    },
+    "sample_period": {
+      "default": 1,
+      "title": "Sample Period",
+      "type": "integer"
+    },
+    "sensor_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sensor Ids",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "start_tick": {
+      "title": "Start Tick",
+      "type": "integer"
+    },
+    "window_id": {
+      "title": "Window Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "window_id",
+    "start_tick",
+    "end_tick"
+  ],
+  "title": "ObservationWindow",
+  "type": "object"
+}

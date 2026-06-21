@@ -1,0 +1,87 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    }
+  },
+  "description": "Verifier-route work item emitted by the runtime.",
+  "properties": {
+    "obligation_category": {
+      "title": "Obligation Category",
+      "type": "string"
+    },
+    "priority_score": {
+      "default": 0.0,
+      "title": "Priority Score",
+      "type": "number"
+    },
+    "request_id": {
+      "title": "Request Id",
+      "type": "string"
+    },
+    "required_evidence_kind": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Evidence Kind",
+      "type": "array"
+    },
+    "residual_external_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual External Obligations",
+      "type": "array"
+    },
+    "residual_policy": {
+      "title": "Residual Policy",
+      "type": "string"
+    },
+    "route_id": {
+      "title": "Route Id",
+      "type": "string"
+    },
+    "safe_default": {
+      "title": "Safe Default",
+      "type": "string"
+    },
+    "settlement_scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Settlement Scope",
+      "type": "array"
+    },
+    "status": {
+      "$ref": "#/$defs/ClaimStatus",
+      "default": "diagnostic"
+    },
+    "verifier_route": {
+      "title": "Verifier Route",
+      "type": "string"
+    }
+  },
+  "required": [
+    "request_id",
+    "route_id",
+    "verifier_route",
+    "obligation_category",
+    "safe_default",
+    "residual_policy"
+  ],
+  "title": "RouteExecutionRequest",
+  "type": "object"
+}

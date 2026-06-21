@@ -1,0 +1,85 @@
+{
+  "description": "One safe external-communication workflow step for agents.",
+  "properties": {
+    "allowed_source_kinds": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Source Kinds",
+      "type": "array"
+    },
+    "failure_modes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Failure Modes",
+      "type": "array"
+    },
+    "inspect_fields": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Inspect Fields",
+      "type": "array"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "required_env_vars": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Env Vars",
+      "type": "array"
+    },
+    "residual_behavior": {
+      "default": "preserve diagnostic residuals",
+      "title": "Residual Behavior",
+      "type": "string"
+    },
+    "safe_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safe Commands",
+      "type": "array"
+    },
+    "safety_notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Notes",
+      "type": "array"
+    },
+    "schemas": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Schemas",
+      "type": "array"
+    },
+    "sdk_entrypoints": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sdk Entrypoints",
+      "type": "array"
+    },
+    "step_id": {
+      "title": "Step Id",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "step_id",
+    "title",
+    "purpose"
+  ],
+  "title": "AgentCommunicationStep",
+  "type": "object"
+}

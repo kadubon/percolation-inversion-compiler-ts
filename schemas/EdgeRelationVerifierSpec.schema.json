@@ -1,0 +1,62 @@
+{
+  "description": "Portable verifier policy for one packet-edge relation type.",
+  "properties": {
+    "minimum_confidence_lower_bound": {
+      "default": 0.2,
+      "title": "Minimum Confidence Lower Bound",
+      "type": "number"
+    },
+    "relation_type": {
+      "title": "Relation Type",
+      "type": "string"
+    },
+    "require_receiver_overlap": {
+      "default": false,
+      "title": "Require Receiver Overlap",
+      "type": "boolean"
+    },
+    "require_verifier_resolution": {
+      "default": false,
+      "title": "Require Verifier Resolution",
+      "type": "boolean"
+    },
+    "required_evidence_markers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Evidence Markers",
+      "type": "array"
+    },
+    "required_relation_evidence_keys": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Relation Evidence Keys",
+      "type": "array"
+    },
+    "required_source_tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Source Tags",
+      "type": "array"
+    },
+    "required_target_tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Target Tags",
+      "type": "array"
+    },
+    "residual_policy": {
+      "default": "charge-false-edge-until-relation-evidence-is-accepted",
+      "title": "Residual Policy",
+      "type": "string"
+    }
+  },
+  "required": [
+    "relation_type"
+  ],
+  "title": "EdgeRelationVerifierSpec",
+  "type": "object"
+}

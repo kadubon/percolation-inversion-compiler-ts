@@ -1,0 +1,174 @@
+{
+  "description": "Portable result channel for domain-specific obligation verifiers.",
+  "properties": {
+    "accepted_evidence_kind": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Accepted Evidence Kind",
+      "type": "array"
+    },
+    "accepted_obligation_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Accepted Obligation Ids",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "deterministic": {
+      "default": true,
+      "title": "Deterministic",
+      "type": "boolean"
+    },
+    "domain_witness_required": {
+      "default": false,
+      "title": "Domain Witness Required",
+      "type": "boolean"
+    },
+    "evidence_artifact_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Artifact Ids",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "evidence_envelope_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evidence Envelope Id"
+    },
+    "failure_modes": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Failure Modes",
+      "type": "object"
+    },
+    "hook_id": {
+      "title": "Hook Id",
+      "type": "string"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    },
+    "obligation_categories": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Obligation Categories",
+      "type": "object"
+    },
+    "obligation_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Obligation Ids",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "provenance_policy": {
+      "default": "legacy-hook-no-resolution-provenance",
+      "title": "Provenance Policy",
+      "type": "string"
+    },
+    "rejected_obligation_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Obligation Ids",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "residual_coordinates": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residual Coordinates",
+      "type": "object"
+    },
+    "residual_external_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual External Obligations",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "residual_policy": {
+      "default": "charge-residual-until-verified",
+      "title": "Residual Policy",
+      "type": "string"
+    },
+    "resolution_digest": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolution Digest"
+    },
+    "resolution_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolution Id"
+    },
+    "safe_default": {
+      "default": "return-diagnostic-with-unresolved-obligations",
+      "title": "Safe Default",
+      "type": "string"
+    },
+    "schema_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Schema Refs",
+      "type": "array"
+    },
+    "settled_scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Settled Scope",
+      "type": "array"
+    },
+    "verifier_contract": {
+      "additionalProperties": true,
+      "title": "Verifier Contract",
+      "type": "object"
+    },
+    "verifier_route": {
+      "title": "Verifier Route",
+      "type": "string"
+    }
+  },
+  "required": [
+    "hook_id",
+    "verifier_route"
+  ],
+  "title": "ExternalVerifierHook",
+  "type": "object"
+}

@@ -1,0 +1,222 @@
+{
+  "$defs": {
+    "AdoptionFirstRunCommand": {
+      "description": "Command text for operator review; PIC does not execute it.",
+      "properties": {
+        "command": {
+          "title": "Command",
+          "type": "string"
+        },
+        "command_id": {
+          "title": "Command Id",
+          "type": "string"
+        },
+        "executed_by_pic": {
+          "default": false,
+          "title": "Executed By Pic",
+          "type": "boolean"
+        },
+        "expected_output": {
+          "default": "operator-reviewed command output",
+          "title": "Expected Output",
+          "type": "string"
+        },
+        "mutates_environment_if_operator_runs_it": {
+          "default": false,
+          "title": "Mutates Environment If Operator Runs It",
+          "type": "boolean"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "requires_operator_authority": {
+          "default": false,
+          "title": "Requires Operator Authority",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "command_id",
+        "command",
+        "purpose"
+      ],
+      "title": "AdoptionFirstRunCommand",
+      "type": "object"
+    },
+    "AdoptionSafetyBoundary": {
+      "description": "Non-authority boundary for operator-adoption sidecars.",
+      "properties": {
+        "affects_agent_accelerate": {
+          "default": false,
+          "title": "Affects Agent Accelerate",
+          "type": "boolean"
+        },
+        "affects_agent_check": {
+          "default": false,
+          "title": "Affects Agent Check",
+          "type": "boolean"
+        },
+        "affects_packet_promotion": {
+          "default": false,
+          "title": "Affects Packet Promotion",
+          "type": "boolean"
+        },
+        "affects_phase_plan": {
+          "default": false,
+          "title": "Affects Phase Plan",
+          "type": "boolean"
+        },
+        "affects_settled": {
+          "default": false,
+          "title": "Affects Settled",
+          "type": "boolean"
+        },
+        "approval_settles_truth": {
+          "default": false,
+          "title": "Approval Settles Truth",
+          "type": "boolean"
+        },
+        "boundary_id": {
+          "default": "adoption-safety-boundary",
+          "title": "Boundary Id",
+          "type": "string"
+        },
+        "calls_network": {
+          "default": false,
+          "title": "Calls Network",
+          "type": "boolean"
+        },
+        "clones_repository": {
+          "default": false,
+          "title": "Clones Repository",
+          "type": "boolean"
+        },
+        "creates_required_approval_state": {
+          "default": false,
+          "title": "Creates Required Approval State",
+          "type": "boolean"
+        },
+        "executes_shell_commands": {
+          "default": false,
+          "title": "Executes Shell Commands",
+          "type": "boolean"
+        },
+        "installs_package": {
+          "default": false,
+          "title": "Installs Package",
+          "type": "boolean"
+        },
+        "invariants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Invariants",
+          "type": "array"
+        },
+        "modifies_config_files": {
+          "default": false,
+          "title": "Modifies Config Files",
+          "type": "boolean"
+        },
+        "mutates_runtime_state": {
+          "default": false,
+          "title": "Mutates Runtime State",
+          "type": "boolean"
+        },
+        "pure_output_generator": {
+          "default": true,
+          "title": "Pure Output Generator",
+          "type": "boolean"
+        },
+        "safe_commands_are_execution_authority": {
+          "default": false,
+          "title": "Safe Commands Are Execution Authority",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "sidecar_only": {
+          "default": true,
+          "title": "Sidecar Only",
+          "type": "boolean"
+        }
+      },
+      "title": "AdoptionSafetyBoundary",
+      "type": "object"
+    }
+  },
+  "description": "Short request an agent can hand to an operator.",
+  "properties": {
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "operationally_usable": {
+      "default": true,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "operator_adoption_status": {
+      "default": "not-recorded",
+      "title": "Operator Adoption Status",
+      "type": "string"
+    },
+    "plain_english_message": {
+      "title": "Plain English Message",
+      "type": "string"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "request_id": {
+      "default": "agent-to-operator-request",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "safety_boundary": {
+      "$ref": "#/$defs/AdoptionSafetyBoundary"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "suggested_first_command": {
+      "$ref": "#/$defs/AdoptionFirstRunCommand"
+    },
+    "suggested_next_command": {
+      "$ref": "#/$defs/AdoptionFirstRunCommand"
+    },
+    "warning": {
+      "default": "Agents without install authority should not self-install PIC. They should generate an operator request instead.",
+      "title": "Warning",
+      "type": "string"
+    },
+    "workflow_usable": {
+      "default": true,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "plain_english_message",
+    "suggested_first_command",
+    "suggested_next_command"
+  ],
+  "title": "AgentToOperatorRequest",
+  "type": "object"
+}

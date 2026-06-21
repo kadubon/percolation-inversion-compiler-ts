@@ -1,0 +1,81 @@
+{
+  "$defs": {
+    "DependencyDAG": {
+      "description": "A finite dependency graph with edges ``dependency -> dependent``.",
+      "properties": {
+        "edges": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "title": "Edges",
+          "type": "object"
+        }
+      },
+      "title": "DependencyDAG",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "accepted_nodes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Accepted Nodes",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "compiler_id": {
+      "title": "Compiler Id",
+      "type": "string"
+    },
+    "coordinate_nodes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Coordinate Nodes",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "dependency_graph": {
+      "$ref": "#/$defs/DependencyDAG"
+    },
+    "law_labels": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Law Labels",
+      "type": "object"
+    },
+    "resource_labels": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Resource Labels",
+      "type": "object"
+    },
+    "unit_labels": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Unit Labels",
+      "type": "object"
+    },
+    "witness_nodes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Witness Nodes",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "compiler_id"
+  ],
+  "title": "CertificateCompilerRecord",
+  "type": "object"
+}

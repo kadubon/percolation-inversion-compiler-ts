@@ -1,0 +1,21 @@
+Percolation Inversion Compiler
+Copyright 2026 K. Takahashi
+
+This product includes software developed for finite certificate compilation
+interfaces derived from the following CC-BY-4.0 research artifacts:
+
+- Takahashi, K. (2026). Executable Capability Percolation Theory. Zenodo.
+  https://doi.org/10.5281/zenodo.20535654
+- Takahashi, K. (2026). Bottleneck Inversion Theory: Machine-Readable Witness
+  Calculus for Unlockable Potential. Zenodo.
+  https://doi.org/10.5281/zenodo.20545356
+- Takahashi, K. (2026). Typed Reality Compilation: Operational Tolerance
+  Allocation for Resource-Efficient Cyber-Physical Frontier Compilation. Zenodo.
+  https://doi.org/10.5281/zenodo.20554083
+- Takahashi, K. (2026). Salience-Queue Occupation Theory. Zenodo.
+  https://doi.org/10.5281/zenodo.20526451
+- Takahashi, K. (2026). Abstraction Liquidity Theory. Zenodo.
+  https://doi.org/10.5281/zenodo.20476200
+
+The cited papers are not vendored in this repository. Extractors operate on
+user-provided TeX sources or externally obtained canonical artifacts.

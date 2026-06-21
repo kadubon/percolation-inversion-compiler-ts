@@ -1,0 +1,31 @@
+{
+  "description": "Finite DKW calibration certificate.",
+  "properties": {
+    "alpha": {
+      "title": "Alpha",
+      "type": "number"
+    },
+    "observed_radius": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Observed Radius"
+    },
+    "sample_size": {
+      "title": "Sample Size",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "sample_size",
+    "alpha"
+  ],
+  "title": "DKWCertificate",
+  "type": "object"
+}

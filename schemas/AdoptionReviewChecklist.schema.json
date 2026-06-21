@@ -1,0 +1,36 @@
+{
+  "description": "Operator-facing checklist for deciding whether local use is allowed.",
+  "properties": {
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "checklist_id": {
+      "default": "adoption-review-checklist",
+      "title": "Checklist Id",
+      "type": "string"
+    },
+    "interpretation_rules": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Interpretation Rules",
+      "type": "array"
+    },
+    "items": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "title": "AdoptionReviewChecklist",
+  "type": "object"
+}

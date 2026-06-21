@@ -1,0 +1,414 @@
+{
+  "$defs": {
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "DependencyDAG": {
+      "description": "A finite dependency graph with edges ``dependency -> dependent``.",
+      "properties": {
+        "edges": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "title": "Edges",
+          "type": "object"
+        }
+      },
+      "title": "DependencyDAG",
+      "type": "object"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "FiniteOrder": {
+      "description": "A finite preorder/partial order represented by a finite relation.",
+      "properties": {
+        "elements": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Elements",
+          "type": "array"
+        },
+        "leq_pairs": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Leq Pairs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "elements"
+      ],
+      "title": "FiniteOrder",
+      "type": "object"
+    },
+    "InterventionLaw": {
+      "properties": {
+        "law_id": {
+          "title": "Law Id",
+          "type": "string"
+        },
+        "normalized": {
+          "default": false,
+          "title": "Normalized",
+          "type": "boolean"
+        },
+        "probabilities": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Probabilities",
+          "type": "object"
+        },
+        "support": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Support",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "law_id"
+      ],
+      "title": "InterventionLaw",
+      "type": "object"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "OrderedPotentialCone": {
+      "properties": {
+        "cone_id": {
+          "title": "Cone Id",
+          "type": "string"
+        },
+        "coordinate_kinds": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Coordinate Kinds",
+          "type": "object"
+        },
+        "product_order": {
+          "$ref": "#/$defs/FiniteOrder"
+        },
+        "unit_functor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/UnitFunctorCertificate"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "cone_id",
+        "product_order"
+      ],
+      "title": "OrderedPotentialCone",
+      "type": "object"
+    },
+    "ProtocolObject": {
+      "properties": {
+        "candidate_universe": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Candidate Universe",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "law_labels": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Law Labels",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "observation_sigma": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observation Sigma",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "protocol_id": {
+          "title": "Protocol Id",
+          "type": "string"
+        },
+        "validity_domains": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Validity Domains",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "protocol_id"
+      ],
+      "title": "ProtocolObject",
+      "type": "object"
+    },
+    "UnitConversion": {
+      "properties": {
+        "audit_id": {
+          "title": "Audit Id",
+          "type": "string"
+        },
+        "factor": {
+          "title": "Factor",
+          "type": "number"
+        },
+        "source_unit": {
+          "title": "Source Unit",
+          "type": "string"
+        },
+        "target_unit": {
+          "title": "Target Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_unit",
+        "target_unit",
+        "factor",
+        "audit_id"
+      ],
+      "title": "UnitConversion",
+      "type": "object"
+    },
+    "UnitFunctorCertificate": {
+      "properties": {
+        "conversions": {
+          "items": {
+            "$ref": "#/$defs/UnitConversion"
+          },
+          "title": "Conversions",
+          "type": "array"
+        },
+        "monotone": {
+          "default": false,
+          "title": "Monotone",
+          "type": "boolean"
+        },
+        "ordered_units": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ordered Units",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "title": "UnitFunctorCertificate",
+      "type": "object"
+    },
+    "VectorCompatibleFamily": {
+      "properties": {
+        "dependency_graph": {
+          "$ref": "#/$defs/DependencyDAG"
+        },
+        "family_id": {
+          "title": "Family Id",
+          "type": "string"
+        },
+        "laws": {
+          "items": {
+            "$ref": "#/$defs/InterventionLaw"
+          },
+          "title": "Laws",
+          "type": "array"
+        },
+        "potential_cone": {
+          "$ref": "#/$defs/OrderedPotentialCone"
+        },
+        "protocol": {
+          "$ref": "#/$defs/ProtocolObject"
+        },
+        "report_mask": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Report Mask",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "resource_ledger": {
+          "$ref": "#/$defs/Ledger"
+        }
+      },
+      "required": [
+        "family_id",
+        "protocol",
+        "potential_cone"
+      ],
+      "title": "VectorCompatibleFamily",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "family": {
+      "$ref": "#/$defs/VectorCompatibleFamily"
+    },
+    "lower_process": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Lower Process",
+      "type": "object"
+    },
+    "report_mask": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Report Mask",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "required_reported": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Reported",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "residual": {
+      "default": 0.0,
+      "title": "Residual",
+      "type": "number"
+    },
+    "selection_charge": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Selection Charge",
+      "type": "object"
+    },
+    "unit_audit": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unit Audit",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "certificate_id",
+    "family"
+  ],
+  "title": "SelectiveCUPCertificate",
+  "type": "object"
+}

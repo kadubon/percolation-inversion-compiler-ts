@@ -1,0 +1,45 @@
+{
+  "description": "Deterministic nonce ledger used to reject replayed agent messages.",
+  "properties": {
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "consumed_nonces": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Consumed Nonces",
+      "type": "array"
+    },
+    "ledger_id": {
+      "default": "agent-message-nonce-ledger",
+      "title": "Ledger Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "rejected_message_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Message Ids",
+      "type": "array"
+    },
+    "replayed_nonces": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Replayed Nonces",
+      "type": "array"
+    }
+  },
+  "title": "AgentMessageNonceLedger",
+  "type": "object"
+}

@@ -1,0 +1,1094 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "FormationCostLedger": {
+      "description": "ALT cost ledger for forming, validating, deploying, and maintaining a token.",
+      "properties": {
+        "absorption_cost": {
+          "default": 0.0,
+          "title": "Absorption Cost",
+          "type": "number"
+        },
+        "certification_cost": {
+          "default": 0.0,
+          "title": "Certification Cost",
+          "type": "number"
+        },
+        "contamination_cost": {
+          "default": 0.0,
+          "title": "Contamination Cost",
+          "type": "number"
+        },
+        "deployment_cost": {
+          "default": 0.0,
+          "title": "Deployment Cost",
+          "type": "number"
+        },
+        "depreciation_cost": {
+          "default": 0.0,
+          "title": "Depreciation Cost",
+          "type": "number"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "formation_cost": {
+          "default": 0.0,
+          "title": "Formation Cost",
+          "type": "number"
+        },
+        "hazard_cost": {
+          "default": 0.0,
+          "title": "Hazard Cost",
+          "type": "number"
+        },
+        "hidden_resource_cost": {
+          "default": 0.0,
+          "title": "Hidden Resource Cost",
+          "type": "number"
+        },
+        "ledger_id": {
+          "title": "Ledger Id",
+          "type": "string"
+        },
+        "maintenance_cost": {
+          "default": 0.0,
+          "title": "Maintenance Cost",
+          "type": "number"
+        },
+        "misapplication_cost": {
+          "default": 0.0,
+          "title": "Misapplication Cost",
+          "type": "number"
+        },
+        "settlement_cost": {
+          "default": 0.0,
+          "title": "Settlement Cost",
+          "type": "number"
+        },
+        "telemetry_cost": {
+          "default": 0.0,
+          "title": "Telemetry Cost",
+          "type": "number"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "validation_cost": {
+          "default": 0.0,
+          "title": "Validation Cost",
+          "type": "number"
+        }
+      },
+      "required": [
+        "ledger_id"
+      ],
+      "title": "FormationCostLedger",
+      "type": "object"
+    },
+    "HazardEnvelopeCertificate": {
+      "description": "Finite hazard, misuse, externality, and rollback envelope.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "authority_envelope_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Authority Envelope Refs",
+          "type": "array"
+        },
+        "capability_envelope_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Capability Envelope Refs",
+          "type": "array"
+        },
+        "certificate_id": {
+          "title": "Certificate Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "hazard_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Hazard Refs",
+          "type": "array"
+        },
+        "irreversible_risk_upper_bound": {
+          "default": 0.0,
+          "title": "Irreversible Risk Upper Bound",
+          "type": "number"
+        },
+        "noncompensable_hazard_detected": {
+          "default": false,
+          "title": "Noncompensable Hazard Detected",
+          "type": "boolean"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "risk_budget_upper_bound": {
+          "default": 1.0,
+          "title": "Risk Budget Upper Bound",
+          "type": "number"
+        },
+        "rollback_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rollback Refs",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "token_id": {
+          "title": "Token Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "certificate_id",
+        "token_id"
+      ],
+      "title": "HazardEnvelopeCertificate",
+      "type": "object"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "LifecycleCostBounds": {
+      "description": "Lifecycle/finality bounds for abstraction capital accounting.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "bounds_id": {
+          "title": "Bounds Id",
+          "type": "string"
+        },
+        "depreciation_upper_bound": {
+          "default": 0.0,
+          "title": "Depreciation Upper Bound",
+          "type": "number"
+        },
+        "expiry_horizon": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expiry Horizon"
+        },
+        "finality_record_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Finality Record Ref"
+        },
+        "half_life_lower_bound": {
+          "default": 0.0,
+          "title": "Half Life Lower Bound",
+          "type": "number"
+        },
+        "maintenance_upper_bound": {
+          "default": 0.0,
+          "title": "Maintenance Upper Bound",
+          "type": "number"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        }
+      },
+      "required": [
+        "bounds_id"
+      ],
+      "title": "LifecycleCostBounds",
+      "type": "object"
+    },
+    "MissionValidityCertificate": {
+      "description": "Finite mission-validity certificate for a token and receiver context.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "certificate_id": {
+          "title": "Certificate Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "mission_id": {
+          "title": "Mission Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "receiver_family": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Receiver Family",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "target_basis": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Target Basis",
+          "type": "array"
+        },
+        "token_id": {
+          "title": "Token Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "certificate_id",
+        "token_id",
+        "mission_id"
+      ],
+      "title": "MissionValidityCertificate",
+      "type": "object"
+    },
+    "OpportunityMeasureContract": {
+      "description": "Declared finite opportunity measure used to value a token.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "baseline_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Baseline Ref"
+        },
+        "contract_id": {
+          "title": "Contract Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "horizon": {
+          "default": "finite",
+          "title": "Horizon",
+          "type": "string"
+        },
+        "mission_id": {
+          "title": "Mission Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "receiver_family": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Receiver Family",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "task_portfolio_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Task Portfolio Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "contract_id",
+        "mission_id"
+      ],
+      "title": "OpportunityMeasureContract",
+      "type": "object"
+    },
+    "RootFinalityCertificate": {
+      "description": "Role-separated root and finality certificate for ALT settlement.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "byzantine_budget_upper_bound": {
+          "default": 0.0,
+          "title": "Byzantine Budget Upper Bound",
+          "type": "number"
+        },
+        "certificate_id": {
+          "title": "Certificate Id",
+          "type": "string"
+        },
+        "correlated_capture_budget_upper_bound": {
+          "default": 0.0,
+          "title": "Correlated Capture Budget Upper Bound",
+          "type": "number"
+        },
+        "evaluator_quorum_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evaluator Quorum Refs",
+          "type": "array"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "finality_record_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Finality Record Ref"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "partition_alarm": {
+          "default": false,
+          "title": "Partition Alarm",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "root_role_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Root Role Refs",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "token_id": {
+          "title": "Token Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "certificate_id",
+        "token_id"
+      ],
+      "title": "RootFinalityCertificate",
+      "type": "object"
+    },
+    "TelemetryCostCertificate": {
+      "description": "Finite telemetry accounting certificate for ALT cost coordinates.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "certificate_id": {
+          "title": "Certificate Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "measured_cost_upper_bound": {
+          "default": 0.0,
+          "title": "Measured Cost Upper Bound",
+          "type": "number"
+        },
+        "observer_cost_upper_bound": {
+          "default": 0.0,
+          "title": "Observer Cost Upper Bound",
+          "type": "number"
+        },
+        "observer_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observer Refs",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "tamper_positive": {
+          "default": false,
+          "title": "Tamper Positive",
+          "type": "boolean"
+        },
+        "token_id": {
+          "title": "Token Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "certificate_id",
+        "token_id"
+      ],
+      "title": "TelemetryCostCertificate",
+      "type": "object"
+    },
+    "TransportCertificate": {
+      "description": "Finite transport certificate for token reuse across receiver contexts.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "certificate_id": {
+          "title": "Certificate Id",
+          "type": "string"
+        },
+        "density_ratio_upper_bound": {
+          "default": 1.0,
+          "title": "Density Ratio Upper Bound",
+          "type": "number"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "max_density_ratio": {
+          "default": 10.0,
+          "title": "Max Density Ratio",
+          "type": "number"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "source_receiver_family": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Receiver Family",
+          "type": "array"
+        },
+        "support_coverage_lower_bound": {
+          "default": 0.0,
+          "title": "Support Coverage Lower Bound",
+          "type": "number"
+        },
+        "target_receiver_family": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Target Receiver Family",
+          "type": "array"
+        },
+        "token_id": {
+          "title": "Token Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "certificate_id",
+        "token_id"
+      ],
+      "title": "TransportCertificate",
+      "type": "object"
+    },
+    "ValueBridgeReport": {
+      "description": "Typed ALT diagnostics for proxy-to-value evidence separation.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "baseline_refresh_ready": {
+          "default": false,
+          "title": "Baseline Refresh Ready",
+          "type": "boolean"
+        },
+        "calibrated_proxy_bridge_ready": {
+          "default": false,
+          "title": "Calibrated Proxy Bridge Ready",
+          "type": "boolean"
+        },
+        "cara_residual_preserved": {
+          "default": true,
+          "title": "Cara Residual Preserved",
+          "type": "boolean"
+        },
+        "causal_effect_ready": {
+          "default": false,
+          "title": "Causal Effect Ready",
+          "type": "boolean"
+        },
+        "causal_effect_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Causal Effect Refs",
+          "type": "array"
+        },
+        "causal_reproduction_ready": {
+          "default": false,
+          "title": "Causal Reproduction Ready",
+          "type": "boolean"
+        },
+        "common_estimand_ready": {
+          "default": false,
+          "title": "Common Estimand Ready",
+          "type": "boolean"
+        },
+        "common_estimand_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Common Estimand Refs",
+          "type": "array"
+        },
+        "contamination_diagnostics": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Contamination Diagnostics",
+          "type": "array"
+        },
+        "foundry_capacity_label": {
+          "default": "evidence-limited",
+          "title": "Foundry Capacity Label",
+          "type": "string"
+        },
+        "instrumentation_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Instrumentation Refs",
+          "type": "array"
+        },
+        "negative_liquidity_preserved": {
+          "default": true,
+          "title": "Negative Liquidity Preserved",
+          "type": "boolean"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "portfolio_gaming_diagnostics": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Portfolio Gaming Diagnostics",
+          "type": "array"
+        },
+        "proxy_bridge_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Proxy Bridge Refs",
+          "type": "array"
+        },
+        "proxy_only": {
+          "default": false,
+          "title": "Proxy Only",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "report_id": {
+          "default": "alt-value-bridge",
+          "title": "Report Id",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "transportability_ready": {
+          "default": false,
+          "title": "Transportability Ready",
+          "type": "boolean"
+        },
+        "value_evidence_level": {
+          "default": "calibrated-proxy",
+          "title": "Value Evidence Level",
+          "type": "string"
+        }
+      },
+      "title": "ValueBridgeReport",
+      "type": "object"
+    }
+  },
+  "description": "Certified lower-bound surplus certificate for reusable abstraction capital.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "causal_effect_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Causal Effect Refs",
+      "type": "array"
+    },
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "common_estimand_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Common Estimand Refs",
+      "type": "array"
+    },
+    "cost_ledger": {
+      "$ref": "#/$defs/FormationCostLedger"
+    },
+    "downstream_search_cost_reduction_lower_bound": {
+      "default": 0.0,
+      "title": "Downstream Search Cost Reduction Lower Bound",
+      "type": "number"
+    },
+    "evaluator_quorum_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evaluator Quorum Refs",
+      "type": "array"
+    },
+    "finite_checks_passed": {
+      "default": false,
+      "title": "Finite Checks Passed",
+      "type": "boolean"
+    },
+    "hazard_envelope_certificate": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/HazardEnvelopeCertificate"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "lifecycle_bounds": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LifecycleCostBounds"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "mission_validity_certificate": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/MissionValidityCertificate"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "opportunity_contract": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/OpportunityMeasureContract"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "proxy_bridge_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Proxy Bridge Refs",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_external_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual External Obligations",
+      "type": "array"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "robustness_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Robustness Refs",
+      "type": "array"
+    },
+    "root_finality_certificate": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RootFinalityCertificate"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "root_of_trust_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Root Of Trust Refs",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "signed_surplus_lower_bound": {
+      "default": 0.0,
+      "title": "Signed Surplus Lower Bound",
+      "type": "number"
+    },
+    "status": {
+      "$ref": "#/$defs/ClaimStatus",
+      "default": "diagnostic"
+    },
+    "telemetry_cost_certificate": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TelemetryCostCertificate"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "telemetry_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Telemetry Refs",
+      "type": "array"
+    },
+    "token_id": {
+      "title": "Token Id",
+      "type": "string"
+    },
+    "transport_certificate": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TransportCertificate"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "value_bridge_report": {
+      "$ref": "#/$defs/ValueBridgeReport"
+    },
+    "value_evidence_level": {
+      "default": "calibrated-proxy",
+      "title": "Value Evidence Level",
+      "type": "string"
+    }
+  },
+  "required": [
+    "certificate_id",
+    "token_id"
+  ],
+  "title": "LiquidityCertificate",
+  "type": "object"
+}

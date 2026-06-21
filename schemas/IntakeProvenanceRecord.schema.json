@@ -1,0 +1,192 @@
+{
+  "$defs": {
+    "PacketSourceKind": {
+      "enum": [
+        "local",
+        "github",
+        "zenodo",
+        "arxiv",
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "agent-message",
+        "agent-inbox",
+        "web-crawl",
+        "agent-output",
+        "auto"
+      ],
+      "title": "PacketSourceKind",
+      "type": "string"
+    },
+    "RobotsDecision": {
+      "description": "Recorded robots/rate decision for bounded web intake.\n\nThis is an audit record, not a guarantee that the remote site authorizes\nevery downstream use.  Unknown or unavailable policy can remain diagnostic\nunder stricter profiles.",
+      "properties": {
+        "allowed": {
+          "default": true,
+          "title": "Allowed",
+          "type": "boolean"
+        },
+        "decision_id": {
+          "default": "robots:not-checked",
+          "title": "Decision Id",
+          "type": "string"
+        },
+        "mode": {
+          "default": "not-checked",
+          "title": "Mode",
+          "type": "string"
+        },
+        "reason": {
+          "default": "robots policy was recorded but not enforced",
+          "title": "Reason",
+          "type": "string"
+        },
+        "residual_coordinate": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Residual Coordinate"
+        },
+        "source_ref": {
+          "default": "",
+          "title": "Source Ref",
+          "type": "string"
+        }
+      },
+      "title": "RobotsDecision",
+      "type": "object"
+    }
+  },
+  "description": "Sanitized provenance for external packet candidates.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "byte_count": {
+      "default": 0,
+      "title": "Byte Count",
+      "type": "integer"
+    },
+    "content_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Content Sha256"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "final_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Final Url"
+    },
+    "media_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Media Type"
+    },
+    "provenance_id": {
+      "title": "Provenance Id",
+      "type": "string"
+    },
+    "public_source_ref": {
+      "title": "Public Source Ref",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "redirect_chain": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Redirect Chain",
+      "type": "array"
+    },
+    "residual_coordinates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual Coordinates",
+      "type": "array"
+    },
+    "robots_decision": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RobotsDecision"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "source_kind": {
+      "$ref": "#/$defs/PacketSourceKind"
+    },
+    "source_ref": {
+      "title": "Source Ref",
+      "type": "string"
+    },
+    "status_code": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Status Code"
+    }
+  },
+  "required": [
+    "provenance_id",
+    "source_kind",
+    "source_ref",
+    "public_source_ref"
+  ],
+  "title": "IntakeProvenanceRecord",
+  "type": "object"
+}

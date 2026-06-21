@@ -1,0 +1,872 @@
+{
+  "$defs": {
+    "CapabilityPacketCandidate": {
+      "description": "An observable artifact that may become an ECPT capability packet.",
+      "properties": {
+        "authority_granted": {
+          "default": true,
+          "title": "Authority Granted",
+          "type": "boolean"
+        },
+        "authority_required": {
+          "default": false,
+          "title": "Authority Required",
+          "type": "boolean"
+        },
+        "claim": {
+          "title": "Claim",
+          "type": "string"
+        },
+        "content_sha256": {
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "dependencies": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Dependencies",
+          "type": "array"
+        },
+        "evidence_hash_valid": {
+          "default": true,
+          "title": "Evidence Hash Valid",
+          "type": "boolean"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "expected_downstream_gain": {
+          "default": 0.0,
+          "title": "Expected Downstream Gain",
+          "type": "number"
+        },
+        "expires_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expires At"
+        },
+        "freshness": {
+          "default": 1.0,
+          "title": "Freshness",
+          "type": "number"
+        },
+        "hazard_charge": {
+          "default": 0.0,
+          "title": "Hazard Charge",
+          "type": "number"
+        },
+        "identity_contribution_status": {
+          "$ref": "#/$defs/IdentityContributionStatus",
+          "default": "provisional"
+        },
+        "issuer_agent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Agent Id"
+        },
+        "issuer_attestation_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Attestation Id"
+        },
+        "issuer_public_key_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Public Key Id"
+        },
+        "issuer_signature_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Signature Ref"
+        },
+        "packet_id": {
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "receiver_family": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Receiver Family",
+          "type": "array"
+        },
+        "residual_charge": {
+          "default": 0.0,
+          "title": "Residual Charge",
+          "type": "number"
+        },
+        "reuse_context": {
+          "default": "general",
+          "title": "Reuse Context",
+          "type": "string"
+        },
+        "rollback_available": {
+          "default": true,
+          "title": "Rollback Available",
+          "type": "boolean"
+        },
+        "route_safe": {
+          "default": true,
+          "title": "Route Safe",
+          "type": "boolean"
+        },
+        "salience_class": {
+          "default": "default",
+          "title": "Salience Class",
+          "type": "string"
+        },
+        "source_kind": {
+          "$ref": "#/$defs/PacketSourceKind",
+          "default": "local"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "provisional"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        },
+        "verification_cost": {
+          "default": 0.0,
+          "title": "Verification Cost",
+          "type": "number"
+        },
+        "verifier_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verifier Routes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "packet_id",
+        "source_ref",
+        "content_sha256",
+        "claim"
+      ],
+      "title": "CapabilityPacketCandidate",
+      "type": "object"
+    },
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "DischargeLevel": {
+      "enum": [
+        "finite_value_check",
+        "replay_check",
+        "contract_enforced",
+        "external_domain_required"
+      ],
+      "title": "DischargeLevel",
+      "type": "string"
+    },
+    "EvidenceArtifact": {
+      "description": "Replayable evidence metadata for an external verifier route.",
+      "properties": {
+        "artifact_id": {
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "attestation_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Attestation Ref"
+        },
+        "attestation_verified": {
+          "default": false,
+          "title": "Attestation Verified",
+          "type": "boolean"
+        },
+        "content_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Ref"
+        },
+        "evidence_kind": {
+          "title": "Evidence Kind",
+          "type": "string"
+        },
+        "media_type": {
+          "title": "Media Type",
+          "type": "string"
+        },
+        "produced_at": {
+          "title": "Produced At",
+          "type": "string"
+        },
+        "producer_id": {
+          "title": "Producer Id",
+          "type": "string"
+        },
+        "schema_sha256": {
+          "title": "Schema Sha256",
+          "type": "string"
+        },
+        "schema_uri": {
+          "title": "Schema Uri",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "signature": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Signature"
+        },
+        "signature_algorithm": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Signature Algorithm"
+        },
+        "verifier_id": {
+          "title": "Verifier Id",
+          "type": "string"
+        },
+        "verifier_version": {
+          "title": "Verifier Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "evidence_kind",
+        "sha256",
+        "media_type",
+        "schema_uri",
+        "schema_sha256",
+        "producer_id",
+        "produced_at",
+        "verifier_id",
+        "verifier_version"
+      ],
+      "title": "EvidenceArtifact",
+      "type": "object"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "EvidenceVerificationProfile": {
+      "enum": [
+        "development",
+        "research",
+        "production"
+      ],
+      "title": "EvidenceVerificationProfile",
+      "type": "string"
+    },
+    "IdentityContributionStatus": {
+      "description": "How identity evidence may contribute to runtime packet capital.",
+      "enum": [
+        "verified",
+        "provisional",
+        "diagnostic",
+        "quarantined",
+        "rejected"
+      ],
+      "title": "IdentityContributionStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "PacketSourceKind": {
+      "enum": [
+        "local",
+        "github",
+        "zenodo",
+        "arxiv",
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "agent-message",
+        "agent-inbox",
+        "web-crawl",
+        "agent-output",
+        "auto"
+      ],
+      "title": "PacketSourceKind",
+      "type": "string"
+    },
+    "RuntimeActionResult": {
+      "description": "Result returned by an agent or executor after attempting an AgentTask.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "action_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Action Id"
+        },
+        "evidence_envelopes": {
+          "items": {
+            "$ref": "#/$defs/VerifierEvidenceEnvelope"
+          },
+          "title": "Evidence Envelopes",
+          "type": "array"
+        },
+        "executed": {
+          "default": false,
+          "title": "Executed",
+          "type": "boolean"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "observed_delta": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Observed Delta",
+          "type": "object"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "output_packets": {
+          "items": {
+            "$ref": "#/$defs/CapabilityPacketCandidate"
+          },
+          "title": "Output Packets",
+          "type": "array"
+        },
+        "output_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Ref"
+        },
+        "output_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Sha256"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "result_id": {
+          "title": "Result Id",
+          "type": "string"
+        },
+        "rollback_available": {
+          "default": false,
+          "title": "Rollback Available",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "verifier_resolution": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/VerifierResolution"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "result_id",
+        "task_id"
+      ],
+      "title": "RuntimeActionResult",
+      "type": "object"
+    },
+    "VerifierEvidenceEnvelope": {
+      "description": "Finite evidence envelope supplied to an adapter route.",
+      "properties": {
+        "deterministic": {
+          "default": true,
+          "title": "Deterministic",
+          "type": "boolean"
+        },
+        "envelope_id": {
+          "title": "Envelope Id",
+          "type": "string"
+        },
+        "envelope_schema_version": {
+          "default": "verifier-evidence-envelope-2.0",
+          "title": "Envelope Schema Version",
+          "type": "string"
+        },
+        "evidence_artifacts": {
+          "items": {
+            "$ref": "#/$defs/EvidenceArtifact"
+          },
+          "title": "Evidence Artifacts",
+          "type": "array"
+        },
+        "evidence_kind": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Kind",
+          "type": "array"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "obligation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Obligation Ids",
+          "type": "array"
+        },
+        "residual_coordinates": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Residual Coordinates",
+          "type": "object"
+        },
+        "route_id": {
+          "title": "Route Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "envelope_id",
+        "route_id"
+      ],
+      "title": "VerifierEvidenceEnvelope",
+      "type": "object"
+    },
+    "VerifierResolution": {
+      "description": "Adapter-route resolution result that preserves safe failure behavior.",
+      "properties": {
+        "accepted": {
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "accepted_obligation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Obligation Ids",
+          "type": "array"
+        },
+        "availability": {
+          "title": "Availability",
+          "type": "string"
+        },
+        "binding_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Binding Id"
+        },
+        "discharge_level": {
+          "$ref": "#/$defs/DischargeLevel",
+          "default": "external_domain_required"
+        },
+        "domain_witness_required": {
+          "default": false,
+          "title": "Domain Witness Required",
+          "type": "boolean"
+        },
+        "evidence_artifact_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Artifact Ids",
+          "type": "array"
+        },
+        "evidence_envelope_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Envelope Id"
+        },
+        "finite_scope_usable": {
+          "default": false,
+          "title": "Finite Scope Usable",
+          "type": "boolean"
+        },
+        "missing_evidence_kind": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Evidence Kind",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "profile": {
+          "$ref": "#/$defs/EvidenceVerificationProfile",
+          "default": "development"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "rejected_obligation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Obligation Ids",
+          "type": "array"
+        },
+        "residual_external_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual External Obligations",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "resolution_digest": {
+          "title": "Resolution Digest",
+          "type": "string"
+        },
+        "resolution_id": {
+          "title": "Resolution Id",
+          "type": "string"
+        },
+        "route_id": {
+          "title": "Route Id",
+          "type": "string"
+        },
+        "safe_default": {
+          "default": "diagnostic-with-unresolved-obligations",
+          "title": "Safe Default",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "settled_scope": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Settled Scope",
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus"
+        }
+      },
+      "required": [
+        "resolution_id",
+        "route_id",
+        "accepted",
+        "status",
+        "availability",
+        "resolution_digest"
+      ],
+      "title": "VerifierResolution",
+      "type": "object"
+    }
+  },
+  "description": "Result of executing one allowlisted runtime task.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "action_result": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RuntimeActionResult"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "finite_checks_passed": {
+      "default": false,
+      "title": "Finite Checks Passed",
+      "type": "boolean"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "task_id": {
+      "title": "Task Id",
+      "type": "string"
+    },
+    "task_type": {
+      "title": "Task Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "report_id",
+    "task_id",
+    "task_type"
+  ],
+  "title": "RuntimeExecutionReport",
+  "type": "object"
+}

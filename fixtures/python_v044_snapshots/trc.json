@@ -1,0 +1,2880 @@
+{
+  "artifact": "Typed Reality Compilation.tex",
+  "artifact_key": "trc",
+  "attribution": {
+    "author": "K. Takahashi",
+    "derived_from": "canonical TeX metadata extraction; TeX/PDF source is not vendored",
+    "doi": "10.5281/zenodo.20554083",
+    "license_id": "cc-by-4.0",
+    "source_tex_md5": "dfd71f38380e0db87f5537f65f035c32",
+    "title": "Typed Reality Compilation: Operational Tolerance Allocation for Resource-Efficient Cyber-Physical Frontier Compilation",
+    "year": 2026
+  },
+  "claims": 46,
+  "coverage_counts": {
+    "external_obligation": 32,
+    "implemented_checker": 52,
+    "implemented_constructive": 20,
+    "implemented_schema": 12,
+    "partial": 0,
+    "unsupported": 0
+  },
+  "coverage_delta": {
+    "external_obligation_total": 32,
+    "implemented_total": 84,
+    "unimplemented_total": 32,
+    "unsupported_total": 0
+  },
+  "definitions": 70,
+  "external_obligation_catalog": {
+    "artifact": "Typed Reality Compilation.tex",
+    "category_summary": {
+      "archive-domain-cover": 5,
+      "assume-guarantee-contract": 3,
+      "distributionally-robust-metric": 1,
+      "latent-oracle-model": 5,
+      "numerical-envelope": 2,
+      "observation-partition": 3,
+      "physical-hybrid-system": 6,
+      "redesign-response": 3,
+      "telemetry-calibration": 4
+    },
+    "obligations": [
+      {
+        "accepted_evidence_kind": [
+          "ambiguity-set-audit",
+          "dual-witness",
+          "ground-metric-certificate"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "ambiguity-set-audit-incomplete",
+          "dual-witness-unaccepted",
+          "ground-metric-certificate-missing",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "ambiguity-set-audit-incomplete",
+          "dual-witness-unaccepted",
+          "ground-metric-certificate-missing"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:ground-metric-dual-dr-admissibility",
+        "label": "Ground-metric dual distributionally robust admissibility",
+        "obligation_category": "distributionally-robust-metric",
+        "proof_obligation_ids": [
+          "obligation:prop:ground-metric-dual-dr-admissibility"
+        ],
+        "residual_coordinates": [
+          "residual:prop:ground-metric-dual-dr-admissibility"
+        ],
+        "residual_policy": "charge-metric-dual-residual-until-dual-witness-accepted",
+        "safe_default": "diagnostic-with-metric-dual-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.metric.verify_distributionally_robust_dual"
+      },
+      {
+        "accepted_evidence_kind": [
+          "calibration-report",
+          "drift-bound-certificate",
+          "signed-telemetry-window"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "calibration-drift-unbounded",
+          "rebasing-certificate-unaccepted",
+          "telemetry-window-missing",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "oracle-or-latent-model-witness-required"
+        ],
+        "failure_modes": [
+          "calibration-drift-unbounded",
+          "rebasing-certificate-unaccepted",
+          "telemetry-window-missing"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:telemetry-updated-resource-cost-kernel",
+        "label": "Telemetry-updated resource-cost kernel",
+        "obligation_category": "telemetry-calibration",
+        "proof_obligation_ids": [
+          "obligation:def:telemetry-updated-resource-cost-kernel"
+        ],
+        "residual_coordinates": [
+          "residual:def:telemetry-updated-resource-cost-kernel"
+        ],
+        "residual_policy": "charge-telemetry-drift-residual-until-window-validated",
+        "safe_default": "diagnostic-with-telemetry-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.telemetry.verify_calibration_window"
+      },
+      {
+        "accepted_evidence_kind": [
+          "calibration-report",
+          "drift-bound-certificate",
+          "signed-telemetry-window"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "calibration-drift-unbounded",
+          "rebasing-certificate-unaccepted",
+          "telemetry-window-missing",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "oracle-or-latent-model-witness-required"
+        ],
+        "failure_modes": [
+          "calibration-drift-unbounded",
+          "rebasing-certificate-unaccepted",
+          "telemetry-window-missing"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "thm:telemetry-updated-resource-cost-kernel-soundness",
+        "label": "Telemetry-updated resource-cost kernel soundness",
+        "obligation_category": "telemetry-calibration",
+        "proof_obligation_ids": [
+          "obligation:thm:telemetry-updated-resource-cost-kernel-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:thm:telemetry-updated-resource-cost-kernel-soundness"
+        ],
+        "residual_policy": "charge-telemetry-drift-residual-until-window-validated",
+        "safe_default": "diagnostic-with-telemetry-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.telemetry.verify_calibration_window"
+      },
+      {
+        "accepted_evidence_kind": [
+          "latent-model-card",
+          "oracle-certificate",
+          "submodular-proof-witness"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "latent-model-not-replayable",
+          "oracle-witness-missing",
+          "submodular-certificate-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "oracle-or-latent-model-witness-required"
+        ],
+        "failure_modes": [
+          "latent-model-not-replayable",
+          "oracle-witness-missing",
+          "submodular-certificate-unverified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:latent-operator-compilation",
+        "label": "Latent operator compilation",
+        "obligation_category": "latent-oracle-model",
+        "proof_obligation_ids": [
+          "obligation:def:latent-operator-compilation"
+        ],
+        "residual_coordinates": [
+          "residual:def:latent-operator-compilation"
+        ],
+        "residual_policy": "charge-oracle-residual-until-replayable-witness-exists",
+        "safe_default": "diagnostic-with-oracle-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+      },
+      {
+        "accepted_evidence_kind": [
+          "latent-model-card",
+          "oracle-certificate",
+          "submodular-proof-witness"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "latent-model-not-replayable",
+          "oracle-witness-missing",
+          "submodular-certificate-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "oracle-or-latent-model-witness-required"
+        ],
+        "failure_modes": [
+          "latent-model-not-replayable",
+          "oracle-witness-missing",
+          "submodular-certificate-unverified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:time-extended-latent-atlas",
+        "label": "Time-extended constructible latent atlas",
+        "obligation_category": "latent-oracle-model",
+        "proof_obligation_ids": [
+          "obligation:def:time-extended-latent-atlas"
+        ],
+        "residual_coordinates": [
+          "residual:def:time-extended-latent-atlas"
+        ],
+        "residual_policy": "charge-oracle-residual-until-replayable-witness-exists",
+        "safe_default": "diagnostic-with-oracle-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+      },
+      {
+        "accepted_evidence_kind": [
+          "latent-model-card",
+          "oracle-certificate",
+          "submodular-proof-witness"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "latent-model-not-replayable",
+          "oracle-witness-missing",
+          "submodular-certificate-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "oracle-or-latent-model-witness-required"
+        ],
+        "failure_modes": [
+          "latent-model-not-replayable",
+          "oracle-witness-missing",
+          "submodular-certificate-unverified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:latent-closed-archive",
+        "label": "Latent-closed compressed archive",
+        "obligation_category": "latent-oracle-model",
+        "proof_obligation_ids": [
+          "obligation:def:latent-closed-archive"
+        ],
+        "residual_coordinates": [
+          "residual:def:latent-closed-archive"
+        ],
+        "residual_policy": "charge-oracle-residual-until-replayable-witness-exists",
+        "safe_default": "diagnostic-with-oracle-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+      },
+      {
+        "accepted_evidence_kind": [
+          "archive-replay-log",
+          "cover-certificate",
+          "distortion-bound"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "archive-cover-missing",
+          "distortion-bound-unverified",
+          "fidelity-loop-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "archive-cover-missing",
+          "distortion-bound-unverified",
+          "fidelity-loop-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:compressed-archive-distortion-cover",
+        "label": "Compressed archive distortion cover",
+        "obligation_category": "archive-domain-cover",
+        "proof_obligation_ids": [
+          "obligation:prop:compressed-archive-distortion-cover"
+        ],
+        "residual_coordinates": [
+          "residual:prop:compressed-archive-distortion-cover"
+        ],
+        "residual_policy": "charge-archive-distortion-residual-until-cover-certified",
+        "safe_default": "diagnostic-with-archive-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.archive.verify_domain_cover"
+      },
+      {
+        "accepted_evidence_kind": [
+          "archive-replay-log",
+          "cover-certificate",
+          "distortion-bound"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "archive-cover-missing",
+          "distortion-bound-unverified",
+          "fidelity-loop-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "archive-cover-missing",
+          "distortion-bound-unverified",
+          "fidelity-loop-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:efficiency-preserving-archive-refinement",
+        "label": "Efficiency-preserving archive refinement",
+        "obligation_category": "archive-domain-cover",
+        "proof_obligation_ids": [
+          "obligation:def:efficiency-preserving-archive-refinement"
+        ],
+        "residual_coordinates": [
+          "residual:def:efficiency-preserving-archive-refinement"
+        ],
+        "residual_policy": "charge-archive-distortion-residual-until-cover-certified",
+        "safe_default": "diagnostic-with-archive-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.archive.verify_domain_cover"
+      },
+      {
+        "accepted_evidence_kind": [
+          "archive-replay-log",
+          "cover-certificate",
+          "distortion-bound"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "archive-cover-missing",
+          "distortion-bound-unverified",
+          "fidelity-loop-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "archive-cover-missing",
+          "distortion-bound-unverified",
+          "fidelity-loop-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:efficiency-preserving-archive-refinement",
+        "label": "Efficiency-preserving archive refinement",
+        "obligation_category": "archive-domain-cover",
+        "proof_obligation_ids": [
+          "obligation:prop:efficiency-preserving-archive-refinement"
+        ],
+        "residual_coordinates": [
+          "residual:prop:efficiency-preserving-archive-refinement"
+        ],
+        "residual_policy": "charge-archive-distortion-residual-until-cover-certified",
+        "safe_default": "diagnostic-with-archive-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.archive.verify_domain_cover"
+      },
+      {
+        "accepted_evidence_kind": [
+          "latent-model-card",
+          "oracle-certificate",
+          "submodular-proof-witness"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "latent-model-not-replayable",
+          "oracle-witness-missing",
+          "submodular-certificate-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "oracle-or-latent-model-witness-required"
+        ],
+        "failure_modes": [
+          "latent-model-not-replayable",
+          "oracle-witness-missing",
+          "submodular-certificate-unverified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:latent-archive-complexity-calibrated-coupling",
+        "label": "Latent archive complexity with calibrated coupling costs",
+        "obligation_category": "latent-oracle-model",
+        "proof_obligation_ids": [
+          "obligation:prop:latent-archive-complexity-calibrated-coupling"
+        ],
+        "residual_coordinates": [
+          "residual:prop:latent-archive-complexity-calibrated-coupling"
+        ],
+        "residual_policy": "charge-oracle-residual-until-replayable-witness-exists",
+        "safe_default": "diagnostic-with-oracle-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+      },
+      {
+        "accepted_evidence_kind": [
+          "instrumented-trace",
+          "physics-simulator-certificate",
+          "resource-calendar"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "hybrid-envelope-not-certified",
+          "physical-system-witness-missing",
+          "resource-calendar-or-null-channel-unresolved",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "physical-or-hybrid-system-witness-required"
+        ],
+        "failure_modes": [
+          "hybrid-envelope-not-certified",
+          "physical-system-witness-missing",
+          "resource-calendar-or-null-channel-unresolved"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:null-channel-routing",
+        "label": "Typed physical null-channel transfer complex",
+        "obligation_category": "physical-hybrid-system",
+        "proof_obligation_ids": [
+          "obligation:def:null-channel-routing"
+        ],
+        "residual_coordinates": [
+          "residual:def:null-channel-routing"
+        ],
+        "residual_policy": "charge-physical-residual-until-verifier-accepts",
+        "safe_default": "diagnostic-with-physical-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+      },
+      {
+        "accepted_evidence_kind": [
+          "instrumented-trace",
+          "physics-simulator-certificate",
+          "resource-calendar"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "hybrid-envelope-not-certified",
+          "physical-system-witness-missing",
+          "resource-calendar-or-null-channel-unresolved",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "physical-or-hybrid-system-witness-required"
+        ],
+        "failure_modes": [
+          "hybrid-envelope-not-certified",
+          "physical-system-witness-missing",
+          "resource-calendar-or-null-channel-unresolved"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:hybrid-buffer-envelope",
+        "label": "Hybrid buffer envelope certificate",
+        "obligation_category": "physical-hybrid-system",
+        "proof_obligation_ids": [
+          "obligation:def:hybrid-buffer-envelope"
+        ],
+        "residual_coordinates": [
+          "residual:def:hybrid-buffer-envelope"
+        ],
+        "residual_policy": "charge-physical-residual-until-verifier-accepts",
+        "safe_default": "diagnostic-with-physical-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+      },
+      {
+        "accepted_evidence_kind": [
+          "calibration-report",
+          "drift-bound-certificate",
+          "signed-telemetry-window"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "calibration-drift-unbounded",
+          "rebasing-certificate-unaccepted",
+          "telemetry-window-missing",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "calibration-drift-unbounded",
+          "rebasing-certificate-unaccepted",
+          "telemetry-window-missing"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:calibrated-event-envelope",
+        "label": "Online regime monitor and rebasing certificate",
+        "obligation_category": "telemetry-calibration",
+        "proof_obligation_ids": [
+          "obligation:def:calibrated-event-envelope"
+        ],
+        "residual_coordinates": [
+          "residual:def:calibrated-event-envelope"
+        ],
+        "residual_policy": "charge-telemetry-drift-residual-until-window-validated",
+        "safe_default": "diagnostic-with-telemetry-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.telemetry.verify_calibration_window"
+      },
+      {
+        "accepted_evidence_kind": [
+          "composition-proof",
+          "contract-library",
+          "counterexample-search-report"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "composition-proof-unaccepted",
+          "contract-library-missing",
+          "domain-contract-incomplete",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "domain-contract-or-redesign-certificate-required"
+        ],
+        "failure_modes": [
+          "composition-proof-unaccepted",
+          "contract-library-missing",
+          "domain-contract-incomplete"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:assume-guarantee-contract-library",
+        "label": "Assume-guarantee contract library",
+        "obligation_category": "assume-guarantee-contract",
+        "proof_obligation_ids": [
+          "obligation:def:assume-guarantee-contract-library"
+        ],
+        "residual_coordinates": [
+          "residual:def:assume-guarantee-contract-library"
+        ],
+        "residual_policy": "charge-contract-gap-until-composition-proof-accepted",
+        "safe_default": "diagnostic-with-contract-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.contracts.verify_assume_guarantee_library"
+      },
+      {
+        "accepted_evidence_kind": [
+          "composition-proof",
+          "contract-library",
+          "counterexample-search-report"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "composition-proof-unaccepted",
+          "contract-library-missing",
+          "domain-contract-incomplete",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "domain-contract-or-redesign-certificate-required"
+        ],
+        "failure_modes": [
+          "composition-proof-unaccepted",
+          "contract-library-missing",
+          "domain-contract-incomplete"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:assume-guarantee-synthesis-soundness",
+        "label": "Assume-guarantee synthesis soundness",
+        "obligation_category": "assume-guarantee-contract",
+        "proof_obligation_ids": [
+          "obligation:prop:assume-guarantee-synthesis-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:prop:assume-guarantee-synthesis-soundness"
+        ],
+        "residual_policy": "charge-contract-gap-until-composition-proof-accepted",
+        "safe_default": "diagnostic-with-contract-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.contracts.verify_assume_guarantee_library"
+      },
+      {
+        "accepted_evidence_kind": [
+          "composition-proof",
+          "contract-library",
+          "counterexample-search-report"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "composition-proof-unaccepted",
+          "contract-library-missing",
+          "domain-contract-incomplete",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "domain-contract-or-redesign-certificate-required"
+        ],
+        "failure_modes": [
+          "composition-proof-unaccepted",
+          "contract-library-missing",
+          "domain-contract-incomplete"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:local-contraction-residual-certificate",
+        "label": "Local contraction residual certificate",
+        "obligation_category": "assume-guarantee-contract",
+        "proof_obligation_ids": [
+          "obligation:def:local-contraction-residual-certificate"
+        ],
+        "residual_coordinates": [
+          "residual:def:local-contraction-residual-certificate"
+        ],
+        "residual_policy": "charge-contract-gap-until-composition-proof-accepted",
+        "safe_default": "diagnostic-with-contract-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.contracts.verify_assume_guarantee_library"
+      },
+      {
+        "accepted_evidence_kind": [
+          "instrumented-trace",
+          "physics-simulator-certificate",
+          "resource-calendar"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "hybrid-envelope-not-certified",
+          "physical-system-witness-missing",
+          "resource-calendar-or-null-channel-unresolved",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "physical-or-hybrid-system-witness-required"
+        ],
+        "failure_modes": [
+          "hybrid-envelope-not-certified",
+          "physical-system-witness-missing",
+          "resource-calendar-or-null-channel-unresolved"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:hybrid-residual-propagation",
+        "label": "Hybrid residual propagation",
+        "obligation_category": "physical-hybrid-system",
+        "proof_obligation_ids": [
+          "obligation:def:hybrid-residual-propagation"
+        ],
+        "residual_coordinates": [
+          "residual:def:hybrid-residual-propagation"
+        ],
+        "residual_policy": "charge-physical-residual-until-verifier-accepts",
+        "safe_default": "diagnostic-with-physical-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+      },
+      {
+        "accepted_evidence_kind": [
+          "calibration-report",
+          "drift-bound-certificate",
+          "signed-telemetry-window"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "calibration-drift-unbounded",
+          "rebasing-certificate-unaccepted",
+          "telemetry-window-missing",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "calibration-drift-unbounded",
+          "rebasing-certificate-unaccepted",
+          "telemetry-window-missing"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:online-regime-monitor-calibration-soundness",
+        "label": "Online regime-monitor calibration soundness",
+        "obligation_category": "telemetry-calibration",
+        "proof_obligation_ids": [
+          "obligation:prop:online-regime-monitor-calibration-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:prop:online-regime-monitor-calibration-soundness"
+        ],
+        "residual_policy": "charge-telemetry-drift-residual-until-window-validated",
+        "safe_default": "diagnostic-with-telemetry-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.telemetry.verify_calibration_window"
+      },
+      {
+        "accepted_evidence_kind": [
+          "instrumented-trace",
+          "physics-simulator-certificate",
+          "resource-calendar"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "hybrid-envelope-not-certified",
+          "physical-system-witness-missing",
+          "resource-calendar-or-null-channel-unresolved",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "physical-or-hybrid-system-witness-required"
+        ],
+        "failure_modes": [
+          "hybrid-envelope-not-certified",
+          "physical-system-witness-missing",
+          "resource-calendar-or-null-channel-unresolved"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:uncoupled-hybrid-residual-propagation",
+        "label": "Typed-disjoint hybrid residual propagation",
+        "obligation_category": "physical-hybrid-system",
+        "proof_obligation_ids": [
+          "obligation:prop:uncoupled-hybrid-residual-propagation"
+        ],
+        "residual_coordinates": [
+          "residual:prop:uncoupled-hybrid-residual-propagation"
+        ],
+        "residual_policy": "charge-physical-residual-until-verifier-accepts",
+        "safe_default": "diagnostic-with-physical-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+      },
+      {
+        "accepted_evidence_kind": [
+          "finite-bound-table",
+          "residual-envelope-proof",
+          "tail-bound-certificate"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "finite-envelope-proof-missing",
+          "residual-bound-not-certified",
+          "tail-bound-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "finite-envelope-proof-missing",
+          "residual-bound-not-certified",
+          "tail-bound-unverified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:logarithmic-norm-fallback",
+        "label": "Logarithmic-norm fallback",
+        "obligation_category": "numerical-envelope",
+        "proof_obligation_ids": [
+          "obligation:prop:logarithmic-norm-fallback"
+        ],
+        "residual_coordinates": [
+          "residual:prop:logarithmic-norm-fallback"
+        ],
+        "residual_policy": "charge-envelope-residual-until-bound-certified",
+        "safe_default": "diagnostic-with-envelope-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "core.adapters.envelope.verify_finite_bound"
+      },
+      {
+        "accepted_evidence_kind": [
+          "finite-bound-table",
+          "residual-envelope-proof",
+          "tail-bound-certificate"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "finite-envelope-proof-missing",
+          "residual-bound-not-certified",
+          "tail-bound-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "finite-envelope-proof-missing",
+          "residual-bound-not-certified",
+          "tail-bound-unverified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:additive-residual-bound",
+        "label": "Additive residual bound as a stable special case",
+        "obligation_category": "numerical-envelope",
+        "proof_obligation_ids": [
+          "obligation:prop:additive-residual-bound"
+        ],
+        "residual_coordinates": [
+          "residual:prop:additive-residual-bound"
+        ],
+        "residual_policy": "charge-envelope-residual-until-bound-certified",
+        "safe_default": "diagnostic-with-envelope-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "core.adapters.envelope.verify_finite_bound"
+      },
+      {
+        "accepted_evidence_kind": [
+          "instrumented-trace",
+          "physics-simulator-certificate",
+          "resource-calendar"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "hybrid-envelope-not-certified",
+          "physical-system-witness-missing",
+          "resource-calendar-or-null-channel-unresolved",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "physical-or-hybrid-system-witness-required"
+        ],
+        "failure_modes": [
+          "hybrid-envelope-not-certified",
+          "physical-system-witness-missing",
+          "resource-calendar-or-null-channel-unresolved"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:hybrid-null-channel-envelope",
+        "label": "Hybrid null-channel envelope",
+        "obligation_category": "physical-hybrid-system",
+        "proof_obligation_ids": [
+          "obligation:prop:hybrid-null-channel-envelope"
+        ],
+        "residual_coordinates": [
+          "residual:prop:hybrid-null-channel-envelope"
+        ],
+        "residual_policy": "charge-physical-residual-until-verifier-accepts",
+        "safe_default": "diagnostic-with-physical-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+      },
+      {
+        "accepted_evidence_kind": [
+          "instrumented-trace",
+          "physics-simulator-certificate",
+          "resource-calendar"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "hybrid-envelope-not-certified",
+          "physical-system-witness-missing",
+          "resource-calendar-or-null-channel-unresolved",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "physical-or-hybrid-system-witness-required"
+        ],
+        "failure_modes": [
+          "hybrid-envelope-not-certified",
+          "physical-system-witness-missing",
+          "resource-calendar-or-null-channel-unresolved"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:null-channel-routing",
+        "label": "Discrete null-channel transfer accounting",
+        "obligation_category": "physical-hybrid-system",
+        "proof_obligation_ids": [
+          "obligation:prop:null-channel-routing"
+        ],
+        "residual_coordinates": [
+          "residual:prop:null-channel-routing"
+        ],
+        "residual_policy": "charge-physical-residual-until-verifier-accepts",
+        "safe_default": "diagnostic-with-physical-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+      },
+      {
+        "accepted_evidence_kind": [
+          "coverage-certificate",
+          "partition-cover-proof",
+          "purification-trace"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "coverage-certificate-unaccepted",
+          "partition-cover-missing",
+          "purification-trace-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "coverage-certificate-unaccepted",
+          "partition-cover-missing",
+          "purification-trace-unverified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:purification-transition",
+        "label": "Purification transition",
+        "obligation_category": "observation-partition",
+        "proof_obligation_ids": [
+          "obligation:def:purification-transition"
+        ],
+        "residual_coordinates": [
+          "residual:def:purification-transition"
+        ],
+        "residual_policy": "charge-partition-residual-until-cover-certified",
+        "safe_default": "diagnostic-with-partition-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.observation.verify_partition_cover"
+      },
+      {
+        "accepted_evidence_kind": [
+          "coverage-certificate",
+          "partition-cover-proof",
+          "purification-trace"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "coverage-certificate-unaccepted",
+          "partition-cover-missing",
+          "purification-trace-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "coverage-certificate-unaccepted",
+          "partition-cover-missing",
+          "purification-trace-unverified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:constructed-partition",
+        "label": "Constructed observation partition certificate",
+        "obligation_category": "observation-partition",
+        "proof_obligation_ids": [
+          "obligation:def:constructed-partition"
+        ],
+        "residual_coordinates": [
+          "residual:def:constructed-partition"
+        ],
+        "residual_policy": "charge-partition-residual-until-cover-certified",
+        "safe_default": "diagnostic-with-partition-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.observation.verify_partition_cover"
+      },
+      {
+        "accepted_evidence_kind": [
+          "coverage-certificate",
+          "partition-cover-proof",
+          "purification-trace"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "coverage-certificate-unaccepted",
+          "partition-cover-missing",
+          "purification-trace-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "coverage-certificate-unaccepted",
+          "partition-cover-missing",
+          "purification-trace-unverified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "lem:constructed-partition-coverage",
+        "label": "Constructed observation partition coverage",
+        "obligation_category": "observation-partition",
+        "proof_obligation_ids": [
+          "obligation:lem:constructed-partition-coverage"
+        ],
+        "residual_coordinates": [
+          "residual:lem:constructed-partition-coverage"
+        ],
+        "residual_policy": "charge-partition-residual-until-cover-certified",
+        "safe_default": "diagnostic-with-partition-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.observation.verify_partition_cover"
+      },
+      {
+        "accepted_evidence_kind": [
+          "feasibility-certificate",
+          "redesign-candidate-set",
+          "response-interval-proof"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "redesign-candidate-space-unbounded",
+          "response-interval-unverified",
+          "topology-redesign-oracle-missing",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "domain-contract-or-redesign-certificate-required"
+        ],
+        "failure_modes": [
+          "redesign-candidate-space-unbounded",
+          "response-interval-unverified",
+          "topology-redesign-oracle-missing"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:topology-redesign-operator",
+        "label": "Topology redesign operator",
+        "obligation_category": "redesign-response",
+        "proof_obligation_ids": [
+          "obligation:def:topology-redesign-operator"
+        ],
+        "residual_coordinates": [
+          "residual:def:topology-redesign-operator"
+        ],
+        "residual_policy": "charge-redesign-response-residual-until-interval-certified",
+        "safe_default": "diagnostic-with-redesign-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.redesign.verify_response_interval"
+      },
+      {
+        "accepted_evidence_kind": [
+          "feasibility-certificate",
+          "redesign-candidate-set",
+          "response-interval-proof"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "redesign-candidate-space-unbounded",
+          "response-interval-unverified",
+          "topology-redesign-oracle-missing",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "domain-contract-or-redesign-certificate-required"
+        ],
+        "failure_modes": [
+          "redesign-candidate-space-unbounded",
+          "response-interval-unverified",
+          "topology-redesign-oracle-missing"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:redesign-response-certificate",
+        "label": "Redesign response certificate",
+        "obligation_category": "redesign-response",
+        "proof_obligation_ids": [
+          "obligation:def:redesign-response-certificate"
+        ],
+        "residual_coordinates": [
+          "residual:def:redesign-response-certificate"
+        ],
+        "residual_policy": "charge-redesign-response-residual-until-interval-certified",
+        "safe_default": "diagnostic-with-redesign-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.redesign.verify_response_interval"
+      },
+      {
+        "accepted_evidence_kind": [
+          "archive-replay-log",
+          "cover-certificate",
+          "distortion-bound"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "archive-cover-missing",
+          "distortion-bound-unverified",
+          "fidelity-loop-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "archive-cover-missing",
+          "distortion-bound-unverified",
+          "fidelity-loop-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:progressive-fidelity-compiler-loop",
+        "label": "Progressive fidelity compiler loop",
+        "obligation_category": "archive-domain-cover",
+        "proof_obligation_ids": [
+          "obligation:def:progressive-fidelity-compiler-loop"
+        ],
+        "residual_coordinates": [
+          "residual:def:progressive-fidelity-compiler-loop"
+        ],
+        "residual_policy": "charge-archive-distortion-residual-until-cover-certified",
+        "safe_default": "diagnostic-with-archive-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.archive.verify_domain_cover"
+      },
+      {
+        "accepted_evidence_kind": [
+          "archive-replay-log",
+          "cover-certificate",
+          "distortion-bound"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "archive-cover-missing",
+          "distortion-bound-unverified",
+          "fidelity-loop-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "archive-cover-missing",
+          "distortion-bound-unverified",
+          "fidelity-loop-not-certified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "thm:progressive-fidelity-compiler-soundness",
+        "label": "Progressive fidelity compiler soundness",
+        "obligation_category": "archive-domain-cover",
+        "proof_obligation_ids": [
+          "obligation:thm:progressive-fidelity-compiler-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:thm:progressive-fidelity-compiler-soundness"
+        ],
+        "residual_policy": "charge-archive-distortion-residual-until-cover-certified",
+        "safe_default": "diagnostic-with-archive-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.archive.verify_domain_cover"
+      },
+      {
+        "accepted_evidence_kind": [
+          "latent-model-card",
+          "oracle-certificate",
+          "submodular-proof-witness"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "latent-model-not-replayable",
+          "oracle-witness-missing",
+          "submodular-certificate-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "oracle-or-latent-model-witness-required",
+          "domain-contract-or-redesign-certificate-required"
+        ],
+        "failure_modes": [
+          "latent-model-not-replayable",
+          "oracle-witness-missing",
+          "submodular-certificate-unverified"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:greedy-redesign",
+        "label": "Greedy redesign under certified submodular oracle",
+        "obligation_category": "latent-oracle-model",
+        "proof_obligation_ids": [
+          "obligation:prop:greedy-redesign"
+        ],
+        "residual_coordinates": [
+          "residual:prop:greedy-redesign"
+        ],
+        "residual_policy": "charge-oracle-residual-until-replayable-witness-exists",
+        "safe_default": "diagnostic-with-oracle-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+      },
+      {
+        "accepted_evidence_kind": [
+          "feasibility-certificate",
+          "redesign-candidate-set",
+          "response-interval-proof"
+        ],
+        "artifact": "Typed Reality Compilation.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "redesign-candidate-space-unbounded",
+          "response-interval-unverified",
+          "topology-redesign-oracle-missing",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "domain-contract-or-redesign-certificate-required"
+        ],
+        "failure_modes": [
+          "redesign-candidate-space-unbounded",
+          "response-interval-unverified",
+          "topology-redesign-oracle-missing"
+        ],
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:redesign-response-interval",
+        "label": "Redesign response interval",
+        "obligation_category": "redesign-response",
+        "proof_obligation_ids": [
+          "obligation:prop:redesign-response-interval"
+        ],
+        "residual_coordinates": [
+          "residual:prop:redesign-response-interval"
+        ],
+        "residual_policy": "charge-redesign-response-residual-until-interval-certified",
+        "safe_default": "diagnostic-with-redesign-obligation",
+        "schema_ref": "core.ExternalProofObligation",
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "trc.adapters.redesign.verify_response_interval"
+      }
+    ],
+    "verifier_route_summary": {
+      "core.adapters.envelope.verify_finite_bound": 2,
+      "trc.adapters.archive.verify_domain_cover": 5,
+      "trc.adapters.contracts.verify_assume_guarantee_library": 3,
+      "trc.adapters.latent_oracle.verify_model_witness": 5,
+      "trc.adapters.metric.verify_distributionally_robust_dual": 1,
+      "trc.adapters.observation.verify_partition_cover": 3,
+      "trc.adapters.physical_hybrid.verify_envelope": 6,
+      "trc.adapters.redesign.verify_response_interval": 3,
+      "trc.adapters.telemetry.verify_calibration_window": 4
+    }
+  },
+  "external_obligation_category_summary": {
+    "archive-domain-cover": 5,
+    "assume-guarantee-contract": 3,
+    "distributionally-robust-metric": 1,
+    "latent-oracle-model": 5,
+    "numerical-envelope": 2,
+    "observation-partition": 3,
+    "physical-hybrid-system": 6,
+    "redesign-response": 3,
+    "telemetry-calibration": 4
+  },
+  "external_verifier_route_summary": {
+    "core.adapters.envelope.verify_finite_bound": 2,
+    "trc.adapters.archive.verify_domain_cover": 5,
+    "trc.adapters.contracts.verify_assume_guarantee_library": 3,
+    "trc.adapters.latent_oracle.verify_model_witness": 5,
+    "trc.adapters.metric.verify_distributionally_robust_dual": 1,
+    "trc.adapters.observation.verify_partition_cover": 3,
+    "trc.adapters.physical_hybrid.verify_envelope": 6,
+    "trc.adapters.redesign.verify_response_interval": 3,
+    "trc.adapters.telemetry.verify_calibration_window": 4
+  },
+  "item_mappings": [
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "trc.ObservationWindow"
+      ],
+      "item_id": "def:observation-window",
+      "label": "Observation window",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "trc.TypedGraphRecord"
+      ],
+      "item_id": "def:typed-graph",
+      "label": "Observable typed infrastructure graph",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "trc.TRCStateRecord"
+      ],
+      "item_id": "def:trc-state",
+      "label": "TRC state",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.observation_consistency_residual"
+      ],
+      "item_id": "def:observation-consistency-complex",
+      "label": "Observation consistency complex",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.observation_consistency_residual"
+      ],
+      "item_id": "prop:observation-consistency-residual",
+      "label": "Observation consistency residual",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "core.Ledger"
+      ],
+      "item_id": "def:ordered-ledger",
+      "label": "Typed ledger space",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.StatusRule"
+      ],
+      "item_id": "def:status-algebra",
+      "label": "Status algebra",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_risk_gate"
+      ],
+      "item_id": "def:risk-gated-admissibility-profile",
+      "label": "Risk-gated admissibility profile",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_script_ground_metric"
+      ],
+      "item_id": "def:script-ground-metric",
+      "label": "Script ground metric certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_lifecycle_dag"
+      ],
+      "item_id": "def:script-sensitivity-witness",
+      "label": "Lifecycle-aware compositional sensitivity-kernel certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_lifecycle_dag"
+      ],
+      "item_id": "prop:lifecycle-aware-sensitivity-kernel-bound",
+      "label": "Lifecycle-aware sensitivity-kernel bound",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_lifecycle_dag"
+      ],
+      "item_id": "def:certificate-lifecycle",
+      "label": "Budgeted lifecycle recomputation scheduler",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_lifecycle_dag"
+      ],
+      "item_id": "prop:budgeted-lifecycle-recomputation-consistency",
+      "label": "Budgeted lifecycle recomputation consistency",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_budgeted_tolerance_scheduler"
+      ],
+      "item_id": "def:budgeted-tolerance-recomputation-scheduler",
+      "label": "Budgeted tolerance recomputation scheduler",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_budgeted_tolerance_scheduler"
+      ],
+      "item_id": "prop:budgeted-tolerance-recomputation-consistency",
+      "label": "Budgeted tolerance recomputation consistency",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_risk_gate"
+      ],
+      "item_id": "def:dual-dr-risk-gate",
+      "label": "Dual distributionally robust risk gate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:ground-metric-dual-dr-admissibility",
+      "label": "Ground-metric dual distributionally robust admissibility",
+      "obligation_category": "distributionally-robust-metric",
+      "verifier_route": "trc.adapters.metric.verify_distributionally_robust_dual"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_relaxation_schedule"
+      ],
+      "item_id": "def:lexicographic-admissibility-relaxation",
+      "label": "Lexicographic admissibility relaxation",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_relaxation_schedule"
+      ],
+      "item_id": "prop:lexicographic-relaxation-frontier",
+      "label": "Lexicographic relaxation frontier",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_process_grammar"
+      ],
+      "item_id": "def:executable-process-grammar",
+      "label": "Executable process grammar",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_trace_normal_form"
+      ],
+      "item_id": "def:executable-trace-normal-form",
+      "label": "Executable trace normal form",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_typed_trace_transducer"
+      ],
+      "item_id": "def:typed-executable-trace-transducer",
+      "label": "Typed executable trace transducer",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_resource_flow"
+      ],
+      "item_id": "def:trace-indexed-resource-flow-ledger",
+      "label": "Trace-indexed resource-flow ledger",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_actionability_vector"
+      ],
+      "item_id": "def:operability-preserving-relaxation",
+      "label": "Actionability vector and relaxed frontier order",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_trace_normal_form"
+      ],
+      "item_id": "def:tolerance-aware-executable-trace",
+      "label": "Tolerance-aware executable trace",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.resource_efficiency_selection"
+      ],
+      "item_id": "def:resource-efficiency-selection",
+      "label": "Resource-efficiency selection stage",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.resource_efficiency_selection"
+      ],
+      "item_id": "prop:resource-efficiency-pareto-selection",
+      "label": "Resource-efficiency Pareto selection",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.resource_efficiency_selection"
+      ],
+      "item_id": "def:resource-efficiency-dominance-certificate",
+      "label": "Resource-efficiency dominance certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.resource_efficiency_selection"
+      ],
+      "item_id": "thm:resource-efficiency-dominance-archive",
+      "label": "Resource-efficiency dominance archive",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_trace_normal_form"
+      ],
+      "item_id": "prop:tolerance-aware-executable-trace-extraction",
+      "label": "Tolerance-aware executable trace extraction",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_boundary_generator"
+      ],
+      "item_id": "def:boundary-generator",
+      "label": "Boundary generator",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_boundary_script"
+      ],
+      "item_id": "def:boundary-script",
+      "label": "Boundary script",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_boundary_script_automaton"
+      ],
+      "item_id": "def:boundary-script-automaton",
+      "label": "Boundary script automaton",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_cascade_residual_potential"
+      ],
+      "item_id": "def:cascade-potential",
+      "label": "Cascade residual potential",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_cascade_residual_potential"
+      ],
+      "item_id": "prop:cascade-potential-residual-bound",
+      "label": "Cascade potential residual bound",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_risk_gate"
+      ],
+      "item_id": "def:risk-sensitive-sidecar",
+      "label": "Risk-sensitive residual sidecar",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_risk_gate"
+      ],
+      "item_id": "prop:risk-sensitive-residual-extraction",
+      "label": "Risk-sensitive residual extraction",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_independence_certificate"
+      ],
+      "item_id": "def:independence-certificate",
+      "label": "Independence certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_multi_horizon_order"
+      ],
+      "item_id": "def:multi-horizon",
+      "label": "Multi-horizon order",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "trc.ToleranceCostKernel"
+      ],
+      "item_id": "def:budgeted-coordinate-kernel",
+      "label": "Budgeted coordinate kernel",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_future_freedom_vector"
+      ],
+      "item_id": "def:future-freedom-evaluator",
+      "label": "Future-freedom evaluator",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_future_freedom_vector"
+      ],
+      "item_id": "def:future-freedom",
+      "label": "Residual future-freedom vector",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.finite_tolerance_allocation"
+      ],
+      "item_id": "def:typed-tolerance-ledger",
+      "label": "Typed tolerance ledger",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.finite_tolerance_allocation"
+      ],
+      "item_id": "prop:typed-tolerance-ledger-soundness",
+      "label": "Typed tolerance-ledger soundness",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.finite_tolerance_allocation"
+      ],
+      "item_id": "def:tolerance-cost-kernel",
+      "label": "Tolerance-cost kernel",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.finite_tolerance_allocation"
+      ],
+      "item_id": "prop:finite-tolerance-cost-kernel-admissibility",
+      "label": "Finite tolerance-cost kernel admissibility",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_tolerance_allocation_certificate"
+      ],
+      "item_id": "def:operational-tolerance-allocator",
+      "label": "Operational tolerance allocator",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_tolerance_allocation_certificate"
+      ],
+      "item_id": "thm:operational-tolerance-allocation-soundness",
+      "label": "Operational tolerance allocation soundness",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_tolerance_allocation_certificate"
+      ],
+      "item_id": "def:compositional-tolerance-propagation",
+      "label": "Compositional tolerance propagation certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_tolerance_allocation_certificate"
+      ],
+      "item_id": "thm:compositional-tolerance-propagation-bound",
+      "label": "Compositional tolerance propagation bound",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:telemetry-updated-resource-cost-kernel",
+      "label": "Telemetry-updated resource-cost kernel",
+      "obligation_category": "telemetry-calibration",
+      "verifier_route": "trc.adapters.telemetry.verify_calibration_window"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "thm:telemetry-updated-resource-cost-kernel-soundness",
+      "label": "Telemetry-updated resource-cost kernel soundness",
+      "obligation_category": "telemetry-calibration",
+      "verifier_route": "trc.adapters.telemetry.verify_calibration_window"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "core.archive_with_truncation"
+      ],
+      "item_id": "def:epsilon-order",
+      "label": "Epsilon charge",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "core.archive_with_truncation"
+      ],
+      "item_id": "def:grid-archive",
+      "label": "Grid epsilon archive",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "core.archive_with_truncation"
+      ],
+      "item_id": "def:capped-archive",
+      "label": "Capped archive and truncation residual",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:latent-operator-compilation",
+      "label": "Latent operator compilation",
+      "obligation_category": "latent-oracle-model",
+      "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:time-extended-latent-atlas",
+      "label": "Time-extended constructible latent atlas",
+      "obligation_category": "latent-oracle-model",
+      "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_causal_event_poset"
+      ],
+      "item_id": "def:clock-event-synchronization",
+      "label": "Constructed causal event-poset certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_causal_event_poset"
+      ],
+      "item_id": "def:causal-schedule-extraction",
+      "label": "Causal schedule extraction certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_causal_event_poset"
+      ],
+      "item_id": "prop:constructed-causal-event-poset-consistency",
+      "label": "Constructed causal event-poset consistency",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_causal_event_poset"
+      ],
+      "item_id": "prop:causal-schedule-extraction-soundness",
+      "label": "Causal schedule extraction soundness",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:latent-closed-archive",
+      "label": "Latent-closed compressed archive",
+      "obligation_category": "latent-oracle-model",
+      "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:compressed-archive-distortion-cover",
+      "label": "Compressed archive distortion cover",
+      "obligation_category": "archive-domain-cover",
+      "verifier_route": "trc.adapters.archive.verify_domain_cover"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:efficiency-preserving-archive-refinement",
+      "label": "Efficiency-preserving archive refinement",
+      "obligation_category": "archive-domain-cover",
+      "verifier_route": "trc.adapters.archive.verify_domain_cover"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:efficiency-preserving-archive-refinement",
+      "label": "Efficiency-preserving archive refinement",
+      "obligation_category": "archive-domain-cover",
+      "verifier_route": "trc.adapters.archive.verify_domain_cover"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:latent-archive-complexity-calibrated-coupling",
+      "label": "Latent archive complexity with calibrated coupling costs",
+      "obligation_category": "latent-oracle-model",
+      "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.StatusRule"
+      ],
+      "item_id": "lem:no-status-promotion",
+      "label": "No status promotion by archive insertion",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:null-channel-routing",
+      "label": "Typed physical null-channel transfer complex",
+      "obligation_category": "physical-hybrid-system",
+      "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:hybrid-buffer-envelope",
+      "label": "Hybrid buffer envelope certificate",
+      "obligation_category": "physical-hybrid-system",
+      "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.network_calculus_bounds"
+      ],
+      "item_id": "def:network-calculus-event-contract",
+      "label": "Network-calculus event contract",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:calibrated-event-envelope",
+      "label": "Online regime monitor and rebasing certificate",
+      "obligation_category": "telemetry-calibration",
+      "verifier_route": "trc.adapters.telemetry.verify_calibration_window"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "trc.TransitionProofRecord"
+      ],
+      "item_id": "def:finite-state-gain-table",
+      "label": "Finite-state transition gain table",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:assume-guarantee-contract-library",
+      "label": "Assume-guarantee contract library",
+      "obligation_category": "assume-guarantee-contract",
+      "verifier_route": "trc.adapters.contracts.verify_assume_guarantee_library"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:assume-guarantee-synthesis-soundness",
+      "label": "Assume-guarantee synthesis soundness",
+      "obligation_category": "assume-guarantee-contract",
+      "verifier_route": "trc.adapters.contracts.verify_assume_guarantee_library"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:local-contraction-residual-certificate",
+      "label": "Local contraction residual certificate",
+      "obligation_category": "assume-guarantee-contract",
+      "verifier_route": "trc.adapters.contracts.verify_assume_guarantee_library"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:hybrid-residual-propagation",
+      "label": "Hybrid residual propagation",
+      "obligation_category": "physical-hybrid-system",
+      "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.AlgebraLawCertificate"
+      ],
+      "item_id": "def:typed-semiring-abstraction",
+      "label": "Domain-typed partial semiring abstraction certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.semiring_path_product"
+      ],
+      "item_id": "def:typed-residual-interconnection-graph",
+      "label": "Ordered-semiring path summary certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.semiring_path_product"
+      ],
+      "item_id": "prop:raw-ordered-semiring-path-product",
+      "label": "Raw ordered-semiring path product",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.AlgebraLawCertificate"
+      ],
+      "item_id": "prop:domain-typed-semiring-summary-soundness",
+      "label": "Domain-typed semiring summary soundness",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "trc.network_calculus_bounds"
+      ],
+      "item_id": "prop:network-calculus-event-contract-soundness",
+      "label": "Network-calculus event contract soundness",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:online-regime-monitor-calibration-soundness",
+      "label": "Online regime-monitor calibration soundness",
+      "obligation_category": "telemetry-calibration",
+      "verifier_route": "trc.adapters.telemetry.verify_calibration_window"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:uncoupled-hybrid-residual-propagation",
+      "label": "Typed-disjoint hybrid residual propagation",
+      "obligation_category": "physical-hybrid-system",
+      "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:logarithmic-norm-fallback",
+      "label": "Logarithmic-norm fallback",
+      "obligation_category": "numerical-envelope",
+      "verifier_route": "core.adapters.envelope.verify_finite_bound"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:additive-residual-bound",
+      "label": "Additive residual bound as a stable special case",
+      "obligation_category": "numerical-envelope",
+      "verifier_route": "core.adapters.envelope.verify_finite_bound"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:hybrid-null-channel-envelope",
+      "label": "Hybrid null-channel envelope",
+      "obligation_category": "physical-hybrid-system",
+      "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:null-channel-routing",
+      "label": "Discrete null-channel transfer accounting",
+      "obligation_category": "physical-hybrid-system",
+      "verifier_route": "trc.adapters.physical_hybrid.verify_envelope"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "trc.TransitionProofRecord"
+      ],
+      "item_id": "def:action-class",
+      "label": "Action class",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_transition_proof"
+      ],
+      "item_id": "def:typed-transition-proof",
+      "label": "Typed transition proof",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:purification-transition",
+      "label": "Purification transition",
+      "obligation_category": "observation-partition",
+      "verifier_route": "trc.adapters.observation.verify_partition_cover"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "trc.ResourceCalendarRecord"
+      ],
+      "item_id": "def:resource-bounded-compensation-tensor",
+      "label": "Resource-bounded compensation tensor",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_resource_calendar"
+      ],
+      "item_id": "def:temporal-resource-tensor",
+      "label": "Resource-conservative scenario calendar",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_resource_calendar"
+      ],
+      "item_id": "prop:resource-bounded-escrow-tensor-soundness",
+      "label": "Same-slot resource tensor soundness",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_resource_flow"
+      ],
+      "item_id": "prop:trace-indexed-resource-flow-feasibility",
+      "label": "Trace-indexed resource-flow feasibility",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "core.MonoidRecord"
+      ],
+      "item_id": "prop:compensation-monoid-special-case",
+      "label": "Commutative compensation monoid as zero-shared-resource case",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:constructed-partition",
+      "label": "Constructed observation partition certificate",
+      "obligation_category": "observation-partition",
+      "verifier_route": "trc.adapters.observation.verify_partition_cover"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "lem:constructed-partition-coverage",
+      "label": "Constructed observation partition coverage",
+      "obligation_category": "observation-partition",
+      "verifier_route": "trc.adapters.observation.verify_partition_cover"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "core.DependencyDAG"
+      ],
+      "item_id": "def:branching-policy-dag",
+      "label": "Branching policy DAG",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:topology-redesign-operator",
+      "label": "Topology redesign operator",
+      "obligation_category": "redesign-response",
+      "verifier_route": "trc.adapters.redesign.verify_response_interval"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:redesign-response-certificate",
+      "label": "Redesign response certificate",
+      "obligation_category": "redesign-response",
+      "verifier_route": "trc.adapters.redesign.verify_response_interval"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:progressive-fidelity-compiler-loop",
+      "label": "Progressive fidelity compiler loop",
+      "obligation_category": "archive-domain-cover",
+      "verifier_route": "trc.adapters.archive.verify_domain_cover"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "thm:progressive-fidelity-compiler-soundness",
+      "label": "Progressive fidelity compiler soundness",
+      "obligation_category": "archive-domain-cover",
+      "verifier_route": "trc.adapters.archive.verify_domain_cover"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.compile_frontier"
+      ],
+      "item_id": "thm:certified-partial-frontier-return",
+      "label": "Certified partial-frontier return",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.compile_frontier"
+      ],
+      "item_id": "def:compiler-instance",
+      "label": "Compiler instance",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.compile_frontier"
+      ],
+      "item_id": "def:budgeted-compiler",
+      "label": "Budgeted TRC compiler",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.compile_frontier"
+      ],
+      "item_id": "thm:budgeted-compiler",
+      "label": "Budgeted compiler complexity",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "core.archive_with_truncation"
+      ],
+      "item_id": "lem:grid-epsilon-archive-cover",
+      "label": "Grid epsilon-archive cover",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "core.archive_with_truncation"
+      ],
+      "item_id": "prop:budgeted-truncation-residual",
+      "label": "Budgeted truncation residual",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "trc.check_future_freedom_vector"
+      ],
+      "item_id": "prop:rff-certificate",
+      "label": "Residual future-freedom from coordinate kernels",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_refs": [
+        "core.pareto_frontier"
+      ],
+      "item_id": "prop:passive-first-dominance",
+      "label": "Passive-first dominance under identical reachable sets",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:greedy-redesign",
+      "label": "Greedy redesign under certified submodular oracle",
+      "obligation_category": "latent-oracle-model",
+      "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:redesign-response-interval",
+      "label": "Redesign response interval",
+      "obligation_category": "redesign-response",
+      "verifier_route": "trc.adapters.redesign.verify_response_interval"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "core.Certificate"
+      ],
+      "item_id": "def:trc-certificate",
+      "label": "TRC certificate",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_refs": [
+        "core.Judgment"
+      ],
+      "item_id": "def:typed-extraction-judgment",
+      "label": "Typed extraction judgment",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "def:trc-checker",
+      "label": "TRC checker",
+      "obligation_category": null,
+      "verifier_route": null
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "thm:typed-checker-extractor-registry-soundness",
+      "label": "Typed checker/extractor and registry soundness",
+      "obligation_category": null,
+      "verifier_route": null
+    }
+  ],
+  "mr_records": 0,
+  "representative_items": [
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:ground-metric-dual-dr-admissibility",
+      "label": "Ground-metric dual distributionally robust admissibility",
+      "obligation_category": "distributionally-robust-metric",
+      "verifier_route": "trc.adapters.metric.verify_distributionally_robust_dual"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:telemetry-updated-resource-cost-kernel",
+      "label": "Telemetry-updated resource-cost kernel",
+      "obligation_category": "telemetry-calibration",
+      "verifier_route": "trc.adapters.telemetry.verify_calibration_window"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "thm:telemetry-updated-resource-cost-kernel-soundness",
+      "label": "Telemetry-updated resource-cost kernel soundness",
+      "obligation_category": "telemetry-calibration",
+      "verifier_route": "trc.adapters.telemetry.verify_calibration_window"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:latent-operator-compilation",
+      "label": "Latent operator compilation",
+      "obligation_category": "latent-oracle-model",
+      "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:time-extended-latent-atlas",
+      "label": "Time-extended constructible latent atlas",
+      "obligation_category": "latent-oracle-model",
+      "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:latent-closed-archive",
+      "label": "Latent-closed compressed archive",
+      "obligation_category": "latent-oracle-model",
+      "verifier_route": "trc.adapters.latent_oracle.verify_model_witness"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:compressed-archive-distortion-cover",
+      "label": "Compressed archive distortion cover",
+      "obligation_category": "archive-domain-cover",
+      "verifier_route": "trc.adapters.archive.verify_domain_cover"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:efficiency-preserving-archive-refinement",
+      "label": "Efficiency-preserving archive refinement",
+      "obligation_category": "archive-domain-cover",
+      "verifier_route": "trc.adapters.archive.verify_domain_cover"
+    }
+  ],
+  "schema_version": "theory-snapshot-1.0"
+}

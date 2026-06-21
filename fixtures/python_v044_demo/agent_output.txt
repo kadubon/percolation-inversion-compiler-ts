@@ -1,0 +1,1 @@
+Candidate capability packet: preserve residual ledgers, route missing verifier evidence, and schedule finite ECPT ASI-proxy packet work without claiming real ASI or self-rewrite.

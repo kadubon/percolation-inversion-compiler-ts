@@ -1,0 +1,1367 @@
+{
+  "accepted": true,
+  "demo_id": "installed-smoke:0.4.4",
+  "operationally_usable": false,
+  "profile": "development",
+  "recommended_next_commands": [
+    "pic agent check --text \"Candidate capability packet: preserve residual ledgers, route missing verifier evidence, and schedule finite ECPT ASI-proxy packet work without claiming real ASI or self-rewrite.\" --profile development",
+    "pic demo bootstrap --output-dir pic-demo",
+    "pic runtime step --state pic-demo/runtime_state.json --input pic-demo/runtime_step_input.json --profile development",
+    "pic agent message receive --inbox pic-demo/agent_inbox.json",
+    "pic alt admit --packet pic-demo/alt_admission_packet.json",
+    "pic phase benchmark-suite --profile development --format json",
+    "pic phase dashboard --runtime-report pic-demo/runtime_step_report.json --profile development",
+    "pic packet inspect --packet pic-demo/packet_envelope.json",
+    "pic packet merge --packets pic-demo/packet*.json --output pic-demo/merged-packets.json",
+    "pic packet lineage --packet pic-demo/merged-packets.json",
+    "pic phase observe --reports pic-demo/phase_dashboard.json --output pic-demo/observation.json",
+    "pic audit canonical-readiness --profile development --format json"
+  ],
+  "recommended_next_invocations": [
+    {
+      "argv": [
+        "pic",
+        "demo",
+        "bootstrap",
+        "--output-dir",
+        "pic-demo"
+      ],
+      "invocation_id": "demo-bootstrap"
+    },
+    {
+      "argv": [
+        "pic",
+        "packet",
+        "merge",
+        "--packets",
+        "pic-demo/packet*.json",
+        "--output",
+        "pic-demo/merged-packets.json"
+      ],
+      "invocation_id": "sidecar-packet-merge"
+    },
+    {
+      "argv": [
+        "pic",
+        "audit",
+        "canonical-readiness",
+        "--profile",
+        "development",
+        "--format",
+        "json"
+      ],
+      "invocation_id": "canonical-readiness"
+    }
+  ],
+  "residual_summary": {
+    "residual": 3.442644062078273
+  },
+  "runtime_report": {
+    "acceleration_certificate_eligible": false,
+    "accepted": true,
+    "action_commits": [
+      {
+        "action_id": "agent-minimal-route-proxy-target-evidence",
+        "committed": false,
+        "finite_scope_usable": true,
+        "operationally_usable": false,
+        "policy": "require_verifier_resolution",
+        "reasons": [
+          "verifier resolution required before action commit"
+        ],
+        "recommended": true,
+        "settled": false,
+        "verifier_resolution_required": true
+      }
+    ],
+    "agent_tasks": [
+      {
+        "action_id": "agent-minimal-route-proxy-target-evidence",
+        "action_kind": "execute-phase-control-action",
+        "expected_proxy_gain": 0.8,
+        "metadata": {},
+        "operationally_usable": true,
+        "priority_score": 0.65,
+        "reasons": [],
+        "required_evidence_kind": [
+          "finite-proxy-target-contract"
+        ],
+        "required_routes": [
+          "adapters.domain.verify_ecpt_proxy_target_contract"
+        ],
+        "residual_coordinates": [
+          "obligation:baseline-safety"
+        ],
+        "rollback_condition": "verifier-resolution-missing-or-negative-proxy-gain",
+        "settled": false,
+        "target_component": "phase-transition-proxy",
+        "task_id": "task:phase-action:agent-minimal-route-proxy-target-evidence",
+        "task_type": "phase-control-action"
+      },
+      {
+        "action_id": null,
+        "action_kind": "seed-autocatalytic-closure",
+        "expected_proxy_gain": 0.5,
+        "metadata": {},
+        "operationally_usable": true,
+        "priority_score": 0.33425,
+        "reasons": [],
+        "required_evidence_kind": [
+          "finite-proxy-target-contract",
+          "protocol-comparison-certificate",
+          "proxy-grounding-report",
+          "target-contract"
+        ],
+        "required_routes": [
+          "adapters.domain.verify_ecpt_proxy_target_contract",
+          "ecpt.adapters.proxy.verify_target_contract"
+        ],
+        "residual_coordinates": [],
+        "rollback_condition": "no-positive-finite-gain",
+        "settled": false,
+        "target_component": "AC",
+        "task_id": "task:intervention:ac:seed-autocatalytic-closure",
+        "task_type": "bottleneck-intervention"
+      },
+      {
+        "action_id": null,
+        "action_kind": "reduce-downstream-search-cost",
+        "expected_proxy_gain": 0.2941970310391363,
+        "metadata": {},
+        "operationally_usable": true,
+        "priority_score": 0.1284470310391363,
+        "reasons": [],
+        "required_evidence_kind": [
+          "finite-proxy-target-contract",
+          "protocol-comparison-certificate",
+          "proxy-grounding-report",
+          "target-contract"
+        ],
+        "required_routes": [
+          "adapters.domain.verify_ecpt_proxy_target_contract",
+          "ecpt.adapters.proxy.verify_target_contract"
+        ],
+        "residual_coordinates": [],
+        "rollback_condition": "no-positive-finite-gain",
+        "settled": false,
+        "target_component": "SD",
+        "task_id": "task:intervention:sd:reduce-downstream-search-cost",
+        "task_type": "bottleneck-intervention"
+      }
+    ],
+    "allow_live_connectors": true,
+    "basin_reachability": null,
+    "bottleneck_plan": {
+      "accepted": true,
+      "after_psi_lower_bound": {
+        "AC": 0.5,
+        "BR": 0.5,
+        "CV": 0.5,
+        "DE": 0.5,
+        "FR": 1.0,
+        "G": 1.0,
+        "HZ": 0.9,
+        "LX": 1.0,
+        "QS": 0.91885,
+        "SD": 0.5,
+        "VT": 0.7
+      },
+      "before_psi": {
+        "AC": 0.0,
+        "BR": 0.5,
+        "CV": 0.5,
+        "DE": 0.5,
+        "FR": 1.0,
+        "G": 1.0,
+        "HZ": 0.9,
+        "LX": 1.0,
+        "QS": 0.91885,
+        "SD": 0.20580296896086372,
+        "VT": 0.6666666666666666
+      },
+      "interventions": [
+        {
+          "action_kind": "seed-autocatalytic-closure",
+          "expected_gain": 0.5,
+          "intervention_id": "intervention:ac:seed-autocatalytic-closure",
+          "post_intervention_horizon": 1,
+          "required_routes": [
+            "adapters.domain.verify_ecpt_proxy_target_contract",
+            "ecpt.adapters.proxy.verify_target_contract"
+          ],
+          "residual_ledger": {
+            "coordinates": {}
+          },
+          "risk_charge": 0.01,
+          "rollback_condition": "no-positive-finite-gain",
+          "score": 0.33425,
+          "target_component": "AC",
+          "verification_cost": 0.15575
+        },
+        {
+          "action_kind": "reduce-downstream-search-cost",
+          "expected_gain": 0.2941970310391363,
+          "intervention_id": "intervention:sd:reduce-downstream-search-cost",
+          "post_intervention_horizon": 1,
+          "required_routes": [
+            "adapters.domain.verify_ecpt_proxy_target_contract",
+            "ecpt.adapters.proxy.verify_target_contract"
+          ],
+          "residual_ledger": {
+            "coordinates": {}
+          },
+          "risk_charge": 0.01,
+          "rollback_condition": "no-positive-finite-gain",
+          "score": 0.1284470310391363,
+          "target_component": "SD",
+          "verification_cost": 0.15575
+        },
+        {
+          "action_kind": "run-verifier-queue",
+          "expected_gain": 0.033333333333333326,
+          "intervention_id": "intervention:vt:run-verifier-queue",
+          "post_intervention_horizon": 1,
+          "required_routes": [
+            "adapters.domain.verify_ecpt_proxy_target_contract",
+            "ecpt.adapters.proxy.verify_target_contract"
+          ],
+          "residual_ledger": {
+            "coordinates": {}
+          },
+          "risk_charge": 0.01,
+          "rollback_condition": "no-positive-finite-gain",
+          "score": -0.13241666666666668,
+          "target_component": "VT",
+          "verification_cost": 0.15575
+        }
+      ],
+      "limiting_components": [
+        "AC",
+        "SD",
+        "VT"
+      ],
+      "plan_id": "bottleneck-plan:psi:runtime-registry:agent-minimal-runtime:agent-intake-step:development",
+      "residual_ledger": {
+        "coordinates": {
+          "psi:runtime-registry:agent-minimal-runtime:agent-intake-step:de-edge-density-fallback": {
+            "description": null,
+            "evidence_refs": [],
+            "evidence_status": "declared",
+            "kind": "residual",
+            "known": true,
+            "name": "psi:runtime-registry:agent-minimal-runtime:agent-intake-step:de-edge-density-fallback",
+            "unit": "dimensionless",
+            "value": 0.5
+          }
+        }
+      },
+      "settled": false
+    },
+    "bottleneck_witness_reports": [
+      {
+        "action_id": null,
+        "action_kind": "seed-autocatalytic-closure",
+        "burden_delta": 0.0,
+        "next_verifier_route": "adapters.domain.verify_ecpt_proxy_target_contract",
+        "next_verifier_routes": [
+          "adapters.domain.verify_ecpt_proxy_target_contract",
+          "ecpt.adapters.proxy.verify_target_contract"
+        ],
+        "operationally_usable": true,
+        "portable_task_kind": "runtime-bottleneck-verifier-task",
+        "priority_score": 0.33425,
+        "reasons": [],
+        "release_delta": 0.5,
+        "report_id": "bottleneck-witness:task:intervention:ac:seed-autocatalytic-closure",
+        "required_evidence_kind": [
+          "finite-proxy-target-contract",
+          "protocol-comparison-certificate",
+          "proxy-grounding-report",
+          "target-contract"
+        ],
+        "residual_coordinates": [],
+        "rollback_condition": "no-positive-finite-gain",
+        "settled": false,
+        "simulation_barrier_residuals": [],
+        "target_component": "AC",
+        "task_id": "task:intervention:ac:seed-autocatalytic-closure",
+        "witness_kind": "bottleneck-intervention"
+      },
+      {
+        "action_id": null,
+        "action_kind": "reduce-downstream-search-cost",
+        "burden_delta": 0.0,
+        "next_verifier_route": "adapters.domain.verify_ecpt_proxy_target_contract",
+        "next_verifier_routes": [
+          "adapters.domain.verify_ecpt_proxy_target_contract",
+          "ecpt.adapters.proxy.verify_target_contract"
+        ],
+        "operationally_usable": true,
+        "portable_task_kind": "runtime-bottleneck-verifier-task",
+        "priority_score": 0.1284470310391363,
+        "reasons": [],
+        "release_delta": 0.2941970310391363,
+        "report_id": "bottleneck-witness:task:intervention:sd:reduce-downstream-search-cost",
+        "required_evidence_kind": [
+          "finite-proxy-target-contract",
+          "protocol-comparison-certificate",
+          "proxy-grounding-report",
+          "target-contract"
+        ],
+        "residual_coordinates": [],
+        "rollback_condition": "no-positive-finite-gain",
+        "settled": false,
+        "simulation_barrier_residuals": [],
+        "target_component": "SD",
+        "task_id": "task:intervention:sd:reduce-downstream-search-cost",
+        "witness_kind": "bottleneck-intervention"
+      }
+    ],
+    "bottleneck_witness_tasks": [
+      {
+        "action_id": null,
+        "action_kind": "seed-autocatalytic-closure",
+        "expected_proxy_gain": 0.5,
+        "metadata": {},
+        "operationally_usable": true,
+        "priority_score": 0.33425,
+        "reasons": [],
+        "required_evidence_kind": [
+          "finite-proxy-target-contract",
+          "protocol-comparison-certificate",
+          "proxy-grounding-report",
+          "target-contract"
+        ],
+        "required_routes": [
+          "adapters.domain.verify_ecpt_proxy_target_contract",
+          "ecpt.adapters.proxy.verify_target_contract"
+        ],
+        "residual_coordinates": [],
+        "rollback_condition": "no-positive-finite-gain",
+        "settled": false,
+        "target_component": "AC",
+        "task_id": "task:intervention:ac:seed-autocatalytic-closure",
+        "task_type": "bottleneck-intervention"
+      },
+      {
+        "action_id": null,
+        "action_kind": "reduce-downstream-search-cost",
+        "expected_proxy_gain": 0.2941970310391363,
+        "metadata": {},
+        "operationally_usable": true,
+        "priority_score": 0.1284470310391363,
+        "reasons": [],
+        "required_evidence_kind": [
+          "finite-proxy-target-contract",
+          "protocol-comparison-certificate",
+          "proxy-grounding-report",
+          "target-contract"
+        ],
+        "required_routes": [
+          "adapters.domain.verify_ecpt_proxy_target_contract",
+          "ecpt.adapters.proxy.verify_target_contract"
+        ],
+        "residual_coordinates": [],
+        "rollback_condition": "no-positive-finite-gain",
+        "settled": false,
+        "target_component": "SD",
+        "task_id": "task:intervention:sd:reduce-downstream-search-cost",
+        "task_type": "bottleneck-intervention"
+      }
+    ],
+    "edge_relation_reports": [
+      {
+        "accepted": true,
+        "certificate_id": "edge-certificate:edge:compat:packet:agent-intake:packet:agent-intake-step:74021a756444",
+        "finite_checks_passed": true,
+        "matched_evidence_refs": [
+          "sha256:74021a7564448321482a4115e129f8a6a3b5eb5be12cfe99d8ec07faa588c535"
+        ],
+        "missing_evidence_markers": [],
+        "operationally_usable": true,
+        "reasons": [],
+        "relation_type": "packet-to-receiver-compatibility",
+        "report_id": "edge-relation:edge-certificate:edge:compat:packet:agent-intake:packet:agent-intake-step:74021a756444:packet-to-receiver-compatibility",
+        "residual_ledger": {
+          "coordinates": {}
+        },
+        "settled": false
+      }
+    ],
+    "event_log_delta": {
+      "aggregate_sha256": "706f25ea7dac1fafe9c32ab7aafe5f86df3e7df5c5d0b09d7b22a566647ef84f",
+      "events": [
+        {
+          "event_id": "event:agent-minimal-runtime:0:agent-intake-step:step",
+          "event_type": "runtime-step",
+          "payload_ref": "runtime-step:agent-intake-step",
+          "payload_sha256": "71b84d83baca2ac113515da58407bcbcceb994f11cc00745d748d1b1bc86eca1",
+          "residual_delta": {
+            "coordinates": {
+              "ecpt-plan:agent-minimal-route-proxy-target-evidence:residual": {
+                "description": null,
+                "evidence_refs": [],
+                "evidence_status": "declared",
+                "kind": "residual",
+                "known": true,
+                "name": "ecpt-plan:agent-minimal-route-proxy-target-evidence:residual",
+                "unit": "dimensionless",
+                "value": 0.02
+              },
+              "packet-promotion:packet:agent-intake-step:74021a756444:missing-route:ecpt.adapters.proxy.verify_target_contract": {
+                "description": null,
+                "evidence_refs": [],
+                "evidence_status": "declared",
+                "kind": "residual",
+                "known": true,
+                "name": "packet-promotion:packet:agent-intake-step:74021a756444:missing-route:ecpt.adapters.proxy.verify_target_contract",
+                "unit": "dimensionless",
+                "value": 1.0
+              },
+              "packet-promotion:packet:agent-intake:missing-route:adapters.domain.verify_ecpt_proxy_target_contract": {
+                "description": null,
+                "evidence_refs": [],
+                "evidence_status": "declared",
+                "kind": "residual",
+                "known": true,
+                "name": "packet-promotion:packet:agent-intake:missing-route:adapters.domain.verify_ecpt_proxy_target_contract",
+                "unit": "dimensionless",
+                "value": 1.0
+              },
+              "psi:runtime-registry:agent-minimal-runtime:agent-intake-step:de-edge-density-fallback": {
+                "description": null,
+                "evidence_refs": [],
+                "evidence_status": "declared",
+                "kind": "residual",
+                "known": true,
+                "name": "psi:runtime-registry:agent-minimal-runtime:agent-intake-step:de-edge-density-fallback",
+                "unit": "dimensionless",
+                "value": 1.0
+              },
+              "sqot:task:intervention:sd:reduce-downstream-search-cost:abstain": {
+                "description": null,
+                "evidence_refs": [],
+                "evidence_status": "declared",
+                "kind": "residual",
+                "known": true,
+                "name": "sqot:task:intervention:sd:reduce-downstream-search-cost:abstain",
+                "unit": "dimensionless",
+                "value": 0.4226440620782726
+              }
+            }
+          },
+          "step_index": 0,
+          "timestamp": null
+        }
+      ]
+    },
+    "evidence_resolution_batch": {
+      "accepted": false,
+      "accepted_obligations": [],
+      "batch_id": "evidence-resolution:agent-intake-step",
+      "envelope_refs": [],
+      "finite_checks_passed": false,
+      "operationally_usable": false,
+      "rejected_obligations": [],
+      "residual_ledger": {
+        "coordinates": {}
+      },
+      "resolutions": [],
+      "settled": false,
+      "unresolved_envelope_refs": []
+    },
+    "finite_checks_passed": true,
+    "frontier_debt_report": {
+      "accepted": true,
+      "external_obligation_count": 0,
+      "frontier_debt_classes": {
+        "external": 0,
+        "hybrid_residual_propagation": 0,
+        "partial_frontier": 0,
+        "physical_hybrid": 0,
+        "physical_null_channel": 0,
+        "progressive_fidelity": 0,
+        "telemetry_resource_cost": 0,
+        "trace_normal_form": 0
+      },
+      "hybrid_residual_propagation_count": 0,
+      "missing_obligation_count": 2,
+      "missing_obligations": [
+        "obligation:baseline-safety",
+        "proxy-target-grounding-proof"
+      ],
+      "operationally_usable": false,
+      "partial_frontier_debt_count": 0,
+      "physical_hybrid_obligation_count": 0,
+      "physical_null_channel_debt_count": 0,
+      "progressive_fidelity_debt_count": 0,
+      "reasons": [
+        "missing obligations remain on the runtime frontier",
+        "residual coordinates remain on the runtime frontier"
+      ],
+      "report_id": "frontier-debt:runtime",
+      "residual_burden": 3.442644062078273,
+      "residual_coordinate_count": 5,
+      "residual_coordinates": [
+        "ecpt-plan:agent-minimal-route-proxy-target-evidence:residual",
+        "packet-promotion:packet:agent-intake-step:74021a756444:missing-route:ecpt.adapters.proxy.verify_target_contract",
+        "packet-promotion:packet:agent-intake:missing-route:adapters.domain.verify_ecpt_proxy_target_contract",
+        "psi:runtime-registry:agent-minimal-runtime:agent-intake-step:de-edge-density-fallback",
+        "sqot:task:intervention:sd:reduce-downstream-search-cost:abstain"
+      ],
+      "settled": false,
+      "telemetry_resource_cost_debt_count": 0,
+      "trace_normal_form_debt_count": 0,
+      "trace_or_frontier_debt_count": 0
+    },
+    "frontier_debt_summary": {
+      "external_obligation_count": 0,
+      "hybrid_residual_propagation_count": 0,
+      "missing_obligation_count": 2,
+      "partial_frontier_debt_count": 0,
+      "physical_hybrid_obligation_count": 0,
+      "physical_null_channel_debt_count": 0,
+      "progressive_fidelity_debt_count": 0,
+      "residual_burden": 3.442644062078273,
+      "residual_coordinate_count": 5,
+      "telemetry_resource_cost_debt_count": 0,
+      "trace_normal_form_debt_count": 0,
+      "trace_or_frontier_debt_count": 0
+    },
+    "ingestion_reports": [
+      {
+        "accepted": true,
+        "packets": [
+          {
+            "authority_granted": true,
+            "authority_required": false,
+            "claim": "Candidate capability packet: preserve residual ledgers, route missing verifier evidence, and schedule finite ECPT ASI-proxy packet work without claiming real ASI or self-rewrite.",
+            "content_sha256": "74021a7564448321482a4115e129f8a6a3b5eb5be12cfe99d8ec07faa588c535",
+            "dependencies": [],
+            "evidence_hash_valid": true,
+            "evidence_refs": [
+              "sha256:74021a7564448321482a4115e129f8a6a3b5eb5be12cfe99d8ec07faa588c535"
+            ],
+            "expected_downstream_gain": 0.02875,
+            "expires_at": null,
+            "freshness": 1.0,
+            "hazard_charge": 0.0,
+            "identity_contribution_status": "provisional",
+            "issuer_agent_id": null,
+            "issuer_attestation_id": null,
+            "issuer_public_key_id": null,
+            "issuer_signature_ref": null,
+            "packet_id": "packet:agent-intake-step:74021a756444",
+            "receiver_family": [
+              "agent",
+              "verifier"
+            ],
+            "residual_charge": 0.0,
+            "reuse_context": "general",
+            "rollback_available": true,
+            "route_safe": true,
+            "salience_class": "packet",
+            "source_kind": "agent-output",
+            "source_ref": "agent-intake-step",
+            "status": "provisional",
+            "tags": [
+              "agent-output",
+              "ecpt",
+              "packet",
+              "residual",
+              "verifier"
+            ],
+            "verification_cost": 0.0115,
+            "verifier_routes": [
+              "ecpt.adapters.proxy.verify_target_contract"
+            ]
+          }
+        ],
+        "provenance": [],
+        "reasons": [],
+        "rejected_sources": [],
+        "report_id": "packet-ingestion:agent-intake-step",
+        "residual_ledger": {
+          "coordinates": {}
+        },
+        "source_kind": "agent-output",
+        "web_fetch_reports": []
+      }
+    ],
+    "input_id": "agent-intake-step",
+    "missing_obligations": [
+      "obligation:baseline-safety",
+      "proxy-target-grounding-proof"
+    ],
+    "operationally_usable": false,
+    "phase_acceleration_score": {
+      "components": {
+        "finite_proxy_gain": 1.1575303643724695,
+        "missing_route_charge": 0.75,
+        "psi_distance_reduction": 0.8275303643724696,
+        "residual_debt_charge": 0.4426440620782726,
+        "risk_charge": 0.03,
+        "stale_packet_charge": 0.0,
+        "verification_throughput_score": 0.6666666666666666
+      },
+      "false_liquidity_charge": 0.0,
+      "finite_proxy_gain": 1.1575303643724695,
+      "missing_route_charge": 0.75,
+      "psi_distance_reduction": 0.8275303643724696,
+      "residual_debt_charge": 0.4426440620782726,
+      "risk_charge": 0.03,
+      "score_id": "phase-acceleration:agent-minimal-runtime:agent-intake-step",
+      "stale_packet_charge": 0.0,
+      "total_score": 1.4290833333333333,
+      "verification_throughput_score": 0.6666666666666666
+    },
+    "phase_control_audit": {
+      "baseline_comparison_label": "resource-comparable-proxy-baseline",
+      "baseline_comparison_ready": true,
+      "baseline_proxy_mass": 0.0,
+      "candidate_count": 1,
+      "controlled_proxy_mass": 0.3999999999999999,
+      "duplicate_mass_excluded": true,
+      "execution_availability_required": true,
+      "execution_available_path_count": 1,
+      "finite_proxy_gain_total": 0.32999999999999996,
+      "missing_obligation_count": 1,
+      "operationally_usable": false,
+      "partial": true,
+      "proxy_bundle_coordinate_count": 1,
+      "proxy_bundle_mass": 1.0,
+      "proxy_target_grounding_refs": [
+        "phase-transition-proxy"
+      ],
+      "proxy_target_grounding_required": false,
+      "queue_capacity_constraints_visible": true,
+      "queue_capacity_margin": 0.0,
+      "reasons": [
+        "phase-control missing obligations remain"
+      ],
+      "selected_action_count": 1,
+      "settled": false,
+      "split_certificate_refs": [
+        "agent-minimal-route-proxy-target-evidence"
+      ],
+      "split_certified_quotient_ready": false,
+      "summary_id": "phase-control-audit:agent-minimal-asi-proxy-target",
+      "target_id": "agent-minimal-asi-proxy-target",
+      "target_node_count": 1
+    },
+    "phase_control_summary": {
+      "baseline_comparison_ready": true,
+      "baseline_proxy_mass": 0.0,
+      "candidate_count": 1,
+      "controlled_proxy_mass": 0.3999999999999999,
+      "duplicate_mass_excluded": true,
+      "execution_availability_required": true,
+      "execution_available_path_count": 1,
+      "finite_proxy_gain_total": 0.32999999999999996,
+      "missing_obligation_count": 1,
+      "operationally_usable": false,
+      "partial": true,
+      "proxy_bundle_coordinate_count": 1,
+      "proxy_bundle_mass": 1.0,
+      "proxy_target_grounding_required": false,
+      "queue_capacity_constraints_visible": true,
+      "queue_capacity_margin": 0.0,
+      "selected_action_count": 1,
+      "settled": false,
+      "split_certified_quotient_ready": false,
+      "target_id": "agent-minimal-asi-proxy-target",
+      "target_node_count": 1
+    },
+    "phase_run_report": {
+      "baseline_reachable_mass": {
+        "compute": 1.0,
+        "models": 0.6499999999999999
+      },
+      "controlled_reachable_mass": {
+        "compute": 1.0,
+        "models": 0.6499999999999999,
+        "phase-transition-proxy": 0.3999999999999999
+      },
+      "plan": {
+        "accepted": true,
+        "candidates": [
+          {
+            "action": {
+              "action_id": "agent-minimal-route-proxy-target-evidence",
+              "activation_delta": 0.8,
+              "burden_delta": 0.1,
+              "postconditions": [
+                "proxy-frontier-observed"
+              ],
+              "preconditions": [
+                "compute",
+                "models"
+              ],
+              "required_obligations": [
+                "obligation:baseline-safety"
+              ],
+              "residual_charge": 0.02,
+              "resource_cost": {
+                "compute": 0.2
+              },
+              "risk_charge": 0.03,
+              "source_nodes": [
+                "compute",
+                "models"
+              ],
+              "target_node": "phase-transition-proxy",
+              "verifier_routes": [
+                "adapters.domain.verify_ecpt_proxy_target_contract"
+              ]
+            },
+            "baseline_proxy_mass": 0.0,
+            "candidate_id": "candidate:agent-minimal-route-proxy-target-evidence",
+            "controlled_proxy_mass": 0.3999999999999999,
+            "finite_proxy_gain": 0.32999999999999996,
+            "finite_scope_usable": true,
+            "missing_obligations": [
+              "proxy-target-grounding-proof"
+            ],
+            "operationally_usable": false,
+            "reasons": [],
+            "required_evidence_routes": [
+              "adapters.domain.verify_ecpt_proxy_target_contract"
+            ],
+            "residual_charge": 0.04,
+            "residual_ledger": {
+              "coordinates": {
+                "ecpt-plan:agent-minimal-route-proxy-target-evidence:residual": {
+                  "description": null,
+                  "evidence_refs": [],
+                  "evidence_status": "declared",
+                  "kind": "residual",
+                  "known": true,
+                  "name": "ecpt-plan:agent-minimal-route-proxy-target-evidence:residual",
+                  "unit": "dimensionless",
+                  "value": 0.02
+                }
+              }
+            },
+            "resource_cost": {
+              "compute": 0.2
+            },
+            "risk_charge": 0.03,
+            "score": 0.12999999999999995,
+            "settled": false
+          }
+        ],
+        "finite_proxy_gain_total": 0.32999999999999996,
+        "missing_obligations": [
+          "proxy-target-grounding-proof"
+        ],
+        "objective_id": "agent-minimal-objective",
+        "operationally_usable": false,
+        "partial": true,
+        "plan_id": "phase-control-plan:agent-minimal-phase-state:agent-minimal-objective",
+        "profile": "development",
+        "reasons": [],
+        "required_evidence_routes": [
+          "adapters.domain.verify_ecpt_proxy_target_contract"
+        ],
+        "residual_ledger": {
+          "coordinates": {
+            "ecpt-plan:agent-minimal-route-proxy-target-evidence:residual": {
+              "description": null,
+              "evidence_refs": [],
+              "evidence_status": "declared",
+              "kind": "residual",
+              "known": true,
+              "name": "ecpt-plan:agent-minimal-route-proxy-target-evidence:residual",
+              "unit": "dimensionless",
+              "value": 0.02
+            }
+          }
+        },
+        "score": 0.12999999999999995,
+        "selected_actions": [
+          {
+            "action_id": "agent-minimal-route-proxy-target-evidence",
+            "activation_delta": 0.8,
+            "burden_delta": 0.1,
+            "postconditions": [
+              "proxy-frontier-observed"
+            ],
+            "preconditions": [
+              "compute",
+              "models"
+            ],
+            "required_obligations": [
+              "obligation:baseline-safety"
+            ],
+            "residual_charge": 0.02,
+            "resource_cost": {
+              "compute": 0.2
+            },
+            "risk_charge": 0.03,
+            "source_nodes": [
+              "compute",
+              "models"
+            ],
+            "target_node": "phase-transition-proxy",
+            "verifier_routes": [
+              "adapters.domain.verify_ecpt_proxy_target_contract"
+            ]
+          }
+        ],
+        "settled": false,
+        "status": "provisional"
+      },
+      "report_id": "phase-control-run:agent-minimal-phase-state:agent-minimal-objective",
+      "safety_invariants": [
+        "phase-control planning recommendations do not prove unobserved ASI outcomes",
+        "unresolved external obligations remain charged in residual ledgers",
+        "planner output alone never promotes a claim to settled status"
+      ],
+      "state_id": "agent-minimal-phase-state",
+      "target_id": "agent-minimal-asi-proxy-target"
+    },
+    "promotion_report": {
+      "accepted": false,
+      "identity_contribution_summary": {
+        "diagnostic": 2
+      },
+      "rejected_packets": [
+        {
+          "identity_contribution_status": "diagnostic",
+          "packet_id": "rejected:packet:agent-intake",
+          "reasons": [
+            "packet rollback receipt is unavailable",
+            "packet verifier route resolution is missing"
+          ],
+          "residual_ledger": {
+            "coordinates": {
+              "packet-promotion:packet:agent-intake:missing-route:adapters.domain.verify_ecpt_proxy_target_contract": {
+                "description": null,
+                "evidence_refs": [],
+                "evidence_status": "declared",
+                "kind": "residual",
+                "known": true,
+                "name": "packet-promotion:packet:agent-intake:missing-route:adapters.domain.verify_ecpt_proxy_target_contract",
+                "unit": "dimensionless",
+                "value": 1.0
+              }
+            }
+          },
+          "source_candidate_id": "packet:agent-intake",
+          "status": "diagnostic"
+        },
+        {
+          "identity_contribution_status": "diagnostic",
+          "packet_id": "rejected:packet:agent-intake-step:74021a756444",
+          "reasons": [
+            "packet verifier route resolution is missing"
+          ],
+          "residual_ledger": {
+            "coordinates": {
+              "packet-promotion:packet:agent-intake-step:74021a756444:missing-route:ecpt.adapters.proxy.verify_target_contract": {
+                "description": null,
+                "evidence_refs": [],
+                "evidence_status": "declared",
+                "kind": "residual",
+                "known": true,
+                "name": "packet-promotion:packet:agent-intake-step:74021a756444:missing-route:ecpt.adapters.proxy.verify_target_contract",
+                "unit": "dimensionless",
+                "value": 1.0
+              }
+            }
+          },
+          "source_candidate_id": "packet:agent-intake-step:74021a756444",
+          "status": "diagnostic"
+        }
+      ],
+      "report_id": "packet-promotion:agent-minimal-runtime:agent-intake-step",
+      "residual_ledger": {
+        "coordinates": {
+          "packet-promotion:packet:agent-intake-step:74021a756444:missing-route:ecpt.adapters.proxy.verify_target_contract": {
+            "description": null,
+            "evidence_refs": [],
+            "evidence_status": "declared",
+            "kind": "residual",
+            "known": true,
+            "name": "packet-promotion:packet:agent-intake-step:74021a756444:missing-route:ecpt.adapters.proxy.verify_target_contract",
+            "unit": "dimensionless",
+            "value": 1.0
+          },
+          "packet-promotion:packet:agent-intake:missing-route:adapters.domain.verify_ecpt_proxy_target_contract": {
+            "description": null,
+            "evidence_refs": [],
+            "evidence_status": "declared",
+            "kind": "residual",
+            "known": true,
+            "name": "packet-promotion:packet:agent-intake:missing-route:adapters.domain.verify_ecpt_proxy_target_contract",
+            "unit": "dimensionless",
+            "value": 1.0
+          }
+        }
+      },
+      "safety_invariants": [
+        "packet promotion is finite-scope and protocol-relative",
+        "verified packets do not settle residual external obligations",
+        "hash, route, authority, expiry, rollback, and edge checks fail closed"
+      ],
+      "verified_packets": []
+    },
+    "psi": {
+      "components": {
+        "AC": 0.0,
+        "BR": 0.5,
+        "CV": 0.5,
+        "DE": 0.5,
+        "FR": 1.0,
+        "G": 1.0,
+        "HZ": 0.9,
+        "LX": 1.0,
+        "QS": 0.91885,
+        "SD": 0.20580296896086372,
+        "VT": 0.6666666666666666
+      },
+      "dashboard_id": "psi:runtime-registry:agent-minimal-runtime:agent-intake-step",
+      "distance_to_threshold": {
+        "AC": 0.5,
+        "BR": 0.0,
+        "CV": 0.0,
+        "DE": 0.0,
+        "FR": 0.0,
+        "G": 0.0,
+        "HZ": 0.0,
+        "LX": 0.0,
+        "QS": 0.0,
+        "SD": 0.2941970310391363,
+        "VT": 0.033333333333333326
+      },
+      "limiting_components": [
+        "AC",
+        "SD",
+        "VT"
+      ],
+      "residual_ledger": {
+        "coordinates": {
+          "psi:runtime-registry:agent-minimal-runtime:agent-intake-step:de-edge-density-fallback": {
+            "description": null,
+            "evidence_refs": [],
+            "evidence_status": "declared",
+            "kind": "residual",
+            "known": true,
+            "name": "psi:runtime-registry:agent-minimal-runtime:agent-intake-step:de-edge-density-fallback",
+            "unit": "dimensionless",
+            "value": 0.5
+          }
+        }
+      },
+      "safety_invariants": [
+        "Psi components are protocol-relative finite proxies",
+        "dashboard output does not prove unobserved ASI or physical outcomes",
+        "residual obligations remain explicit until verifier routes discharge them"
+      ],
+      "threshold": {
+        "AC": 0.5,
+        "BR": 0.1,
+        "CV": 0.5,
+        "DE": 0.5,
+        "FR": 0.5,
+        "G": 0.7,
+        "HZ": 0.5,
+        "LX": 0.5,
+        "QS": 0.5,
+        "SD": 0.5,
+        "VT": 0.7
+      },
+      "throughput": {
+        "abstained_packets": 1,
+        "accepted_packets": 1,
+        "evidence_hash_mismatch_rate": 0.5,
+        "false_liquidity_rate": 0.0,
+        "low_contribution_queue_occupation": 0.0,
+        "packet_inflow": 2,
+        "rejected_packets": 0,
+        "residual_debt_growth": 0.0,
+        "stale_packet_ratio": 0.0,
+        "unresolved_obligation_backlog": 2,
+        "verifier_latency_proxy": 0.05575
+      }
+    },
+    "reasons": [],
+    "registry": {
+      "edges": [
+        {
+          "accepted": true,
+          "confidence": 0.4,
+          "edge_id": "edge:compat:packet:agent-intake:packet:agent-intake-step:74021a756444",
+          "edge_type": "packet-to-receiver-compatibility",
+          "evidence_refs": [
+            "sha256:74021a7564448321482a4115e129f8a6a3b5eb5be12cfe99d8ec07faa588c535"
+          ],
+          "expires_at": null,
+          "reasons": [
+            "common_tags:ecpt"
+          ],
+          "residual": 0.0,
+          "source_packet_ids": [
+            "packet:agent-intake"
+          ],
+          "target_packet_id": "packet:agent-intake-step:74021a756444"
+        }
+      ],
+      "packets": [
+        {
+          "authority_granted": true,
+          "authority_required": false,
+          "claim": "Candidate capability packet: preserve residual ledgers, route missing verifier evidence, and schedule finite ECPT ASI-proxy packet work without claiming real ASI or self-rewrite.",
+          "content_sha256": "74021a7564448321482a4115e129f8a6a3b5eb5be12cfe99d8ec07faa588c535",
+          "dependencies": [],
+          "evidence_hash_valid": true,
+          "evidence_refs": [],
+          "expected_downstream_gain": 0.2,
+          "expires_at": null,
+          "freshness": 1.0,
+          "hazard_charge": 0.0,
+          "identity_contribution_status": "provisional",
+          "issuer_agent_id": null,
+          "issuer_attestation_id": null,
+          "issuer_public_key_id": null,
+          "issuer_signature_ref": null,
+          "packet_id": "packet:agent-intake",
+          "receiver_family": [
+            "agent",
+            "verifier"
+          ],
+          "residual_charge": 0.0,
+          "reuse_context": "general",
+          "rollback_available": false,
+          "route_safe": true,
+          "salience_class": "default",
+          "source_kind": "agent-output",
+          "source_ref": "agent-intake",
+          "status": "provisional",
+          "tags": [
+            "ecpt",
+            "phase"
+          ],
+          "verification_cost": 0.1,
+          "verifier_routes": [
+            "adapters.domain.verify_ecpt_proxy_target_contract"
+          ]
+        },
+        {
+          "authority_granted": true,
+          "authority_required": false,
+          "claim": "Candidate capability packet: preserve residual ledgers, route missing verifier evidence, and schedule finite ECPT ASI-proxy packet work without claiming real ASI or self-rewrite.",
+          "content_sha256": "74021a7564448321482a4115e129f8a6a3b5eb5be12cfe99d8ec07faa588c535",
+          "dependencies": [],
+          "evidence_hash_valid": true,
+          "evidence_refs": [
+            "sha256:74021a7564448321482a4115e129f8a6a3b5eb5be12cfe99d8ec07faa588c535"
+          ],
+          "expected_downstream_gain": 0.02875,
+          "expires_at": null,
+          "freshness": 1.0,
+          "hazard_charge": 0.0,
+          "identity_contribution_status": "provisional",
+          "issuer_agent_id": null,
+          "issuer_attestation_id": null,
+          "issuer_public_key_id": null,
+          "issuer_signature_ref": null,
+          "packet_id": "packet:agent-intake-step:74021a756444",
+          "receiver_family": [
+            "agent",
+            "verifier"
+          ],
+          "residual_charge": 0.0,
+          "reuse_context": "general",
+          "rollback_available": true,
+          "route_safe": true,
+          "salience_class": "packet",
+          "source_kind": "agent-output",
+          "source_ref": "agent-intake-step",
+          "status": "provisional",
+          "tags": [
+            "agent-output",
+            "ecpt",
+            "packet",
+            "residual",
+            "verifier"
+          ],
+          "verification_cost": 0.0115,
+          "verifier_routes": [
+            "ecpt.adapters.proxy.verify_target_contract"
+          ]
+        }
+      ],
+      "registry_id": "runtime-registry:agent-minimal-runtime:agent-intake-step",
+      "residual_ledger": {
+        "coordinates": {}
+      }
+    },
+    "report_id": "runtime-step:agent-minimal-runtime:0:agent-intake-step",
+    "residual_ledger": {
+      "coordinates": {
+        "ecpt-plan:agent-minimal-route-proxy-target-evidence:residual": {
+          "description": null,
+          "evidence_refs": [],
+          "evidence_status": "declared",
+          "kind": "residual",
+          "known": true,
+          "name": "ecpt-plan:agent-minimal-route-proxy-target-evidence:residual",
+          "unit": "dimensionless",
+          "value": 0.02
+        },
+        "packet-promotion:packet:agent-intake-step:74021a756444:missing-route:ecpt.adapters.proxy.verify_target_contract": {
+          "description": null,
+          "evidence_refs": [],
+          "evidence_status": "declared",
+          "kind": "residual",
+          "known": true,
+          "name": "packet-promotion:packet:agent-intake-step:74021a756444:missing-route:ecpt.adapters.proxy.verify_target_contract",
+          "unit": "dimensionless",
+          "value": 1.0
+        },
+        "packet-promotion:packet:agent-intake:missing-route:adapters.domain.verify_ecpt_proxy_target_contract": {
+          "description": null,
+          "evidence_refs": [],
+          "evidence_status": "declared",
+          "kind": "residual",
+          "known": true,
+          "name": "packet-promotion:packet:agent-intake:missing-route:adapters.domain.verify_ecpt_proxy_target_contract",
+          "unit": "dimensionless",
+          "value": 1.0
+        },
+        "psi:runtime-registry:agent-minimal-runtime:agent-intake-step:de-edge-density-fallback": {
+          "description": null,
+          "evidence_refs": [],
+          "evidence_status": "declared",
+          "kind": "residual",
+          "known": true,
+          "name": "psi:runtime-registry:agent-minimal-runtime:agent-intake-step:de-edge-density-fallback",
+          "unit": "dimensionless",
+          "value": 1.0
+        },
+        "sqot:task:intervention:sd:reduce-downstream-search-cost:abstain": {
+          "description": null,
+          "evidence_refs": [],
+          "evidence_status": "declared",
+          "kind": "residual",
+          "known": true,
+          "name": "sqot:task:intervention:sd:reduce-downstream-search-cost:abstain",
+          "unit": "dimensionless",
+          "value": 0.4226440620782726
+        }
+      }
+    },
+    "route_execution_requests": [
+      {
+        "obligation_category": "ecpt-proxy-target",
+        "priority_score": 1.0,
+        "request_id": "route-request:adapters.domain.verify_ecpt_proxy_target_contract",
+        "required_evidence_kind": [
+          "finite-proxy-target-contract"
+        ],
+        "residual_external_obligations": [
+          "proxy-target-grounding-proof"
+        ],
+        "residual_policy": "charge-proxy-grounding-residual-until-target-contract-is-validated",
+        "route_id": "adapters.domain.verify_ecpt_proxy_target_contract",
+        "safe_default": "diagnostic-with-proxy-target-obligation",
+        "settlement_scope": [
+          "routing-contract:adapters.domain.verify_ecpt_proxy_target_contract"
+        ],
+        "status": "diagnostic",
+        "verifier_route": "percolation_inversion_compiler.adapters.domain.verify_ecpt_proxy_target_contract"
+      },
+      {
+        "obligation_category": "ecpt-proxy-target",
+        "priority_score": 1.0,
+        "request_id": "route-request:ecpt.adapters.proxy.verify_target_contract",
+        "required_evidence_kind": [
+          "protocol-comparison-certificate",
+          "proxy-grounding-report",
+          "target-contract"
+        ],
+        "residual_external_obligations": [
+          "proxy-target-grounding-proof"
+        ],
+        "residual_policy": "charge-proxy-target-residual-until-contract-accepted",
+        "route_id": "ecpt.adapters.proxy.verify_target_contract",
+        "safe_default": "diagnostic-with-proxy-obligation",
+        "settlement_scope": [
+          "routing-contract:adapters.domain.verify_ecpt_proxy_target_contract"
+        ],
+        "status": "diagnostic",
+        "verifier_route": "ecpt.adapters.proxy.verify_target_contract"
+      }
+    ],
+    "safety_invariants": [
+      "runtime planning does not prove unobserved ASI, physical, or oracle outcomes",
+      "settled remains false unless verifier rules discharge the full finite route scope",
+      "live connectors are bounded and candidate-only by default when an explicit source is supplied",
+      "residual ledgers and missing obligations are preserved across runtime steps"
+    ],
+    "salience_schedule": {
+      "accepted": true,
+      "adversarial_transfer_charge": 0.0,
+      "aggregation_group_counts": {},
+      "aggregation_group_occupation": {},
+      "audit_recursion_violations": [],
+      "decisions": [
+        {
+          "decision": "run",
+          "operationally_usable": true,
+          "priority_score": 1.35,
+          "reasons": [],
+          "record_id": "task:phase-action:agent-minimal-route-proxy-target-evidence",
+          "residual_ledger": {
+            "coordinates": {}
+          },
+          "settled": false,
+          "status": "provisional"
+        },
+        {
+          "decision": "run",
+          "operationally_usable": true,
+          "priority_score": 1.0999999999999999,
+          "reasons": [],
+          "record_id": "queue:packet:agent-intake",
+          "residual_ledger": {
+            "coordinates": {}
+          },
+          "settled": false,
+          "status": "provisional"
+        },
+        {
+          "decision": "run",
+          "operationally_usable": true,
+          "priority_score": 1.01725,
+          "reasons": [],
+          "record_id": "queue:packet:agent-intake-step:74021a756444",
+          "residual_ledger": {
+            "coordinates": {}
+          },
+          "settled": false,
+          "status": "provisional"
+        },
+        {
+          "decision": "run",
+          "operationally_usable": true,
+          "priority_score": 0.4342499999999999,
+          "reasons": [],
+          "record_id": "task:intervention:ac:seed-autocatalytic-closure",
+          "residual_ledger": {
+            "coordinates": {}
+          },
+          "settled": false,
+          "status": "provisional"
+        },
+        {
+          "decision": "abstain",
+          "operationally_usable": false,
+          "priority_score": 0.022644062078272575,
+          "reasons": [
+            "insufficient attention budget"
+          ],
+          "record_id": "task:intervention:sd:reduce-downstream-search-cost",
+          "residual_ledger": {
+            "coordinates": {
+              "sqot:task:intervention:sd:reduce-downstream-search-cost:abstain": {
+                "description": null,
+                "evidence_refs": [],
+                "evidence_status": "declared",
+                "kind": "residual",
+                "known": true,
+                "name": "sqot:task:intervention:sd:reduce-downstream-search-cost:abstain",
+                "unit": "dimensionless",
+                "value": 0.4226440620782726
+              }
+            }
+          },
+          "settled": false,
+          "status": "diagnostic"
+        }
+      ],
+      "diagnostic_reserve": {
+        "audit_depth": 1,
+        "minimum_reserve": 0.0,
+        "reserve_fraction": 0.1
+      },
+      "distributed_origin_count": 0,
+      "effective_diagnostic_reserve": 0.0,
+      "false_liquidity_rate": 0.0,
+      "label_laundering_suspicions": [],
+      "latency_deadline_loss": 0.0,
+      "low_contribution_occupation": 0.0,
+      "occupation_ledger": {
+        "attention_budget": 1.0,
+        "occupied": 0.6114999999999999,
+        "occupied_by_class": {
+          "bottleneck-intervention": 0.4,
+          "default": 0.1,
+          "packet": 0.0115,
+          "phase-control-action": 0.1
+        },
+        "unknown_occupation": []
+      },
+      "privacy_rejoin_refs": [],
+      "profile": "development",
+      "protocol_integrity_refs": [],
+      "quarantine_ledger": {
+        "quarantined_items": [],
+        "reasons": {},
+        "rollback_items": []
+      },
+      "report_id": "sqot-salience-schedule",
+      "residual_debt_growth": 0.4226440620782726,
+      "risk_ledger": {
+        "risk_budget": 1.0,
+        "risk_charges": {
+          "queue:packet:agent-intake": 0.0,
+          "queue:packet:agent-intake-step:74021a756444": 0.0,
+          "task:intervention:ac:seed-autocatalytic-closure": 0.0,
+          "task:phase-action:agent-minimal-route-proxy-target-evidence": 0.0
+        }
+      },
+      "rollback_class_summary": {
+        "none": 5
+      },
+      "safety_invariants": [
+        "queue priority never promotes obligations to settled status",
+        "stale, hash-invalid, authority-invalid, or unsafe-route items fail closed",
+        "diagnostic reserve is preserved before non-diagnostic work is scheduled"
+      ],
+      "sovereignty_kernel_refs": [],
+      "stale_packet_ratio": 0.0,
+      "thermodynamic_discharge_charge": 0.0,
+      "unresolved_obligation_backlog": 2,
+      "verifier_latency_proxy": 0.12229999999999999
+    },
+    "schema_valid": true,
+    "settled": false,
+    "state_id": "agent-minimal-runtime",
+    "status": "diagnostic",
+    "step_index": 0,
+    "verified_packet_count": 0
+  },
+  "safety_invariants": [
+    "settled=false is expected unless scoped finite verifier rules settle obligations",
+    "residual ledgers and missing obligations must be preserved",
+    "this package does not prove real ASI, physical, simulator, oracle, or policy outcomes",
+    "this package does not require self-rewrite, fine-tuning, or model-weight changes",
+    "agent-facing commands are recommendation-only and do not execute arbitrary shell commands",
+    "production packet promotion requires accepted identity context",
+    "live connectors are bounded and candidate-only by default when an explicit source is supplied",
+    "no background crawling",
+    "no autonomous polling",
+    "no arbitrary shell execution",
+    "no repository mutation",
+    "no hidden promotion from accepted or workflow_usable to settled",
+    "external metadata packets remain candidates until downstream checks pass",
+    "candidate-only external intake cannot improve Psi, BR, AC, or collective certificates",
+    "general web intake is bounded and does not execute scripts, forms, or repo mutation",
+    "agent-to-agent messages are packet candidates, not proof of external-world truth"
+  ],
+  "settled": false,
+  "version": "0.4.4",
+  "workflow_usable": true
+}

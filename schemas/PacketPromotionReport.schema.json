@@ -1,0 +1,354 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "IdentityContributionStatus": {
+      "description": "How identity evidence may contribute to runtime packet capital.",
+      "enum": [
+        "verified",
+        "provisional",
+        "diagnostic",
+        "quarantined",
+        "rejected"
+      ],
+      "title": "IdentityContributionStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "PacketRejection": {
+      "description": "Machine-readable packet promotion rejection.",
+      "properties": {
+        "identity_contribution_status": {
+          "$ref": "#/$defs/IdentityContributionStatus",
+          "default": "rejected"
+        },
+        "packet_id": {
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "source_candidate_id": {
+          "title": "Source Candidate Id",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "diagnostic"
+        }
+      },
+      "required": [
+        "packet_id",
+        "source_candidate_id"
+      ],
+      "title": "PacketRejection",
+      "type": "object"
+    },
+    "VerifiedCapabilityPacket": {
+      "description": "Finite-scope reusable packet capital after verifier and edge checks.",
+      "properties": {
+        "accepted_edge_witness_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Edge Witness Ids",
+          "type": "array"
+        },
+        "execution_available": {
+          "default": false,
+          "title": "Execution Available",
+          "type": "boolean"
+        },
+        "expires_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expires At"
+        },
+        "identity_contribution_status": {
+          "$ref": "#/$defs/IdentityContributionStatus",
+          "default": "verified"
+        },
+        "issuer_agent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Agent Id"
+        },
+        "issuer_attestation_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Attestation Id"
+        },
+        "issuer_public_key_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Public Key Id"
+        },
+        "liquidity_score": {
+          "default": 0.0,
+          "title": "Liquidity Score",
+          "type": "number"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "packet_id": {
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "receiver_family": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Receiver Family",
+          "type": "array"
+        },
+        "residual_external_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual External Obligations",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "rollback_receipt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rollback Receipt"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "settlement_scope": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Settlement Scope",
+          "type": "array"
+        },
+        "source_candidate_id": {
+          "title": "Source Candidate Id",
+          "type": "string"
+        },
+        "validity_domain": {
+          "default": "protocol-relative-finite",
+          "title": "Validity Domain",
+          "type": "string"
+        },
+        "verification_resolution_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verification Resolution Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "packet_id",
+        "source_candidate_id"
+      ],
+      "title": "VerifiedCapabilityPacket",
+      "type": "object"
+    }
+  },
+  "description": "Batch packet promotion output for runtime steps.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "identity_contribution_summary": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Identity Contribution Summary",
+      "type": "object"
+    },
+    "rejected_packets": {
+      "items": {
+        "$ref": "#/$defs/PacketRejection"
+      },
+      "title": "Rejected Packets",
+      "type": "array"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "verified_packets": {
+      "items": {
+        "$ref": "#/$defs/VerifiedCapabilityPacket"
+      },
+      "title": "Verified Packets",
+      "type": "array"
+    }
+  },
+  "required": [
+    "report_id"
+  ],
+  "title": "PacketPromotionReport",
+  "type": "object"
+}

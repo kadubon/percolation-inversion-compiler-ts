@@ -1,0 +1,101 @@
+{
+  "description": "Concrete next action for an AI agent or orchestration system.",
+  "properties": {
+    "action_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Action Id"
+    },
+    "action_kind": {
+      "title": "Action Kind",
+      "type": "string"
+    },
+    "expected_proxy_gain": {
+      "default": 0.0,
+      "title": "Expected Proxy Gain",
+      "type": "number"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Metadata",
+      "type": "object"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "priority_score": {
+      "title": "Priority Score",
+      "type": "number"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "required_evidence_kind": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Evidence Kind",
+      "type": "array"
+    },
+    "required_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Routes",
+      "type": "array"
+    },
+    "residual_coordinates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual Coordinates",
+      "type": "array"
+    },
+    "rollback_condition": {
+      "default": "runtime-score-nonpositive",
+      "title": "Rollback Condition",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "target_component": {
+      "title": "Target Component",
+      "type": "string"
+    },
+    "task_id": {
+      "title": "Task Id",
+      "type": "string"
+    },
+    "task_type": {
+      "title": "Task Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_id",
+    "task_type",
+    "priority_score",
+    "target_component",
+    "action_kind"
+  ],
+  "title": "AgentTask",
+  "type": "object"
+}

@@ -1,0 +1,426 @@
+{
+  "accepted": true,
+  "allow_live_connectors": true,
+  "guide_id": "agent-communication-guide",
+  "operationally_usable": true,
+  "policy": {
+    "allow_live_connectors": true,
+    "allowed_source_kinds": [
+      "github",
+      "zenodo",
+      "arxiv",
+      "http",
+      "web-page",
+      "rss",
+      "atom",
+      "json-feed",
+      "ndjson",
+      "agent-message",
+      "agent-inbox",
+      "web-crawl"
+    ],
+    "arbitrary_execution_allowed": false,
+    "background_crawling_allowed": false,
+    "candidate_only_by_default": true,
+    "explicit_source_required": true,
+    "live_connectors_default_enabled": true,
+    "live_default_mode": "explicit-source-bounded-candidate-intake",
+    "opt_out_available": true,
+    "profile": "development",
+    "required_env_vars": [],
+    "residual_behavior": "connector failures become diagnostic residual ledger entries",
+    "token_policy": "environment-only"
+  },
+  "profile": "development",
+  "safety_invariants": [
+    "settled=false is expected unless scoped finite verifier rules settle obligations",
+    "residual ledgers and missing obligations must be preserved",
+    "this package does not prove real ASI, physical, simulator, oracle, or policy outcomes",
+    "this package does not require self-rewrite, fine-tuning, or model-weight changes",
+    "agent-facing commands are recommendation-only and do not execute arbitrary shell commands",
+    "production packet promotion requires accepted identity context",
+    "live connectors are bounded and candidate-only by default when an explicit source is supplied",
+    "no background crawling",
+    "no autonomous polling",
+    "no arbitrary shell execution",
+    "no repository mutation",
+    "no hidden promotion from accepted or workflow_usable to settled",
+    "external metadata packets remain candidates until downstream checks pass",
+    "candidate-only external intake cannot improve Psi, BR, AC, or collective certificates",
+    "general web intake is bounded and does not execute scripts, forms, or repo mutation",
+    "agent-to-agent messages are packet candidates, not proof of external-world truth"
+  ],
+  "settled": false,
+  "steps": [
+    {
+      "allowed_source_kinds": [],
+      "failure_modes": [
+        "missing local files",
+        "diagnostic residuals"
+      ],
+      "inspect_fields": [
+        "settled",
+        "residual_summary",
+        "readiness.live_metadata_ingest"
+      ],
+      "purpose": "Run agent intake and runtime health with no network access.",
+      "required_env_vars": [],
+      "residual_behavior": "local diagnostics remain explicit residuals",
+      "safe_commands": [
+        "uv run pic agent intake --text-file examples/agent_minimal/agent_output.txt --profile development",
+        "uv run pic agent network-readiness --profile development --no-allow-live-connectors"
+      ],
+      "safety_notes": [
+        "Use --no-allow-live-connectors when a local-only dry run is required."
+      ],
+      "schemas": [
+        "AgentIntakeReport",
+        "AgentNetworkReadinessReport"
+      ],
+      "sdk_entrypoints": [],
+      "step_id": "01-local-only-baseline",
+      "title": "Local-Only Baseline"
+    },
+    {
+      "allowed_source_kinds": [],
+      "failure_modes": [
+        "missing httpx extra",
+        "missing token",
+        "token kept out of output"
+      ],
+      "inspect_fields": [
+        "connector_dependency_present",
+        "github_token_present"
+      ],
+      "purpose": "Check optional connector and service auth readiness without network calls.",
+      "required_env_vars": [
+        "GITHUB_TOKEN"
+      ],
+      "residual_behavior": "missing optional dependency or token is diagnostic, not settled",
+      "safe_commands": [
+        "uv run pic agent network-readiness --profile development --allow-live-connectors"
+      ],
+      "safety_notes": [
+        "Tokens are environment-only and must not be stored in repo outputs."
+      ],
+      "schemas": [
+        "AgentNetworkReadinessReport",
+        "RuntimeServiceSettings"
+      ],
+      "sdk_entrypoints": [],
+      "step_id": "02-token-env-readiness",
+      "title": "Token And Environment Readiness"
+    },
+    {
+      "allowed_source_kinds": [
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "web-crawl"
+      ],
+      "failure_modes": [
+        "private network target",
+        "oversized response",
+        "unsupported content type",
+        "robots or rate uncertainty"
+      ],
+      "inspect_fields": [
+        "accepted",
+        "packets",
+        "provenance",
+        "web_fetch_reports",
+        "source_policy_decisions",
+        "candidate_residual_coordinates",
+        "ecpt_phase_contribution_allowed",
+        "rejected_sources",
+        "residual_ledger"
+      ],
+      "purpose": "Ingest bounded HTTP(S), local HTML, RSS/Atom, JSON feed, or NDJSON sources.",
+      "required_env_vars": [],
+      "residual_behavior": "web/feed intake failures return diagnostic residuals",
+      "safe_commands": [
+        "uv run pic ecology policy explain --profile development",
+        "uv run pic ecology ingest-general --source examples/agent_network/feed.xml --kind rss",
+        "uv run pic ecology ingest-general --source examples/agent_network/page.html --kind web-page",
+        "uv run pic ecology discover-web --source examples/agent_network/page.html"
+      ],
+      "safety_notes": [
+        "General web intake never executes scripts or submits forms.",
+        "Live HTTP(S) requires an explicit source and remains bounded.",
+        "External candidate volume alone cannot improve accepted ECPT phase status."
+      ],
+      "schemas": [
+        "GeneralIntakePolicy",
+        "GeneralIntakePolicyDecision",
+        "GeneralIntakeReport",
+        "IntakeProvenanceRecord",
+        "WebDiscoveryReport",
+        "GeneralIntakeRuntimeBridgeReport"
+      ],
+      "sdk_entrypoints": [
+        "percolation_inversion_compiler.ecology.ingest_general_source",
+        "percolation_inversion_compiler.ecology.discover_web_packets"
+      ],
+      "step_id": "03-general-web-feed-intake",
+      "title": "General Web And Feed Intake"
+    },
+    {
+      "allowed_source_kinds": [
+        "agent-message",
+        "agent-inbox"
+      ],
+      "failure_modes": [
+        "digest mismatch",
+        "expired message",
+        "future clock skew",
+        "replay nonce",
+        "missing production signature",
+        "missing accepted identity context"
+      ],
+      "inspect_fields": [
+        "message_contract_valid",
+        "accepted",
+        "identity_verified",
+        "identity_status",
+        "nonce_ledger",
+        "nonce_status",
+        "signature_required",
+        "replay_detected",
+        "residual_ledger"
+      ],
+      "purpose": "Exchange local agent messages without status promotion.",
+      "required_env_vars": [],
+      "residual_behavior": "invalid or unsigned messages remain diagnostic candidates",
+      "safe_commands": [
+        "uv run pic agent message contract --message examples/agent_network/agent_message.json",
+        "uv run pic agent message ingest --message examples/agent_network/agent_message.json",
+        "uv run pic agent inbox export --inbox examples/agent_network/inbox.json"
+      ],
+      "safety_notes": [
+        "Agent messages do not settle obligations."
+      ],
+      "schemas": [
+        "AgentMessageEnvelope",
+        "AgentMessageContractReport",
+        "AgentMessageVerificationContext",
+        "AgentInboxRecord",
+        "AgentPacketExchangeReport"
+      ],
+      "sdk_entrypoints": [
+        "percolation_inversion_compiler.ecology.verify_agent_message",
+        "percolation_inversion_compiler.ecology.ingest_agent_inbox"
+      ],
+      "step_id": "04-agent-message-exchange",
+      "title": "Agent Message Exchange"
+    },
+    {
+      "allowed_source_kinds": [
+        "github",
+        "zenodo",
+        "arxiv",
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "agent-message",
+        "agent-inbox",
+        "web-crawl"
+      ],
+      "failure_modes": [
+        "rate limit",
+        "auth failure",
+        "network error",
+        "malformed response"
+      ],
+      "inspect_fields": [
+        "accepted",
+        "packets",
+        "rejected_sources",
+        "residual_ledger"
+      ],
+      "purpose": "Ingest GitHub, Zenodo, or arXiv metadata packet candidates when sources are explicit.",
+      "required_env_vars": [],
+      "residual_behavior": "connector failures return diagnostic PacketIngestionReport records",
+      "safe_commands": [
+        "uv run pic ecology ingest --source kadubon/percolation-inversion-compiler --kind github",
+        "uv run pic ecology ingest --source https://zenodo.org/records/20526451 --kind zenodo",
+        "uv run pic ecology ingest --source arxiv:salience queue --kind arxiv"
+      ],
+      "safety_notes": [
+        "Live metadata packets are candidates, not verified packet capital."
+      ],
+      "schemas": [
+        "PacketIngestionReport",
+        "CapabilityPacketCandidate"
+      ],
+      "sdk_entrypoints": [
+        "percolation_inversion_compiler.ecology.ingest_live_source"
+      ],
+      "step_id": "05-live-metadata-ingest",
+      "title": "Live Metadata Ingest"
+    },
+    {
+      "allowed_source_kinds": [],
+      "failure_modes": [
+        "sha256 mismatch",
+        "schema digest mismatch",
+        "missing verifier identity"
+      ],
+      "inspect_fields": [
+        "accepted",
+        "settled",
+        "residual_ledger",
+        "reasons"
+      ],
+      "purpose": "Verify evidence envelope hashes, schema digests, identities, and determinism.",
+      "required_env_vars": [],
+      "residual_behavior": "invalid evidence remains diagnostic and cannot promote status",
+      "safe_commands": [
+        "uv run pic evidence verify --envelope examples/evidence_envelope.json",
+        "uv run pic evidence verify --envelope examples/evidence_envelope.json --profile production"
+      ],
+      "safety_notes": [
+        "Evidence verification does not prove external physical/oracle truth."
+      ],
+      "schemas": [
+        "VerifierEvidenceEnvelope",
+        "EvidenceArtifact"
+      ],
+      "sdk_entrypoints": [
+        "percolation_inversion_compiler.core.verify_evidence_envelope"
+      ],
+      "step_id": "06-evidence-envelope-verify",
+      "title": "Evidence Envelope Verify"
+    },
+    {
+      "allowed_source_kinds": [],
+      "failure_modes": [
+        "missing evidence kind",
+        "unsupported route",
+        "residual external domain"
+      ],
+      "inspect_fields": [
+        "settled_scope",
+        "residual_external_obligations",
+        "settled"
+      ],
+      "purpose": "Route external proof obligations through registered verifier bindings.",
+      "required_env_vars": [],
+      "residual_behavior": "route residuals remain until scoped obligations are discharged",
+      "safe_commands": [
+        "uv run pic routes bindings",
+        "uv run pic evidence discharge --envelope examples/evidence_envelope.json --obligations examples/external_obligations.json --profile production"
+      ],
+      "safety_notes": [
+        "Route acceptance is scoped; unresolved external obligations remain."
+      ],
+      "schemas": [
+        "DischargeRouteBinding",
+        "VerifierResolution"
+      ],
+      "sdk_entrypoints": [
+        "percolation_inversion_compiler.core.resolve_adapter_route"
+      ],
+      "step_id": "07-route-discharge",
+      "title": "Route Discharge"
+    },
+    {
+      "allowed_source_kinds": [],
+      "failure_modes": [
+        "missing server extra",
+        "missing bearer token",
+        "oversized request"
+      ],
+      "inspect_fields": [
+        "allow_live_connectors",
+        "safety_invariants"
+      ],
+      "purpose": "Use the local HTTP service with loopback and production bearer auth.",
+      "required_env_vars": [
+        "PIC_RUNTIME_TOKEN"
+      ],
+      "residual_behavior": "service errors return deterministic diagnostic JSON",
+      "safe_commands": [
+        "uv run pic runtime export-openapi --output openapi.json",
+        "uv run pic runtime service --host 127.0.0.1 --port 8765 --profile development"
+      ],
+      "safety_notes": [
+        "Keep service local-first; production requires bearer auth."
+      ],
+      "schemas": [
+        "RuntimeServiceSettings",
+        "RuntimeStepInput",
+        "RuntimeStepReport"
+      ],
+      "sdk_entrypoints": [
+        "percolation_inversion_compiler.runtime.create_runtime_app"
+      ],
+      "step_id": "08-runtime-service-loopback",
+      "title": "Runtime Service Loopback"
+    },
+    {
+      "allowed_source_kinds": [],
+      "failure_modes": [
+        "missing schema bundle",
+        "modified artifact",
+        "local path leak"
+      ],
+      "inspect_fields": [
+        "event_log",
+        "schema-digest",
+        "provenance"
+      ],
+      "purpose": "Persist runtime events and provenance for later audit.",
+      "required_env_vars": [],
+      "residual_behavior": "provenance does not settle unresolved obligations",
+      "safe_commands": [
+        "uv run pic runtime store init --store runtime.sqlite",
+        "uv run pic schema --all --output-dir schemas/generated",
+        "uv run pic provenance create --schema-dir schemas/generated --output provenance.json"
+      ],
+      "safety_notes": [
+        "Do not persist secrets or private keys."
+      ],
+      "schemas": [
+        "RuntimeStoreSnapshot",
+        "ProvenanceManifest"
+      ],
+      "sdk_entrypoints": [],
+      "step_id": "09-store-provenance",
+      "title": "Store And Provenance"
+    },
+    {
+      "allowed_source_kinds": [],
+      "failure_modes": [
+        "dropped residual",
+        "misread settled=false as failure"
+      ],
+      "inspect_fields": [
+        "residual_summary",
+        "missing_obligations",
+        "next_commands"
+      ],
+      "purpose": "Carry unresolved external communication residuals into the next runtime step.",
+      "required_env_vars": [],
+      "residual_behavior": "residual coordinates are output obligations, not errors to suppress",
+      "safe_commands": [
+        "uv run pic agent next --intake-report intake-report.json --profile production"
+      ],
+      "safety_notes": [
+        "Never hide connector or route residuals."
+      ],
+      "schemas": [
+        "AgentNextActionReport",
+        "LedgerCoordinate"
+      ],
+      "sdk_entrypoints": [],
+      "step_id": "10-residual-carry-forward",
+      "title": "Residual Carry-Forward"
+    }
+  ]
+}

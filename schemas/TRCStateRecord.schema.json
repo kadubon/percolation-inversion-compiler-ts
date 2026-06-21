@@ -1,0 +1,149 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "ObservationWindow": {
+      "properties": {
+        "end_tick": {
+          "title": "End Tick",
+          "type": "integer"
+        },
+        "refresh_obligation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Refresh Obligation"
+        },
+        "sample_period": {
+          "default": 1,
+          "title": "Sample Period",
+          "type": "integer"
+        },
+        "sensor_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sensor Ids",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "start_tick": {
+          "title": "Start Tick",
+          "type": "integer"
+        },
+        "window_id": {
+          "title": "Window Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "window_id",
+        "start_tick",
+        "end_tick"
+      ],
+      "title": "ObservationWindow",
+      "type": "object"
+    },
+    "TypedGraphRecord": {
+      "properties": {
+        "capacities": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Capacities",
+          "type": "object"
+        },
+        "components": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Components",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "observed_flows": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Observed Flows",
+          "type": "object"
+        },
+        "typed_ports": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Typed Ports",
+          "type": "object"
+        },
+        "unit_tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Unit Tags",
+          "type": "object"
+        }
+      },
+      "title": "TypedGraphRecord",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "active_components": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Active Components",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "infrastructure_graph": {
+      "$ref": "#/$defs/TypedGraphRecord"
+    },
+    "ledger_coordinates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Ledger Coordinates",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "observation_window": {
+      "$ref": "#/$defs/ObservationWindow"
+    },
+    "state_id": {
+      "title": "State Id",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ClaimStatus",
+      "default": "provisional"
+    }
+  },
+  "required": [
+    "state_id",
+    "observation_window",
+    "infrastructure_graph"
+  ],
+  "title": "TRCStateRecord",
+  "type": "object"
+}

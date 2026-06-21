@@ -1,0 +1,39 @@
+{
+  "description": "Declarative status policy for agent-facing integrations.",
+  "properties": {
+    "hard_domain_requires": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Hard Domain Requires",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "provisional_requires": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Provisional Requires",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "settled_requires": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Settled Requires",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "speculative_requires": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Speculative Requires",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "title": "NonPromotionPolicy",
+  "type": "object"
+}

@@ -1,0 +1,161 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    }
+  },
+  "description": "Runtime readiness and safety summary for agent orchestration.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "accepted_agent_context_present": {
+      "default": false,
+      "title": "Accepted Agent Context Present",
+      "type": "boolean"
+    },
+    "accepted_public_key_context_present": {
+      "default": false,
+      "title": "Accepted Public Key Context Present",
+      "type": "boolean"
+    },
+    "can_promote_unsigned_packets": {
+      "default": true,
+      "title": "Can Promote Unsigned Packets",
+      "type": "boolean"
+    },
+    "checks": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "object"
+    },
+    "cryptographic_identity_required": {
+      "default": false,
+      "title": "Cryptographic Identity Required",
+      "type": "boolean"
+    },
+    "edge_count": {
+      "default": 0,
+      "title": "Edge Count",
+      "type": "integer"
+    },
+    "finite_checks_passed": {
+      "default": false,
+      "title": "Finite Checks Passed",
+      "type": "boolean"
+    },
+    "identity_contribution_summary": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Identity Contribution Summary",
+      "type": "object"
+    },
+    "identity_mode": {
+      "default": "declared",
+      "title": "Identity Mode",
+      "type": "string"
+    },
+    "missing_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Obligations",
+      "type": "array"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "packet_count": {
+      "default": 0,
+      "title": "Packet Count",
+      "type": "integer"
+    },
+    "production_identity_ready": {
+      "default": false,
+      "title": "Production Identity Ready",
+      "type": "boolean"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "psi_components": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Psi Components",
+      "type": "object"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_debt": {
+      "default": 0.0,
+      "title": "Residual Debt",
+      "type": "number"
+    },
+    "route_count": {
+      "default": 0,
+      "title": "Route Count",
+      "type": "integer"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "schema_valid": {
+      "default": true,
+      "title": "Schema Valid",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "state_id": {
+      "title": "State Id",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ClaimStatus",
+      "default": "diagnostic"
+    },
+    "sybil_policy_profile": {
+      "default": "development",
+      "title": "Sybil Policy Profile",
+      "type": "string"
+    }
+  },
+  "required": [
+    "report_id",
+    "state_id"
+  ],
+  "title": "RuntimeHealthReport",
+  "type": "object"
+}

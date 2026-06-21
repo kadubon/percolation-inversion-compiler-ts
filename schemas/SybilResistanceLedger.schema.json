@@ -1,0 +1,427 @@
+{
+  "$defs": {
+    "AgentIdentityCheckReport": {
+      "description": "Fail-closed verification report for identity or attestation evidence.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "digest_valid": {
+          "default": false,
+          "title": "Digest Valid",
+          "type": "boolean"
+        },
+        "fingerprint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fingerprint"
+        },
+        "fingerprint_valid": {
+          "default": false,
+          "title": "Fingerprint Valid",
+          "type": "boolean"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "key_valid": {
+          "default": false,
+          "title": "Key Valid",
+          "type": "boolean"
+        },
+        "non_expired": {
+          "default": false,
+          "title": "Non Expired",
+          "type": "boolean"
+        },
+        "non_revoked": {
+          "default": false,
+          "title": "Non Revoked",
+          "type": "boolean"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "payload_digest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Payload Digest"
+        },
+        "policy_digest_present": {
+          "default": false,
+          "title": "Policy Digest Present",
+          "type": "boolean"
+        },
+        "public_key_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Public Key Id"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "report_id": {
+          "title": "Report Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "signature_suite": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Signature Suite"
+        },
+        "signature_valid": {
+          "default": false,
+          "title": "Signature Valid",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "report_id",
+        "agent_id"
+      ],
+      "title": "AgentIdentityCheckReport",
+      "type": "object"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "IdentityTrustProfile": {
+      "description": "Operational trust profile for protocol-relative identity checks.",
+      "enum": [
+        "development",
+        "research",
+        "controlled",
+        "federated",
+        "production",
+        "adversarial"
+      ],
+      "title": "IdentityTrustProfile",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "description": "Population-level Sybil-resistance judgment and residual ledger.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "accepted_agent_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Accepted Agent Ids",
+      "type": "array"
+    },
+    "accepted_public_key_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Accepted Public Key Ids",
+      "type": "array"
+    },
+    "clone_fanout_groups": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Clone Fanout Groups",
+      "type": "array"
+    },
+    "duplicate_agent_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Duplicate Agent Ids",
+      "type": "array"
+    },
+    "duplicate_credential_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Duplicate Credential Refs",
+      "type": "array"
+    },
+    "duplicate_public_key_fingerprints": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Duplicate Public Key Fingerprints",
+      "type": "array"
+    },
+    "duplicate_public_key_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Duplicate Public Key Ids",
+      "type": "array"
+    },
+    "expired_agent_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Expired Agent Ids",
+      "type": "array"
+    },
+    "failed_signature_agent_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Failed Signature Agent Ids",
+      "type": "array"
+    },
+    "finite_checks_passed": {
+      "default": false,
+      "title": "Finite Checks Passed",
+      "type": "boolean"
+    },
+    "fleet_overrepresented": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Fleet Overrepresented",
+      "type": "array"
+    },
+    "identity_check_reports": {
+      "items": {
+        "$ref": "#/$defs/AgentIdentityCheckReport"
+      },
+      "title": "Identity Check Reports",
+      "type": "array"
+    },
+    "identity_count": {
+      "title": "Identity Count",
+      "type": "integer"
+    },
+    "issuer_overrepresented": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Issuer Overrepresented",
+      "type": "array"
+    },
+    "ledger_id": {
+      "title": "Ledger Id",
+      "type": "string"
+    },
+    "missing_evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Evidence Refs",
+      "type": "array"
+    },
+    "model_overrepresented": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Model Overrepresented",
+      "type": "array"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "policy_explanation": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Policy Explanation",
+      "type": "object"
+    },
+    "policy_id": {
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "policy_overrepresented": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Policy Overrepresented",
+      "type": "array"
+    },
+    "population_id": {
+      "title": "Population Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "rejected_agent_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Agent Ids",
+      "type": "array"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "revoked_agent_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Revoked Agent Ids",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "trust_profile": {
+      "$ref": "#/$defs/IdentityTrustProfile",
+      "default": "production"
+    }
+  },
+  "required": [
+    "ledger_id",
+    "population_id",
+    "policy_id",
+    "identity_count"
+  ],
+  "title": "SybilResistanceLedger",
+  "type": "object"
+}

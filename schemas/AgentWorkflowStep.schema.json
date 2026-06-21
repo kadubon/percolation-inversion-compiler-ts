@@ -1,0 +1,59 @@
+{
+  "description": "One safe full-feature workflow step for autonomous agents.",
+  "properties": {
+    "inspect_fields": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Inspect Fields",
+      "type": "array"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "safe_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safe Commands",
+      "type": "array"
+    },
+    "safety_notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Notes",
+      "type": "array"
+    },
+    "schemas": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Schemas",
+      "type": "array"
+    },
+    "sdk_entrypoints": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sdk Entrypoints",
+      "type": "array"
+    },
+    "step_id": {
+      "title": "Step Id",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "step_id",
+    "title",
+    "purpose"
+  ],
+  "title": "AgentWorkflowStep",
+  "type": "object"
+}

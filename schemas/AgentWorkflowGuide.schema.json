@@ -1,0 +1,128 @@
+{
+  "$defs": {
+    "AgentWorkflowStep": {
+      "description": "One safe full-feature workflow step for autonomous agents.",
+      "properties": {
+        "inspect_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Inspect Fields",
+          "type": "array"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "safe_commands": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safe Commands",
+          "type": "array"
+        },
+        "safety_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safety Notes",
+          "type": "array"
+        },
+        "schemas": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Schemas",
+          "type": "array"
+        },
+        "sdk_entrypoints": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sdk Entrypoints",
+          "type": "array"
+        },
+        "step_id": {
+          "title": "Step Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "step_id",
+        "title",
+        "purpose"
+      ],
+      "title": "AgentWorkflowStep",
+      "type": "object"
+    }
+  },
+  "description": "Deterministic full-feature workflow guide for AI agents.",
+  "properties": {
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "guide_id": {
+      "default": "agent-workflow-guide",
+      "title": "Guide Id",
+      "type": "string"
+    },
+    "operationally_usable": {
+      "default": true,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "pip_agent_full_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Pip Agent Full Commands",
+      "type": "array"
+    },
+    "pip_core_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Pip Core Commands",
+      "type": "array"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "source_checkout_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Checkout Commands",
+      "type": "array"
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/AgentWorkflowStep"
+      },
+      "title": "Steps",
+      "type": "array"
+    }
+  },
+  "title": "AgentWorkflowGuide",
+  "type": "object"
+}

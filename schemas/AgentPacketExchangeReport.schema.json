@@ -1,0 +1,519 @@
+{
+  "$defs": {
+    "AgentMessageNonceLedger": {
+      "description": "Deterministic nonce ledger used to reject replayed agent messages.",
+      "properties": {
+        "accepted": {
+          "default": true,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "consumed_nonces": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Consumed Nonces",
+          "type": "array"
+        },
+        "ledger_id": {
+          "default": "agent-message-nonce-ledger",
+          "title": "Ledger Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "rejected_message_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Message Ids",
+          "type": "array"
+        },
+        "replayed_nonces": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Replayed Nonces",
+          "type": "array"
+        }
+      },
+      "title": "AgentMessageNonceLedger",
+      "type": "object"
+    },
+    "CapabilityPacketCandidate": {
+      "description": "An observable artifact that may become an ECPT capability packet.",
+      "properties": {
+        "authority_granted": {
+          "default": true,
+          "title": "Authority Granted",
+          "type": "boolean"
+        },
+        "authority_required": {
+          "default": false,
+          "title": "Authority Required",
+          "type": "boolean"
+        },
+        "claim": {
+          "title": "Claim",
+          "type": "string"
+        },
+        "content_sha256": {
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "dependencies": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Dependencies",
+          "type": "array"
+        },
+        "evidence_hash_valid": {
+          "default": true,
+          "title": "Evidence Hash Valid",
+          "type": "boolean"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "expected_downstream_gain": {
+          "default": 0.0,
+          "title": "Expected Downstream Gain",
+          "type": "number"
+        },
+        "expires_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expires At"
+        },
+        "freshness": {
+          "default": 1.0,
+          "title": "Freshness",
+          "type": "number"
+        },
+        "hazard_charge": {
+          "default": 0.0,
+          "title": "Hazard Charge",
+          "type": "number"
+        },
+        "identity_contribution_status": {
+          "$ref": "#/$defs/IdentityContributionStatus",
+          "default": "provisional"
+        },
+        "issuer_agent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Agent Id"
+        },
+        "issuer_attestation_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Attestation Id"
+        },
+        "issuer_public_key_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Public Key Id"
+        },
+        "issuer_signature_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer Signature Ref"
+        },
+        "packet_id": {
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "receiver_family": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Receiver Family",
+          "type": "array"
+        },
+        "residual_charge": {
+          "default": 0.0,
+          "title": "Residual Charge",
+          "type": "number"
+        },
+        "reuse_context": {
+          "default": "general",
+          "title": "Reuse Context",
+          "type": "string"
+        },
+        "rollback_available": {
+          "default": true,
+          "title": "Rollback Available",
+          "type": "boolean"
+        },
+        "route_safe": {
+          "default": true,
+          "title": "Route Safe",
+          "type": "boolean"
+        },
+        "salience_class": {
+          "default": "default",
+          "title": "Salience Class",
+          "type": "string"
+        },
+        "source_kind": {
+          "$ref": "#/$defs/PacketSourceKind",
+          "default": "local"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "provisional"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        },
+        "verification_cost": {
+          "default": 0.0,
+          "title": "Verification Cost",
+          "type": "number"
+        },
+        "verifier_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verifier Routes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "packet_id",
+        "source_ref",
+        "content_sha256",
+        "claim"
+      ],
+      "title": "CapabilityPacketCandidate",
+      "type": "object"
+    },
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "IdentityContributionStatus": {
+      "description": "How identity evidence may contribute to runtime packet capital.",
+      "enum": [
+        "verified",
+        "provisional",
+        "diagnostic",
+        "quarantined",
+        "rejected"
+      ],
+      "title": "IdentityContributionStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "PacketSourceKind": {
+      "enum": [
+        "local",
+        "github",
+        "zenodo",
+        "arxiv",
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "agent-message",
+        "agent-inbox",
+        "web-crawl",
+        "agent-output",
+        "auto"
+      ],
+      "title": "PacketSourceKind",
+      "type": "string"
+    }
+  },
+  "description": "Report for agent-message verification and packet candidate exchange.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "candidate_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Candidate Packet Ids",
+      "type": "array"
+    },
+    "consumed_nonces": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Consumed Nonces",
+      "type": "array"
+    },
+    "identity_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Identity Reasons",
+      "type": "array"
+    },
+    "identity_status": {
+      "default": "not-required",
+      "title": "Identity Status",
+      "type": "string"
+    },
+    "identity_verified": {
+      "default": false,
+      "title": "Identity Verified",
+      "type": "boolean"
+    },
+    "message_contract_valid": {
+      "default": false,
+      "title": "Message Contract Valid",
+      "type": "boolean"
+    },
+    "message_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Message Id"
+    },
+    "next_safe_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Next Safe Commands",
+      "type": "array"
+    },
+    "nonce_ledger": {
+      "$ref": "#/$defs/AgentMessageNonceLedger"
+    },
+    "nonce_status": {
+      "default": "not-provided",
+      "title": "Nonce Status",
+      "type": "string"
+    },
+    "packets": {
+      "items": {
+        "$ref": "#/$defs/CapabilityPacketCandidate"
+      },
+      "title": "Packets",
+      "type": "array"
+    },
+    "quarantine_recommended": {
+      "default": false,
+      "title": "Quarantine Recommended",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "replay_detected": {
+      "default": false,
+      "title": "Replay Detected",
+      "type": "boolean"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "sender_agent_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sender Agent Id"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "signature_present": {
+      "default": false,
+      "title": "Signature Present",
+      "type": "boolean"
+    },
+    "signature_required": {
+      "default": false,
+      "title": "Signature Required",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "report_id"
+  ],
+  "title": "AgentPacketExchangeReport",
+  "type": "object"
+}

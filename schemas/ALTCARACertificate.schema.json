@@ -1,0 +1,285 @@
+{
+  "$defs": {
+    "ALTAccelerationCertificate": {
+      "description": "Finite comparison certificate for abstraction-liquidity acceleration.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "baseline_foundry_id": {
+          "title": "Baseline Foundry Id",
+          "type": "string"
+        },
+        "candidate_foundry_id": {
+          "title": "Candidate Foundry Id",
+          "type": "string"
+        },
+        "certificate_id": {
+          "title": "Certificate Id",
+          "type": "string"
+        },
+        "certified_surplus_gain_lower_bound": {
+          "default": 0.0,
+          "title": "Certified Surplus Gain Lower Bound",
+          "type": "number"
+        },
+        "finite_checks_passed": {
+          "default": false,
+          "title": "Finite Checks Passed",
+          "type": "boolean"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_external_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual External Obligations",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "resource_matched": {
+          "default": false,
+          "title": "Resource Matched",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "settlement_latency_reduction_lower_bound": {
+          "default": 0.0,
+          "title": "Settlement Latency Reduction Lower Bound",
+          "type": "number"
+        }
+      },
+      "required": [
+        "certificate_id",
+        "baseline_foundry_id",
+        "candidate_foundry_id"
+      ],
+      "title": "ALTAccelerationCertificate",
+      "type": "object"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "description": "Target-valid ALT certified ASI-realization acceleration certificate.",
+  "properties": {
+    "acceleration_certificate": {
+      "$ref": "#/$defs/ALTAccelerationCertificate"
+    },
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "baseline_upper_envelope_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Baseline Upper Envelope Refs",
+      "type": "array"
+    },
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "certified_capital_witness_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Certified Capital Witness Refs",
+      "type": "array"
+    },
+    "finite_checks_passed": {
+      "default": false,
+      "title": "Finite Checks Passed",
+      "type": "boolean"
+    },
+    "hazard_envelope_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Hazard Envelope Refs",
+      "type": "array"
+    },
+    "live_predicate_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Live Predicate Refs",
+      "type": "array"
+    },
+    "non_tradable_constraint_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Non Tradable Constraint Refs",
+      "type": "array"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_external_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual External Obligations",
+      "type": "array"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "resource_matched_baseline_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Resource Matched Baseline Refs",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "target_id": {
+      "title": "Target Id",
+      "type": "string"
+    },
+    "target_validity_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Target Validity Refs",
+      "type": "array"
+    },
+    "transport_validity_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Transport Validity Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "certificate_id",
+    "target_id",
+    "acceleration_certificate"
+  ],
+  "title": "ALTCARACertificate",
+  "type": "object"
+}

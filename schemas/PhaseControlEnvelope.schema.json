@@ -1,0 +1,53 @@
+{
+  "properties": {
+    "control_surface": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Control Surface",
+      "type": "object"
+    },
+    "envelope_id": {
+      "title": "Envelope Id",
+      "type": "string"
+    },
+    "finite_horizon": {
+      "default": 0,
+      "title": "Finite Horizon",
+      "type": "integer"
+    },
+    "finite_state_space": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Finite State Space",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "phase_response": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Phase Response",
+      "type": "object"
+    },
+    "residual": {
+      "default": 0.0,
+      "title": "Residual",
+      "type": "number"
+    },
+    "thermodynamic_obligation_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Thermodynamic Obligation Ids",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "envelope_id"
+  ],
+  "title": "PhaseControlEnvelope",
+  "type": "object"
+}

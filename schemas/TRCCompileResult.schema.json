@@ -1,0 +1,239 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "FrontierRecord": {
+      "description": "One typed frontier/archive record.",
+      "properties": {
+        "benefits": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Benefits",
+          "type": "object"
+        },
+        "burdens": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Burdens",
+          "type": "object"
+        },
+        "domain_key": {
+          "default": "global",
+          "title": "Domain Key",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "provisional"
+        },
+        "stratum": {
+          "default": "main",
+          "title": "Stratum",
+          "type": "string"
+        },
+        "trace_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Trace Id"
+        }
+      },
+      "required": [
+        "record_id"
+      ],
+      "title": "FrontierRecord",
+      "type": "object"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "diagnostic_archive": {
+      "items": {
+        "$ref": "#/$defs/FrontierRecord"
+      },
+      "title": "Diagnostic Archive",
+      "type": "array"
+    },
+    "efficiency_archive": {
+      "items": {
+        "$ref": "#/$defs/FrontierRecord"
+      },
+      "title": "Efficiency Archive",
+      "type": "array"
+    },
+    "failed_main_records": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Failed Main Records",
+      "type": "array"
+    },
+    "main_frontier": {
+      "items": {
+        "$ref": "#/$defs/FrontierRecord"
+      },
+      "title": "Main Frontier",
+      "type": "array"
+    },
+    "missing_trace_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Trace Obligations",
+      "type": "array"
+    },
+    "partial_frontier": {
+      "items": {
+        "$ref": "#/$defs/FrontierRecord"
+      },
+      "title": "Partial Frontier",
+      "type": "array"
+    },
+    "relaxed_frontier": {
+      "items": {
+        "$ref": "#/$defs/FrontierRecord"
+      },
+      "title": "Relaxed Frontier",
+      "type": "array"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "risk_frontier": {
+      "items": {
+        "$ref": "#/$defs/FrontierRecord"
+      },
+      "title": "Risk Frontier",
+      "type": "array"
+    },
+    "trace_residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    }
+  },
+  "title": "TRCCompileResult",
+  "type": "object"
+}

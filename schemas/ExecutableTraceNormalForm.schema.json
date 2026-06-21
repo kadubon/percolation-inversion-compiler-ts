@@ -1,0 +1,659 @@
+{
+  "$defs": {
+    "CausalEventPosetRecord": {
+      "properties": {
+        "concurrency_residual": {
+          "default": 0.0,
+          "title": "Concurrency Residual",
+          "type": "number"
+        },
+        "event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Event Ids",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "happens_before": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Happens Before",
+          "type": "array"
+        },
+        "missing_tick_residual": {
+          "default": 0.0,
+          "title": "Missing Tick Residual",
+          "type": "number"
+        },
+        "out_of_order_residual": {
+          "default": 0.0,
+          "title": "Out Of Order Residual",
+          "type": "number"
+        }
+      },
+      "required": [
+        "event_ids"
+      ],
+      "title": "CausalEventPosetRecord",
+      "type": "object"
+    },
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "FutureFreedomVector": {
+      "properties": {
+        "horizons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Horizons",
+          "type": "array"
+        },
+        "order": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MultiHorizonOrder"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "residuals": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Residuals",
+          "type": "object"
+        },
+        "values": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Values",
+          "type": "object"
+        },
+        "vector_id": {
+          "title": "Vector Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "vector_id"
+      ],
+      "title": "FutureFreedomVector",
+      "type": "object"
+    },
+    "LifecycleDAGRecord": {
+      "properties": {
+        "certificate_versions": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Certificate Versions",
+          "type": "object"
+        },
+        "dependency_sets": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "title": "Dependency Sets",
+          "type": "object"
+        },
+        "invalidated_cells": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Invalidated Cells",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "recomputation_routes": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Recomputation Routes",
+          "type": "object"
+        },
+        "stale_residual": {
+          "default": 0.0,
+          "title": "Stale Residual",
+          "type": "number"
+        }
+      },
+      "title": "LifecycleDAGRecord",
+      "type": "object"
+    },
+    "MultiHorizonOrder": {
+      "properties": {
+        "horizons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Horizons",
+          "type": "array"
+        },
+        "order_id": {
+          "title": "Order Id",
+          "type": "string"
+        },
+        "precedence": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Precedence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "order_id"
+      ],
+      "title": "MultiHorizonOrder",
+      "type": "object"
+    },
+    "ResourceCalendarRecord": {
+      "properties": {
+        "calendar_id": {
+          "title": "Calendar Id",
+          "type": "string"
+        },
+        "capacities": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Capacities",
+          "type": "object"
+        },
+        "freshness_version": {
+          "default": "v1",
+          "title": "Freshness Version",
+          "type": "string"
+        },
+        "reservations": {
+          "items": {
+            "$ref": "#/$defs/ResourceReservationRecord"
+          },
+          "title": "Reservations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "calendar_id"
+      ],
+      "title": "ResourceCalendarRecord",
+      "type": "object"
+    },
+    "ResourceEscrowRecord": {
+      "properties": {
+        "capacity_ledger": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Capacity Ledger",
+          "type": "object"
+        },
+        "commutation_certificate": {
+          "default": false,
+          "title": "Commutation Certificate",
+          "type": "boolean"
+        },
+        "dependency_class": {
+          "title": "Dependency Class",
+          "type": "string"
+        },
+        "escrow_id": {
+          "title": "Escrow Id",
+          "type": "string"
+        },
+        "resolution_status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "provisional"
+        },
+        "resource_use": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Resource Use",
+          "type": "object"
+        }
+      },
+      "required": [
+        "escrow_id",
+        "dependency_class"
+      ],
+      "title": "ResourceEscrowRecord",
+      "type": "object"
+    },
+    "ResourceFlowRecord": {
+      "properties": {
+        "capacity": {
+          "title": "Capacity",
+          "type": "number"
+        },
+        "conservation_residual": {
+          "default": 0.0,
+          "title": "Conservation Residual",
+          "type": "number"
+        },
+        "depletion_profile": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Depletion Profile",
+          "type": "array"
+        },
+        "inflow_profile": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Inflow Profile",
+          "type": "array"
+        },
+        "overlap_residual": {
+          "default": 0.0,
+          "title": "Overlap Residual",
+          "type": "number"
+        },
+        "reservation_interval": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Reservation Interval",
+          "type": "array"
+        },
+        "scenario_id": {
+          "title": "Scenario Id",
+          "type": "string"
+        },
+        "service_profile": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Service Profile",
+          "type": "array"
+        },
+        "stale_calendar_residual": {
+          "default": 0.0,
+          "title": "Stale Calendar Residual",
+          "type": "number"
+        },
+        "trace_id": {
+          "title": "Trace Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "trace_id",
+        "scenario_id",
+        "reservation_interval",
+        "inflow_profile",
+        "service_profile",
+        "capacity"
+      ],
+      "title": "ResourceFlowRecord",
+      "type": "object"
+    },
+    "ResourceReservationRecord": {
+      "properties": {
+        "amount": {
+          "title": "Amount",
+          "type": "number"
+        },
+        "end_tick": {
+          "title": "End Tick",
+          "type": "integer"
+        },
+        "reservation_id": {
+          "title": "Reservation Id",
+          "type": "string"
+        },
+        "resource": {
+          "title": "Resource",
+          "type": "string"
+        },
+        "start_tick": {
+          "title": "Start Tick",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "reservation_id",
+        "resource",
+        "start_tick",
+        "end_tick",
+        "amount"
+      ],
+      "title": "ResourceReservationRecord",
+      "type": "object"
+    },
+    "TraceNormalizationCertificate": {
+      "properties": {
+        "commuting_pairs": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Commuting Pairs",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "confluence_witness": {
+          "default": false,
+          "title": "Confluence Witness",
+          "type": "boolean"
+        },
+        "normalized_word": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Normalized Word",
+          "type": "array"
+        },
+        "residual": {
+          "default": 0.0,
+          "title": "Residual",
+          "type": "number"
+        },
+        "rewrite_steps": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Rewrite Steps",
+          "type": "array"
+        },
+        "source_word": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Word",
+          "type": "array"
+        },
+        "termination_witness": {
+          "default": false,
+          "title": "Termination Witness",
+          "type": "boolean"
+        },
+        "trace_id": {
+          "title": "Trace Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "trace_id"
+      ],
+      "title": "TraceNormalizationCertificate",
+      "type": "object"
+    },
+    "TransitionProofRecord": {
+      "properties": {
+        "action_class": {
+          "title": "Action Class",
+          "type": "string"
+        },
+        "cost": {
+          "default": 0.0,
+          "title": "Cost",
+          "type": "number"
+        },
+        "latency": {
+          "default": 0.0,
+          "title": "Latency",
+          "type": "number"
+        },
+        "postcondition": {
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "title": "Postcondition",
+          "type": "object"
+        },
+        "precondition": {
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "title": "Precondition",
+          "type": "object"
+        },
+        "rollback_escrow": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rollback Escrow"
+        },
+        "status": {
+          "$ref": "#/$defs/ClaimStatus",
+          "default": "provisional"
+        }
+      },
+      "required": [
+        "action_class"
+      ],
+      "title": "TransitionProofRecord",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "causal_schedule": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CausalEventPosetRecord"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "certificate_versions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Certificate Versions",
+      "type": "array"
+    },
+    "error_budget": {
+      "default": 0.0,
+      "title": "Error Budget",
+      "type": "number"
+    },
+    "escrows": {
+      "items": {
+        "$ref": "#/$defs/ResourceEscrowRecord"
+      },
+      "title": "Escrows",
+      "type": "array"
+    },
+    "future_freedom": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FutureFreedomVector"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "latency_ledger": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Latency Ledger",
+      "type": "object"
+    },
+    "lifecycle": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LifecycleDAGRecord"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "normalization": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TraceNormalizationCertificate"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "normalized_word": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Normalized Word",
+      "type": "array"
+    },
+    "postcondition": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "title": "Postcondition",
+      "type": "object"
+    },
+    "precondition": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "title": "Precondition",
+      "type": "object"
+    },
+    "resource_calendar": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ResourceCalendarRecord"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "resource_flow_profile": {
+      "items": {
+        "$ref": "#/$defs/ResourceFlowRecord"
+      },
+      "title": "Resource Flow Profile",
+      "type": "array"
+    },
+    "rollback_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rollback Obligations",
+      "type": "array"
+    },
+    "step_proofs": {
+      "items": {
+        "$ref": "#/$defs/TransitionProofRecord"
+      },
+      "title": "Step Proofs",
+      "type": "array"
+    },
+    "tolerance_versions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tolerance Versions",
+      "type": "array"
+    },
+    "trace_id": {
+      "title": "Trace Id",
+      "type": "string"
+    },
+    "trace_residual": {
+      "default": 0.0,
+      "title": "Trace Residual",
+      "type": "number"
+    },
+    "validity_domain": {
+      "default": "global",
+      "title": "Validity Domain",
+      "type": "string"
+    }
+  },
+  "required": [
+    "trace_id",
+    "normalized_word"
+  ],
+  "title": "ExecutableTraceNormalForm",
+  "type": "object"
+}

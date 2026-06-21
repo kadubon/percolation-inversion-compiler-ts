@@ -1,0 +1,80 @@
+{
+  "accepted": true,
+  "checked_outputs": {
+    "agent_tasks": "present",
+    "input": "accepted",
+    "promotion": "accepted",
+    "residual_ledger": "preserved",
+    "route_requests": "present",
+    "salience_schedule": "accepted"
+  },
+  "next_safe_actions": [
+    "Inspect runtime_report.residual_ledger and runtime_report.missing_obligations.",
+    "Inspect runtime_report.route_execution_requests before route execution.",
+    "Inspect unresolved_obligations before reusing the output.",
+    "Preserve residual_summary in downstream logs.",
+    "Review runtime_report.agent_tasks; do not execute arbitrary commands.",
+    "Route verifier requests before promoting candidates to reusable work.",
+    "Run another runtime step after new evidence or action results are available."
+  ],
+  "operationally_usable": false,
+  "profile": "development",
+  "reasons": [
+    "unresolved obligations remain; use workflow_usable for routing only"
+  ],
+  "report_id": "agent-check:agent-intake",
+  "report_mode": "compact",
+  "residual_summary": {
+    "residual": 2.02
+  },
+  "runbook_steps": [
+    "Run pic agent check --compact on candidate agent output.",
+    "Read accepted, workflow_usable, settled, unresolved_obligations, and residual_summary.",
+    "Inspect next_safe_actions before promoting any reusable work item.",
+    "Read RuntimeStepReport phase_control_audit, frontier_debt_report, and bottleneck_witness_reports when theory fidelity matters.",
+    "Use production identity context before production packet promotion.",
+    "Run pic phase plan --compact when an agent needs ranked finite bottlenecks.",
+    "Use profile=development consistently across intake, runtime, and readiness commands."
+  ],
+  "safety_invariants": [
+    "settled=false is expected unless scoped finite verifier rules settle obligations",
+    "residual ledgers and missing obligations must be preserved",
+    "this package does not prove real ASI, physical, simulator, oracle, or policy outcomes",
+    "this package does not require self-rewrite, fine-tuning, or model-weight changes",
+    "agent-facing commands are recommendation-only and do not execute arbitrary shell commands",
+    "production packet promotion requires accepted identity context",
+    "live connectors are bounded and candidate-only by default when an explicit source is supplied",
+    "no background crawling",
+    "no autonomous polling",
+    "no arbitrary shell execution",
+    "no repository mutation",
+    "no hidden promotion from accepted or workflow_usable to settled",
+    "external metadata packets remain candidates until downstream checks pass",
+    "candidate-only external intake cannot improve Psi, BR, AC, or collective certificates",
+    "general web intake is bounded and does not execute scripts, forms, or repo mutation",
+    "agent-to-agent messages are packet candidates, not proof of external-world truth"
+  ],
+  "schema_refs": [
+    "AgentCheckReport",
+    "AgentIntakeReport",
+    "RuntimeStepReport",
+    "PhaseControlAuditSummary",
+    "FrontierDebtReport",
+    "BottleneckWitnessReport",
+    "SalienceScheduleReport",
+    "ALTAdmissionDecision",
+    "PhaseAccelerationPlan",
+    "PhaseGapVector",
+    "BottleneckCandidate",
+    "SafePhaseAction",
+    "AgentCommandInvocation",
+    "AgentAutonomyAuditReport",
+    "CanonicalImplementationReadinessReport"
+  ],
+  "settled": false,
+  "unresolved_obligations": [
+    "obligation:baseline-safety",
+    "proxy-target-grounding-proof"
+  ],
+  "workflow_usable": true
+}

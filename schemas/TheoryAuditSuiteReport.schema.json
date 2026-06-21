@@ -1,0 +1,775 @@
+{
+  "$defs": {
+    "CoverageStatus": {
+      "enum": [
+        "implemented_constructive",
+        "implemented_checker",
+        "implemented_schema",
+        "partial",
+        "external_obligation",
+        "unsupported"
+      ],
+      "title": "CoverageStatus",
+      "type": "string"
+    },
+    "ExternalObligationCatalog": {
+      "description": "Catalog of non-finite or domain-specific obligations.",
+      "properties": {
+        "artifact": {
+          "title": "Artifact",
+          "type": "string"
+        },
+        "category_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Category Summary",
+          "type": "object"
+        },
+        "obligations": {
+          "items": {
+            "$ref": "#/$defs/TheoryImplementationRecord"
+          },
+          "title": "Obligations",
+          "type": "array"
+        },
+        "verifier_route_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Verifier Route Summary",
+          "type": "object"
+        }
+      },
+      "required": [
+        "artifact"
+      ],
+      "title": "ExternalObligationCatalog",
+      "type": "object"
+    },
+    "ImplementationMaturity": {
+      "enum": [
+        "implemented_verified_algorithm",
+        "implemented_shape_checker",
+        "implemented_schema_only",
+        "external_contract_only",
+        "snapshot_metadata_only",
+        "unsupported_no_interface"
+      ],
+      "title": "ImplementationMaturity",
+      "type": "string"
+    },
+    "ProjectionAudit": {
+      "description": "Registry-vs-extractor projection audit.",
+      "properties": {
+        "accepted": {
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "checked_claims": {
+          "default": 0,
+          "title": "Checked Claims",
+          "type": "integer"
+        },
+        "extractor_artifact": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Extractor Artifact"
+        },
+        "mismatches": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Mismatches",
+          "type": "array"
+        },
+        "missing_in_extractor": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing In Extractor",
+          "type": "array"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "registry_artifact": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Registry Artifact"
+        },
+        "strict": {
+          "default": false,
+          "title": "Strict",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "accepted"
+      ],
+      "title": "ProjectionAudit",
+      "type": "object"
+    },
+    "TheoryAuditReport": {
+      "description": "Machine-readable audit summary for one TeX source artifact.",
+      "properties": {
+        "artifact": {
+          "title": "Artifact",
+          "type": "string"
+        },
+        "bit_mr_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Bit Mr Counts",
+          "type": "object"
+        },
+        "canonical": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Canonical"
+        },
+        "canonical_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Canonical Key"
+        },
+        "coverage": {
+          "$ref": "#/$defs/TheoryCoverageRecord"
+        },
+        "coverage_delta": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Coverage Delta",
+          "type": "object"
+        },
+        "external_catalog_errors": {
+          "items": {
+            "type": "string"
+          },
+          "title": "External Catalog Errors",
+          "type": "array"
+        },
+        "external_obligation_catalog": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExternalObligationCatalog"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "external_obligation_category_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "External Obligation Category Summary",
+          "type": "object"
+        },
+        "external_obligation_items": {
+          "items": {
+            "$ref": "#/$defs/TheoryItem"
+          },
+          "title": "External Obligation Items",
+          "type": "array"
+        },
+        "external_verifier_route_summary": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "External Verifier Route Summary",
+          "type": "object"
+        },
+        "finite_constructive_targets": {
+          "items": {
+            "$ref": "#/$defs/TheoryImplementationRecord"
+          },
+          "title": "Finite Constructive Targets",
+          "type": "array"
+        },
+        "implemented_with_obligations": {
+          "items": {
+            "$ref": "#/$defs/TheoryImplementationRecord"
+          },
+          "title": "Implemented With Obligations",
+          "type": "array"
+        },
+        "projection_audits": {
+          "items": {
+            "$ref": "#/$defs/ProjectionAudit"
+          },
+          "title": "Projection Audits",
+          "type": "array"
+        },
+        "snapshot_delta": {
+          "additionalProperties": true,
+          "title": "Snapshot Delta",
+          "type": "object"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "unimplemented_by_section": {
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/$defs/TheoryItem"
+            },
+            "type": "array"
+          },
+          "title": "Unimplemented By Section",
+          "type": "object"
+        },
+        "unsupported_items": {
+          "items": {
+            "$ref": "#/$defs/TheoryItem"
+          },
+          "title": "Unsupported Items",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source",
+        "artifact",
+        "coverage"
+      ],
+      "title": "TheoryAuditReport",
+      "type": "object"
+    },
+    "TheoryCoverageRecord": {
+      "properties": {
+        "artifact": {
+          "title": "Artifact",
+          "type": "string"
+        },
+        "claims": {
+          "default": 0,
+          "title": "Claims",
+          "type": "integer"
+        },
+        "definitions": {
+          "default": 0,
+          "title": "Definitions",
+          "type": "integer"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/TheoryItem"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "mr_records": {
+          "default": 0,
+          "title": "Mr Records",
+          "type": "integer"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "artifact"
+      ],
+      "title": "TheoryCoverageRecord",
+      "type": "object"
+    },
+    "TheoryImplementationRecord": {
+      "description": "Portable implementation mapping for one finite theory item.",
+      "properties": {
+        "accepted_evidence_kind": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Evidence Kind",
+          "type": "array"
+        },
+        "artifact": {
+          "title": "Artifact",
+          "type": "string"
+        },
+        "checker_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Checker Ref"
+        },
+        "checker_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checker Refs",
+          "type": "array"
+        },
+        "coverage_status": {
+          "$ref": "#/$defs/CoverageStatus"
+        },
+        "external_failure_modes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "External Failure Modes",
+          "type": "array"
+        },
+        "failure_modes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Failure Modes",
+          "type": "array"
+        },
+        "implementation_maturity": {
+          "$ref": "#/$defs/ImplementationMaturity",
+          "default": "unsupported_no_interface"
+        },
+        "implementation_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Implementation Ref"
+        },
+        "implementation_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Implementation Refs",
+          "type": "array"
+        },
+        "item_id": {
+          "title": "Item Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "obligation_category": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Obligation Category"
+        },
+        "proof_obligation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Proof Obligation Ids",
+          "type": "array"
+        },
+        "residual_coordinates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual Coordinates",
+          "type": "array"
+        },
+        "residual_policy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Residual Policy"
+        },
+        "safe_default": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Safe Default"
+        },
+        "schema_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Schema Ref"
+        },
+        "schema_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Schema Refs",
+          "type": "array"
+        },
+        "verifier_contract": {
+          "additionalProperties": true,
+          "title": "Verifier Contract",
+          "type": "object"
+        },
+        "verifier_route": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verifier Route"
+        }
+      },
+      "required": [
+        "item_id",
+        "artifact",
+        "label",
+        "coverage_status"
+      ],
+      "title": "TheoryImplementationRecord",
+      "type": "object"
+    },
+    "TheoryItem": {
+      "properties": {
+        "accepted_evidence_kind": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Evidence Kind",
+          "type": "array"
+        },
+        "artifact": {
+          "title": "Artifact",
+          "type": "string"
+        },
+        "checker_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checker Refs",
+          "type": "array"
+        },
+        "coverage_status": {
+          "$ref": "#/$defs/CoverageStatus",
+          "default": "unsupported"
+        },
+        "external_failure_modes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "External Failure Modes",
+          "type": "array"
+        },
+        "failure_modes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Failure Modes",
+          "type": "array"
+        },
+        "implementation_maturity": {
+          "$ref": "#/$defs/ImplementationMaturity",
+          "default": "unsupported_no_interface"
+        },
+        "implementation_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Implementation Refs",
+          "type": "array"
+        },
+        "item_id": {
+          "title": "Item Id",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "line_number": {
+          "title": "Line Number",
+          "type": "integer"
+        },
+        "obligation_category": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Obligation Category"
+        },
+        "proof_obligation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Proof Obligation Ids",
+          "type": "array"
+        },
+        "residual_coordinates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Residual Coordinates",
+          "type": "array"
+        },
+        "residual_policy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Residual Policy"
+        },
+        "safe_default": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Safe Default"
+        },
+        "schema_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Schema Refs",
+          "type": "array"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "verifier_contract": {
+          "additionalProperties": true,
+          "title": "Verifier Contract",
+          "type": "object"
+        },
+        "verifier_route": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verifier Route"
+        }
+      },
+      "required": [
+        "item_id",
+        "artifact",
+        "kind",
+        "label",
+        "line_number"
+      ],
+      "title": "TheoryItem",
+      "type": "object"
+    }
+  },
+  "description": "Canonical multi-theory audit report for reproducible release checks.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "audits": {
+      "additionalProperties": {
+        "$ref": "#/$defs/TheoryAuditReport"
+      },
+      "title": "Audits",
+      "type": "object"
+    },
+    "canonical_dir": {
+      "title": "Canonical Dir",
+      "type": "string"
+    },
+    "canonical_results": {
+      "additionalProperties": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Canonical Results",
+      "type": "object"
+    },
+    "coverage_counts": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "type": "integer"
+        },
+        "type": "object"
+      },
+      "title": "Coverage Counts",
+      "type": "object"
+    },
+    "coverage_counts_match": {
+      "default": false,
+      "title": "Coverage Counts Match",
+      "type": "boolean"
+    },
+    "expected_artifacts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Expected Artifacts",
+      "type": "array"
+    },
+    "external_category_summary_match": {
+      "default": false,
+      "title": "External Category Summary Match",
+      "type": "boolean"
+    },
+    "external_obligation_category_summary": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "type": "integer"
+        },
+        "type": "object"
+      },
+      "title": "External Obligation Category Summary",
+      "type": "object"
+    },
+    "overall_status": {
+      "default": "fail",
+      "title": "Overall Status",
+      "type": "string"
+    },
+    "partial_total": {
+      "default": 0,
+      "title": "Partial Total",
+      "type": "integer"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "pic-theory-audit-suite",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "snapshot_delta": {
+      "additionalProperties": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Snapshot Delta",
+      "type": "object"
+    },
+    "strict_grammar": {
+      "additionalProperties": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Strict Grammar",
+      "type": "object"
+    },
+    "unsupported_total": {
+      "default": 0,
+      "title": "Unsupported Total",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "canonical_dir"
+  ],
+  "title": "TheoryAuditSuiteReport",
+  "type": "object"
+}

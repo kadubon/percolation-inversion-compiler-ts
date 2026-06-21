@@ -1,0 +1,119 @@
+{
+  "accepted": true,
+  "aggregate_gap": 0.8074324324324325,
+  "components": [
+    {
+      "component": "AC",
+      "current_value": 0.0,
+      "gap": 0.5,
+      "limiting": true,
+      "reasons": [
+        "component is below finite threshold",
+        "component is listed as limiting by PsiDashboard"
+      ],
+      "source": "PsiDashboard",
+      "threshold_value": 0.5
+    },
+    {
+      "component": "BR",
+      "current_value": 0.5,
+      "gap": 0.0,
+      "limiting": false,
+      "reasons": [],
+      "source": "PsiDashboard",
+      "threshold_value": 0.1
+    },
+    {
+      "component": "CV",
+      "current_value": 0.5,
+      "gap": 0.0,
+      "limiting": false,
+      "reasons": [],
+      "source": "PsiDashboard",
+      "threshold_value": 0.5
+    },
+    {
+      "component": "DE",
+      "current_value": 0.5,
+      "gap": 0.0,
+      "limiting": false,
+      "reasons": [],
+      "source": "PsiDashboard",
+      "threshold_value": 0.5
+    },
+    {
+      "component": "FR",
+      "current_value": 1.0,
+      "gap": 0.0,
+      "limiting": false,
+      "reasons": [],
+      "source": "PsiDashboard",
+      "threshold_value": 0.5
+    },
+    {
+      "component": "G",
+      "current_value": 1.0,
+      "gap": 0.0,
+      "limiting": false,
+      "reasons": [],
+      "source": "PsiDashboard",
+      "threshold_value": 0.7
+    },
+    {
+      "component": "HZ",
+      "current_value": 0.9,
+      "gap": 0.0,
+      "limiting": false,
+      "reasons": [],
+      "source": "PsiDashboard",
+      "threshold_value": 0.5
+    },
+    {
+      "component": "LX",
+      "current_value": 0.5,
+      "gap": 0.0,
+      "limiting": false,
+      "reasons": [],
+      "source": "PsiDashboard",
+      "threshold_value": 0.5
+    },
+    {
+      "component": "QS",
+      "current_value": 0.954,
+      "gap": 0.0,
+      "limiting": false,
+      "reasons": [],
+      "source": "PsiDashboard",
+      "threshold_value": 0.5
+    },
+    {
+      "component": "SD",
+      "current_value": 0.19256756756756757,
+      "gap": 0.30743243243243246,
+      "limiting": true,
+      "reasons": [
+        "component is below finite threshold",
+        "component is listed as limiting by PsiDashboard"
+      ],
+      "source": "PsiDashboard",
+      "threshold_value": 0.5
+    },
+    {
+      "component": "VT",
+      "current_value": 1.0,
+      "gap": 0.0,
+      "limiting": false,
+      "reasons": [],
+      "source": "PsiDashboard",
+      "threshold_value": 0.7
+    }
+  ],
+  "limiting_components": [
+    "AC",
+    "SD"
+  ],
+  "operationally_usable": true,
+  "reasons": [],
+  "settled": false,
+  "vector_id": "phase-gap-vector:runtime-step:agent-minimal-runtime:0:agent-intake-step"
+}

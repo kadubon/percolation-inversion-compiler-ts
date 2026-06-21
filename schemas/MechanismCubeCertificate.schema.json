@@ -1,0 +1,92 @@
+{
+  "$defs": {
+    "MechanismCube": {
+      "properties": {
+        "factorization_rank": {
+          "title": "Factorization Rank",
+          "type": "integer"
+        },
+        "log_channel": {
+          "title": "Log Channel",
+          "type": "string"
+        },
+        "negative_control_rank": {
+          "title": "Negative Control Rank",
+          "type": "integer"
+        },
+        "observation_channel": {
+          "title": "Observation Channel",
+          "type": "string"
+        },
+        "path_channel": {
+          "title": "Path Channel",
+          "type": "string"
+        },
+        "proximal_bridge": {
+          "default": false,
+          "title": "Proximal Bridge",
+          "type": "boolean"
+        },
+        "triangular_commutator_zero": {
+          "default": false,
+          "title": "Triangular Commutator Zero",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "path_channel",
+        "log_channel",
+        "observation_channel",
+        "factorization_rank",
+        "negative_control_rank"
+      ],
+      "title": "MechanismCube",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "cube": {
+      "$ref": "#/$defs/MechanismCube"
+    },
+    "negative_control_channels": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Negative Control Channels",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "non_substitution_residual": {
+      "default": 0.0,
+      "title": "Non Substitution Residual",
+      "type": "number"
+    },
+    "paired_null_witnesses": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Paired Null Witnesses",
+      "type": "object"
+    },
+    "release_channel": {
+      "title": "Release Channel",
+      "type": "string"
+    }
+  },
+  "required": [
+    "certificate_id",
+    "cube",
+    "release_channel"
+  ],
+  "title": "MechanismCubeCertificate",
+  "type": "object"
+}

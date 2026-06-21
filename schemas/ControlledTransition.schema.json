@@ -1,0 +1,90 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "PostconditionObligation": {
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "required_postconditions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Postconditions",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "satisfied_postconditions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Satisfied Postconditions",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "action_id"
+      ],
+      "title": "PostconditionObligation",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "action_id": {
+      "title": "Action Id",
+      "type": "string"
+    },
+    "postcondition_obligation": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PostconditionObligation"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "preconditions_met": {
+      "default": false,
+      "title": "Preconditions Met",
+      "type": "boolean"
+    },
+    "residual": {
+      "default": 0.0,
+      "title": "Residual",
+      "type": "number"
+    },
+    "status": {
+      "$ref": "#/$defs/ClaimStatus",
+      "default": "provisional"
+    },
+    "transition_id": {
+      "title": "Transition Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "transition_id",
+    "action_id"
+  ],
+  "title": "ControlledTransition",
+  "type": "object"
+}

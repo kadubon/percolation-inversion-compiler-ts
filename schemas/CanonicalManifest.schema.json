@@ -1,0 +1,80 @@
+{
+  "$defs": {
+    "CanonicalManifestRecord": {
+      "description": "Release-stable canonical artifact identity metadata.",
+      "properties": {
+        "artifact_key": {
+          "title": "Artifact Key",
+          "type": "string"
+        },
+        "doi": {
+          "title": "Doi",
+          "type": "string"
+        },
+        "license_id": {
+          "default": "cc-by-4.0",
+          "title": "License Id",
+          "type": "string"
+        },
+        "provenance_policy": {
+          "default": "sha256-primary-md5-legacy-identity",
+          "title": "Provenance Policy",
+          "type": "string"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "integer"
+        },
+        "tex_filename": {
+          "title": "Tex Filename",
+          "type": "string"
+        },
+        "tex_md5_legacy": {
+          "title": "Tex Md5 Legacy",
+          "type": "string"
+        },
+        "tex_sha256": {
+          "title": "Tex Sha256",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_key",
+        "doi",
+        "record_id",
+        "title",
+        "tex_filename",
+        "tex_sha256",
+        "tex_md5_legacy"
+      ],
+      "title": "CanonicalManifestRecord",
+      "type": "object"
+    }
+  },
+  "description": "Small derived manifest for canonical source integrity checks.",
+  "properties": {
+    "manifest_id": {
+      "default": "percolation-inversion-compiler-canonical-manifest",
+      "title": "Manifest Id",
+      "type": "string"
+    },
+    "records": {
+      "additionalProperties": {
+        "$ref": "#/$defs/CanonicalManifestRecord"
+      },
+      "title": "Records",
+      "type": "object"
+    },
+    "schema_version": {
+      "default": "canonical-manifest-2.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "title": "CanonicalManifest",
+  "type": "object"
+}

@@ -1,0 +1,36 @@
+{
+  "description": "Bundled benchmark task that can run from an installed package.",
+  "properties": {
+    "agent_output": {
+      "title": "Agent Output",
+      "type": "string"
+    },
+    "candidate_only": {
+      "default": true,
+      "title": "Candidate Only",
+      "type": "boolean"
+    },
+    "execution_authority_granted": {
+      "default": false,
+      "title": "Execution Authority Granted",
+      "type": "boolean"
+    },
+    "expected_properties": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Expected Properties",
+      "type": "array"
+    },
+    "task_id": {
+      "title": "Task Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_id",
+    "agent_output"
+  ],
+  "title": "PhaseBenchmarkTask",
+  "type": "object"
+}

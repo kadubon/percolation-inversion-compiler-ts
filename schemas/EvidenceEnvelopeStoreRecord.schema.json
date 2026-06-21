@@ -1,0 +1,100 @@
+{
+  "$defs": {
+    "ContentAddressedEvidenceRef": {
+      "description": "Content-addressed reference to a verifier evidence envelope.",
+      "properties": {
+        "media_type": {
+          "default": "application/json",
+          "title": "Media Type",
+          "type": "string"
+        },
+        "provenance_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provenance Ref"
+        },
+        "ref": {
+          "title": "Ref",
+          "type": "string"
+        },
+        "schema_uri": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Schema Uri"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ref",
+        "sha256"
+      ],
+      "title": "ContentAddressedEvidenceRef",
+      "type": "object"
+    }
+  },
+  "description": "Portable description of an evidence-envelope store.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "allowed_ref_prefixes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Ref Prefixes",
+      "type": "array"
+    },
+    "content_refs": {
+      "items": {
+        "$ref": "#/$defs/ContentAddressedEvidenceRef"
+      },
+      "title": "Content Refs",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "root_ref": {
+      "title": "Root Ref",
+      "type": "string"
+    },
+    "store_id": {
+      "title": "Store Id",
+      "type": "string"
+    },
+    "store_kind": {
+      "default": "file",
+      "title": "Store Kind",
+      "type": "string"
+    }
+  },
+  "required": [
+    "store_id",
+    "root_ref"
+  ],
+  "title": "EvidenceEnvelopeStoreRecord",
+  "type": "object"
+}

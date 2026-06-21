@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "law_id": {
+      "title": "Law Id",
+      "type": "string"
+    },
+    "normalized": {
+      "default": false,
+      "title": "Normalized",
+      "type": "boolean"
+    },
+    "support_residual": {
+      "default": 0.0,
+      "title": "Support Residual",
+      "type": "number"
+    },
+    "traces": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Traces",
+      "type": "object"
+    }
+  },
+  "required": [
+    "law_id"
+  ],
+  "title": "FiniteTraceLaw",
+  "type": "object"
+}

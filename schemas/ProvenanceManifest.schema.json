@@ -1,0 +1,221 @@
+{
+  "$defs": {
+    "AttestationRecord": {
+      "description": "GitHub/Sigstore-style artifact attestation metadata.\n\nThe core package verifies local SHA-256 subject consistency. Full signature\nand transparency-log validation stays behind the release workflow and\noptional external tooling.",
+      "properties": {
+        "attestation_id": {
+          "title": "Attestation Id",
+          "type": "string"
+        },
+        "bundle_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bundle Ref"
+        },
+        "issuer": {
+          "title": "Issuer",
+          "type": "string"
+        },
+        "predicate_type": {
+          "title": "Predicate Type",
+          "type": "string"
+        },
+        "subject_name": {
+          "title": "Subject Name",
+          "type": "string"
+        },
+        "subject_sha256": {
+          "title": "Subject Sha256",
+          "type": "string"
+        },
+        "verified": {
+          "default": false,
+          "title": "Verified",
+          "type": "boolean"
+        },
+        "verified_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verified At"
+        }
+      },
+      "required": [
+        "attestation_id",
+        "subject_name",
+        "subject_sha256",
+        "issuer",
+        "predicate_type"
+      ],
+      "title": "AttestationRecord",
+      "type": "object"
+    },
+    "ProvenanceManifestEntry": {
+      "description": "One file entry in a deterministic provenance manifest.",
+      "properties": {
+        "media_type": {
+          "default": "application/octet-stream",
+          "title": "Media Type",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "ProvenanceManifestEntry",
+      "type": "object"
+    }
+  },
+  "description": "Release provenance manifest for agents and downstream implementers.",
+  "properties": {
+    "aggregate_sha256": {
+      "title": "Aggregate Sha256",
+      "type": "string"
+    },
+    "attestation_subjects": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Attestation Subjects",
+      "type": "array"
+    },
+    "attestations": {
+      "items": {
+        "$ref": "#/$defs/AttestationRecord"
+      },
+      "title": "Attestations",
+      "type": "array"
+    },
+    "bundle_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bundle Ref"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/ProvenanceManifestEntry"
+      },
+      "title": "Entries",
+      "type": "array"
+    },
+    "issuer": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Issuer"
+    },
+    "manifest_id": {
+      "default": "percolation-inversion-compiler-provenance",
+      "title": "Manifest Id",
+      "type": "string"
+    },
+    "package_version": {
+      "default": "0.4.4",
+      "title": "Package Version",
+      "type": "string"
+    },
+    "predicate_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Predicate Type"
+    },
+    "sbom_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sbom Ref"
+    },
+    "schema_version": {
+      "default": "provenance-manifest-1.1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "signature_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Signature Ref"
+    },
+    "signed": {
+      "default": false,
+      "title": "Signed",
+      "type": "boolean"
+    },
+    "verified_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verified At"
+    }
+  },
+  "required": [
+    "aggregate_sha256"
+  ],
+  "title": "ProvenanceManifest",
+  "type": "object"
+}

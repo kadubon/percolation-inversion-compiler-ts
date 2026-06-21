@@ -1,0 +1,44 @@
+{
+  "description": "Command text for operator review; PIC does not execute it.",
+  "properties": {
+    "command": {
+      "title": "Command",
+      "type": "string"
+    },
+    "command_id": {
+      "title": "Command Id",
+      "type": "string"
+    },
+    "executed_by_pic": {
+      "default": false,
+      "title": "Executed By Pic",
+      "type": "boolean"
+    },
+    "expected_output": {
+      "default": "operator-reviewed command output",
+      "title": "Expected Output",
+      "type": "string"
+    },
+    "mutates_environment_if_operator_runs_it": {
+      "default": false,
+      "title": "Mutates Environment If Operator Runs It",
+      "type": "boolean"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "requires_operator_authority": {
+      "default": false,
+      "title": "Requires Operator Authority",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "command_id",
+    "command",
+    "purpose"
+  ],
+  "title": "AdoptionFirstRunCommand",
+  "type": "object"
+}

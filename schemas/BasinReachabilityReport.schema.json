@@ -1,0 +1,244 @@
+{
+  "$defs": {
+    "AcceptedPacketPath": {
+      "description": "Accepted packet path witness into a finite ECPT basin.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "cost": {
+          "default": 0.0,
+          "title": "Cost",
+          "type": "number"
+        },
+        "edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Edge Ids",
+          "type": "array"
+        },
+        "packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Packet Ids",
+          "type": "array"
+        },
+        "path_id": {
+          "title": "Path Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_ledger": {
+          "$ref": "#/$defs/Ledger"
+        },
+        "route_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Route Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path_id"
+      ],
+      "title": "AcceptedPacketPath",
+      "type": "object"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    }
+  },
+  "description": "Finite basin reachability report for ECPT target contracts.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "accepted_edge_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Accepted Edge Ids",
+      "type": "array"
+    },
+    "accepted_paths": {
+      "items": {
+        "$ref": "#/$defs/AcceptedPacketPath"
+      },
+      "title": "Accepted Paths",
+      "type": "array"
+    },
+    "basin_id": {
+      "title": "Basin Id",
+      "type": "string"
+    },
+    "missing_edge_types": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Edge Types",
+      "type": "array"
+    },
+    "missing_packet_types": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Packet Types",
+      "type": "array"
+    },
+    "missing_verifier_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Verifier Routes",
+      "type": "array"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "path_cost_lower_bound": {
+      "default": 0.0,
+      "title": "Path Cost Lower Bound",
+      "type": "number"
+    },
+    "reachable_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reachable Packet Ids",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "receiver_compatible": {
+      "default": false,
+      "title": "Receiver Compatible",
+      "type": "boolean"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "report_id",
+    "basin_id"
+  ],
+  "title": "BasinReachabilityReport",
+  "type": "object"
+}

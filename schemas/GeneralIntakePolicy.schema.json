@@ -1,0 +1,255 @@
+{
+  "$defs": {
+    "PacketSourceKind": {
+      "enum": [
+        "local",
+        "github",
+        "zenodo",
+        "arxiv",
+        "http",
+        "web-page",
+        "rss",
+        "atom",
+        "json-feed",
+        "ndjson",
+        "agent-message",
+        "agent-inbox",
+        "web-crawl",
+        "agent-output",
+        "auto"
+      ],
+      "title": "PacketSourceKind",
+      "type": "string"
+    },
+    "WebFetchPolicy": {
+      "description": "Bounded policy for explicit-source web intake.",
+      "properties": {
+        "allow_http": {
+          "default": false,
+          "title": "Allow Http",
+          "type": "boolean"
+        },
+        "allow_live_connectors": {
+          "title": "Allow Live Connectors",
+          "type": "boolean"
+        },
+        "allowed_content_types": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Content Types",
+          "type": "array"
+        },
+        "allowed_hosts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Hosts",
+          "type": "array"
+        },
+        "allowed_path_prefixes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Path Prefixes",
+          "type": "array"
+        },
+        "allowed_schemes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Schemes",
+          "type": "array"
+        },
+        "background_crawling_allowed": {
+          "default": false,
+          "title": "Background Crawling Allowed",
+          "type": "boolean"
+        },
+        "blocked_hosts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Blocked Hosts",
+          "type": "array"
+        },
+        "candidate_only_by_default": {
+          "default": true,
+          "title": "Candidate Only By Default",
+          "type": "boolean"
+        },
+        "diagnose_rate_limits": {
+          "default": true,
+          "title": "Diagnose Rate Limits",
+          "type": "boolean"
+        },
+        "explicit_source_required": {
+          "default": true,
+          "title": "Explicit Source Required",
+          "type": "boolean"
+        },
+        "live_default_mode": {
+          "title": "Live Default Mode",
+          "type": "string"
+        },
+        "max_bytes_per_resource": {
+          "default": 1000000,
+          "title": "Max Bytes Per Resource",
+          "type": "integer"
+        },
+        "max_depth": {
+          "default": 1,
+          "title": "Max Depth",
+          "type": "integer"
+        },
+        "max_pages": {
+          "default": 8,
+          "title": "Max Pages",
+          "type": "integer"
+        },
+        "max_redirects": {
+          "default": 3,
+          "title": "Max Redirects",
+          "type": "integer"
+        },
+        "max_total_bytes_per_run": {
+          "default": 8000000,
+          "title": "Max Total Bytes Per Run",
+          "type": "integer"
+        },
+        "max_total_packets_per_run": {
+          "default": 256,
+          "title": "Max Total Packets Per Run",
+          "type": "integer"
+        },
+        "prefer_https": {
+          "default": true,
+          "title": "Prefer Https",
+          "type": "boolean"
+        },
+        "reject_private_networks": {
+          "default": true,
+          "title": "Reject Private Networks",
+          "type": "boolean"
+        },
+        "require_https_for_live": {
+          "default": true,
+          "title": "Require Https For Live",
+          "type": "boolean"
+        },
+        "require_robots_decision": {
+          "default": false,
+          "title": "Require Robots Decision",
+          "type": "boolean"
+        },
+        "respect_robots": {
+          "default": true,
+          "title": "Respect Robots",
+          "type": "boolean"
+        },
+        "robots_uncertainty_is_diagnostic": {
+          "default": false,
+          "title": "Robots Uncertainty Is Diagnostic",
+          "type": "boolean"
+        },
+        "timeout_seconds": {
+          "default": 20.0,
+          "title": "Timeout Seconds",
+          "type": "number"
+        },
+        "user_agent": {
+          "default": "percolation-inversion-compiler-agent-intake/0.4.4",
+          "title": "User Agent",
+          "type": "string"
+        }
+      },
+      "title": "WebFetchPolicy",
+      "type": "object"
+    }
+  },
+  "description": "Policy for local, web, feed, and agent-message packet intake.",
+  "properties": {
+    "allow_live_connectors": {
+      "title": "Allow Live Connectors",
+      "type": "boolean"
+    },
+    "allowed_source_kinds": {
+      "items": {
+        "$ref": "#/$defs/PacketSourceKind"
+      },
+      "title": "Allowed Source Kinds",
+      "type": "array"
+    },
+    "candidate_only_by_default": {
+      "default": true,
+      "title": "Candidate Only By Default",
+      "type": "boolean"
+    },
+    "explicit_source_required": {
+      "default": true,
+      "title": "Explicit Source Required",
+      "type": "boolean"
+    },
+    "live_default_mode": {
+      "title": "Live Default Mode",
+      "type": "string"
+    },
+    "max_agent_messages_per_inbox": {
+      "default": 256,
+      "title": "Max Agent Messages Per Inbox",
+      "type": "integer"
+    },
+    "max_feed_entries": {
+      "default": 256,
+      "title": "Max Feed Entries",
+      "type": "integer"
+    },
+    "max_message_clock_skew_seconds": {
+      "default": 300,
+      "title": "Max Message Clock Skew Seconds",
+      "type": "integer"
+    },
+    "policy_id": {
+      "default": "general-intake-policy",
+      "title": "Policy Id",
+      "type": "string"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "reject_replay_nonce": {
+      "default": true,
+      "title": "Reject Replay Nonce",
+      "type": "boolean"
+    },
+    "require_message_identity_context": {
+      "default": false,
+      "title": "Require Message Identity Context",
+      "type": "boolean"
+    },
+    "require_signed_agent_messages": {
+      "default": false,
+      "title": "Require Signed Agent Messages",
+      "type": "boolean"
+    },
+    "residual_behavior": {
+      "default": "external intake failures become diagnostic residual ledger entries",
+      "title": "Residual Behavior",
+      "type": "string"
+    },
+    "seen_message_nonces": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Seen Message Nonces",
+      "type": "array"
+    },
+    "web_policy": {
+      "$ref": "#/$defs/WebFetchPolicy"
+    }
+  },
+  "title": "GeneralIntakePolicy",
+  "type": "object"
+}

@@ -1,0 +1,39 @@
+{
+  "description": "Strict TeX grammar diagnostic for fail-closed source audits.",
+  "properties": {
+    "diagnostic_id": {
+      "title": "Diagnostic Id",
+      "type": "string"
+    },
+    "kind": {
+      "title": "Kind",
+      "type": "string"
+    },
+    "line_number": {
+      "title": "Line Number",
+      "type": "integer"
+    },
+    "message": {
+      "title": "Message",
+      "type": "string"
+    },
+    "raw": {
+      "title": "Raw",
+      "type": "string"
+    },
+    "severity": {
+      "default": "error",
+      "title": "Severity",
+      "type": "string"
+    }
+  },
+  "required": [
+    "diagnostic_id",
+    "kind",
+    "line_number",
+    "message",
+    "raw"
+  ],
+  "title": "TexGrammarDiagnostic",
+  "type": "object"
+}

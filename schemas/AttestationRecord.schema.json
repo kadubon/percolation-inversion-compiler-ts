@@ -1,0 +1,63 @@
+{
+  "description": "GitHub/Sigstore-style artifact attestation metadata.\n\nThe core package verifies local SHA-256 subject consistency. Full signature\nand transparency-log validation stays behind the release workflow and\noptional external tooling.",
+  "properties": {
+    "attestation_id": {
+      "title": "Attestation Id",
+      "type": "string"
+    },
+    "bundle_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bundle Ref"
+    },
+    "issuer": {
+      "title": "Issuer",
+      "type": "string"
+    },
+    "predicate_type": {
+      "title": "Predicate Type",
+      "type": "string"
+    },
+    "subject_name": {
+      "title": "Subject Name",
+      "type": "string"
+    },
+    "subject_sha256": {
+      "title": "Subject Sha256",
+      "type": "string"
+    },
+    "verified": {
+      "default": false,
+      "title": "Verified",
+      "type": "boolean"
+    },
+    "verified_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verified At"
+    }
+  },
+  "required": [
+    "attestation_id",
+    "subject_name",
+    "subject_sha256",
+    "issuer",
+    "predicate_type"
+  ],
+  "title": "AttestationRecord",
+  "type": "object"
+}

@@ -1,0 +1,321 @@
+{
+  "$defs": {
+    "PhaseComponentGap": {
+      "description": "One finite gap between a phase proxy component and its threshold.",
+      "properties": {
+        "component": {
+          "title": "Component",
+          "type": "string"
+        },
+        "current_value": {
+          "default": 0.0,
+          "title": "Current Value",
+          "type": "number"
+        },
+        "gap": {
+          "default": 0.0,
+          "title": "Gap",
+          "type": "number"
+        },
+        "limiting": {
+          "default": false,
+          "title": "Limiting",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "source": {
+          "default": "PsiDashboard",
+          "title": "Source",
+          "type": "string"
+        },
+        "threshold_value": {
+          "default": 0.0,
+          "title": "Threshold Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "component"
+      ],
+      "title": "PhaseComponentGap",
+      "type": "object"
+    },
+    "PhaseDashboardReport": {
+      "description": "Observational phase dashboard sidecar.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "accepted_packet_count": {
+          "default": 0,
+          "title": "Accepted Packet Count",
+          "type": "integer"
+        },
+        "alt_liquidity_candidate_count": {
+          "default": 0,
+          "title": "Alt Liquidity Candidate Count",
+          "type": "integer"
+        },
+        "bottleneck_count_by_type": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Bottleneck Count By Type",
+          "type": "object"
+        },
+        "candidate_only_reason_count": {
+          "default": 0,
+          "title": "Candidate Only Reason Count",
+          "type": "integer"
+        },
+        "dashboard_id": {
+          "default": "phase-dashboard",
+          "title": "Dashboard Id",
+          "type": "string"
+        },
+        "dashboard_safety_boundary": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Dashboard Safety Boundary",
+          "type": "array"
+        },
+        "external_volume_candidate_only_count": {
+          "default": 0,
+          "title": "External Volume Candidate Only Count",
+          "type": "integer"
+        },
+        "identity_blocker_count": {
+          "default": 0,
+          "title": "Identity Blocker Count",
+          "type": "integer"
+        },
+        "missing_obligation_count": {
+          "default": 0,
+          "title": "Missing Obligation Count",
+          "type": "integer"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "packet_candidate_count": {
+          "default": 0,
+          "title": "Packet Candidate Count",
+          "type": "integer"
+        },
+        "phase_gap_vector": {
+          "$ref": "#/$defs/PhaseGapVector"
+        },
+        "profile": {
+          "default": "development",
+          "title": "Profile",
+          "type": "string"
+        },
+        "promotion_blocker_summary": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Promotion Blocker Summary",
+          "type": "array"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_debt_count": {
+          "default": 0,
+          "title": "Residual Debt Count",
+          "type": "integer"
+        },
+        "rollback_blocker_count": {
+          "default": 0,
+          "title": "Rollback Blocker Count",
+          "type": "integer"
+        },
+        "route_blocker_count": {
+          "default": 0,
+          "title": "Route Blocker Count",
+          "type": "integer"
+        },
+        "safe_command_count": {
+          "default": 0,
+          "title": "Safe Command Count",
+          "type": "integer"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "settled_blocker_count": {
+          "default": 0,
+          "title": "Settled Blocker Count",
+          "type": "integer"
+        },
+        "settled_packet_count": {
+          "default": 0,
+          "title": "Settled Packet Count",
+          "type": "integer"
+        },
+        "sqot_queue_pressure": {
+          "default": 0.0,
+          "title": "Sqot Queue Pressure",
+          "type": "number"
+        },
+        "unsettled_candidate_count": {
+          "default": 0,
+          "title": "Unsettled Candidate Count",
+          "type": "integer"
+        },
+        "workflow_usable": {
+          "default": false,
+          "title": "Workflow Usable",
+          "type": "boolean"
+        },
+        "workflow_usable_packet_count": {
+          "default": 0,
+          "title": "Workflow Usable Packet Count",
+          "type": "integer"
+        }
+      },
+      "title": "PhaseDashboardReport",
+      "type": "object"
+    },
+    "PhaseGapVector": {
+      "description": "Portable vector of remaining protocol-relative phase gaps.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "aggregate_gap": {
+          "default": 0.0,
+          "title": "Aggregate Gap",
+          "type": "number"
+        },
+        "components": {
+          "items": {
+            "$ref": "#/$defs/PhaseComponentGap"
+          },
+          "title": "Components",
+          "type": "array"
+        },
+        "limiting_components": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limiting Components",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "vector_id": {
+          "default": "phase-gap-vector",
+          "title": "Vector Id",
+          "type": "string"
+        }
+      },
+      "title": "PhaseGapVector",
+      "type": "object"
+    }
+  },
+  "description": "Observation-only aggregation over one or more phase dashboard reports.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "aggregate_metrics": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          }
+        ]
+      },
+      "title": "Aggregate Metrics",
+      "type": "object"
+    },
+    "dashboards": {
+      "items": {
+        "$ref": "#/$defs/PhaseDashboardReport"
+      },
+      "title": "Dashboards",
+      "type": "array"
+    },
+    "observation_id": {
+      "default": "phase-observation",
+      "title": "Observation Id",
+      "type": "string"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "workflow_usable": {
+      "default": false,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "title": "PhaseObservationReport",
+  "type": "object"
+}

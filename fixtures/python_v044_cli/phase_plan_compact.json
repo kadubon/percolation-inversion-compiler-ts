@@ -1,0 +1,384 @@
+{
+  "accepted": true,
+  "candidate_only_reasons": [
+    "one or more packet candidates were rejected by promotion policy"
+  ],
+  "cannot_promote_because": [
+    "ECPT split-certified quotient readiness is not established",
+    "TRC frontier debt remains",
+    "missing obligations remain",
+    "runtime residual ledger has unresolved burden",
+    "verifier route execution requests remain unresolved"
+  ],
+  "finite_checks_passed": true,
+  "missing_obligations": [
+    "obligation:baseline-safety",
+    "proxy-target-grounding-proof"
+  ],
+  "operationally_usable": true,
+  "phase_gap_vector": {
+    "accepted": true,
+    "aggregate_gap": 0.8074324324324325,
+    "components": [
+      {
+        "component": "AC",
+        "current_value": 0.0,
+        "gap": 0.5,
+        "limiting": true,
+        "reasons": [
+          "component is below finite threshold",
+          "component is listed as limiting by PsiDashboard"
+        ],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "BR",
+        "current_value": 0.5,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.1
+      },
+      {
+        "component": "CV",
+        "current_value": 0.5,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "DE",
+        "current_value": 0.5,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "FR",
+        "current_value": 1.0,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "G",
+        "current_value": 1.0,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.7
+      },
+      {
+        "component": "HZ",
+        "current_value": 0.9,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "LX",
+        "current_value": 0.5,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "QS",
+        "current_value": 0.954,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "SD",
+        "current_value": 0.19256756756756757,
+        "gap": 0.30743243243243246,
+        "limiting": true,
+        "reasons": [
+          "component is below finite threshold",
+          "component is listed as limiting by PsiDashboard"
+        ],
+        "source": "PsiDashboard",
+        "threshold_value": 0.5
+      },
+      {
+        "component": "VT",
+        "current_value": 1.0,
+        "gap": 0.0,
+        "limiting": false,
+        "reasons": [],
+        "source": "PsiDashboard",
+        "threshold_value": 0.7
+      }
+    ],
+    "limiting_components": [
+      "AC",
+      "SD"
+    ],
+    "operationally_usable": true,
+    "reasons": [],
+    "settled": false,
+    "vector_id": "phase-gap-vector:runtime-step:agent-minimal-runtime:0:agent-intake-step"
+  },
+  "plan_id": "phase-acceleration-plan:phase-cli",
+  "profile": "development",
+  "reasons": [
+    "ECPT split-certified quotient readiness is not established",
+    "TRC frontier debt remains",
+    "missing obligations remain",
+    "one or more packet candidates were rejected by promotion policy",
+    "runtime residual ledger has unresolved burden",
+    "verifier route execution requests remain unresolved"
+  ],
+  "report_mode": "compact",
+  "request_id": "phase-cli",
+  "residual_summary": {
+    "frontier_debt": 2.02,
+    "residual": 2.02
+  },
+  "safe_commands": [
+    "pic evidence verify --envelope <evidence.json>",
+    "pic phase gap --compact",
+    "pic routes bindings",
+    "pic schema --type PhaseAccelerationPlan"
+  ],
+  "safety_invariants": [
+    "phase acceleration planning is recommendation-only and does not execute actions",
+    "raw external candidate volume cannot improve Psi, BR, AC, or settled status",
+    "candidate packets, agent messages, and proxy-only ALT reports remain candidates",
+    "settled remains false unless scoped finite verifier rules discharge all obligations",
+    "residual ledgers and missing obligations must be preserved into downstream loops",
+    "ASI-proxy phase is protocol-relative workflow coordination, not real ASI proof",
+    "no physical, simulator, oracle, legal, or policy outcome is proven by this report",
+    "live connectors are bounded and candidate-only by default when an explicit source is supplied",
+    "no background crawling",
+    "no autonomous polling",
+    "no arbitrary shell execution",
+    "no repository mutation",
+    "no hidden promotion from accepted or workflow_usable to settled"
+  ],
+  "schema_refs": [
+    "PhaseAccelerationRequest",
+    "PhaseAccelerationPlan",
+    "PhaseGapVector",
+    "PhaseComponentGap",
+    "BottleneckCandidate",
+    "SafePhaseAction",
+    "PhaseTrajectoryReport",
+    "PhaseAccelerationBenchmarkReport",
+    "ProtocolRelativeBenchmarkMetric",
+    "PhaseBenchmarkTask",
+    "PhaseBenchmarkCaseResult",
+    "PhaseBenchmarkSuiteReport",
+    "PhaseDashboardReport",
+    "PhaseObservationReport",
+    "RuntimeStepReport",
+    "PhaseControlAuditSummary",
+    "FrontierDebtReport",
+    "BottleneckWitnessReport",
+    "SalienceScheduleReport",
+    "ALTAdmissionDecision",
+    "GeneralIntakeRuntimeBridgeReport"
+  ],
+  "sdk_calls": [
+    "percolation_inversion_compiler.acceleration.build_phase_acceleration_plan",
+    "percolation_inversion_compiler.core.resolve_adapter_route"
+  ],
+  "settled": false,
+  "settled_blockers": [
+    "ECPT split-certified quotient readiness is not established",
+    "TRC frontier debt remains",
+    "missing obligations remain",
+    "one or more phase proxy components remain below threshold",
+    "phase planner is recommendation-only and cannot settle claims",
+    "real ASI, physical, simulator, and oracle outcomes are outside this finite report",
+    "runtime report settled=false",
+    "runtime residual ledger has unresolved burden",
+    "verifier route execution requests remain unresolved"
+  ],
+  "status": "diagnostic",
+  "top_bottlenecks": [
+    {
+      "bottleneck_kind": "phase-component-gap",
+      "burden_delta": 0.0,
+      "candidate_id": "bottleneck:phase-gap:0:AC",
+      "candidate_only": false,
+      "cannot_promote_because": [
+        "ECPT split-certified quotient readiness is not established",
+        "TRC frontier debt remains",
+        "missing obligations remain",
+        "runtime residual ledger has unresolved burden",
+        "verifier route execution requests remain unresolved"
+      ],
+      "next_safe_commands": [
+        "pic phase gap --compact"
+      ],
+      "next_verifier_routes": [],
+      "priority_score": 10.5,
+      "reasons": [
+        "component is below finite threshold",
+        "component is listed as limiting by PsiDashboard"
+      ],
+      "release_delta": 0.5,
+      "required_evidence_kind": [],
+      "residual_coordinates": [
+        "AC"
+      ],
+      "schema_refs": [
+        "PsiDashboard",
+        "PhaseGapVector"
+      ],
+      "sdk_calls": [
+        "percolation_inversion_compiler.acceleration.build_phase_acceleration_plan"
+      ],
+      "source": "PsiDashboard",
+      "target_component": "AC"
+    },
+    {
+      "bottleneck_kind": "phase-component-gap",
+      "burden_delta": 0.0,
+      "candidate_id": "bottleneck:phase-gap:9:SD",
+      "candidate_only": false,
+      "cannot_promote_because": [
+        "ECPT split-certified quotient readiness is not established",
+        "TRC frontier debt remains",
+        "missing obligations remain",
+        "runtime residual ledger has unresolved burden",
+        "verifier route execution requests remain unresolved"
+      ],
+      "next_safe_commands": [
+        "pic phase gap --compact"
+      ],
+      "next_verifier_routes": [],
+      "priority_score": 10.307432432432432,
+      "reasons": [
+        "component is below finite threshold",
+        "component is listed as limiting by PsiDashboard"
+      ],
+      "release_delta": 0.30743243243243246,
+      "required_evidence_kind": [],
+      "residual_coordinates": [
+        "SD"
+      ],
+      "schema_refs": [
+        "PsiDashboard",
+        "PhaseGapVector"
+      ],
+      "sdk_calls": [
+        "percolation_inversion_compiler.acceleration.build_phase_acceleration_plan"
+      ],
+      "source": "PsiDashboard",
+      "target_component": "SD"
+    },
+    {
+      "bottleneck_kind": "bottleneck-intervention",
+      "burden_delta": 0.0,
+      "candidate_id": "bottleneck:bit-witness:0:bottleneck-witness:task:intervention:ac:seed-autocatalytic-closure",
+      "candidate_only": false,
+      "cannot_promote_because": [],
+      "next_safe_commands": [
+        "Inspect RuntimeStepReport.bottleneck_witness_reports."
+      ],
+      "next_verifier_routes": [
+        "adapters.domain.verify_ecpt_proxy_target_contract"
+      ],
+      "priority_score": 9.335,
+      "reasons": [],
+      "release_delta": 0.5,
+      "required_evidence_kind": [
+        "finite-proxy-target-contract"
+      ],
+      "residual_coordinates": [],
+      "schema_refs": [
+        "BottleneckWitnessReport",
+        "AgentTask"
+      ],
+      "sdk_calls": [
+        "percolation_inversion_compiler.runtime.build_runtime_step"
+      ],
+      "source": "BottleneckWitnessReport",
+      "target_component": "AC"
+    },
+    {
+      "bottleneck_kind": "bottleneck-intervention",
+      "burden_delta": 0.0,
+      "candidate_id": "bottleneck:bit-witness:1:bottleneck-witness:task:intervention:sd:reduce-downstream-search-cost",
+      "candidate_only": false,
+      "cannot_promote_because": [],
+      "next_safe_commands": [
+        "Inspect RuntimeStepReport.bottleneck_witness_reports."
+      ],
+      "next_verifier_routes": [
+        "adapters.domain.verify_ecpt_proxy_target_contract"
+      ],
+      "priority_score": 9.142432432432432,
+      "reasons": [],
+      "release_delta": 0.30743243243243246,
+      "required_evidence_kind": [
+        "finite-proxy-target-contract"
+      ],
+      "residual_coordinates": [],
+      "schema_refs": [
+        "BottleneckWitnessReport",
+        "AgentTask"
+      ],
+      "sdk_calls": [
+        "percolation_inversion_compiler.runtime.build_runtime_step"
+      ],
+      "source": "BottleneckWitnessReport",
+      "target_component": "SD"
+    },
+    {
+      "bottleneck_kind": "verifier-route",
+      "burden_delta": 0.0,
+      "candidate_id": "bottleneck:route:0:route-request:adapters.domain.verify_ecpt_proxy_target_contract",
+      "candidate_only": false,
+      "cannot_promote_because": [
+        "proxy-target-grounding-proof"
+      ],
+      "next_safe_commands": [
+        "pic routes bindings",
+        "pic evidence verify --envelope <evidence.json>"
+      ],
+      "next_verifier_routes": [
+        "percolation_inversion_compiler.adapters.domain.verify_ecpt_proxy_target_contract"
+      ],
+      "priority_score": 9.0,
+      "reasons": [
+        "diagnostic-with-proxy-target-obligation"
+      ],
+      "release_delta": 0.0,
+      "required_evidence_kind": [
+        "finite-proxy-target-contract"
+      ],
+      "residual_coordinates": [
+        "proxy-target-grounding-proof"
+      ],
+      "schema_refs": [
+        "RouteExecutionRequest",
+        "VerifierResolution"
+      ],
+      "sdk_calls": [
+        "percolation_inversion_compiler.core.resolve_adapter_route"
+      ],
+      "source": "RouteExecutionRequest",
+      "target_component": "ecpt-proxy-target"
+    }
+  ],
+  "workflow_usable": true
+}

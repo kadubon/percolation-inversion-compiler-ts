@@ -1,0 +1,39 @@
+{
+  "description": "Training/holdout split certificate.",
+  "properties": {
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "checked_on_holdout": {
+      "default": false,
+      "title": "Checked On Holdout",
+      "type": "boolean"
+    },
+    "holdout_size": {
+      "title": "Holdout Size",
+      "type": "integer"
+    },
+    "selected_on_train": {
+      "default": false,
+      "title": "Selected On Train",
+      "type": "boolean"
+    },
+    "selection_residual": {
+      "default": 0.0,
+      "title": "Selection Residual",
+      "type": "number"
+    },
+    "train_size": {
+      "title": "Train Size",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "certificate_id",
+    "train_size",
+    "holdout_size"
+  ],
+  "title": "SplitCertificate",
+  "type": "object"
+}

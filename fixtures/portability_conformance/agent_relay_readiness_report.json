@@ -1,0 +1,40 @@
+{
+  "accepted": true,
+  "allow_live_connectors": true,
+  "bounded_candidate_intake": true,
+  "candidate_only": true,
+  "identity_context_accepted": false,
+  "identity_context_required": false,
+  "inbox_exists": true,
+  "inbox_ref": "relay_inbox.json",
+  "live_default_mode": "explicit-source-bounded-candidate-intake",
+  "loopback_ready": true,
+  "message_count": 1,
+  "operationally_usable": true,
+  "profile": "development",
+  "readiness": {
+    "contract_check": "ready",
+    "identity_context": "not-required",
+    "live_default_mode": "bounded-explicit-source",
+    "local_inbox": "ready",
+    "nonce_replay_check": "ready",
+    "signature_policy": "diagnostic"
+  },
+  "reasons": [],
+  "recommended_next_commands": [
+    "pic agent message send --inbox inbox.json --sender agent:alice --text <text>",
+    "pic agent message receive --inbox inbox.json",
+    "pic agent inbox verify --inbox inbox.json",
+    "pic ecology bridge-runtime --report <general-intake-report.json>"
+  ],
+  "report_id": "agent-relay-readiness:development",
+  "safety_invariants": [
+    "agent-message relay is local-file based unless an explicit live source is supplied",
+    "agent messages remain packet candidates until verifier and identity policies pass",
+    "nonce, signature, identity, and residual checks fail closed",
+    "relay readiness does not prove external-world truth or real ASI"
+  ],
+  "seen_nonce_count": 0,
+  "settled": false,
+  "signature_required": false
+}

@@ -1,0 +1,2134 @@
+{
+  "artifact": "Salience-Queue Occupation Theory.tex",
+  "artifact_key": "sqot",
+  "attribution": {
+    "author": "K. Takahashi",
+    "derived_from": "canonical TeX metadata extraction; TeX/PDF not vendored",
+    "doi": "10.5281/zenodo.20526451",
+    "license_id": "cc-by-4.0",
+    "source_tex_md5": "c626c1b78301e33c7805e6020cf5bda2",
+    "source_tex_sha256": "73d3448d09b6e72ce7600c136b86b8064d8f71010f4cc8e9a2383d4c6e714958",
+    "title": "Salience-Queue Occupation Theory",
+    "year": 2026
+  },
+  "claims": 74,
+  "coverage_counts": {
+    "external_obligation": 15,
+    "implemented_checker": 78,
+    "implemented_constructive": 22,
+    "implemented_schema": 18,
+    "partial": 0,
+    "unsupported": 0
+  },
+  "coverage_delta": {
+    "external_obligation_total": 15,
+    "implemented_total": 118,
+    "unimplemented_total": 15,
+    "unsupported_total": 0
+  },
+  "definitions": 59,
+  "external_obligation_catalog": {
+    "artifact": "Salience-Queue Occupation Theory.tex",
+    "category_summary": {
+      "domain-specific-proof": 8,
+      "ecpt-bridge-reserve": 1,
+      "sqot-adversarial-transfer": 3,
+      "sqot-protocol-integrity": 2,
+      "sqot-thermodynamic-discharge": 1
+    },
+    "obligations": [
+      {
+        "accepted_evidence_kind": [
+          "finite-discharge-envelope",
+          "limit-residual",
+          "regularity-regime-certificate"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "finite-discharge-envelope-missing",
+          "limit-residual-not-certified",
+          "regularity-regime-certificate-unverified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required",
+          "limit-envelope-or-generator-calibration-required"
+        ],
+        "failure_modes": [
+          "finite-discharge-envelope-missing",
+          "limit-residual-not-certified",
+          "regularity-regime-certificate-unverified"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:thermodynamic-discharge-ledger",
+        "label": "Thermodynamic discharge ledger",
+        "obligation_category": "sqot-thermodynamic-discharge",
+        "proof_obligation_ids": [
+          "obligation:def:thermodynamic-discharge-ledger"
+        ],
+        "residual_coordinates": [
+          "residual:def:thermodynamic-discharge-ledger"
+        ],
+        "residual_policy": "charge-thermodynamic-discharge-residual-until-envelope-certified",
+        "safe_default": "diagnostic-with-thermodynamic-discharge-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "sqot.adapters.thermodynamic.verify_discharge_envelope"
+      },
+      {
+        "accepted_evidence_kind": [
+          "domain-certificate",
+          "replayable-witness"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "thm:obligation-routing-soundness",
+        "label": "Obligation routing soundness",
+        "obligation_category": "domain-specific-proof",
+        "proof_obligation_ids": [
+          "obligation:thm:obligation-routing-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:thm:obligation-routing-soundness"
+        ],
+        "residual_policy": "charge-domain-residual-until-specific-verifier-accepted",
+        "safe_default": "diagnostic-with-domain-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation and independently replayable domain evidence",
+          "output": "ExternalVerifierHook with explicit residual coordinates",
+          "promotion_rule": "unresolved or rejected hooks keep diagnostic status"
+        },
+        "verifier_route": "core.adapters.external.verify_domain_obligation"
+      },
+      {
+        "accepted_evidence_kind": [
+          "counterfactual-probe-log",
+          "finite-game-certificate",
+          "transfer-bound"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "counterfactual-probe-log-unverified",
+          "finite-game-certificate-missing",
+          "transfer-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "counterfactual-probe-log-unverified",
+          "finite-game-certificate-missing",
+          "transfer-bound-not-certified"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:adversarial-salience-game",
+        "label": "Adversarial salience game",
+        "obligation_category": "sqot-adversarial-transfer",
+        "proof_obligation_ids": [
+          "obligation:def:adversarial-salience-game"
+        ],
+        "residual_coordinates": [
+          "residual:def:adversarial-salience-game"
+        ],
+        "residual_policy": "charge-adversarial-transfer-residual-until-game-certificate-accepted",
+        "safe_default": "diagnostic-with-adversarial-transfer-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "sqot.adapters.adversarial.verify_transfer_game"
+      },
+      {
+        "accepted_evidence_kind": [
+          "authority-ledger",
+          "protocol-kernel-certificate",
+          "source-attribution-proof"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "authority-ledger-unverified",
+          "protocol-kernel-certificate-missing",
+          "source-attribution-proof-missing",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "authority-ledger-unverified",
+          "protocol-kernel-certificate-missing",
+          "source-attribution-proof-missing"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "thm:adversarial-sovereignty-kernel",
+        "label": "Adversarial sovereignty kernel",
+        "obligation_category": "sqot-protocol-integrity",
+        "proof_obligation_ids": [
+          "obligation:thm:adversarial-sovereignty-kernel"
+        ],
+        "residual_coordinates": [
+          "residual:thm:adversarial-sovereignty-kernel"
+        ],
+        "residual_policy": "charge-protocol-integrity-residual-until-kernel-certified",
+        "safe_default": "diagnostic-with-protocol-integrity-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "sqot.adapters.integrity.verify_protocol_kernel"
+      },
+      {
+        "accepted_evidence_kind": [
+          "domain-certificate",
+          "replayable-witness"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "thm:computational-belief-soundness",
+        "label": "Computational belief soundness",
+        "obligation_category": "domain-specific-proof",
+        "proof_obligation_ids": [
+          "obligation:thm:computational-belief-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:thm:computational-belief-soundness"
+        ],
+        "residual_policy": "charge-domain-residual-until-specific-verifier-accepted",
+        "safe_default": "diagnostic-with-domain-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation and independently replayable domain evidence",
+          "output": "ExternalVerifierHook with explicit residual coordinates",
+          "promotion_rule": "unresolved or rejected hooks keep diagnostic status"
+        },
+        "verifier_route": "core.adapters.external.verify_domain_obligation"
+      },
+      {
+        "accepted_evidence_kind": [
+          "domain-certificate",
+          "replayable-witness"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "thm:verifier-to-witness-soundness",
+        "label": "Verifier-to-witness soundness",
+        "obligation_category": "domain-specific-proof",
+        "proof_obligation_ids": [
+          "obligation:thm:verifier-to-witness-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:thm:verifier-to-witness-soundness"
+        ],
+        "residual_policy": "charge-domain-residual-until-specific-verifier-accepted",
+        "safe_default": "diagnostic-with-domain-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation and independently replayable domain evidence",
+          "output": "ExternalVerifierHook with explicit residual coordinates",
+          "promotion_rule": "unresolved or rejected hooks keep diagnostic status"
+        },
+        "verifier_route": "core.adapters.external.verify_domain_obligation"
+      },
+      {
+        "accepted_evidence_kind": [
+          "domain-certificate",
+          "replayable-witness"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "thm:adaptive-succinct-session-soundness",
+        "label": "Adaptive succinct session soundness",
+        "obligation_category": "domain-specific-proof",
+        "proof_obligation_ids": [
+          "obligation:thm:adaptive-succinct-session-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:thm:adaptive-succinct-session-soundness"
+        ],
+        "residual_policy": "charge-domain-residual-until-specific-verifier-accepted",
+        "safe_default": "diagnostic-with-domain-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation and independently replayable domain evidence",
+          "output": "ExternalVerifierHook with explicit residual coordinates",
+          "promotion_rule": "unresolved or rejected hooks keep diagnostic status"
+        },
+        "verifier_route": "core.adapters.external.verify_domain_obligation"
+      },
+      {
+        "accepted_evidence_kind": [
+          "domain-certificate",
+          "replayable-witness"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "thm:model-relative-anchor-soundness",
+        "label": "Model-relative anchor soundness",
+        "obligation_category": "domain-specific-proof",
+        "proof_obligation_ids": [
+          "obligation:thm:model-relative-anchor-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:thm:model-relative-anchor-soundness"
+        ],
+        "residual_policy": "charge-domain-residual-until-specific-verifier-accepted",
+        "safe_default": "diagnostic-with-domain-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation and independently replayable domain evidence",
+          "output": "ExternalVerifierHook with explicit residual coordinates",
+          "promotion_rule": "unresolved or rejected hooks keep diagnostic status"
+        },
+        "verifier_route": "core.adapters.external.verify_domain_obligation"
+      },
+      {
+        "accepted_evidence_kind": [
+          "domain-certificate",
+          "replayable-witness"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:anchor-diversity-soundness",
+        "label": "Anchor-diversity soundness",
+        "obligation_category": "domain-specific-proof",
+        "proof_obligation_ids": [
+          "obligation:prop:anchor-diversity-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:prop:anchor-diversity-soundness"
+        ],
+        "residual_policy": "charge-domain-residual-until-specific-verifier-accepted",
+        "safe_default": "diagnostic-with-domain-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation and independently replayable domain evidence",
+          "output": "ExternalVerifierHook with explicit residual coordinates",
+          "promotion_rule": "unresolved or rejected hooks keep diagnostic status"
+        },
+        "verifier_route": "core.adapters.external.verify_domain_obligation"
+      },
+      {
+        "accepted_evidence_kind": [
+          "counterfactual-probe-log",
+          "finite-game-certificate",
+          "transfer-bound"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "counterfactual-probe-log-unverified",
+          "finite-game-certificate-missing",
+          "transfer-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "counterfactual-probe-log-unverified",
+          "finite-game-certificate-missing",
+          "transfer-bound-not-certified"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:adversarial-pac-transfer",
+        "label": "Adversarial PAC transfer certificate",
+        "obligation_category": "sqot-adversarial-transfer",
+        "proof_obligation_ids": [
+          "obligation:def:adversarial-pac-transfer"
+        ],
+        "residual_coordinates": [
+          "residual:def:adversarial-pac-transfer"
+        ],
+        "residual_policy": "charge-adversarial-transfer-residual-until-game-certificate-accepted",
+        "safe_default": "diagnostic-with-adversarial-transfer-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "sqot.adapters.adversarial.verify_transfer_game"
+      },
+      {
+        "accepted_evidence_kind": [
+          "counterfactual-probe-log",
+          "finite-game-certificate",
+          "transfer-bound"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "counterfactual-probe-log-unverified",
+          "finite-game-certificate-missing",
+          "transfer-bound-not-certified",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "counterfactual-probe-log-unverified",
+          "finite-game-certificate-missing",
+          "transfer-bound-not-certified"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "thm:adversarial-pac-transfer",
+        "label": "Adversarial PAC transfer",
+        "obligation_category": "sqot-adversarial-transfer",
+        "proof_obligation_ids": [
+          "obligation:thm:adversarial-pac-transfer"
+        ],
+        "residual_coordinates": [
+          "residual:thm:adversarial-pac-transfer"
+        ],
+        "residual_policy": "charge-adversarial-transfer-residual-until-game-certificate-accepted",
+        "safe_default": "diagnostic-with-adversarial-transfer-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "sqot.adapters.adversarial.verify_transfer_game"
+      },
+      {
+        "accepted_evidence_kind": [
+          "domain-certificate",
+          "replayable-witness"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:topological-surgery-fragmented-certificate",
+        "label": "Topological surgery and fragmented certificate",
+        "obligation_category": "domain-specific-proof",
+        "proof_obligation_ids": [
+          "obligation:def:topological-surgery-fragmented-certificate"
+        ],
+        "residual_coordinates": [
+          "residual:def:topological-surgery-fragmented-certificate"
+        ],
+        "residual_policy": "charge-domain-residual-until-specific-verifier-accepted",
+        "safe_default": "diagnostic-with-domain-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation and independently replayable domain evidence",
+          "output": "ExternalVerifierHook with explicit residual coordinates",
+          "promotion_rule": "unresolved or rejected hooks keep diagnostic status"
+        },
+        "verifier_route": "core.adapters.external.verify_domain_obligation"
+      },
+      {
+        "accepted_evidence_kind": [
+          "authority-ledger",
+          "protocol-kernel-certificate",
+          "source-attribution-proof"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "authority-ledger-unverified",
+          "protocol-kernel-certificate-missing",
+          "source-attribution-proof-missing",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "authority-ledger-unverified",
+          "protocol-kernel-certificate-missing",
+          "source-attribution-proof-missing"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "thm:fragmented-sovereignty",
+        "label": "Fragmented sovereignty",
+        "obligation_category": "sqot-protocol-integrity",
+        "proof_obligation_ids": [
+          "obligation:thm:fragmented-sovereignty"
+        ],
+        "residual_coordinates": [
+          "residual:thm:fragmented-sovereignty"
+        ],
+        "residual_policy": "charge-protocol-integrity-residual-until-kernel-certified",
+        "safe_default": "diagnostic-with-protocol-integrity-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "sqot.adapters.integrity.verify_protocol_kernel"
+      },
+      {
+        "accepted_evidence_kind": [
+          "bridge-map",
+          "machine-readable-capsule-audit",
+          "reserve-invariance-proof"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "bridge-map-unverified",
+          "capsule-projection-not-certified",
+          "reserve-invariance-unaccepted"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "def:continuous-time-boundary",
+        "label": "Continuous-time SQOT boundary",
+        "obligation_category": "ecpt-bridge-reserve",
+        "proof_obligation_ids": [
+          "obligation:def:continuous-time-boundary"
+        ],
+        "residual_coordinates": [
+          "residual:def:continuous-time-boundary"
+        ],
+        "residual_policy": "charge-bridge-residual-until-cross-theory-proof-accepted",
+        "safe_default": "diagnostic-with-bridge-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation plus domain evidence matching accepted_evidence_kind",
+          "output": "ExternalVerifierHook with accepted/rejected obligation ids",
+          "promotion_rule": "accepted hooks may discharge obligations but cannot bypass finite checker status derivation"
+        },
+        "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+      },
+      {
+        "accepted_evidence_kind": [
+          "domain-certificate",
+          "replayable-witness"
+        ],
+        "artifact": "Salience-Queue Occupation Theory.tex",
+        "checker_ref": null,
+        "checker_refs": [],
+        "coverage_status": "external_obligation",
+        "external_failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured",
+          "no-implicit-settled-promotion",
+          "external-verifier-hook-required"
+        ],
+        "failure_modes": [
+          "domain-certificate-missing",
+          "replayable-witness-missing",
+          "specific-verifier-route-not-configured"
+        ],
+        "implementation_maturity": "external_contract_only",
+        "implementation_ref": "core.ExternalProofObligation",
+        "implementation_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "item_id": "prop:continuous-time-skeleton-soundness",
+        "label": "Continuous-time skeleton soundness",
+        "obligation_category": "domain-specific-proof",
+        "proof_obligation_ids": [
+          "obligation:prop:continuous-time-skeleton-soundness"
+        ],
+        "residual_coordinates": [
+          "residual:prop:continuous-time-skeleton-soundness"
+        ],
+        "residual_policy": "charge-domain-residual-until-specific-verifier-accepted",
+        "safe_default": "diagnostic-with-domain-obligation",
+        "schema_ref": null,
+        "schema_refs": [
+          "core.ExternalProofObligation"
+        ],
+        "verifier_contract": {
+          "input": "ExternalProofObligation and independently replayable domain evidence",
+          "output": "ExternalVerifierHook with explicit residual coordinates",
+          "promotion_rule": "unresolved or rejected hooks keep diagnostic status"
+        },
+        "verifier_route": "core.adapters.external.verify_domain_obligation"
+      }
+    ],
+    "verifier_route_summary": {
+      "core.adapters.external.verify_domain_obligation": 8,
+      "ecpt.adapters.bridge.verify_cross_theory_bridge": 1,
+      "sqot.adapters.adversarial.verify_transfer_game": 3,
+      "sqot.adapters.integrity.verify_protocol_kernel": 2,
+      "sqot.adapters.thermodynamic.verify_discharge_envelope": 1
+    }
+  },
+  "external_obligation_category_summary": {
+    "domain-specific-proof": 8,
+    "ecpt-bridge-reserve": 1,
+    "sqot-adversarial-transfer": 3,
+    "sqot-protocol-integrity": 2,
+    "sqot-thermodynamic-discharge": 1
+  },
+  "external_verifier_route_summary": {
+    "core.adapters.external.verify_domain_obligation": 8,
+    "ecpt.adapters.bridge.verify_cross_theory_bridge": 1,
+    "sqot.adapters.adversarial.verify_transfer_game": 3,
+    "sqot.adapters.integrity.verify_protocol_kernel": 2,
+    "sqot.adapters.thermodynamic.verify_discharge_envelope": 1
+  },
+  "item_mappings": [
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "def:checker-semantics",
+      "label": "Checker semantics"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "def:checkable-ledger-judgment",
+      "label": "Checkable ledger and checker judgment"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.QuarantineLedger"
+      ],
+      "item_id": "def:leaky-quarantine-ledger",
+      "label": "Leaky quarantine ledger"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "def:certificate-grammar",
+      "label": "Certificate grammar and checker traces"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "trc.check_risk_gate"
+      ],
+      "item_id": "def:global-risk-ledger",
+      "label": "Global risk ledger"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "def:self-auditing-checker-budget",
+      "label": "Self-auditing checker budget"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:thermodynamic-discharge-ledger",
+      "label": "Thermodynamic discharge ledger",
+      "obligation_category": "sqot-thermodynamic-discharge",
+      "verifier_route": "sqot.adapters.thermodynamic.verify_discharge_envelope"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:finite-witness-obligations",
+      "label": "Finite obligation specification"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CertificateFamily"
+      ],
+      "item_id": "thm:certificate-grammar-soundness",
+      "label": "Finite certificate grammar soundness"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "thm:finite-checker-semantics-soundness",
+      "label": "Finite checker semantics soundness"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "trc.check_risk_gate"
+      ],
+      "item_id": "prop:risk-budget-composition",
+      "label": "Risk-budget composition"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "trc.check_risk_gate"
+      ],
+      "item_id": "thm:typed-risk-composition",
+      "label": "Typed risk composition"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "thm:obligation-routing-soundness",
+      "label": "Obligation routing soundness",
+      "obligation_category": "domain-specific-proof",
+      "verifier_route": "core.adapters.external.verify_domain_obligation"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "ecpt.ObservationProtocol"
+      ],
+      "item_id": "def:observation-protocol",
+      "label": "Observation protocol"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:protocol-state-mutation",
+      "label": "Protocol state and mutation"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:operational-process",
+      "label": "Operational process"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "def:finite-window",
+      "label": "Finite window"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:causal-window-clock-ledger",
+      "label": "Causal window and clock ledger"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "def:budget-ledger",
+      "label": "Budget ledger"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "def:polymorphic-resource-ledger",
+      "label": "Polymorphic resource ledger"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:absolute-pac-certificates",
+      "label": "Absolute and PAC salience certificates"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "ecpt.check_queue_certificate"
+      ],
+      "item_id": "def:queue-morphism",
+      "label": "Queue representation and morphism"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:salience-source",
+      "label": "Salience source"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:finite-probe-counterfactual",
+      "label": "Finite probe and counterfactual no-action"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "def:probe-economy",
+      "label": "Probe economy and stopping certificate"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "thm:probe-economy-stopping",
+      "label": "Probe-economy stopping"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:positive-valence-compatibility",
+      "label": "Positive-valence compatibility"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:typed-diagnostic-bundle",
+      "label": "Typed diagnostic bundle"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:cone-order-mandatory",
+      "label": "Cone order and mandatory coordinates"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:scalarization-failure",
+      "label": "Scalarization failure"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.OccupationLedger"
+      ],
+      "item_id": "def:occupation-distortion",
+      "label": "Occupation and distortion"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:latency-loss",
+      "label": "Latency and deadline loss"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.DiagnosticReservePolicy"
+      ],
+      "item_id": "def:reserve-audit-depth",
+      "label": "Diagnostic reserve and audit depth"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.OccupationLedger"
+      ],
+      "item_id": "def:reserve-adequacy-meta",
+      "label": "Reserve adequacy interval and meta-occupation"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "prop:reserve-adequacy-two-sided",
+      "label": "Reserve adequacy is two-sided"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:rollback-residue",
+      "label": "Rollback classes and residue"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "def:future-freedom",
+      "label": "Future freedom"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "thm:finite-salience-accounting",
+      "label": "Finite salience accounting"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "thm:pac-salience-accounting",
+      "label": "PAC salience accounting"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "ecpt.check_queue_certificate"
+      ],
+      "item_id": "thm:queue-morphism-invariance",
+      "label": "Queue-morphism invariance"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "thm:resource-arbitrage-obstruction",
+      "label": "Resource arbitrage obstruction"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "prop:exchange-morphism-preservation",
+      "label": "Exchange-morphism preservation"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:class-refinement-hypergraph",
+      "label": "Class-refinement hypergraph"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "def:information-tracking",
+      "label": "Finite-partition information tracking"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "ecology.build_edge_witnesses"
+      ],
+      "item_id": "def:semantic-egress-context-closure",
+      "label": "Semantic egress and contextual payload closure"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "thm:granularity-closure",
+      "label": "Granularity closure"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "thm:partition-information-tracking",
+      "label": "Partition information tracking"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:contextual-payload-obstruction",
+      "label": "Contextual payload obstruction"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "thm:galois-egress-overclosure",
+      "label": "Galois egress over-closure"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "thm:egress-abstraction-refinement",
+      "label": "Egress abstraction refinement"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "thm:counterexample-guided-egress-refinement",
+      "label": "Counterexample-guided egress refinement"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "ecpt.check_queue_certificate"
+      ],
+      "item_id": "prop:encrypted-queue-leakage-separation",
+      "label": "Encrypted queue leakage separation"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:label-laundering-effect-first",
+      "label": "Label laundering and effect-first diagnosis"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "def:finite-sovereignty-game",
+      "label": "Finite sovereignty game"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "lem:cone-safe-predecessor",
+      "label": "Cone-safe predecessor"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:path-integral-cone-recovery",
+      "label": "Path-integral cone recovery"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "lem:path-integral-cone-predecessor",
+      "label": "Path-integral cone predecessor"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:protocol-integrity-kernel",
+      "label": "Protocol-integrity kernel"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:protocol-integrity-fixed-point",
+      "label": "Protocol-integrity fixed point"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:protocol-mutation-vulnerability",
+      "label": "Protocol-mutation vulnerability"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:safe-target-states",
+      "label": "Safe and target states"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.QuarantineLedger"
+      ],
+      "item_id": "thm:quarantine-breach",
+      "label": "Quarantine breach"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "thm:no-free-discharge",
+      "label": "No-free-discharge"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:sovereignty-kernel",
+      "label": "Sovereignty kernel"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "thm:self-auditing-kernel",
+      "label": "Self-auditing sovereignty kernel"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:adversarial-salience-game",
+      "label": "Adversarial salience game",
+      "obligation_category": "sqot-adversarial-transfer",
+      "verifier_route": "sqot.adapters.adversarial.verify_transfer_game"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "thm:adversarial-sovereignty-kernel",
+      "label": "Adversarial sovereignty kernel",
+      "obligation_category": "sqot-protocol-integrity",
+      "verifier_route": "sqot.adapters.integrity.verify_protocol_kernel"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:epistemic-salience-game",
+      "label": "Epistemic salience game"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "thm:epistemic-salience-kernel",
+      "label": "Epistemic salience kernel"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "def:bounded-memory-computational-belief",
+      "label": "Bounded-memory computational belief"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "thm:computational-belief-soundness",
+      "label": "Computational belief soundness",
+      "obligation_category": "domain-specific-proof",
+      "verifier_route": "core.adapters.external.verify_domain_obligation"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:belief-executability-gap",
+      "label": "Complete belief does not imply bounded executability"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:reserve-safety-kernel",
+      "label": "Reserve safety kernel"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "thm:effective-reserve-kernel",
+      "label": "Effective reserve kernel"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:raw-sovereignty-certificate",
+      "label": "Raw sovereignty certificate"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:raw-checked-sovereignty-certificate",
+      "label": "Raw checked sovereignty certificate"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "def:verification-cost-succinct-certificate",
+      "label": "Verification-cost and succinct certificate"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "thm:noncircular-sovereignty",
+      "label": "Non-circular sovereignty certificate"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "thm:checked-noncircular-sovereignty",
+      "label": "Checked non-circular sovereignty certificate"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:bureaucratic-capture",
+      "label": "Bureaucratic capture obstruction"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "thm:verifier-to-witness-soundness",
+      "label": "Verifier-to-witness soundness",
+      "obligation_category": "domain-specific-proof",
+      "verifier_route": "core.adapters.external.verify_domain_obligation"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "thm:adaptive-succinct-session-soundness",
+      "label": "Adaptive succinct session soundness",
+      "obligation_category": "domain-specific-proof",
+      "verifier_route": "core.adapters.external.verify_domain_obligation"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:proof-dag-compression",
+      "label": "Proof-DAG compression"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:no-free-succinctness",
+      "label": "No-free succinctness"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:choice-preserving-no-action",
+      "label": "Choice-preserving no-action"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:counterfactual-no-action-separation",
+      "label": "Counterfactual no-action separation"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.QuarantineLedger"
+      ],
+      "item_id": "prop:rollback-not-erasure",
+      "label": "Rollback is not erasure"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "def:stratified-audit-checker",
+      "label": "Stratified audit checker"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "def:substrate-anchored-root-checker",
+      "label": "Substrate-anchored root checker"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:anchor-model-simulation",
+      "label": "Anchor model and simulation indistinguishability"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "thm:stratified-audit-termination",
+      "label": "Stratified audit termination"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "prop:root-checker-contamination",
+      "label": "Root checker contamination"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "thm:substrate-anchored-acceptance",
+      "label": "Substrate-anchored acceptance"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "thm:no-absolute-base-reality",
+      "label": "No absolute base-reality certification"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "thm:model-relative-anchor-soundness",
+      "label": "Model-relative anchor soundness",
+      "obligation_category": "domain-specific-proof",
+      "verifier_route": "core.adapters.external.verify_domain_obligation"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:anchor-diversity-soundness",
+      "label": "Anchor-diversity soundness",
+      "obligation_category": "domain-specific-proof",
+      "verifier_route": "core.adapters.external.verify_domain_obligation"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:audit-recursion-capture",
+      "label": "Audit-recursion capture"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:window-composition",
+      "label": "Window composition"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:online-control-realizability",
+      "label": "Online-control realizability"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:compressor-relative-safe-ignorance",
+      "label": "Compressor-relative safe ignorance"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:safe-adversary-class-expansion",
+      "label": "Safe adversary-class expansion"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:adversarial-pac-transfer",
+      "label": "Adversarial PAC transfer certificate",
+      "obligation_category": "sqot-adversarial-transfer",
+      "verifier_route": "sqot.adapters.adversarial.verify_transfer_game"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "thm:adversarial-pac-transfer",
+      "label": "Adversarial PAC transfer",
+      "obligation_category": "sqot-adversarial-transfer",
+      "verifier_route": "sqot.adapters.adversarial.verify_transfer_game"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "thm:regret-realizability",
+      "label": "Regret realizability"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "thm:safe-adversary-class-expansion",
+      "label": "Safe adversary-class expansion"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "thm:safe-ignorance",
+      "label": "Safe ignorance"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.OccupationLedger"
+      ],
+      "item_id": "prop:cumulative-occupation",
+      "label": "Cumulative occupation composition"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:effect-source-certificates",
+      "label": "Effect and source certificates"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:effect-source-separation",
+      "label": "Effect-source identifiability separation"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.OccupationLedger"
+      ],
+      "item_id": "prop:latency-without-high-total-occupation",
+      "label": "Latency without high total occupation"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "ecpt.check_queue_certificate"
+      ],
+      "item_id": "def:network-process",
+      "label": "Network process and communication queues"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:consensus-sovereignty-certificate",
+      "label": "Consensus sovereignty certificate"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:topological-surgery-fragmented-certificate",
+      "label": "Topological surgery and fragmented certificate",
+      "obligation_category": "domain-specific-proof",
+      "verifier_route": "core.adapters.external.verify_domain_obligation"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "def:salience-extortion-mechanism",
+      "label": "Salience-extortion mechanism"
+    },
+    {
+      "coverage_status": "implemented_schema",
+      "implementation_maturity": "implemented_schema_only",
+      "implementation_refs": [
+        "sqot.SalienceQueueRecord"
+      ],
+      "item_id": "def:verifier-mediated-rejoin-certificate",
+      "label": "Verifier-mediated rejoin certificate"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:distributed-salience-composition",
+      "label": "Distributed salience composition"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:topology-morphism",
+      "label": "Topology morphism"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "thm:topomorphism-invariance",
+      "label": "Topo-morphism invariance"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "thm:fragmented-sovereignty",
+      "label": "Fragmented sovereignty",
+      "obligation_category": "sqot-protocol-integrity",
+      "verifier_route": "sqot.adapters.integrity.verify_protocol_kernel"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "thm:mechanism-compatible-kernel",
+      "label": "Mechanism-compatible sovereignty kernel"
+    },
+    {
+      "coverage_status": "implemented_constructive",
+      "implementation_maturity": "implemented_verified_algorithm",
+      "implementation_refs": [
+        "sqot.build_salience_schedule"
+      ],
+      "item_id": "thm:mechanism-witness-verification",
+      "label": "Mechanism witness verification"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "ecology.build_bottleneck_plan"
+      ],
+      "item_id": "thm:mechanism-payoff-reflection",
+      "label": "Mechanism payoff-reflection"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "ecology.build_bottleneck_plan"
+      ],
+      "item_id": "thm:payoff-reflected-mechanism-robustness",
+      "label": "Payoff-reflected mechanism robustness"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:extortion-equilibrium-separation",
+      "label": "Extortion equilibrium separation"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "ecology.build_bottleneck_plan"
+      ],
+      "item_id": "prop:strict-domination-mechanism-design",
+      "label": "Strict-domination mechanism design"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:extortion-margin",
+      "label": "Extortion margin"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:unsafe-self-amputation",
+      "label": "Unsafe self-amputation"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "thm:safe-reintegration",
+      "label": "Safe reintegration"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:byzantine-false-rejoin-separation",
+      "label": "Byzantine false-rejoin separation"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:continuous-time-boundary",
+      "label": "Continuous-time SQOT boundary",
+      "obligation_category": "ecpt-bridge-reserve",
+      "verifier_route": "ecpt.adapters.bridge.verify_cross_theory_bridge"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "prop:continuous-time-skeleton-soundness",
+      "label": "Continuous-time skeleton soundness",
+      "obligation_category": "domain-specific-proof",
+      "verifier_route": "core.adapters.external.verify_domain_obligation"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "prop:chronos-attack-separation",
+      "label": "Chronos attack separation"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "lem:causal-window-soundness",
+      "label": "Causal window soundness"
+    }
+  ],
+  "mr_records": 0,
+  "representative_items": [
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "def:checker-semantics",
+      "label": "Checker semantics"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "def:checkable-ledger-judgment",
+      "label": "Checkable ledger and checker judgment"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.QuarantineLedger"
+      ],
+      "item_id": "def:leaky-quarantine-ledger",
+      "label": "Leaky quarantine ledger"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "def:certificate-grammar",
+      "label": "Certificate grammar and checker traces"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "trc.check_risk_gate"
+      ],
+      "item_id": "def:global-risk-ledger",
+      "label": "Global risk ledger"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "def:self-auditing-checker-budget",
+      "label": "Self-auditing checker budget"
+    },
+    {
+      "coverage_status": "external_obligation",
+      "implementation_maturity": "external_contract_only",
+      "implementation_refs": [
+        "core.ExternalProofObligation"
+      ],
+      "item_id": "def:thermodynamic-discharge-ledger",
+      "label": "Thermodynamic discharge ledger",
+      "obligation_category": "sqot-thermodynamic-discharge",
+      "verifier_route": "sqot.adapters.thermodynamic.verify_discharge_envelope"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "sqot.check_salience_record"
+      ],
+      "item_id": "def:finite-witness-obligations",
+      "label": "Finite obligation specification"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CertificateFamily"
+      ],
+      "item_id": "thm:certificate-grammar-soundness",
+      "label": "Finite certificate grammar soundness"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "core.CheckerContext"
+      ],
+      "item_id": "thm:finite-checker-semantics-soundness",
+      "label": "Finite checker semantics soundness"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "trc.check_risk_gate"
+      ],
+      "item_id": "prop:risk-budget-composition",
+      "label": "Risk-budget composition"
+    },
+    {
+      "coverage_status": "implemented_checker",
+      "implementation_maturity": "implemented_shape_checker",
+      "implementation_refs": [
+        "trc.check_risk_gate"
+      ],
+      "item_id": "thm:typed-risk-composition",
+      "label": "Typed risk composition"
+    }
+  ],
+  "schema_version": "theory-snapshot-1.0"
+}

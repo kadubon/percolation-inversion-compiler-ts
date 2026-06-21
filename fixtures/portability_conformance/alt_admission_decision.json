@@ -1,0 +1,16 @@
+{
+  "accepted": true,
+  "action": "admit",
+  "certified_capital_ref": "alt-capital:alt-token:trace:alt-example:alt-liquidity:example",
+  "decision_id": "alt-admission:alt-packet:example",
+  "finite_checks_passed": true,
+  "missing_obligations": [],
+  "operationally_usable": true,
+  "packet_id": "alt-packet:example",
+  "reasons": [],
+  "residual_ledger": {
+    "coordinates": {}
+  },
+  "settled": false,
+  "status": "provisional"
+}

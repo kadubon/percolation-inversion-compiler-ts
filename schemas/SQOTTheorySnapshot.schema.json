@@ -1,0 +1,49 @@
+{
+  "description": "Portable SQOT source identity and derived coverage metadata.",
+  "properties": {
+    "claims": {
+      "title": "Claims",
+      "type": "integer"
+    },
+    "definitions": {
+      "title": "Definitions",
+      "type": "integer"
+    },
+    "items": {
+      "title": "Items",
+      "type": "integer"
+    },
+    "snapshot_id": {
+      "default": "sqot-zenodo-derived-snapshot",
+      "title": "Snapshot Id",
+      "type": "string"
+    },
+    "source_kind": {
+      "default": "zenodo-canonical-manuscript",
+      "title": "Source Kind",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "source_title": {
+      "default": "Salience-Queue Occupation Theory",
+      "title": "Source Title",
+      "type": "string"
+    },
+    "unsupported": {
+      "default": 0,
+      "title": "Unsupported",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "source_sha256",
+    "definitions",
+    "claims",
+    "items"
+  ],
+  "title": "SQOTTheorySnapshot",
+  "type": "object"
+}

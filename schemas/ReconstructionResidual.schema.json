@@ -1,0 +1,24 @@
+{
+  "description": "Residual charged when an algebraic summary is decoded to a source ledger.",
+  "properties": {
+    "coordinate": {
+      "title": "Coordinate",
+      "type": "string"
+    },
+    "unit": {
+      "default": "dimensionless",
+      "title": "Unit",
+      "type": "string"
+    },
+    "value": {
+      "title": "Value",
+      "type": "number"
+    }
+  },
+  "required": [
+    "coordinate",
+    "value"
+  ],
+  "title": "ReconstructionResidual",
+  "type": "object"
+}

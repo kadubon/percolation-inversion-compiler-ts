@@ -1,0 +1,281 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "description": "Protocol-relative status labels used by ECPT, BIT, TRC, SQOT, and ALT.",
+      "enum": [
+        "rejected",
+        "expired",
+        "diagnostic",
+        "relaxed",
+        "risk-provisional",
+        "speculative",
+        "provisional",
+        "partial",
+        "settled"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "CoordinateKind": {
+      "enum": [
+        "benefit",
+        "burden",
+        "residual",
+        "tolerance",
+        "resource",
+        "metadata"
+      ],
+      "title": "CoordinateKind",
+      "type": "string"
+    },
+    "EvidenceStatus": {
+      "enum": [
+        "verified",
+        "declared",
+        "unknown"
+      ],
+      "title": "EvidenceStatus",
+      "type": "string"
+    },
+    "Ledger": {
+      "description": "A finite typed ledger with explicit coordinate kinds.",
+      "properties": {
+        "coordinates": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LedgerCoordinate"
+          },
+          "title": "Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "Ledger",
+      "type": "object"
+    },
+    "LedgerCoordinate": {
+      "description": "One typed coordinate in a finite certificate ledger.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/EvidenceStatus",
+          "default": "declared"
+        },
+        "kind": {
+          "$ref": "#/$defs/CoordinateKind",
+          "default": "burden"
+        },
+        "known": {
+          "default": true,
+          "title": "Known",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit": {
+          "default": "dimensionless",
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "LedgerCoordinate",
+      "type": "object"
+    },
+    "TokenLineage": {
+      "description": "Lineage of an abstraction token through traces, packets, and versions.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Sha256"
+        },
+        "lineage_id": {
+          "title": "Lineage Id",
+          "type": "string"
+        },
+        "parent_token_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Parent Token Ids",
+          "type": "array"
+        },
+        "provenance_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Provenance Refs",
+          "type": "array"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "source_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Packet Ids",
+          "type": "array"
+        },
+        "source_trace_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Trace Ids",
+          "type": "array"
+        },
+        "token_id": {
+          "title": "Token Id",
+          "type": "string"
+        },
+        "version": {
+          "default": "0",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "lineage_id",
+        "token_id"
+      ],
+      "title": "TokenLineage",
+      "type": "object"
+    }
+  },
+  "description": "Candidate reusable abstraction with declared receivers and dependencies.",
+  "properties": {
+    "authority_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Authority Refs",
+      "type": "array"
+    },
+    "candidate_only": {
+      "default": true,
+      "title": "Candidate Only",
+      "type": "boolean"
+    },
+    "capability_envelope_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Capability Envelope Refs",
+      "type": "array"
+    },
+    "claim": {
+      "title": "Claim",
+      "type": "string"
+    },
+    "dependency_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Dependency Ids",
+      "type": "array"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "interface_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Interface Refs",
+      "type": "array"
+    },
+    "lineage": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TokenLineage"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "receiver_family": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Receiver Family",
+      "type": "array"
+    },
+    "residual_ledger": {
+      "$ref": "#/$defs/Ledger"
+    },
+    "status": {
+      "$ref": "#/$defs/ClaimStatus",
+      "default": "provisional"
+    },
+    "token_id": {
+      "title": "Token Id",
+      "type": "string"
+    },
+    "validity_domain": {
+      "default": "protocol-relative-finite",
+      "title": "Validity Domain",
+      "type": "string"
+    },
+    "verifier_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Verifier Routes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "token_id",
+    "claim"
+  ],
+  "title": "AbstractionToken",
+  "type": "object"
+}

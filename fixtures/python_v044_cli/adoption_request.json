@@ -1,0 +1,60 @@
+{
+  "accepted": true,
+  "operationally_usable": true,
+  "operator_adoption_status": "not-recorded",
+  "plain_english_message": "I found PIC.\nPIC treats AI-agent output as candidate work.\nPIC preserves evidence, proof obligations, residual ledgers, and settlement blockers.\nPIC does not execute my proposed actions.\nPIC does not bypass your approval policy.\nPIC does not prove real ASI or real-world truth.\nPlease review and decide whether I may use it.",
+  "profile": "development",
+  "reasons": [
+    "agent lacks install authority and should request operator review"
+  ],
+  "request_id": "agent-to-operator-request",
+  "safety_boundary": {
+    "affects_agent_accelerate": false,
+    "affects_agent_check": false,
+    "affects_packet_promotion": false,
+    "affects_phase_plan": false,
+    "affects_settled": false,
+    "approval_settles_truth": false,
+    "boundary_id": "adoption-safety-boundary",
+    "calls_network": false,
+    "clones_repository": false,
+    "creates_required_approval_state": false,
+    "executes_shell_commands": false,
+    "installs_package": false,
+    "invariants": [
+      "adoption sidecars are optional operator-facing documentation",
+      "absence of an adoption sidecar is normal and is not a blocker",
+      "operator adoption does not settle runtime obligations",
+      "operator adoption does not prove real ASI, physical truth, or oracle truth",
+      "operator adoption does not promote packet candidates",
+      "agents without install authority should generate an operator request instead"
+    ],
+    "modifies_config_files": false,
+    "mutates_runtime_state": false,
+    "pure_output_generator": true,
+    "safe_commands_are_execution_authority": false,
+    "settled": false,
+    "sidecar_only": true
+  },
+  "settled": false,
+  "suggested_first_command": {
+    "command": "python -m pip install percolation-inversion-compiler\npic agent check --compact --text \"Candidate packet: route evidence and preserve residuals.\" --profile development",
+    "command_id": "operator-request-first-command",
+    "executed_by_pic": false,
+    "expected_output": "installed package plus compact agent check JSON",
+    "mutates_environment_if_operator_runs_it": true,
+    "purpose": "Install PIC and run the first compact check if the operator approves use.",
+    "requires_operator_authority": true
+  },
+  "suggested_next_command": {
+    "command": "pic phase plan --compact --text \"Candidate packet: route evidence and preserve residuals.\" --profile development",
+    "command_id": "operator-request-next-command",
+    "executed_by_pic": false,
+    "expected_output": "compact PhaseAccelerationPlan JSON",
+    "mutates_environment_if_operator_runs_it": false,
+    "purpose": "Inspect phase-planning diagnostics after the first check.",
+    "requires_operator_authority": false
+  },
+  "warning": "Agents without install authority should not self-install PIC. They should generate an operator request instead.",
+  "workflow_usable": true
+}

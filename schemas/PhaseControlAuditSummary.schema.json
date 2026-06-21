@@ -1,0 +1,143 @@
+{
+  "description": "Typed ECPT phase-control diagnostics derived from a finite runtime step.",
+  "properties": {
+    "baseline_comparison_label": {
+      "default": "unavailable",
+      "title": "Baseline Comparison Label",
+      "type": "string"
+    },
+    "baseline_comparison_ready": {
+      "default": false,
+      "title": "Baseline Comparison Ready",
+      "type": "boolean"
+    },
+    "baseline_proxy_mass": {
+      "default": 0.0,
+      "title": "Baseline Proxy Mass",
+      "type": "number"
+    },
+    "candidate_count": {
+      "default": 0,
+      "title": "Candidate Count",
+      "type": "integer"
+    },
+    "controlled_proxy_mass": {
+      "default": 0.0,
+      "title": "Controlled Proxy Mass",
+      "type": "number"
+    },
+    "duplicate_mass_excluded": {
+      "default": false,
+      "title": "Duplicate Mass Excluded",
+      "type": "boolean"
+    },
+    "execution_availability_required": {
+      "default": true,
+      "title": "Execution Availability Required",
+      "type": "boolean"
+    },
+    "execution_available_path_count": {
+      "default": 0,
+      "title": "Execution Available Path Count",
+      "type": "integer"
+    },
+    "finite_proxy_gain_total": {
+      "default": 0.0,
+      "title": "Finite Proxy Gain Total",
+      "type": "number"
+    },
+    "missing_obligation_count": {
+      "default": 0,
+      "title": "Missing Obligation Count",
+      "type": "integer"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "partial": {
+      "default": false,
+      "title": "Partial",
+      "type": "boolean"
+    },
+    "proxy_bundle_coordinate_count": {
+      "default": 0,
+      "title": "Proxy Bundle Coordinate Count",
+      "type": "integer"
+    },
+    "proxy_bundle_mass": {
+      "default": 0.0,
+      "title": "Proxy Bundle Mass",
+      "type": "number"
+    },
+    "proxy_target_grounding_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Proxy Target Grounding Refs",
+      "type": "array"
+    },
+    "proxy_target_grounding_required": {
+      "default": true,
+      "title": "Proxy Target Grounding Required",
+      "type": "boolean"
+    },
+    "queue_capacity_constraints_visible": {
+      "default": false,
+      "title": "Queue Capacity Constraints Visible",
+      "type": "boolean"
+    },
+    "queue_capacity_margin": {
+      "default": 0.0,
+      "title": "Queue Capacity Margin",
+      "type": "number"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "selected_action_count": {
+      "default": 0,
+      "title": "Selected Action Count",
+      "type": "integer"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "split_certificate_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Split Certificate Refs",
+      "type": "array"
+    },
+    "split_certified_quotient_ready": {
+      "default": false,
+      "title": "Split Certified Quotient Ready",
+      "type": "boolean"
+    },
+    "summary_id": {
+      "default": "phase-control-audit:runtime",
+      "title": "Summary Id",
+      "type": "string"
+    },
+    "target_id": {
+      "default": "",
+      "title": "Target Id",
+      "type": "string"
+    },
+    "target_node_count": {
+      "default": 0,
+      "title": "Target Node Count",
+      "type": "integer"
+    }
+  },
+  "title": "PhaseControlAuditSummary",
+  "type": "object"
+}

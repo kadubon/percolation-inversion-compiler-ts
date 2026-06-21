@@ -1,0 +1,65 @@
+{
+  "description": "Lifecycle/finality bounds for abstraction capital accounting.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "bounds_id": {
+      "title": "Bounds Id",
+      "type": "string"
+    },
+    "depreciation_upper_bound": {
+      "default": 0.0,
+      "title": "Depreciation Upper Bound",
+      "type": "number"
+    },
+    "expiry_horizon": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expiry Horizon"
+    },
+    "finality_record_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Finality Record Ref"
+    },
+    "half_life_lower_bound": {
+      "default": 0.0,
+      "title": "Half Life Lower Bound",
+      "type": "number"
+    },
+    "maintenance_upper_bound": {
+      "default": 0.0,
+      "title": "Maintenance Upper Bound",
+      "type": "number"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    }
+  },
+  "required": [
+    "bounds_id"
+  ],
+  "title": "LifecycleCostBounds",
+  "type": "object"
+}

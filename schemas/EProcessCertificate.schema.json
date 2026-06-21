@@ -1,0 +1,22 @@
+{
+  "description": "Finite e-process hook for time-uniform evidence.",
+  "properties": {
+    "alpha": {
+      "title": "Alpha",
+      "type": "number"
+    },
+    "e_values": {
+      "items": {
+        "type": "number"
+      },
+      "title": "E Values",
+      "type": "array"
+    }
+  },
+  "required": [
+    "e_values",
+    "alpha"
+  ],
+  "title": "EProcessCertificate",
+  "type": "object"
+}

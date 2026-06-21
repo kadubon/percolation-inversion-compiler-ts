@@ -1,0 +1,303 @@
+{
+  "$defs": {
+    "AdoptionFirstRunCommand": {
+      "description": "Command text for operator review; PIC does not execute it.",
+      "properties": {
+        "command": {
+          "title": "Command",
+          "type": "string"
+        },
+        "command_id": {
+          "title": "Command Id",
+          "type": "string"
+        },
+        "executed_by_pic": {
+          "default": false,
+          "title": "Executed By Pic",
+          "type": "boolean"
+        },
+        "expected_output": {
+          "default": "operator-reviewed command output",
+          "title": "Expected Output",
+          "type": "string"
+        },
+        "mutates_environment_if_operator_runs_it": {
+          "default": false,
+          "title": "Mutates Environment If Operator Runs It",
+          "type": "boolean"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "requires_operator_authority": {
+          "default": false,
+          "title": "Requires Operator Authority",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "command_id",
+        "command",
+        "purpose"
+      ],
+      "title": "AdoptionFirstRunCommand",
+      "type": "object"
+    },
+    "AdoptionReviewChecklist": {
+      "description": "Operator-facing checklist for deciding whether local use is allowed.",
+      "properties": {
+        "accepted": {
+          "default": true,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "checklist_id": {
+          "default": "adoption-review-checklist",
+          "title": "Checklist Id",
+          "type": "string"
+        },
+        "interpretation_rules": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Interpretation Rules",
+          "type": "array"
+        },
+        "items": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "title": "AdoptionReviewChecklist",
+      "type": "object"
+    },
+    "AdoptionSafetyBoundary": {
+      "description": "Non-authority boundary for operator-adoption sidecars.",
+      "properties": {
+        "affects_agent_accelerate": {
+          "default": false,
+          "title": "Affects Agent Accelerate",
+          "type": "boolean"
+        },
+        "affects_agent_check": {
+          "default": false,
+          "title": "Affects Agent Check",
+          "type": "boolean"
+        },
+        "affects_packet_promotion": {
+          "default": false,
+          "title": "Affects Packet Promotion",
+          "type": "boolean"
+        },
+        "affects_phase_plan": {
+          "default": false,
+          "title": "Affects Phase Plan",
+          "type": "boolean"
+        },
+        "affects_settled": {
+          "default": false,
+          "title": "Affects Settled",
+          "type": "boolean"
+        },
+        "approval_settles_truth": {
+          "default": false,
+          "title": "Approval Settles Truth",
+          "type": "boolean"
+        },
+        "boundary_id": {
+          "default": "adoption-safety-boundary",
+          "title": "Boundary Id",
+          "type": "string"
+        },
+        "calls_network": {
+          "default": false,
+          "title": "Calls Network",
+          "type": "boolean"
+        },
+        "clones_repository": {
+          "default": false,
+          "title": "Clones Repository",
+          "type": "boolean"
+        },
+        "creates_required_approval_state": {
+          "default": false,
+          "title": "Creates Required Approval State",
+          "type": "boolean"
+        },
+        "executes_shell_commands": {
+          "default": false,
+          "title": "Executes Shell Commands",
+          "type": "boolean"
+        },
+        "installs_package": {
+          "default": false,
+          "title": "Installs Package",
+          "type": "boolean"
+        },
+        "invariants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Invariants",
+          "type": "array"
+        },
+        "modifies_config_files": {
+          "default": false,
+          "title": "Modifies Config Files",
+          "type": "boolean"
+        },
+        "mutates_runtime_state": {
+          "default": false,
+          "title": "Mutates Runtime State",
+          "type": "boolean"
+        },
+        "pure_output_generator": {
+          "default": true,
+          "title": "Pure Output Generator",
+          "type": "boolean"
+        },
+        "safe_commands_are_execution_authority": {
+          "default": false,
+          "title": "Safe Commands Are Execution Authority",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "sidecar_only": {
+          "default": true,
+          "title": "Sidecar Only",
+          "type": "boolean"
+        }
+      },
+      "title": "AdoptionSafetyBoundary",
+      "type": "object"
+    }
+  },
+  "description": "Operator-facing overview packet for optional PIC adoption.",
+  "properties": {
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "accepted_true_meaning": {
+      "default": "accepted=true means the finite checker accepted the report shape and routing record; it does not mean final truth or settled obligations.",
+      "title": "Accepted True Meaning",
+      "type": "string"
+    },
+    "candidate_work_rationale": {
+      "default": "AI-agent output is treated as candidate work until finite verifier, residual, identity, route, rollback, and promotion checks accept the scoped packet.",
+      "title": "Candidate Work Rationale",
+      "type": "string"
+    },
+    "compact_json_fields_to_inspect": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Compact Json Fields To Inspect",
+      "type": "array"
+    },
+    "distribution_modes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Distribution Modes",
+      "type": "array"
+    },
+    "features_requiring_explicit_operator_permission": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Features Requiring Explicit Operator Permission",
+      "type": "array"
+    },
+    "first_run_commands": {
+      "items": {
+        "$ref": "#/$defs/AdoptionFirstRunCommand"
+      },
+      "title": "First Run Commands",
+      "type": "array"
+    },
+    "operationally_usable": {
+      "default": true,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "operator_adoption_status": {
+      "default": "not-recorded",
+      "title": "Operator Adoption Status",
+      "type": "string"
+    },
+    "packet_id": {
+      "default": "operator-adoption-packet",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "profile": {
+      "default": "development",
+      "title": "Profile",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "review_checklist": {
+      "$ref": "#/$defs/AdoptionReviewChecklist"
+    },
+    "safe_commands_meaning": {
+      "default": "safe_commands are deterministic hints to inspect or run only under operator authority.",
+      "title": "Safe Commands Meaning",
+      "type": "string"
+    },
+    "safety_boundary": {
+      "$ref": "#/$defs/AdoptionSafetyBoundary"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "settled_false_meaning": {
+      "default": "settled=false means unresolved obligations remain explicit; it is not command failure.",
+      "title": "Settled False Meaning",
+      "type": "string"
+    },
+    "what_pic_does": {
+      "items": {
+        "type": "string"
+      },
+      "title": "What Pic Does",
+      "type": "array"
+    },
+    "what_pic_does_not_do": {
+      "items": {
+        "type": "string"
+      },
+      "title": "What Pic Does Not Do",
+      "type": "array"
+    },
+    "workflow_usable": {
+      "default": true,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "title": "OperatorAdoptionPacket",
+  "type": "object"
+}

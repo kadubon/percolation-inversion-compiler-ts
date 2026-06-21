@@ -1,0 +1,122 @@
+{
+  "$defs": {
+    "RAFSettlementCertificate": {
+      "properties": {
+        "certificate_id": {
+          "title": "Certificate Id",
+          "type": "string"
+        },
+        "debt_ledger_present": {
+          "default": false,
+          "title": "Debt Ledger Present",
+          "type": "boolean"
+        },
+        "event_algebra": {
+          "$ref": "#/$defs/SettlementEventAlgebra"
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "risk_ledger_present": {
+          "default": false,
+          "title": "Risk Ledger Present",
+          "type": "boolean"
+        },
+        "transition_ledger_present": {
+          "default": false,
+          "title": "Transition Ledger Present",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "certificate_id",
+        "event_algebra",
+        "event_id"
+      ],
+      "title": "RAFSettlementCertificate",
+      "type": "object"
+    },
+    "SettlementEventAlgebra": {
+      "properties": {
+        "algebra_id": {
+          "title": "Algebra Id",
+          "type": "string"
+        },
+        "expiration_events": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Expiration Events",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "ruin_events": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ruin Events",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "settled_events": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Settled Events",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "algebra_id"
+      ],
+      "title": "SettlementEventAlgebra",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "certificate_id": {
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "external_settlement_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "External Settlement Obligations",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "present_ledger_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Present Ledger Obligations",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "raf_certificate": {
+      "$ref": "#/$defs/RAFSettlementCertificate"
+    },
+    "required_ledger_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Ledger Obligations",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "residual": {
+      "default": 0.0,
+      "title": "Residual",
+      "type": "number"
+    }
+  },
+  "required": [
+    "certificate_id",
+    "raf_certificate"
+  ],
+  "title": "SettlementReturnRAFCertificate",
+  "type": "object"
+}

@@ -1,0 +1,83 @@
+{
+  "description": "Next safe actions derived from an agent intake report.",
+  "properties": {
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "next_commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Next Commands",
+      "type": "array"
+    },
+    "next_sdk_calls": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Next Sdk Calls",
+      "type": "array"
+    },
+    "operationally_usable": {
+      "default": true,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "output_fields_to_inspect": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Output Fields To Inspect",
+      "type": "array"
+    },
+    "profile": {
+      "title": "Profile",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_summary": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residual Summary",
+      "type": "object"
+    },
+    "safety_invariants": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Invariants",
+      "type": "array"
+    },
+    "schemas_to_inspect": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Schemas To Inspect",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "report_id",
+    "profile"
+  ],
+  "title": "AgentNextActionReport",
+  "type": "object"
+}

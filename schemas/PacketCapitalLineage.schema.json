@@ -1,0 +1,90 @@
+{
+  "description": "Lineage record for finite verified packet capital.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "edge_certificate_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Edge Certificate Ids",
+      "type": "array"
+    },
+    "lineage_id": {
+      "title": "Lineage Id",
+      "type": "string"
+    },
+    "packet_id": {
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "parent_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Parent Packet Ids",
+      "type": "array"
+    },
+    "protocol_frame_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Protocol Frame Sha256"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_external_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual External Obligations",
+      "type": "array"
+    },
+    "runtime_event_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Runtime Event Ids",
+      "type": "array"
+    },
+    "source_candidate_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Candidate Id"
+    },
+    "verifier_resolution_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Verifier Resolution Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "lineage_id",
+    "packet_id"
+  ],
+  "title": "PacketCapitalLineage",
+  "type": "object"
+}
