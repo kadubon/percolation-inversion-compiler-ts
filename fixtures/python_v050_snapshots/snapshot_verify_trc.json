@@ -1,0 +1,10 @@
+{
+  "artifact_key": "trc",
+  "canonical_manifest_schema_version": "canonical-manifest-2.0",
+  "canonical_sha256": "cd236045dd7d6608bbf031878d6c4083c8209ebdba60916ec6d550858f6bf79e",
+  "doi_matches": true,
+  "legacy_md5_matches": true,
+  "snapshot_is_derived_metadata": true,
+  "snapshot_schema_version": "theory-snapshot-1.0",
+  "valid": true
+}

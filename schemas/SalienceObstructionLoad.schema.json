@@ -1,0 +1,21 @@
+{
+  "properties": {
+    "blocked_count": {
+      "default": 0,
+      "title": "Blocked Count",
+      "type": "integer"
+    },
+    "load": {
+      "default": 0.0,
+      "title": "Load",
+      "type": "number"
+    },
+    "total_count": {
+      "default": 0,
+      "title": "Total Count",
+      "type": "integer"
+    }
+  },
+  "title": "SalienceObstructionLoad",
+  "type": "object"
+}

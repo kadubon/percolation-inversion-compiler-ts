@@ -1,0 +1,23 @@
+{
+  "properties": {
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "present": {
+      "default": false,
+      "title": "Present",
+      "type": "boolean"
+    },
+    "receiver_context_id": {
+      "default": "receiver-context:default",
+      "title": "Receiver Context Id",
+      "type": "string"
+    }
+  },
+  "title": "ReceiverContextSupport",
+  "type": "object"
+}

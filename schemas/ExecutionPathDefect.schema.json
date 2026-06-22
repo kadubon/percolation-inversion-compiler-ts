@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "defect_id": {
+      "title": "Defect Id",
+      "type": "string"
+    },
+    "defect_type": {
+      "title": "Defect Type",
+      "type": "string"
+    },
+    "path_id": {
+      "title": "Path Id",
+      "type": "string"
+    },
+    "residual_preserved": {
+      "default": true,
+      "title": "Residual Preserved",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "defect_id",
+    "path_id",
+    "defect_type"
+  ],
+  "title": "ExecutionPathDefect",
+  "type": "object"
+}

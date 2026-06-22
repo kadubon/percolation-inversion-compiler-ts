@@ -1,0 +1,50 @@
+{
+  "properties": {
+    "applied": {
+      "default": false,
+      "title": "Applied",
+      "type": "boolean"
+    },
+    "decision": {
+      "default": "quarantine",
+      "title": "Decision",
+      "type": "string"
+    },
+    "decision_id": {
+      "title": "Decision Id",
+      "type": "string"
+    },
+    "deletes_packet": {
+      "default": false,
+      "title": "Deletes Packet",
+      "type": "boolean"
+    },
+    "packet_id": {
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "reversible": {
+      "default": true,
+      "title": "Reversible",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "decision_id",
+    "packet_id"
+  ],
+  "title": "PacketQuarantineDecision",
+  "type": "object"
+}

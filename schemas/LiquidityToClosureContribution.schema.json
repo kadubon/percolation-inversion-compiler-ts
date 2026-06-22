@@ -1,0 +1,53 @@
+{
+  "description": "Contribution from ALT liquidity to autocatalytic closure support.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "closure_witness_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Closure Witness Ids",
+      "type": "array"
+    },
+    "contribution_id": {
+      "title": "Contribution Id",
+      "type": "string"
+    },
+    "graph_id": {
+      "default": "",
+      "title": "Graph Id",
+      "type": "string"
+    },
+    "packet_id": {
+      "default": "",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "supports_closure": {
+      "default": false,
+      "title": "Supports Closure",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "contribution_id"
+  ],
+  "title": "LiquidityToClosureContribution",
+  "type": "object"
+}

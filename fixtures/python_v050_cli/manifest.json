@@ -1,0 +1,48 @@
+{
+  "canonical_source": "percolation-inversion-compiler==0.5.0",
+  "description": "Python v0.5.0 CLI reference JSON for PIC-TS public-shape and safety compatibility checks.",
+  "exact_parity_files": [],
+  "fixture_set_id": "python-v050-cli-reference",
+  "notes": [
+    "Phase Lab storage is JSON/JSONL in PIC-TS and SQLite-backed in Python, so these files are not exact equality claims.",
+    "PIC-TS uses these records to preserve public JSON meaning, non-promotion rules, and fail-closed diagnostic behavior.",
+    "Exact snapshot parity is tracked separately in fixtures/python_v050_snapshots/manifest.json."
+  ],
+  "safe_diagnostic_compatibility_files": [
+    "alt_capital_impact.json",
+    "alt_ecpt_lift.json",
+    "alt_liquidity_to_paths.json",
+    "alt_receiver_lift.json",
+    "bit_certificate.json",
+    "bit_compare_baseline.json",
+    "bit_diagnose.json",
+    "bit_invert.json",
+    "bit_mec.json",
+    "ecology_effective_graph.json",
+    "ecology_execution_available_paths.json",
+    "phase_lab_certify.json",
+    "phase_lab_closure.json",
+    "phase_lab_compare_window.json",
+    "phase_lab_executable_paths.json",
+    "phase_lab_graph.json",
+    "phase_lab_ingest_1.json",
+    "phase_lab_ingest_2.json",
+    "phase_lab_init.json",
+    "phase_lab_list_windows.json",
+    "phase_lab_observe.json",
+    "phase_lab_threshold_status.json",
+    "sqot_diagnose_queue.json",
+    "sqot_quarantine.json",
+    "sqot_rebalance.json",
+    "sqot_reserve_check.json",
+    "sqot_salience_obstruction.json",
+    "trc_action_boundary.json",
+    "trc_tool_trace.json",
+    "trc_trace_adapter.json"
+  ],
+  "safety_contract": {
+    "execution_authority_granted": false,
+    "packet_and_trace_content_is_inert": true,
+    "settled": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "properties": {
+    "missing_evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Evidence Refs",
+      "type": "array"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    },
+    "reason_id": {
+      "title": "Reason Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "reason_id",
+    "reason"
+  ],
+  "title": "ClosureAbstentionReason",
+  "type": "object"
+}

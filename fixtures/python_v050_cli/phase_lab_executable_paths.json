@@ -1,0 +1,88 @@
+{
+  "accepted": true,
+  "accepted_path_count": 1,
+  "authority_requirements": [
+    "authority:edge:self-alpha"
+  ],
+  "blocked_path_count": 0,
+  "blocker_reason_by_path": {},
+  "candidate_only_path_count": 0,
+  "executed_path_count": 0,
+  "graph_id": "effective-graph:all",
+  "operationally_usable": true,
+  "path_count": 1,
+  "path_density": 0.5,
+  "paths": [
+    {
+      "accepted": true,
+      "action_boundary_requirements": [
+        {
+          "requirement_id": "authority:edge:self-alpha",
+          "requirement_type": "authority",
+          "residual": "",
+          "satisfied": true
+        },
+        {
+          "requirement_id": "rollback:edge:self-alpha",
+          "requirement_type": "rollback",
+          "residual": "",
+          "satisfied": true
+        }
+      ],
+      "authority_status": {
+        "authority_status": "explicit-scope-bounded",
+        "explicit_scope_bounded": true,
+        "grants_execution": false,
+        "reasons": [
+          "execution path report never grants execution authority"
+        ]
+      },
+      "blocked": false,
+      "candidate_only": false,
+      "edge_ids": [
+        "edge:self-alpha"
+      ],
+      "not_executed": true,
+      "packet_ids": [
+        "node:a0e7926edd1c"
+      ],
+      "path_id": "execution-path:edge:self-alpha",
+      "reasons": [
+        "execution path is available as a finite diagnostic witness"
+      ],
+      "receiver_context": {
+        "evidence_refs": [
+          "evidence:alpha"
+        ],
+        "present": true,
+        "receiver_context_id": "receiver:node:a0e7926edd1c"
+      },
+      "settled": false,
+      "witness": {
+        "accepted": true,
+        "edge_ids": [
+          "edge:self-alpha"
+        ],
+        "packet_ids": [
+          "node:a0e7926edd1c"
+        ],
+        "reasons": [],
+        "settled": false,
+        "witness_id": "execution-witness:edge:self-alpha"
+      }
+    }
+  ],
+  "reasons": [
+    "execution-available path detection never executes paths"
+  ],
+  "report_id": "execution-available-path-density",
+  "residual_carry_forward": [
+    "execution path is available as a finite diagnostic witness"
+  ],
+  "rollback_requirements": [
+    "rollback:edge:self-alpha"
+  ],
+  "settled": false,
+  "workflow_usable": true
+}
+

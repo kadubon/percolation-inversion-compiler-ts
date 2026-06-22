@@ -1,0 +1,400 @@
+{
+  "$defs": {
+    "AltLiftBlocker": {
+      "description": "Reason an ALT artifact did not lift into ECPT phase components.",
+      "properties": {
+        "blocker_id": {
+          "title": "Blocker Id",
+          "type": "string"
+        },
+        "blocker_type": {
+          "title": "Blocker Type",
+          "type": "string"
+        },
+        "packet_id": {
+          "default": "",
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "remediation": {
+          "default": "",
+          "title": "Remediation",
+          "type": "string"
+        },
+        "residual_preserved": {
+          "default": true,
+          "title": "Residual Preserved",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "blocker_id",
+        "blocker_type"
+      ],
+      "title": "AltLiftBlocker",
+      "type": "object"
+    },
+    "CapitalToPathContribution": {
+      "description": "Contribution from certified abstraction capital to execution path density.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "contribution_id": {
+          "title": "Contribution Id",
+          "type": "string"
+        },
+        "graph_id": {
+          "default": "",
+          "title": "Graph Id",
+          "type": "string"
+        },
+        "increases_execution_available_path_density": {
+          "default": false,
+          "title": "Increases Execution Available Path Density",
+          "type": "boolean"
+        },
+        "packet_id": {
+          "default": "",
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "path_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Path Ids",
+          "type": "array"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "contribution_id"
+      ],
+      "title": "CapitalToPathContribution",
+      "type": "object"
+    },
+    "CrossContextTransferWitness": {
+      "description": "Witness that ALT capital transfers across declared receiver contexts.",
+      "properties": {
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "residuals_preserved": {
+          "default": true,
+          "title": "Residuals Preserved",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "source_context": {
+          "default": "",
+          "title": "Source Context",
+          "type": "string"
+        },
+        "target_context": {
+          "default": "",
+          "title": "Target Context",
+          "type": "string"
+        },
+        "transfer_supported": {
+          "default": false,
+          "title": "Transfer Supported",
+          "type": "boolean"
+        },
+        "witness_id": {
+          "title": "Witness Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "witness_id"
+      ],
+      "title": "CrossContextTransferWitness",
+      "type": "object"
+    },
+    "DownstreamSearchCostDelta": {
+      "description": "Finite downstream search-cost delta claimed by an ALT token.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "baseline_cost": {
+          "default": 0.0,
+          "title": "Baseline Cost",
+          "type": "number"
+        },
+        "candidate_cost": {
+          "default": 0.0,
+          "title": "Candidate Cost",
+          "type": "number"
+        },
+        "delta_id": {
+          "title": "Delta Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "lower_bound_reduction": {
+          "default": 0.0,
+          "title": "Lower Bound Reduction",
+          "type": "number"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "delta_id"
+      ],
+      "title": "DownstreamSearchCostDelta",
+      "type": "object"
+    },
+    "LiquidityToClosureContribution": {
+      "description": "Contribution from ALT liquidity to autocatalytic closure support.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "closure_witness_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Closure Witness Ids",
+          "type": "array"
+        },
+        "contribution_id": {
+          "title": "Contribution Id",
+          "type": "string"
+        },
+        "graph_id": {
+          "default": "",
+          "title": "Graph Id",
+          "type": "string"
+        },
+        "packet_id": {
+          "default": "",
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "supports_closure": {
+          "default": false,
+          "title": "Supports Closure",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "contribution_id"
+      ],
+      "title": "LiquidityToClosureContribution",
+      "type": "object"
+    },
+    "ReceiverLiquidityLift": {
+      "description": "Receiver-context contribution from ALT abstraction liquidity.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "blockers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Blockers",
+          "type": "array"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "improves_receiver_context": {
+          "default": false,
+          "title": "Improves Receiver Context",
+          "type": "boolean"
+        },
+        "lift_id": {
+          "title": "Lift Id",
+          "type": "string"
+        },
+        "packet_id": {
+          "default": "",
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "receiver_context_id": {
+          "default": "",
+          "title": "Receiver Context Id",
+          "type": "string"
+        },
+        "receiver_context_present": {
+          "default": false,
+          "title": "Receiver Context Present",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "lift_id"
+      ],
+      "title": "ReceiverLiquidityLift",
+      "type": "object"
+    }
+  },
+  "description": "ALT-to-ECPT lift report for protocol-relative phase components.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "affected_ecpt_components": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Ecpt Components",
+      "type": "array"
+    },
+    "blockers": {
+      "items": {
+        "$ref": "#/$defs/AltLiftBlocker"
+      },
+      "title": "Blockers",
+      "type": "array"
+    },
+    "capital_to_path_contributions": {
+      "items": {
+        "$ref": "#/$defs/CapitalToPathContribution"
+      },
+      "title": "Capital To Path Contributions",
+      "type": "array"
+    },
+    "cross_context_transfer_witnesses": {
+      "items": {
+        "$ref": "#/$defs/CrossContextTransferWitness"
+      },
+      "title": "Cross Context Transfer Witnesses",
+      "type": "array"
+    },
+    "diagnostic_only_lift_failure": {
+      "default": true,
+      "title": "Diagnostic Only Lift Failure",
+      "type": "boolean"
+    },
+    "downstream_search_cost_deltas": {
+      "items": {
+        "$ref": "#/$defs/DownstreamSearchCostDelta"
+      },
+      "title": "Downstream Search Cost Deltas",
+      "type": "array"
+    },
+    "graph_id": {
+      "default": "",
+      "title": "Graph Id",
+      "type": "string"
+    },
+    "liquidity_to_closure_contributions": {
+      "items": {
+        "$ref": "#/$defs/LiquidityToClosureContribution"
+      },
+      "title": "Liquidity To Closure Contributions",
+      "type": "array"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "protocol_relative_only": {
+      "default": true,
+      "title": "Protocol Relative Only",
+      "type": "boolean"
+    },
+    "proves_real_asi": {
+      "default": false,
+      "title": "Proves Real Asi",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "receiver_liquidity_lifts": {
+      "items": {
+        "$ref": "#/$defs/ReceiverLiquidityLift"
+      },
+      "title": "Receiver Liquidity Lifts",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "alt-ecpt-lift",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "workflow_usable": {
+      "default": true,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "title": "AltEcptLiftReport",
+  "type": "object"
+}

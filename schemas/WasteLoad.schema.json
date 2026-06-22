@@ -1,0 +1,21 @@
+{
+  "properties": {
+    "load": {
+      "default": 0.0,
+      "title": "Load",
+      "type": "number"
+    },
+    "non_contributing_volume": {
+      "default": 0,
+      "title": "Non Contributing Volume",
+      "type": "integer"
+    },
+    "total_volume": {
+      "default": 0,
+      "title": "Total Volume",
+      "type": "integer"
+    }
+  },
+  "title": "WasteLoad",
+  "type": "object"
+}

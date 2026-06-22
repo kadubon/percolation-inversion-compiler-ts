@@ -1,0 +1,24 @@
+{
+  "accepted": true,
+  "baseline_comparison": {
+    "accepted_packet_count": 0.0,
+    "closure_witness_count": 0.0,
+    "effective_edge_count": 0.0,
+    "execution_available_path_count": 0.0,
+    "residual_debt": 0.0
+  },
+  "bottlenecks": [],
+  "capability_expression_paths": [],
+  "certificates": [],
+  "graph_id": "",
+  "inversion_candidates": [],
+  "protocol_relative_only": true,
+  "reasons": [
+    "baseline comparison is diagnostic and protocol-relative"
+  ],
+  "recommendation_only": true,
+  "report_id": "bit-baseline-comparison",
+  "settled": false,
+  "workflow_usable": true
+}
+

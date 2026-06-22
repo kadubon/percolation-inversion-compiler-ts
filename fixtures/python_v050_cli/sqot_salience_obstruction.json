@@ -1,0 +1,19 @@
+{
+  "accepted": true,
+  "diagnosis_id": "sqot-salience-obstruction",
+  "graph_id": "effective-packet-graph",
+  "obstructed_packet_ids": [
+    "node:749ba66f5742"
+  ],
+  "obstruction_load": 0.5,
+  "obstruction_reasons": {
+    "node:749ba66f5742": [
+      "candidate-only"
+    ]
+  },
+  "reasons": [
+    "salience obstruction diagnosis does not execute or delete queue items"
+  ],
+  "settled": false
+}
+

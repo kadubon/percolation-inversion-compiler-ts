@@ -1,0 +1,46 @@
+{
+  "description": "Witness that ALT capital transfers across declared receiver contexts.",
+  "properties": {
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "residuals_preserved": {
+      "default": true,
+      "title": "Residuals Preserved",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "source_context": {
+      "default": "",
+      "title": "Source Context",
+      "type": "string"
+    },
+    "target_context": {
+      "default": "",
+      "title": "Target Context",
+      "type": "string"
+    },
+    "transfer_supported": {
+      "default": false,
+      "title": "Transfer Supported",
+      "type": "boolean"
+    },
+    "witness_id": {
+      "title": "Witness Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "witness_id"
+  ],
+  "title": "CrossContextTransferWitness",
+  "type": "object"
+}

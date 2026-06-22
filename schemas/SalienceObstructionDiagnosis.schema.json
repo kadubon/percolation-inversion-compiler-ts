@@ -1,0 +1,55 @@
+{
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "diagnosis_id": {
+      "default": "sqot-salience-obstruction",
+      "title": "Diagnosis Id",
+      "type": "string"
+    },
+    "graph_id": {
+      "default": "",
+      "title": "Graph Id",
+      "type": "string"
+    },
+    "obstructed_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Obstructed Packet Ids",
+      "type": "array"
+    },
+    "obstruction_load": {
+      "default": 0.0,
+      "title": "Obstruction Load",
+      "type": "number"
+    },
+    "obstruction_reasons": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Obstruction Reasons",
+      "type": "object"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "title": "SalienceObstructionDiagnosis",
+  "type": "object"
+}

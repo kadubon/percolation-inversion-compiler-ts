@@ -1,0 +1,33 @@
+{
+  "properties": {
+    "component": {
+      "title": "Component",
+      "type": "string"
+    },
+    "defect_id": {
+      "title": "Defect Id",
+      "type": "string"
+    },
+    "defect_type": {
+      "title": "Defect Type",
+      "type": "string"
+    },
+    "required_remediation": {
+      "title": "Required Remediation",
+      "type": "string"
+    },
+    "residual_preserved": {
+      "default": true,
+      "title": "Residual Preserved",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "defect_id",
+    "component",
+    "defect_type",
+    "required_remediation"
+  ],
+  "title": "PhaseCertificateDefect",
+  "type": "object"
+}

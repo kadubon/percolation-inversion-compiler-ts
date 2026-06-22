@@ -1,0 +1,29 @@
+{
+  "accepted": false,
+  "abstention_reasons": ["missing finite threshold component: minimum_closure_witness_count"],
+  "certificate_status": "abstain",
+  "component_status": {
+    "minimum_closure_witness_count": false
+  },
+  "failed_components": ["minimum_closure_witness_count"],
+  "observation": {
+    "observation_id": "phase-window-observation",
+    "settled": false,
+    "window": {
+      "event_count": 0,
+      "event_ids": [],
+      "sequence": 0,
+      "window_id": "phase-window:example"
+    }
+  },
+  "protocol_relative_only": true,
+  "proves_real_asi": false,
+  "reasons": ["threshold status is protocol-relative only"],
+  "rejection_reasons": [],
+  "settled": false,
+  "status_id": "asi-proxy-threshold-status",
+  "threshold": {
+    "threshold_id": "asi-proxy-development"
+  },
+  "threshold_distance": 1.0
+}

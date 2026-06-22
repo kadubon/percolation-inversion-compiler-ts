@@ -1,0 +1,78 @@
+{
+  "description": "Index entry for one deterministic ingest window.",
+  "properties": {
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "accepted_event_count": {
+      "default": 0,
+      "title": "Accepted Event Count",
+      "type": "integer"
+    },
+    "candidate_only_event_count": {
+      "default": 0,
+      "title": "Candidate Only Event Count",
+      "type": "integer"
+    },
+    "event_count": {
+      "default": 0,
+      "title": "Event Count",
+      "type": "integer"
+    },
+    "event_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Event Ids",
+      "type": "array"
+    },
+    "missing_obligation_count": {
+      "default": 0,
+      "title": "Missing Obligation Count",
+      "type": "integer"
+    },
+    "positive_contribution_event_count": {
+      "default": 0,
+      "title": "Positive Contribution Event Count",
+      "type": "integer"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_debt": {
+      "default": 0.0,
+      "title": "Residual Debt",
+      "type": "number"
+    },
+    "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "settled_event_count": {
+      "default": 0,
+      "title": "Settled Event Count",
+      "type": "integer"
+    },
+    "window_id": {
+      "title": "Window Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "window_id",
+    "sequence"
+  ],
+  "title": "PhaseLabWindowIndex",
+  "type": "object"
+}

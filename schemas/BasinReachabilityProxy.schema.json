@@ -1,0 +1,21 @@
+{
+  "properties": {
+    "effective_node_count": {
+      "default": 0,
+      "title": "Effective Node Count",
+      "type": "integer"
+    },
+    "execution_available_path_count": {
+      "default": 0,
+      "title": "Execution Available Path Count",
+      "type": "integer"
+    },
+    "reachability_proxy": {
+      "default": 0.0,
+      "title": "Reachability Proxy",
+      "type": "number"
+    }
+  },
+  "title": "BasinReachabilityProxy",
+  "type": "object"
+}

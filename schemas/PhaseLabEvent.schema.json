@@ -1,0 +1,123 @@
+{
+  "description": "One inert report or packet stored by the Phase Lab.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "candidate_only": {
+      "default": true,
+      "title": "Candidate Only",
+      "type": "boolean"
+    },
+    "candidate_only_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Candidate Only Reasons",
+      "type": "array"
+    },
+    "content_digest": {
+      "title": "Content Digest",
+      "type": "string"
+    },
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "missing_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Obligations",
+      "type": "array"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "payload": {
+      "additionalProperties": true,
+      "title": "Payload",
+      "type": "object"
+    },
+    "positive_contribution_allowed": {
+      "default": false,
+      "title": "Positive Contribution Allowed",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_summary": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residual Summary",
+      "type": "object"
+    },
+    "safety_boundary": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Safety Boundary",
+      "type": "array"
+    },
+    "schema_hint": {
+      "default": "unknown",
+      "title": "Schema Hint",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "settled_blockers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Settled Blockers",
+      "type": "array"
+    },
+    "source_kind": {
+      "default": "unknown-report",
+      "title": "Source Kind",
+      "type": "string"
+    },
+    "source_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Path"
+    },
+    "window_id": {
+      "title": "Window Id",
+      "type": "string"
+    },
+    "workflow_usable": {
+      "default": false,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "event_id",
+    "window_id",
+    "content_digest"
+  ],
+  "title": "PhaseLabEvent",
+  "type": "object"
+}

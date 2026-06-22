@@ -1,0 +1,29 @@
+{
+  "description": "TRC tolerance ledger for adapted agent traces.",
+  "properties": {
+    "ledger_id": {
+      "default": "trace-tolerance-ledger",
+      "title": "Ledger Id",
+      "type": "string"
+    },
+    "residual_charge": {
+      "default": 0.0,
+      "title": "Residual Charge",
+      "type": "number"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "tolerance_coordinates": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Tolerance Coordinates",
+      "type": "object"
+    }
+  },
+  "title": "TraceToleranceLedger",
+  "type": "object"
+}

@@ -1,0 +1,408 @@
+{
+  "$defs": {
+    "AutocatalyticClosureWitness": {
+      "description": "Evidence-supported diagnostic closure witness over effective packet edges.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Edge Ids",
+          "type": "array"
+        },
+        "evidence_supported": {
+          "default": false,
+          "title": "Evidence Supported",
+          "type": "boolean"
+        },
+        "execution_available": {
+          "default": false,
+          "title": "Execution Available",
+          "type": "boolean"
+        },
+        "packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Packet Ids",
+          "type": "array"
+        },
+        "productive": {
+          "default": false,
+          "title": "Productive",
+          "type": "boolean"
+        },
+        "protocol_relative_only": {
+          "default": true,
+          "title": "Protocol Relative Only",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "witness_id": {
+          "title": "Witness Id",
+          "type": "string"
+        },
+        "witness_kind": {
+          "default": "autocatalytic-closure",
+          "title": "Witness Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "witness_id"
+      ],
+      "title": "AutocatalyticClosureWitness",
+      "type": "object"
+    },
+    "ClosureAbstentionReason": {
+      "properties": {
+        "missing_evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Evidence Refs",
+          "type": "array"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "reason_id": {
+          "title": "Reason Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reason_id",
+        "reason"
+      ],
+      "title": "ClosureAbstentionReason",
+      "type": "object"
+    },
+    "ClosureCertificateCandidate": {
+      "properties": {
+        "abstention_reasons": {
+          "items": {
+            "$ref": "#/$defs/ClosureAbstentionReason"
+          },
+          "title": "Abstention Reasons",
+          "type": "array"
+        },
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "certificate_id": {
+          "default": "closure-certificate-candidate",
+          "title": "Certificate Id",
+          "type": "string"
+        },
+        "certificate_status": {
+          "default": "abstain",
+          "title": "Certificate Status",
+          "type": "string"
+        },
+        "defects": {
+          "items": {
+            "$ref": "#/$defs/ClosureDefect"
+          },
+          "title": "Defects",
+          "type": "array"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "witness_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Witness Ids",
+          "type": "array"
+        }
+      },
+      "title": "ClosureCertificateCandidate",
+      "type": "object"
+    },
+    "ClosureDefect": {
+      "properties": {
+        "defect_id": {
+          "title": "Defect Id",
+          "type": "string"
+        },
+        "defect_type": {
+          "title": "Defect Type",
+          "type": "string"
+        },
+        "packet_or_edge_id": {
+          "title": "Packet Or Edge Id",
+          "type": "string"
+        },
+        "residual_preserved": {
+          "default": true,
+          "title": "Residual Preserved",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "defect_id",
+        "packet_or_edge_id",
+        "defect_type"
+      ],
+      "title": "ClosureDefect",
+      "type": "object"
+    },
+    "ClosureSupportHyperpath": {
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Edge Ids",
+          "type": "array"
+        },
+        "hyperpath_id": {
+          "title": "Hyperpath Id",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "source_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Packet Ids",
+          "type": "array"
+        },
+        "target_packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Target Packet Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "hyperpath_id"
+      ],
+      "title": "ClosureSupportHyperpath",
+      "type": "object"
+    },
+    "ExecutableClosureWitness": {
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "closure_witness_id": {
+          "title": "Closure Witness Id",
+          "type": "string"
+        },
+        "execution_available": {
+          "default": false,
+          "title": "Execution Available",
+          "type": "boolean"
+        },
+        "execution_path_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Execution Path Ids",
+          "type": "array"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "witness_id": {
+          "title": "Witness Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "witness_id",
+        "closure_witness_id"
+      ],
+      "title": "ExecutableClosureWitness",
+      "type": "object"
+    },
+    "ProductiveClosureWitness": {
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Packet Ids",
+          "type": "array"
+        },
+        "productive_edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Productive Edge Ids",
+          "type": "array"
+        },
+        "productivity_lower_bound": {
+          "default": 0.0,
+          "title": "Productivity Lower Bound",
+          "type": "number"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "witness_id": {
+          "title": "Witness Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "witness_id"
+      ],
+      "title": "ProductiveClosureWitness",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "certificate_candidate": {
+      "$ref": "#/$defs/ClosureCertificateCandidate"
+    },
+    "closure_score": {
+      "default": 0.0,
+      "title": "Closure Score",
+      "type": "number"
+    },
+    "closure_witnesses": {
+      "items": {
+        "$ref": "#/$defs/AutocatalyticClosureWitness"
+      },
+      "title": "Closure Witnesses",
+      "type": "array"
+    },
+    "defects": {
+      "items": {
+        "$ref": "#/$defs/ClosureDefect"
+      },
+      "title": "Defects",
+      "type": "array"
+    },
+    "executable_witnesses": {
+      "items": {
+        "$ref": "#/$defs/ExecutableClosureWitness"
+      },
+      "title": "Executable Witnesses",
+      "type": "array"
+    },
+    "graph_id": {
+      "title": "Graph Id",
+      "type": "string"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "productive_witnesses": {
+      "items": {
+        "$ref": "#/$defs/ProductiveClosureWitness"
+      },
+      "title": "Productive Witnesses",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "autocatalytic-closure-report",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "support_hyperpaths": {
+      "items": {
+        "$ref": "#/$defs/ClosureSupportHyperpath"
+      },
+      "title": "Support Hyperpaths",
+      "type": "array"
+    },
+    "workflow_usable": {
+      "default": true,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "graph_id",
+    "certificate_candidate"
+  ],
+  "title": "AutocatalyticClosureReport",
+  "type": "object"
+}

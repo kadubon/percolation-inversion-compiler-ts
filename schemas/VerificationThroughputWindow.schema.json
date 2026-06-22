@@ -1,0 +1,21 @@
+{
+  "properties": {
+    "accepted_count": {
+      "default": 0,
+      "title": "Accepted Count",
+      "type": "integer"
+    },
+    "backlog_count": {
+      "default": 0,
+      "title": "Backlog Count",
+      "type": "integer"
+    },
+    "throughput_ratio": {
+      "default": 0.0,
+      "title": "Throughput Ratio",
+      "type": "number"
+    }
+  },
+  "title": "VerificationThroughputWindow",
+  "type": "object"
+}

@@ -1,0 +1,40 @@
+{
+  "description": "Evidence summary for one effective graph edge.",
+  "properties": {
+    "edge_certificate_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Edge Certificate Refs",
+      "type": "array"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "evidence_supported": {
+      "default": false,
+      "title": "Evidence Supported",
+      "type": "boolean"
+    },
+    "missing_evidence": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Evidence",
+      "type": "array"
+    },
+    "verifier_resolution_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Verifier Resolution Refs",
+      "type": "array"
+    }
+  },
+  "title": "SemanticEdgeEvidence",
+  "type": "object"
+}

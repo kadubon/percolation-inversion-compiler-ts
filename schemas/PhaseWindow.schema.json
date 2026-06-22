@@ -1,0 +1,31 @@
+{
+  "description": "A finite Phase Lab observation window.",
+  "properties": {
+    "event_count": {
+      "default": 0,
+      "title": "Event Count",
+      "type": "integer"
+    },
+    "event_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Event Ids",
+      "type": "array"
+    },
+    "sequence": {
+      "default": 0,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "window_id": {
+      "title": "Window Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "window_id"
+  ],
+  "title": "PhaseWindow",
+  "type": "object"
+}

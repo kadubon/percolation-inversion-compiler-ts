@@ -1,0 +1,178 @@
+{
+  "accepted": true,
+  "accepted_packet_capital": 1,
+  "candidate_only_packets": 1,
+  "edge_count_by_relation": {
+    "self-support": 1
+  },
+  "edges": [
+    {
+      "accepted": true,
+      "contribution": {
+        "candidate_only": false,
+        "non_contributing_reason": "",
+        "positive_contribution": true,
+        "settled": false,
+        "status": "accepted"
+      },
+      "edge_id": "edge:self-alpha",
+      "evidence": {
+        "edge_certificate_refs": [],
+        "evidence_refs": [
+          "evidence:alpha"
+        ],
+        "evidence_supported": true,
+        "missing_evidence": [],
+        "verifier_resolution_refs": []
+      },
+      "reasons": [
+        "edge extracted from inert report data"
+      ],
+      "relation_type": "self-support",
+      "residual_summary": {},
+      "settled": false,
+      "source_node_ids": [
+        "node:a0e7926edd1c"
+      ],
+      "target_node_id": "node:a0e7926edd1c"
+    }
+  ],
+  "graph_id": "effective-packet-graph",
+  "graph_safety_boundary": [
+    "raw packet volume is diagnostic only",
+    "candidate-only nodes do not improve positive phase components",
+    "graph construction does not execute packet content",
+    "graph construction does not settle claims"
+  ],
+  "missing_edge_evidence": [],
+  "node_count_by_status": {
+    "accepted": 1,
+    "candidate-only": 1
+  },
+  "nodes": [
+    {
+      "accepted": true,
+      "content_digest": "a0e7926edd1c21e191da43d6de646d47f2f05aa536721ea2cbaf87c07fbe8ae9",
+      "contribution": {
+        "candidate_only": false,
+        "non_contributing_reason": "",
+        "positive_contribution": true,
+        "settled": false,
+        "status": "accepted"
+      },
+      "eligibility": {
+        "accepted_or_certificate_admissible": true,
+        "agent_text_not_treated_as_evidence": true,
+        "authority_valid": true,
+        "blockers": [],
+        "eligible": true,
+        "hash_valid": true,
+        "not_raw_external_volume": true,
+        "not_registry_metadata_only": true,
+        "not_salience_blocked": true,
+        "not_stale": true,
+        "not_verification_blocked": true,
+        "residuals_preserved": true,
+        "retrievable": true,
+        "rollback_available_or_not_required": true,
+        "within_validity_domain": true
+      },
+      "missing_obligations": [],
+      "node_id": "node:a0e7926edd1c",
+      "operationally_usable": true,
+      "reasons": [
+        "event content is stored as inert data"
+      ],
+      "residual_summary": {},
+      "schema_hint": "AgentCheckReport",
+      "settled": false,
+      "source_event_id": "phase-lab-event:0:a0e7926edd1c",
+      "source_kind": "agent-check",
+      "workflow_usable": true
+    },
+    {
+      "accepted": false,
+      "content_digest": "749ba66f574233b51eb2a924e1c5c7314ee4800006cf86a351a7484b778e241d",
+      "contribution": {
+        "candidate_only": true,
+        "non_contributing_reason": "eligibility blockers prevent positive contribution",
+        "positive_contribution": false,
+        "settled": false,
+        "status": "candidate-only"
+      },
+      "eligibility": {
+        "accepted_or_certificate_admissible": false,
+        "agent_text_not_treated_as_evidence": true,
+        "authority_valid": true,
+        "blockers": [
+          "candidate-only",
+          "verification-blocked"
+        ],
+        "eligible": false,
+        "hash_valid": true,
+        "not_raw_external_volume": true,
+        "not_registry_metadata_only": true,
+        "not_salience_blocked": true,
+        "not_stale": true,
+        "not_verification_blocked": false,
+        "residuals_preserved": true,
+        "retrievable": true,
+        "rollback_available_or_not_required": true,
+        "within_validity_domain": true
+      },
+      "missing_obligations": [],
+      "node_id": "node:749ba66f5742",
+      "operationally_usable": false,
+      "reasons": [
+        "event content is stored as inert data",
+        "candidate-only reasons remain visible",
+        "settlement blockers remain visible",
+        "candidate-only event cannot improve phase metrics"
+      ],
+      "residual_summary": {
+        "missing_evidence": 1.0
+      },
+      "schema_hint": "AgentCheckReport",
+      "settled": false,
+      "source_event_id": "phase-lab-event:1:749ba66f5742",
+      "source_kind": "agent-check",
+      "workflow_usable": true
+    }
+  ],
+  "non_contributing_volume": 1,
+  "operationally_usable": true,
+  "reasons": [
+    "effective graph separates positive contribution from diagnostic volume",
+    "raw packet count does not increase positive phase metrics"
+  ],
+  "rejected_or_quarantined_packets": 0,
+  "residual_summary": {
+    "candidate_only_reasons": [
+      "external candidate requires finite verifier route"
+    ],
+    "missing_obligation_count": 0,
+    "residual_debt": 1.0,
+    "residual_summary": {
+      "missing_evidence": 1.0
+    },
+    "settled_blockers": [
+      "missing evidence"
+    ]
+  },
+  "semantic_edge_witnesses": [
+    {
+      "edge_certificate_refs": [],
+      "evidence_refs": [
+        "evidence:alpha"
+      ],
+      "evidence_supported": true,
+      "missing_evidence": [],
+      "verifier_resolution_refs": []
+    }
+  ],
+  "settled": false,
+  "source_window_id": "adhoc",
+  "stale_or_unsafe_packets": [],
+  "workflow_usable": true
+}
+

@@ -1,0 +1,109 @@
+{
+  "$defs": {
+    "ClosureAbstentionReason": {
+      "properties": {
+        "missing_evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Evidence Refs",
+          "type": "array"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "reason_id": {
+          "title": "Reason Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reason_id",
+        "reason"
+      ],
+      "title": "ClosureAbstentionReason",
+      "type": "object"
+    },
+    "ClosureDefect": {
+      "properties": {
+        "defect_id": {
+          "title": "Defect Id",
+          "type": "string"
+        },
+        "defect_type": {
+          "title": "Defect Type",
+          "type": "string"
+        },
+        "packet_or_edge_id": {
+          "title": "Packet Or Edge Id",
+          "type": "string"
+        },
+        "residual_preserved": {
+          "default": true,
+          "title": "Residual Preserved",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "defect_id",
+        "packet_or_edge_id",
+        "defect_type"
+      ],
+      "title": "ClosureDefect",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "abstention_reasons": {
+      "items": {
+        "$ref": "#/$defs/ClosureAbstentionReason"
+      },
+      "title": "Abstention Reasons",
+      "type": "array"
+    },
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "certificate_id": {
+      "default": "closure-certificate-candidate",
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "certificate_status": {
+      "default": "abstain",
+      "title": "Certificate Status",
+      "type": "string"
+    },
+    "defects": {
+      "items": {
+        "$ref": "#/$defs/ClosureDefect"
+      },
+      "title": "Defects",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "witness_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Witness Ids",
+      "type": "array"
+    }
+  },
+  "title": "ClosureCertificateCandidate",
+  "type": "object"
+}

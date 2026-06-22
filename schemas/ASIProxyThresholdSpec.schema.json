@@ -1,0 +1,72 @@
+{
+  "description": "Protocol-relative finite threshold specification for ASI-proxy diagnostics.",
+  "properties": {
+    "maximum_false_liquidity_load": {
+      "default": 0.5,
+      "title": "Maximum False Liquidity Load",
+      "type": "number"
+    },
+    "maximum_residual_debt": {
+      "default": 0.0,
+      "title": "Maximum Residual Debt",
+      "type": "number"
+    },
+    "maximum_salience_obstruction": {
+      "default": 0.5,
+      "title": "Maximum Salience Obstruction",
+      "type": "number"
+    },
+    "minimum_accepted_packet_count": {
+      "default": 1,
+      "title": "Minimum Accepted Packet Count",
+      "type": "integer"
+    },
+    "minimum_alt_to_ecpt_lift_count": {
+      "default": 0,
+      "title": "Minimum Alt To Ecpt Lift Count",
+      "type": "integer"
+    },
+    "minimum_closure_witness_count": {
+      "default": 1,
+      "title": "Minimum Closure Witness Count",
+      "type": "integer"
+    },
+    "minimum_effective_edge_count": {
+      "default": 1,
+      "title": "Minimum Effective Edge Count",
+      "type": "integer"
+    },
+    "minimum_execution_available_path_density": {
+      "default": 0.1,
+      "title": "Minimum Execution Available Path Density",
+      "type": "number"
+    },
+    "minimum_verification_throughput": {
+      "default": 0.1,
+      "title": "Minimum Verification Throughput",
+      "type": "number"
+    },
+    "required_authority_status": {
+      "default": "explicit-scope-bounded",
+      "title": "Required Authority Status",
+      "type": "string"
+    },
+    "required_identity_mode": {
+      "default": "declared",
+      "title": "Required Identity Mode",
+      "type": "string"
+    },
+    "required_rollback_availability": {
+      "default": true,
+      "title": "Required Rollback Availability",
+      "type": "boolean"
+    },
+    "threshold_id": {
+      "default": "asi-proxy-development",
+      "title": "Threshold Id",
+      "type": "string"
+    }
+  },
+  "title": "ASIProxyThresholdSpec",
+  "type": "object"
+}

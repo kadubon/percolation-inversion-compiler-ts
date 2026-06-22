@@ -1,0 +1,55 @@
+{
+  "description": "Python v0.5.0 Phase Ecology Lab JSON fixtures for TypeScript portability checks.",
+  "examples": [
+    {
+      "file": "phase_lab_event_1.json",
+      "schema": "PhaseLabEvent",
+      "sha256": "ea0369e2626b0d41dd4cd3495314df8f567e2399b862e3d8cdea4bbbaab7ffc0"
+    },
+    {
+      "file": "phase_lab_event_2.json",
+      "schema": "PhaseLabEvent",
+      "sha256": "2e875d23f802cd2b460ee90ec13612b25dacc9357422b5f9103f90dd5cd5de79"
+    },
+    {
+      "file": "effective_graph.example.json",
+      "schema": "EffectivePacketGraph",
+      "sha256": "0351e3766304324c3ce5fc3f0819e491dc01c22e029c91481a47eeca48c21b8c"
+    },
+    {
+      "file": "phase_window_observation.example.json",
+      "schema": "PhaseWindowObservation",
+      "sha256": "9c9c78874054b3b0372ccfd8af44fae49936cb35870418db5cccb186d32a65b0"
+    },
+    {
+      "file": "closure_report.example.json",
+      "schema": "AutocatalyticClosureReport",
+      "sha256": "18a81c3c291ba1493a1daf4309383bf89f6a3701b48a24d5ceb519e1e4c440fe"
+    },
+    {
+      "file": "executable_paths.example.json",
+      "schema": "ExecutablePathDensityReport",
+      "sha256": "8e674012ddbbc661068de13b9918dff938ea4284b49cfce772e5b1484e07c8cc"
+    },
+    {
+      "file": "threshold_status.example.json",
+      "schema": "ASIProxyThresholdStatus",
+      "sha256": "9b6522ac4efdb97633f769a1ed2091ef076fffe243106695c0a4ba97568eeeea"
+    },
+    {
+      "file": "certificate_abstain.example.json",
+      "schema": "CollectivePhaseCertificateCandidate",
+      "sha256": "dd430f70e72c13349ee2bff57db7042c99fe730a7e7a6a60aeb277a200932d88"
+    }
+  ],
+  "negative_examples": [],
+  "invariants": [
+    "accepted and settled remain separate booleans",
+    "Phase Ecology Lab observations are protocol-relative only",
+    "candidate-only reports and raw packet volume do not increase positive phase metrics",
+    "executable paths are detected as inert data and do not grant execution authority",
+    "collective certificates preserve residual obligations and do not prove real ASI"
+  ],
+  "manifest_id": "pic-portability-conformance-v050",
+  "schema_version": "portability-conformance-1.0"
+}

@@ -1,0 +1,20 @@
+{
+  "accepted": true,
+  "database_path": "phase_lab.sqlite",
+  "event_count": 0,
+  "latest_window_id": null,
+  "reasons": [
+    "phase lab store is local and non-executing"
+  ],
+  "safety_invariants": [
+    "phase lab stores local report data only",
+    "phase lab never executes report or packet content",
+    "phase lab diagnostics do not settle claims"
+  ],
+  "schema_version": "phase-lab-store-v1",
+  "settled": false,
+  "store_id": "phase-lab-store",
+  "store_path": "pic-phase-lab",
+  "window_count": 0
+}
+

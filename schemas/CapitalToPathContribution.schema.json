@@ -1,0 +1,53 @@
+{
+  "description": "Contribution from certified abstraction capital to execution path density.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "contribution_id": {
+      "title": "Contribution Id",
+      "type": "string"
+    },
+    "graph_id": {
+      "default": "",
+      "title": "Graph Id",
+      "type": "string"
+    },
+    "increases_execution_available_path_density": {
+      "default": false,
+      "title": "Increases Execution Available Path Density",
+      "type": "boolean"
+    },
+    "packet_id": {
+      "default": "",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "path_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Path Ids",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "contribution_id"
+  ],
+  "title": "CapitalToPathContribution",
+  "type": "object"
+}

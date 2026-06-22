@@ -1,0 +1,20 @@
+{
+  "accepted": true,
+  "accepted_path_count": 1,
+  "authority_requirements": ["authority:edge:self-alpha"],
+  "blocked_path_count": 0,
+  "blocker_reason_by_path": {},
+  "candidate_only_path_count": 0,
+  "executed_path_count": 0,
+  "graph_id": "effective-graph-example",
+  "operationally_usable": true,
+  "path_count": 1,
+  "path_density": 1.0,
+  "paths": [],
+  "reasons": ["execution-available path detection never executes paths"],
+  "report_id": "execution-available-path-density",
+  "residual_carry_forward": [],
+  "rollback_requirements": ["rollback:edge:self-alpha"],
+  "settled": false,
+  "workflow_usable": true
+}

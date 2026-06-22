@@ -1,0 +1,27 @@
+{
+  "accepted": false,
+  "affected_ecpt_components": [],
+  "blockers": [
+    {
+      "blocker_id": "alt-lift-blocker:packet:demo:capital",
+      "blocker_type": "missing accepted ALT capital",
+      "packet_id": "packet:demo",
+      "remediation": "admit an ALT packet with finite checks",
+      "residual_preserved": true
+    }
+  ],
+  "capital_to_path_contributions": [],
+  "cross_context_transfer_witnesses": [],
+  "diagnostic_only_lift_failure": true,
+  "downstream_search_cost_deltas": [],
+  "graph_id": "effective-graph-example",
+  "liquidity_to_closure_contributions": [],
+  "operationally_usable": false,
+  "protocol_relative_only": true,
+  "proves_real_asi": false,
+  "reasons": ["no accepted ECPT component lift was established"],
+  "receiver_liquidity_lifts": [],
+  "report_id": "alt-ecpt-lift",
+  "settled": false,
+  "workflow_usable": true
+}

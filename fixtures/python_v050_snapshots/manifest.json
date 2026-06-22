@@ -1,0 +1,39 @@
+{
+  "canonical_source": "percolation-inversion-compiler==0.5.0",
+  "description": "Python v0.5.0 snapshot CLI golden JSON for PIC-TS public compatibility checks.",
+  "exact_parity_files": [
+    "snapshot_list.json",
+    "snapshot_routes.json",
+    "snapshot_show_alt.json",
+    "snapshot_show_bit.json",
+    "snapshot_show_ecpt.json",
+    "snapshot_show_sqot.json",
+    "snapshot_show_trc.json",
+    "snapshot_verify_alt.json",
+    "snapshot_verify_bit.json",
+    "snapshot_verify_ecpt.json",
+    "snapshot_verify_sqot.json",
+    "snapshot_verify_trc.json"
+  ],
+  "files": [
+    "snapshot_list.json",
+    "snapshot_routes.json",
+    "snapshot_show_alt.json",
+    "snapshot_show_bit.json",
+    "snapshot_show_ecpt.json",
+    "snapshot_show_sqot.json",
+    "snapshot_show_trc.json",
+    "snapshot_verify_alt.json",
+    "snapshot_verify_bit.json",
+    "snapshot_verify_ecpt.json",
+    "snapshot_verify_sqot.json",
+    "snapshot_verify_trc.json"
+  ],
+  "fixture_set_id": "python-v050-snapshots",
+  "generated_by": ".venv/Scripts/pic.exe snapshot list/show/verify/routes",
+  "invariants": [
+    "snapshot records are derived metadata and do not vendor TeX or PDF source files",
+    "snapshot verification returns canonical_sha256 and valid status without changing claim status",
+    "external obligations remain explicit residual work and are not promoted to settled claims"
+  ]
+}

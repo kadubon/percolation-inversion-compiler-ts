@@ -10,6 +10,47 @@ export {
   phaseAccelerationRunbook,
 } from "./phase/index.js";
 export {
+  buildCollectivePhaseCertificateCandidate,
+  buildEffectivePacketGraph,
+  buildPhaseThresholdStatus,
+  comparePhaseWindows,
+  detectAutocatalyticClosure,
+  detectExecutionAvailablePaths,
+  exportPhaseLabStore,
+  ingestPhaseLabPacket,
+  ingestPhaseLabReport,
+  initPhaseLabStore,
+  listPhaseLabWindows,
+  loadPhaseLabGraph,
+  loadPhaseLabObservation,
+  observePhaseWindow,
+} from "./phase_lab/index.js";
+export {
+  buildInversionCertificate,
+  buildMinimalEnablingConditions,
+  compareBottleneckBaseline,
+  diagnoseBottlenecks,
+  invertBottlenecks,
+} from "./bit_engine/index.js";
+export {
+  buildPacketQuarantineDecisions,
+  buildQueueRebalancePlan,
+  checkDiagnosticReserve,
+  diagnoseQueueOccupation,
+  diagnoseSalienceObstruction,
+} from "./sqot_controller/index.js";
+export {
+  estimateCapitalImpact,
+  mapLiquidityToPaths,
+  verifyAltEcptLift,
+  verifyReceiverLift,
+} from "./alt_lift/index.js";
+export {
+  adaptToolTrace,
+  adaptTrcTrace,
+  buildActionBoundaryReport,
+} from "./trc_adapter/index.js";
+export {
   buildRuntimeStep,
   minimalRuntimeState,
   minimalRuntimeStepInput,

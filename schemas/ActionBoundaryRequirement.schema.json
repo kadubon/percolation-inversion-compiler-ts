@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "requirement_id": {
+      "title": "Requirement Id",
+      "type": "string"
+    },
+    "requirement_type": {
+      "title": "Requirement Type",
+      "type": "string"
+    },
+    "residual": {
+      "default": "",
+      "title": "Residual",
+      "type": "string"
+    },
+    "satisfied": {
+      "default": false,
+      "title": "Satisfied",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "requirement_id",
+    "requirement_type"
+  ],
+  "title": "ActionBoundaryRequirement",
+  "type": "object"
+}

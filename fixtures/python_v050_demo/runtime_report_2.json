@@ -1,0 +1,14 @@
+{
+  "accepted": false,
+  "candidate_only": true,
+  "candidate_only_reasons": ["external candidate requires finite verifier route"],
+  "operationally_usable": false,
+  "packet_ref": "packet:beta",
+  "report_id": "phase-lab-runtime-report-2",
+  "residual_summary": {
+    "missing_evidence": 1.0
+  },
+  "settled": false,
+  "settled_blockers": ["missing evidence"],
+  "workflow_usable": true
+}

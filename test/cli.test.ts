@@ -308,6 +308,135 @@ describe("CLI golden parity", () => {
     ).toHaveLength(19);
   });
 
+  it("verifies bundled v0.5.0 portability manifest", () => {
+    const data = pic([
+      "portability",
+      "verify",
+      "--manifest",
+      "fixtures/portability_conformance_v050/manifest.json",
+    ]);
+    expect(data.accepted).toBe(true);
+    expect(data.settled).toBe(false);
+    expect(data.unexpected_failure_count).toBe(0);
+    expect(
+      Object.values(data.checked_examples as Record<string, string>),
+    ).toEqual(expect.arrayContaining(["valid"]));
+  });
+
+  it("runs Phase Ecology Lab commands without promoting candidate data", () => {
+    const dir = mkdtempSync(join(tmpdir(), "pic-ts-phase-lab-"));
+    const store = join(dir, "store");
+    const report = join(
+      packageRoot(),
+      "examples",
+      "phase_lab",
+      "runtime_report_1.json",
+    );
+    const threshold = join(
+      packageRoot(),
+      "examples",
+      "thresholds",
+      "asi_proxy_development.json",
+    );
+
+    expect(pic(["phase", "lab", "init", "--output-dir", store]).settled).toBe(
+      false,
+    );
+    const ingest = pic([
+      "phase",
+      "lab",
+      "ingest",
+      "--store",
+      store,
+      "--report",
+      report,
+    ]);
+    expect(ingest.accepted).toBe(true);
+    expect(ingest.settled).toBe(false);
+    expect(JSON.stringify(ingest)).not.toContain(packageRoot());
+
+    const graph = pic(["phase", "lab", "graph", "--store", store]);
+    expect(graph.settled).toBe(false);
+    expect(graph.nodes).toHaveLength(1);
+    expect(graph.graph_safety_boundary).toEqual(
+      expect.arrayContaining([
+        "graph construction does not execute packet content",
+      ]),
+    );
+
+    const observe = pic(["phase", "lab", "observe", "--store", store]);
+    expect(observe.protocol_relative_only).toBe(true);
+    expect(observe.proves_real_asi).toBe(false);
+    expect(observe.proves_physical_or_oracle_truth).toBe(false);
+    expect(observe.settled).toBe(false);
+
+    const closure = pic(["phase", "lab", "closure", "--store", store]);
+    expect(closure.settled).toBe(false);
+    expect(Array.isArray(closure.closure_witnesses)).toBe(true);
+
+    const paths = pic(["phase", "lab", "executable-paths", "--store", store]);
+    expect(paths.executed_path_count).toBe(0);
+    expect(paths.execution_authority_granted).toBe(false);
+    expect(paths.settled).toBe(false);
+
+    const certify = pic([
+      "phase",
+      "lab",
+      "certify",
+      "--store",
+      store,
+      "--threshold",
+      threshold,
+    ]);
+    expect(certify.settled).toBe(false);
+    expect(certify.execution_authority_granted).toBe(false);
+  });
+
+  it("runs v0.5.0 BIT/SQOT/ALT/TRC/ecology diagnostic commands as inert JSON", () => {
+    const graphPath = join(
+      packageRoot(),
+      "examples",
+      "phase_lab",
+      "effective_graph.example.json",
+    );
+    const altPath = join(
+      packageRoot(),
+      "examples",
+      "alt_lift",
+      "alt_ecpt_lift.example.json",
+    );
+    const tracePath = join(
+      packageRoot(),
+      "examples",
+      "trc_adapter",
+      "tool_trace_input.example.json",
+    );
+    const bit = pic(["bit", "diagnose", "--graph", graphPath]);
+    const sqot = pic(["sqot", "diagnose-queue", "--graph", graphPath]);
+    const alt = pic([
+      "alt",
+      "ecpt-lift",
+      "--packets",
+      altPath,
+      "--graph",
+      graphPath,
+    ]);
+    const trc = pic(["trc", "trace-adapter", "--input", tracePath]);
+    const ecology = pic([
+      "ecology",
+      "execution-available-paths",
+      "--graph",
+      graphPath,
+    ]);
+
+    for (const data of [bit, sqot, alt, trc, ecology]) {
+      expect(data.settled).toBe(false);
+    }
+    expect(trc.execution_authority_granted).toBe(false);
+    expect(ecology.execution_authority_granted).toBe(false);
+    expect(ecology.executed_path_count).toBe(0);
+  });
+
   it("keeps known diagnostic fallback commands fail-closed", () => {
     const commands = [
       ["doctor", "--profile", "production"],

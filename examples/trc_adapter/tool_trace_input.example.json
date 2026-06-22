@@ -1,0 +1,17 @@
+{
+  "events": [
+    {
+      "action_kind": "tool-call",
+      "authority_status": "not-granted",
+      "event_id": "event:tool:1",
+      "evidence_refs": [],
+      "input": {
+        "query": "candidate packet"
+      },
+      "rollback_status": "unknown",
+      "source": "agent:demo",
+      "tool_name": "example-tool"
+    }
+  ],
+  "trace_id": "trace:demo"
+}

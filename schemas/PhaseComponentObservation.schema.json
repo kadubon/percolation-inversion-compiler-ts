@@ -1,0 +1,39 @@
+{
+  "description": "One phase component value and threshold distance.",
+  "properties": {
+    "component": {
+      "title": "Component",
+      "type": "string"
+    },
+    "diagnostic_only": {
+      "default": true,
+      "title": "Diagnostic Only",
+      "type": "boolean"
+    },
+    "distance": {
+      "default": 0.0,
+      "title": "Distance",
+      "type": "number"
+    },
+    "positive_contribution_source": {
+      "default": "effective-graph-only",
+      "title": "Positive Contribution Source",
+      "type": "string"
+    },
+    "threshold": {
+      "default": 0.0,
+      "title": "Threshold",
+      "type": "number"
+    },
+    "value": {
+      "default": 0.0,
+      "title": "Value",
+      "type": "number"
+    }
+  },
+  "required": [
+    "component"
+  ],
+  "title": "PhaseComponentObservation",
+  "type": "object"
+}

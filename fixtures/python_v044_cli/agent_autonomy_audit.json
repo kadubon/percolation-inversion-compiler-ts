@@ -36,7 +36,7 @@
     "pic phase benchmark-suite --profile development --format json",
     "pic phase dashboard --profile development --format json",
     "pic packet inspect --packet pic-demo/packet_envelope.json",
-    "pic packet merge --packets pic-demo/packet*.json --output pic-demo/merged-packets.json",
+    "pic packet merge --packets pic-demo/packet.json --output pic-demo/merged-packets.json",
     "pic packet lineage --packet pic-demo/merged-packets.json",
     "pic phase observe --reports pic-demo/phase_dashboard.json --output pic-demo/observation.json",
     "pic snapshot list",
@@ -173,7 +173,7 @@
         "packet",
         "merge",
         "--packets",
-        "pic-demo/packet*.json",
+        "pic-demo/packet.json",
         "--output",
         "pic-demo/merged-packets.json"
       ],
@@ -188,7 +188,7 @@
         "argv is the portable invocation; shell_command is display text",
         "PIC emits this command as data and does not execute it"
       ],
-      "shell_command": "pic packet merge --packets pic-demo/packet*.json --output pic-demo/merged-packets.json"
+      "shell_command": "pic packet merge --packets pic-demo/packet.json --output pic-demo/merged-packets.json"
     },
     {
       "argv": [
@@ -252,3 +252,4 @@
   "source_checkout_required_for_core": false,
   "workflow_usable": true
 }
+

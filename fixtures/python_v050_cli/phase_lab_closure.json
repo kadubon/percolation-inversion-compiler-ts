@@ -1,0 +1,85 @@
+{
+  "accepted": true,
+  "certificate_candidate": {
+    "abstention_reasons": [],
+    "accepted": true,
+    "certificate_id": "closure-certificate-candidate",
+    "certificate_status": "candidate",
+    "defects": [],
+    "reasons": [
+      "closure candidate is not automatically settled",
+      "candidate-only cycles do not count"
+    ],
+    "settled": false,
+    "witness_ids": [
+      "closure-witness:edge:self-alpha"
+    ]
+  },
+  "closure_score": 0.5,
+  "closure_witnesses": [
+    {
+      "accepted": true,
+      "edge_ids": [
+        "edge:self-alpha"
+      ],
+      "evidence_supported": true,
+      "execution_available": false,
+      "packet_ids": [
+        "node:a0e7926edd1c"
+      ],
+      "productive": true,
+      "protocol_relative_only": true,
+      "reasons": [
+        "witness is evidence-supported within the effective graph",
+        "witness remains diagnostic until finite threshold checks pass"
+      ],
+      "settled": false,
+      "witness_id": "closure-witness:edge:self-alpha",
+      "witness_kind": "autocatalytic-closure"
+    }
+  ],
+  "defects": [],
+  "executable_witnesses": [],
+  "graph_id": "effective-graph:all",
+  "operationally_usable": true,
+  "productive_witnesses": [
+    {
+      "accepted": true,
+      "packet_ids": [
+        "node:a0e7926edd1c"
+      ],
+      "productive_edge_ids": [
+        "edge:self-alpha"
+      ],
+      "productivity_lower_bound": 0.1,
+      "reasons": [
+        "self-supporting evidence edge is productive in declared scope"
+      ],
+      "settled": false,
+      "witness_id": "productive:edge:self-alpha"
+    }
+  ],
+  "reasons": [
+    "closure detection does not execute or settle paths"
+  ],
+  "report_id": "autocatalytic-closure-report",
+  "settled": false,
+  "support_hyperpaths": [
+    {
+      "accepted": true,
+      "edge_ids": [
+        "edge:self-alpha"
+      ],
+      "hyperpath_id": "closure-hyperpath:edge:self-alpha",
+      "settled": false,
+      "source_packet_ids": [
+        "node:a0e7926edd1c"
+      ],
+      "target_packet_ids": [
+        "node:a0e7926edd1c"
+      ]
+    }
+  ],
+  "workflow_usable": true
+}
+

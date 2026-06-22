@@ -1,0 +1,38 @@
+{
+  "accepted": true,
+  "attention_budget_ledger": {
+    "attention_budget": 1.0,
+    "diagnostic_reserve_available": 0.9,
+    "diagnostic_reserve_required": 0.1,
+    "ledger_id": "sqot-attention-budget",
+    "occupied": 0.1,
+    "reserve_preserved": true,
+    "settled": false
+  },
+  "blocked_high_value_packets": [
+    "node:749ba66f5742"
+  ],
+  "graph_id": "effective-packet-graph",
+  "low_value_packet_ids": [
+    "node:749ba66f5742"
+  ],
+  "reasons": [
+    "queue occupation report is diagnostic only",
+    "raw candidate volume does not improve phase metrics"
+  ],
+  "repeated_candidate_only_packets": [],
+  "report_id": "sqot-queue-occupation",
+  "rollback_unavailable_decisions": [],
+  "settled": false,
+  "verification_queue_pressure": {
+    "backlog_count": 1,
+    "candidate_only_count": 1,
+    "pressure": 0.5,
+    "pressure_id": "sqot-verification-pressure",
+    "settled": false,
+    "stale_packet_count": 0,
+    "unsafe_packet_count": 0
+  },
+  "workflow_usable": true
+}
+

@@ -1,0 +1,30 @@
+{
+  "accepted": false,
+  "affected_ecpt_components": [],
+  "blockers": [
+    {
+      "blocker_id": "alt-capital-impact-blocker:0",
+      "blocker_type": "report not accepted operational capital",
+      "packet_id": "alt-ecpt-lift",
+      "remediation": "rerun finite ALT and ECPT component checks",
+      "residual_preserved": true
+    }
+  ],
+  "capital_to_path_contributions": [],
+  "cross_context_transfer_witnesses": [],
+  "diagnostic_only_lift_failure": true,
+  "downstream_search_cost_deltas": [],
+  "graph_id": "",
+  "liquidity_to_closure_contributions": [],
+  "operationally_usable": false,
+  "protocol_relative_only": true,
+  "proves_real_asi": false,
+  "reasons": [
+    "capital impact summary is diagnostic and does not settle ALT lift"
+  ],
+  "receiver_liquidity_lifts": [],
+  "report_id": "alt-capital-impact",
+  "settled": false,
+  "workflow_usable": true
+}
+

@@ -1,0 +1,84 @@
+{
+  "description": "Eligibility checks for positive phase contribution.",
+  "properties": {
+    "accepted_or_certificate_admissible": {
+      "default": false,
+      "title": "Accepted Or Certificate Admissible",
+      "type": "boolean"
+    },
+    "agent_text_not_treated_as_evidence": {
+      "default": false,
+      "title": "Agent Text Not Treated As Evidence",
+      "type": "boolean"
+    },
+    "authority_valid": {
+      "default": false,
+      "title": "Authority Valid",
+      "type": "boolean"
+    },
+    "blockers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Blockers",
+      "type": "array"
+    },
+    "eligible": {
+      "default": false,
+      "title": "Eligible",
+      "type": "boolean"
+    },
+    "hash_valid": {
+      "default": false,
+      "title": "Hash Valid",
+      "type": "boolean"
+    },
+    "not_raw_external_volume": {
+      "default": false,
+      "title": "Not Raw External Volume",
+      "type": "boolean"
+    },
+    "not_registry_metadata_only": {
+      "default": false,
+      "title": "Not Registry Metadata Only",
+      "type": "boolean"
+    },
+    "not_salience_blocked": {
+      "default": false,
+      "title": "Not Salience Blocked",
+      "type": "boolean"
+    },
+    "not_stale": {
+      "default": false,
+      "title": "Not Stale",
+      "type": "boolean"
+    },
+    "not_verification_blocked": {
+      "default": false,
+      "title": "Not Verification Blocked",
+      "type": "boolean"
+    },
+    "residuals_preserved": {
+      "default": false,
+      "title": "Residuals Preserved",
+      "type": "boolean"
+    },
+    "retrievable": {
+      "default": false,
+      "title": "Retrievable",
+      "type": "boolean"
+    },
+    "rollback_available_or_not_required": {
+      "default": false,
+      "title": "Rollback Available Or Not Required",
+      "type": "boolean"
+    },
+    "within_validity_domain": {
+      "default": false,
+      "title": "Within Validity Domain",
+      "type": "boolean"
+    }
+  },
+  "title": "EffectivePacketEligibility",
+  "type": "object"
+}

@@ -1,0 +1,38 @@
+{
+  "description": "Rollback/deactivation plan for a candidate intervention.",
+  "properties": {
+    "automatic_rollback": {
+      "default": false,
+      "title": "Automatic Rollback",
+      "type": "boolean"
+    },
+    "deactivation_steps": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Deactivation Steps",
+      "type": "array"
+    },
+    "plan_id": {
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "rollback_refs_required": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rollback Refs Required",
+      "type": "array"
+    },
+    "rollback_required": {
+      "default": true,
+      "title": "Rollback Required",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "plan_id"
+  ],
+  "title": "RollbackOrDeactivationPlan",
+  "type": "object"
+}

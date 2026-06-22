@@ -1,0 +1,199 @@
+{
+  "$defs": {
+    "EffectivePacketEligibility": {
+      "description": "Eligibility checks for positive phase contribution.",
+      "properties": {
+        "accepted_or_certificate_admissible": {
+          "default": false,
+          "title": "Accepted Or Certificate Admissible",
+          "type": "boolean"
+        },
+        "agent_text_not_treated_as_evidence": {
+          "default": false,
+          "title": "Agent Text Not Treated As Evidence",
+          "type": "boolean"
+        },
+        "authority_valid": {
+          "default": false,
+          "title": "Authority Valid",
+          "type": "boolean"
+        },
+        "blockers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Blockers",
+          "type": "array"
+        },
+        "eligible": {
+          "default": false,
+          "title": "Eligible",
+          "type": "boolean"
+        },
+        "hash_valid": {
+          "default": false,
+          "title": "Hash Valid",
+          "type": "boolean"
+        },
+        "not_raw_external_volume": {
+          "default": false,
+          "title": "Not Raw External Volume",
+          "type": "boolean"
+        },
+        "not_registry_metadata_only": {
+          "default": false,
+          "title": "Not Registry Metadata Only",
+          "type": "boolean"
+        },
+        "not_salience_blocked": {
+          "default": false,
+          "title": "Not Salience Blocked",
+          "type": "boolean"
+        },
+        "not_stale": {
+          "default": false,
+          "title": "Not Stale",
+          "type": "boolean"
+        },
+        "not_verification_blocked": {
+          "default": false,
+          "title": "Not Verification Blocked",
+          "type": "boolean"
+        },
+        "residuals_preserved": {
+          "default": false,
+          "title": "Residuals Preserved",
+          "type": "boolean"
+        },
+        "retrievable": {
+          "default": false,
+          "title": "Retrievable",
+          "type": "boolean"
+        },
+        "rollback_available_or_not_required": {
+          "default": false,
+          "title": "Rollback Available Or Not Required",
+          "type": "boolean"
+        },
+        "within_validity_domain": {
+          "default": false,
+          "title": "Within Validity Domain",
+          "type": "boolean"
+        }
+      },
+      "title": "EffectivePacketEligibility",
+      "type": "object"
+    },
+    "PacketContributionStatus": {
+      "description": "Portable contribution status for one graph object.",
+      "properties": {
+        "candidate_only": {
+          "default": true,
+          "title": "Candidate Only",
+          "type": "boolean"
+        },
+        "non_contributing_reason": {
+          "default": "candidate-only data does not improve phase metrics",
+          "title": "Non Contributing Reason",
+          "type": "string"
+        },
+        "positive_contribution": {
+          "default": false,
+          "title": "Positive Contribution",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "status": {
+          "default": "diagnostic",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "title": "PacketContributionStatus",
+      "type": "object"
+    }
+  },
+  "description": "One node in the effective packet graph.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "content_digest": {
+      "default": "",
+      "title": "Content Digest",
+      "type": "string"
+    },
+    "contribution": {
+      "$ref": "#/$defs/PacketContributionStatus"
+    },
+    "eligibility": {
+      "$ref": "#/$defs/EffectivePacketEligibility"
+    },
+    "missing_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Obligations",
+      "type": "array"
+    },
+    "node_id": {
+      "title": "Node Id",
+      "type": "string"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_summary": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residual Summary",
+      "type": "object"
+    },
+    "schema_hint": {
+      "default": "unknown",
+      "title": "Schema Hint",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "source_event_id": {
+      "default": "",
+      "title": "Source Event Id",
+      "type": "string"
+    },
+    "source_kind": {
+      "default": "unknown-report",
+      "title": "Source Kind",
+      "type": "string"
+    },
+    "workflow_usable": {
+      "default": false,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "node_id"
+  ],
+  "title": "EffectivePacketNode",
+  "type": "object"
+}

@@ -1,0 +1,38 @@
+{
+  "accepted": true,
+  "baseline_comparison": {},
+  "bottlenecks": [
+    {
+      "accepted": false,
+      "blockers": ["missing-edge-evidence"],
+      "bottleneck_class": "missing semantic edge",
+      "bottleneck_id": "bit-bottleneck:edge:beta:missing-semantic-edge",
+      "minimal_enabling_conditions": [
+        {
+          "bottleneck_id": "bit-bottleneck:edge:beta:missing-semantic-edge",
+          "condition_id": "mec:bit-bottleneck:edge:beta:missing-semantic-edge:semantic-edge",
+          "condition_type": "semantic-edge",
+          "required_evidence": ["edge-evidence-ref"],
+          "residual_preserved": true,
+          "settled": false,
+          "verifier_routes": ["route:edge"]
+        }
+      ],
+      "object_id": "edge:beta",
+      "reasons": ["edge lacks finite evidence support"],
+      "recommendation_only": true,
+      "settled": false,
+      "severity": 1.0
+    }
+  ],
+  "capability_expression_paths": [],
+  "certificates": [],
+  "graph_id": "effective-graph-example",
+  "inversion_candidates": [],
+  "protocol_relative_only": true,
+  "reasons": ["BIT diagnostics do not grant execution authority"],
+  "recommendation_only": true,
+  "report_id": "bit-bottleneck-inversion-report",
+  "settled": false,
+  "workflow_usable": true
+}

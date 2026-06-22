@@ -1,0 +1,105 @@
+{
+  "accepted": true,
+  "content_treated_as_data": true,
+  "executed_command_count": 0,
+  "ingested_events": [
+    {
+      "accepted": true,
+      "candidate_only": false,
+      "candidate_only_reasons": [],
+      "content_digest": "a0e7926edd1c21e191da43d6de646d47f2f05aa536721ea2cbaf87c07fbe8ae9",
+      "event_id": "phase-lab-event:0:a0e7926edd1c",
+      "missing_obligations": [],
+      "operationally_usable": true,
+      "payload": {
+        "accepted": true,
+        "edges": [
+          {
+            "accepted": true,
+            "edge_id": "edge:self-alpha",
+            "evidence_refs": [
+              "evidence:alpha"
+            ],
+            "relation_type": "self-support",
+            "source_packet_ids": [
+              "packet:alpha"
+            ],
+            "target_packet_id": "packet:alpha"
+          }
+        ],
+        "operationally_usable": true,
+        "packet_ref": "packet:alpha",
+        "report_id": "phase-lab-runtime-report-1",
+        "residual_summary": {},
+        "settled": false,
+        "workflow_usable": true
+      },
+      "positive_contribution_allowed": true,
+      "reasons": [
+        "event content is stored as inert data"
+      ],
+      "residual_summary": {},
+      "safety_boundary": [
+        "protocol-relative only",
+        "does not prove real ASI",
+        "does not prove physical or oracle truth",
+        "does not execute command text or safe_commands",
+        "raw packet volume is diagnostic only"
+      ],
+      "schema_hint": "AgentCheckReport",
+      "settled": false,
+      "settled_blockers": [],
+      "source_kind": "agent-check",
+      "source_path": "runtime_report_1.json",
+      "window_id": "phase-window:0000",
+      "workflow_usable": true
+    }
+  ],
+  "reasons": [
+    "ingested files were stored as inert local data",
+    "no embedded command, safe_command, network, repository, or model action was executed"
+  ],
+  "rejected_paths": [],
+  "report_id": "phase-lab-ingest:phase-window:0000",
+  "settled": false,
+  "store_manifest": {
+    "accepted": true,
+    "database_path": "phase_lab.sqlite",
+    "event_count": 1,
+    "latest_window_id": "phase-window:0000",
+    "reasons": [
+      "phase lab store is local and non-executing"
+    ],
+    "safety_invariants": [
+      "phase lab stores local report data only",
+      "phase lab never executes report or packet content",
+      "phase lab diagnostics do not settle claims"
+    ],
+    "schema_version": "phase-lab-store-v1",
+    "settled": false,
+    "store_id": "phase-lab-store",
+    "store_path": "pic-phase-lab",
+    "window_count": 1
+  },
+  "window": {
+    "accepted": true,
+    "accepted_event_count": 1,
+    "candidate_only_event_count": 0,
+    "event_count": 1,
+    "event_ids": [
+      "phase-lab-event:0:a0e7926edd1c"
+    ],
+    "missing_obligation_count": 0,
+    "positive_contribution_event_count": 1,
+    "reasons": [
+      "window index preserves event residuals without settling claims"
+    ],
+    "residual_debt": 0.0,
+    "sequence": 0,
+    "settled": false,
+    "settled_event_count": 0,
+    "window_id": "phase-window:0000"
+  },
+  "workflow_usable": true
+}
+

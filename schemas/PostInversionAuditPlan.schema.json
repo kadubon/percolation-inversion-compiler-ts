@@ -1,0 +1,38 @@
+{
+  "description": "Audit steps that must follow a bottleneck inversion candidate.",
+  "properties": {
+    "evidence_to_record": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence To Record",
+      "type": "array"
+    },
+    "executes_actions": {
+      "default": false,
+      "title": "Executes Actions",
+      "type": "boolean"
+    },
+    "plan_id": {
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "preserves_residuals": {
+      "default": true,
+      "title": "Preserves Residuals",
+      "type": "boolean"
+    },
+    "required_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Checks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "plan_id"
+  ],
+  "title": "PostInversionAuditPlan",
+  "type": "object"
+}

@@ -8,9 +8,9 @@ structured JSON reports. The reports show what is accepted, what is usable for a
 workflow, what still needs checking, and what must not be treated as completed
 work.
 
-This npm package is a TypeScript-compatible port of the Python v0.4.4 public
-JSON, CLI, schema, conformance, and safety semantics. The Python package
-remains the canonical implementation:
+This npm package is a TypeScript-compatible port of the Python v0.5.0 public
+JSON, CLI, schema, conformance, and safety semantics for npm and JavaScript
+agent runtimes. The Python package remains the canonical implementation:
 
 - Canonical repository:
   [kadubon/percolation-inversion-compiler](https://github.com/kadubon/percolation-inversion-compiler)
@@ -32,6 +32,8 @@ In plain terms, it answers:
 - Which command or SDK call can inspect the next step?
 - Which content must remain candidate-only and not be promoted to completed
   work?
+- How do accepted packets, missing evidence, and blocked execution paths look
+  across a local Phase Ecology Lab window?
 
 The package is local-first and Python-free at runtime. It does not execute
 arbitrary shell commands, mutate repositories, crawl in the background, or prove
@@ -45,16 +47,21 @@ Install from npm:
 npm install percolation-inversion-compiler-ts
 ```
 
-Run a compact agent check:
+Create local demo files. This works from any new npm project and does not need
+Python:
+
+```sh
+npx pic-ts demo bootstrap --output-dir .pic-demo --overwrite
+```
+
+Run the first local checks:
 
 ```sh
 npx pic-ts agent check --compact --text "Candidate packet: preserve residuals." --profile development
-```
-
-Plan the next workflow step:
-
-```sh
-npx pic-ts phase plan --compact --text "Candidate packet: preserve residuals." --profile development
+npx pic-ts runtime step --state .pic-demo/runtime_state.json --input .pic-demo/runtime_step_input.json --output .pic-demo/runtime_step_report.generated.json
+npx pic-ts packet export --report .pic-demo/runtime_step_report.generated.json --output .pic-demo/packet.json
+npx pic-ts packet inspect --packet .pic-demo/packet.json
+npx pic-ts phase plan --request .pic-demo/asi_proxy_phase_request.json --compact
 ```
 
 The package exposes two command names:
@@ -86,6 +93,30 @@ is preserved, missing work is kept visible, and bottlenecks are routed to finite
 checks. It is not a claim that real ASI, physical outcomes, simulator truth, or
 oracle truth has been proven.
 
+## Run The Phase Ecology Lab
+
+Version 0.5.0 adds a local JSON/JSONL lab for comparing agent reports over a
+small observation window. It stores only JSON records and source file basenames.
+It does not store absolute local paths, run packet content, or turn candidate
+traffic into accepted progress.
+
+```sh
+npx pic-ts demo bootstrap --output-dir .pic-demo --overwrite
+npx pic-ts runtime step --state .pic-demo/runtime_state.json --input .pic-demo/runtime_step_input.json --output .pic-demo/runtime_step_report.generated.json
+npx pic-ts phase lab init --output-dir .pic-lab
+npx pic-ts phase lab ingest --store .pic-lab --report .pic-demo/runtime_step_report.generated.json
+npx pic-ts phase lab graph --store .pic-lab
+npx pic-ts phase lab observe --store .pic-lab
+npx pic-ts phase lab closure --store .pic-lab
+npx pic-ts phase lab executable-paths --store .pic-lab
+npx pic-ts phase lab certify --store .pic-lab --threshold .pic-demo/asi_proxy_development.json
+```
+
+The lab output is useful for routing follow-up checks: which packets contribute,
+which ones are only candidates, which evidence is missing, and which execution
+paths are only available as typed data. The lab keeps `settled=false` unless a
+scoped finite verifier path actually discharges its obligations.
+
 ## Common Commands
 
 Check agent output:
@@ -104,26 +135,42 @@ npx pic-ts phase gap --compact --profile development
 npx pic-ts phase runbook --profile development
 ```
 
-Run the bundled runtime fixture:
+Run a runtime check from files created by `demo bootstrap`:
 
 ```sh
-npx pic-ts runtime step --state fixtures/python_v044_demo/runtime_state.json --input fixtures/python_v044_demo/runtime_step_input.json
+npx pic-ts demo bootstrap --output-dir .pic-demo --overwrite
+npx pic-ts runtime step --state .pic-demo/runtime_state.json --input .pic-demo/runtime_step_input.json --output .pic-demo/runtime_step_report.generated.json
 ```
 
 Work with packets as data:
 
 ```sh
-npx pic-ts packet export --report fixtures/python_v044_demo/runtime_step_report.json --output packet.json
-npx pic-ts packet inspect --packet packet.json
+npx pic-ts packet export --report .pic-demo/runtime_step_report.generated.json --output .pic-demo/packet.json
+npx pic-ts packet inspect --packet .pic-demo/packet.json
 ```
 
-Inspect schemas and conformance fixtures:
+Inspect schemas and the local snapshot catalog:
 
 ```sh
 npx pic-ts schema --type PhaseAccelerationPlan
-npx pic-ts portability verify --manifest fixtures/portability_conformance/manifest.json
+npx pic-ts schema --type EffectivePacketGraph
 npx pic-ts snapshot list
 ```
+
+Use v0.5.0 diagnostic helpers from a repository checkout or from packaged
+examples under `node_modules/percolation-inversion-compiler-ts/examples`:
+
+```sh
+npx pic-ts bit diagnose --graph examples/phase_lab/effective_graph.example.json
+npx pic-ts sqot diagnose-queue --graph examples/phase_lab/effective_graph.example.json
+npx pic-ts alt ecpt-lift --packets examples/alt_lift/alt_ecpt_lift.example.json
+npx pic-ts trc trace-adapter --input examples/trc_adapter/tool_trace_input.example.json
+npx pic-ts ecology execution-available-paths --graph examples/phase_lab/effective_graph.example.json
+```
+
+For installed npm projects, the main path is `demo bootstrap`: it creates the
+runtime state, runtime input, phase request, and threshold files in your current
+project so the commands above do not depend on a cloned repository.
 
 ## Use From JavaScript
 
@@ -156,6 +203,11 @@ Subpath imports for agent runtimes:
 import { schemaByType } from "percolation-inversion-compiler-ts/schema";
 import { createAgentMessage } from "percolation-inversion-compiler-ts/agent/messages";
 import { packetEnvelopeFromRuntimeReport } from "percolation-inversion-compiler-ts/packet";
+import { buildEffectivePacketGraph } from "percolation-inversion-compiler-ts/phase-lab";
+import { diagnoseBottlenecks } from "percolation-inversion-compiler-ts/bit-engine";
+import { diagnoseQueueOccupation } from "percolation-inversion-compiler-ts/sqot-controller";
+import { verifyAltEcptLift } from "percolation-inversion-compiler-ts/alt-lift";
+import { adaptToolTrace } from "percolation-inversion-compiler-ts/trc-adapter";
 ```
 
 ## How To Read The JSON
@@ -198,7 +250,7 @@ missing obligations.
 ## Python Canonical Implementation
 
 The canonical implementation is the Python package
-`percolation-inversion-compiler==0.4.4`.
+`percolation-inversion-compiler==0.5.0`.
 
 Use the Python project when you need the canonical source implementation,
 Python SDK behavior, optional Python sidecars, or the full project
@@ -215,13 +267,15 @@ not copy Python internals line by line.
 
 ## Compatibility
 
-| Command family                                                                                                                                                                                        | Compatibility claim                                                                                         |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `agent check`, `agent intake`, `agent runbook`, `agent autonomy-audit`, `agent manifest`, `agent communication-guide`                                                                                 | Exact Python v0.4.4 golden JSON for bundled fixture-backed modes.                                           |
-| `phase plan`, `phase gap`, `phase runbook`, `phase benchmark`, `phase benchmark-suite`, `phase dashboard`, `phase observe`                                                                            | Exact Python v0.4.4 golden JSON for static fixtures; dynamic `--request` preserves public v0.4.4 semantics. |
-| `runtime step`, `schema`, `snapshot`, `routes`, `portability`, `adoption`, `identity`, `demo installed-smoke`                                                                                         | Python v0.4.4 golden JSON or bundled canonical schema and fixture semantics.                                |
-| `agent message`, `agent inbox`, `packet`, Node-only demo bootstrap                                                                                                                                    | npm/Node sidecar implementation with the same non-promotion and residual-preservation rules.                |
-| evidence heavy routes, runtime service/store/heavy actions, SQOT audit, ALT heavy routes, ecology heavy routes, ECPT heavy routes, audit/extract/check/coverage/parse/provenance/sbom/demo datacenter | Safe diagnostic compatibility only.                                                                         |
+| Command family                                                                                                                                                                                        | Compatibility claim                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `agent check`, `agent intake`, `agent runbook`, `agent autonomy-audit`, `agent manifest`, `agent communication-guide`                                                                                 | Python v0.5.0 public JSON meaning, with v0.4.4 fixture-backed parity preserved.                           |
+| `phase plan`, `phase gap`, `phase runbook`, `phase benchmark`, `phase benchmark-suite`, `phase dashboard`, `phase observe`                                                                            | Python v0.5.0 public semantics; dynamic `--request` keeps candidate-only and identity blockers visible.   |
+| `phase lab init/ingest/list-windows/export/observe/graph/closure/executable-paths/threshold-status/certify/compare-window`                                                                            | npm/Node JSON/JSONL local store for Python v0.5.0 Phase Ecology Lab records.                              |
+| `bit`, `sqot`, `alt`, `trc`, `ecology effective-graph`, `ecology execution-available-paths`                                                                                                           | v0.5.0 diagnostic and recommendation routes; outputs are inert JSON and do not grant execution authority. |
+| `runtime step`, `schema`, `snapshot`, `routes`, `portability`, `adoption`, `identity`, `demo installed-smoke`                                                                                         | Python v0.5.0-compatible schema and fixture semantics, with bundled v0.4.4/v0.5.0 conformance fixtures.   |
+| `agent message`, `agent inbox`, `packet`, Node-only demo bootstrap                                                                                                                                    | npm/Node sidecar implementation with the same non-promotion and residual-preservation rules.              |
+| evidence heavy routes, runtime service/store/heavy actions, SQOT audit, ALT heavy routes, ecology heavy routes, ECPT heavy routes, audit/extract/check/coverage/parse/provenance/sbom/demo datacenter | Safe diagnostic compatibility only.                                                                       |
 
 ## Development And Publishing Checks
 
@@ -254,4 +308,5 @@ unresolved work ledger, missing obligations, packet export, packet inspection,
 agent-to-agent message checking, runtime step report, phase planning, workflow
 bottleneck planning, portability conformance, JSON schema validation,
 percolation inversion compiler, PIC, ECPT, BIT, TRC, SQOT, ALT, ASI-proxy
-workflow loop.
+workflow loop, Phase Ecology Lab, effective packet graph, execution available
+paths, bottleneck inversion, salience queue, typed runtime trace.

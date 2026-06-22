@@ -1,0 +1,55 @@
+{
+  "accepted": true,
+  "baseline_comparison": {},
+  "bottlenecks": [],
+  "capability_expression_paths": [],
+  "certificates": [],
+  "graph_id": "effective-graph-example",
+  "inversion_candidates": [
+    {
+      "accepted": false,
+      "bottleneck_class": "missing semantic edge",
+      "bottleneck_id": "bit-bottleneck:edge:beta:missing-semantic-edge",
+      "candidate_id": "inversion-candidate:bit-bottleneck:edge:beta:missing-semantic-edge",
+      "expected_activation_gain": {
+        "assumptions": ["finite evidence is supplied"],
+        "estimate_id": "activation-gain:edge:beta",
+        "lower_bound": 0.4,
+        "settled": false,
+        "unit": "protocol-relative-phase-proxy",
+        "upper_bound": 0.6
+      },
+      "minimal_enabling_conditions": [],
+      "mutates_repositories_shells_networks_or_models": false,
+      "post_inversion_audit_plan": {
+        "evidence_to_record": ["edge evidence"],
+        "executes_actions": false,
+        "plan_id": "audit:edge:beta",
+        "preserves_residuals": true,
+        "required_checks": ["rerun effective graph build"]
+      },
+      "reasons": [
+        "candidate remains not settled until finite checker rules pass"
+      ],
+      "recommendation_only": true,
+      "risk_hazard_authority_notes": ["candidate is not execution authority"],
+      "rollback_or_deactivation_plan": {
+        "automatic_rollback": false,
+        "deactivation_steps": ["return to diagnostic-only status"],
+        "plan_id": "rollback:edge:beta",
+        "rollback_refs_required": ["rollback-or-safe-abort-evidence"],
+        "rollback_required": true
+      },
+      "settled": false,
+      "verification_cost": 1.0
+    }
+  ],
+  "protocol_relative_only": true,
+  "reasons": [
+    "inversion candidates are recommendations, not execution authority"
+  ],
+  "recommendation_only": true,
+  "report_id": "bit-bottleneck-inversion-report",
+  "settled": false,
+  "workflow_usable": true
+}

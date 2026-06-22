@@ -1,0 +1,38 @@
+{
+  "description": "Residual summary carried by an effective graph.",
+  "properties": {
+    "candidate_only_reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Candidate Only Reasons",
+      "type": "array"
+    },
+    "missing_obligation_count": {
+      "default": 0,
+      "title": "Missing Obligation Count",
+      "type": "integer"
+    },
+    "residual_debt": {
+      "default": 0.0,
+      "title": "Residual Debt",
+      "type": "number"
+    },
+    "residual_summary": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residual Summary",
+      "type": "object"
+    },
+    "settled_blockers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Settled Blockers",
+      "type": "array"
+    }
+  },
+  "title": "EffectiveGraphResidualSummary",
+  "type": "object"
+}

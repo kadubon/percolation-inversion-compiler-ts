@@ -1,0 +1,41 @@
+{
+  "properties": {
+    "backlog_count": {
+      "default": 0,
+      "title": "Backlog Count",
+      "type": "integer"
+    },
+    "candidate_only_count": {
+      "default": 0,
+      "title": "Candidate Only Count",
+      "type": "integer"
+    },
+    "pressure": {
+      "default": 0.0,
+      "title": "Pressure",
+      "type": "number"
+    },
+    "pressure_id": {
+      "default": "sqot-verification-pressure",
+      "title": "Pressure Id",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "stale_packet_count": {
+      "default": 0,
+      "title": "Stale Packet Count",
+      "type": "integer"
+    },
+    "unsafe_packet_count": {
+      "default": 0,
+      "title": "Unsafe Packet Count",
+      "type": "integer"
+    }
+  },
+  "title": "VerificationQueuePressure",
+  "type": "object"
+}

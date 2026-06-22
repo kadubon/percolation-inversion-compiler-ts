@@ -1,156 +1,44 @@
 {
-  "$defs": {
-    "CoordinateKind": {
-      "enum": [
-        "benefit",
-        "burden",
-        "residual",
-        "tolerance",
-        "resource",
-        "metadata"
-      ],
-      "title": "CoordinateKind",
-      "type": "string"
-    },
-    "EvidenceStatus": {
-      "enum": [
-        "verified",
-        "declared",
-        "unknown"
-      ],
-      "title": "EvidenceStatus",
-      "type": "string"
-    },
-    "Ledger": {
-      "description": "A finite typed ledger with explicit coordinate kinds.",
-      "properties": {
-        "coordinates": {
-          "additionalProperties": {
-            "$ref": "#/$defs/LedgerCoordinate"
-          },
-          "title": "Coordinates",
-          "type": "object"
-        }
-      },
-      "title": "Ledger",
-      "type": "object"
-    },
-    "LedgerCoordinate": {
-      "description": "One typed coordinate in a finite certificate ledger.",
-      "properties": {
-        "description": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Description"
-        },
-        "evidence_refs": {
-          "items": {
-            "type": "string"
-          },
-          "title": "Evidence Refs",
-          "type": "array"
-        },
-        "evidence_status": {
-          "$ref": "#/$defs/EvidenceStatus",
-          "default": "declared"
-        },
-        "kind": {
-          "$ref": "#/$defs/CoordinateKind",
-          "default": "burden"
-        },
-        "known": {
-          "default": true,
-          "title": "Known",
-          "type": "boolean"
-        },
-        "name": {
-          "title": "Name",
-          "type": "string"
-        },
-        "unit": {
-          "default": "dimensionless",
-          "title": "Unit",
-          "type": "string"
-        },
-        "value": {
-          "title": "Value",
-          "type": "number"
-        }
-      },
-      "required": [
-        "name",
-        "value"
-      ],
-      "title": "LedgerCoordinate",
-      "type": "object"
-    }
-  },
-  "description": "Accepted finite closure witness for ECPT collective packet regeneration.",
+  "description": "Evidence-supported diagnostic closure witness over effective packet edges.",
   "properties": {
     "accepted": {
       "default": false,
       "title": "Accepted",
       "type": "boolean"
     },
-    "closure_packet_ids": {
+    "edge_ids": {
       "items": {
         "type": "string"
       },
-      "title": "Closure Packet Ids",
+      "title": "Edge Ids",
       "type": "array"
     },
-    "closure_strength": {
-      "default": 0.0,
-      "title": "Closure Strength",
-      "type": "number"
-    },
-    "external_seed_packet_ids": {
-      "items": {
-        "type": "string"
-      },
-      "title": "External Seed Packet Ids",
-      "type": "array"
-    },
-    "false_liquidity_rate": {
-      "default": 0.0,
-      "title": "False Liquidity Rate",
-      "type": "number"
-    },
-    "finite_checks_passed": {
+    "evidence_supported": {
       "default": false,
-      "title": "Finite Checks Passed",
+      "title": "Evidence Supported",
       "type": "boolean"
     },
-    "internal_edge_ids": {
-      "items": {
-        "type": "string"
-      },
-      "title": "Internal Edge Ids",
-      "type": "array"
-    },
-    "operationally_usable": {
+    "execution_available": {
       "default": false,
-      "title": "Operationally Usable",
+      "title": "Execution Available",
       "type": "boolean"
     },
-    "productive_packet_ids": {
+    "packet_ids": {
       "items": {
         "type": "string"
       },
-      "title": "Productive Packet Ids",
+      "title": "Packet Ids",
       "type": "array"
     },
-    "productivity_lower_bound": {
-      "default": 0.0,
-      "title": "Productivity Lower Bound",
-      "type": "number"
+    "productive": {
+      "default": false,
+      "title": "Productive",
+      "type": "boolean"
+    },
+    "protocol_relative_only": {
+      "default": true,
+      "title": "Protocol Relative Only",
+      "type": "boolean"
     },
     "reasons": {
       "items": {
@@ -159,16 +47,6 @@
       "title": "Reasons",
       "type": "array"
     },
-    "regeneration_edge_ids": {
-      "items": {
-        "type": "string"
-      },
-      "title": "Regeneration Edge Ids",
-      "type": "array"
-    },
-    "residual_ledger": {
-      "$ref": "#/$defs/Ledger"
-    },
     "settled": {
       "default": false,
       "title": "Settled",
@@ -176,6 +54,11 @@
     },
     "witness_id": {
       "title": "Witness Id",
+      "type": "string"
+    },
+    "witness_kind": {
+      "default": "autocatalytic-closure",
+      "title": "Witness Kind",
       "type": "string"
     }
   },

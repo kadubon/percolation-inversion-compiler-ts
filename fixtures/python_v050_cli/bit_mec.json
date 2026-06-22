@@ -1,0 +1,18 @@
+{
+  "minimal_enabling_conditions": [
+    {
+      "bottleneck_id": "bit-bottleneck:edge:beta:missing-semantic-edge",
+      "condition_id": "mec:bit-bottleneck:edge:beta:missing-semantic-edge:semantic-edge",
+      "condition_type": "semantic-edge",
+      "required_evidence": [
+        "edge-evidence-ref"
+      ],
+      "residual_preserved": true,
+      "settled": false,
+      "verifier_routes": [
+        "route:edge"
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,249 @@
+{
+  "$defs": {
+    "ActivationGainEstimate": {
+      "description": "Protocol-relative estimate of phase proxy activation after an inversion.",
+      "properties": {
+        "assumptions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Assumptions",
+          "type": "array"
+        },
+        "estimate_id": {
+          "title": "Estimate Id",
+          "type": "string"
+        },
+        "lower_bound": {
+          "default": 0.0,
+          "title": "Lower Bound",
+          "type": "number"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "unit": {
+          "default": "protocol-relative-phase-proxy",
+          "title": "Unit",
+          "type": "string"
+        },
+        "upper_bound": {
+          "default": 0.0,
+          "title": "Upper Bound",
+          "type": "number"
+        }
+      },
+      "required": [
+        "estimate_id"
+      ],
+      "title": "ActivationGainEstimate",
+      "type": "object"
+    },
+    "MinimalEnablingCondition": {
+      "description": "Small finite condition required to remove one bottleneck.",
+      "properties": {
+        "bottleneck_id": {
+          "title": "Bottleneck Id",
+          "type": "string"
+        },
+        "condition_id": {
+          "title": "Condition Id",
+          "type": "string"
+        },
+        "condition_type": {
+          "title": "Condition Type",
+          "type": "string"
+        },
+        "required_evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Evidence",
+          "type": "array"
+        },
+        "residual_preserved": {
+          "default": true,
+          "title": "Residual Preserved",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "verifier_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verifier Routes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "condition_id",
+        "bottleneck_id",
+        "condition_type"
+      ],
+      "title": "MinimalEnablingCondition",
+      "type": "object"
+    },
+    "PostInversionAuditPlan": {
+      "description": "Audit steps that must follow a bottleneck inversion candidate.",
+      "properties": {
+        "evidence_to_record": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence To Record",
+          "type": "array"
+        },
+        "executes_actions": {
+          "default": false,
+          "title": "Executes Actions",
+          "type": "boolean"
+        },
+        "plan_id": {
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "preserves_residuals": {
+          "default": true,
+          "title": "Preserves Residuals",
+          "type": "boolean"
+        },
+        "required_checks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Checks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "plan_id"
+      ],
+      "title": "PostInversionAuditPlan",
+      "type": "object"
+    },
+    "RollbackOrDeactivationPlan": {
+      "description": "Rollback/deactivation plan for a candidate intervention.",
+      "properties": {
+        "automatic_rollback": {
+          "default": false,
+          "title": "Automatic Rollback",
+          "type": "boolean"
+        },
+        "deactivation_steps": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Deactivation Steps",
+          "type": "array"
+        },
+        "plan_id": {
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "rollback_refs_required": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rollback Refs Required",
+          "type": "array"
+        },
+        "rollback_required": {
+          "default": true,
+          "title": "Rollback Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "plan_id"
+      ],
+      "title": "RollbackOrDeactivationPlan",
+      "type": "object"
+    }
+  },
+  "description": "Recommendation-only BIT inversion candidate.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "bottleneck_class": {
+      "title": "Bottleneck Class",
+      "type": "string"
+    },
+    "bottleneck_id": {
+      "title": "Bottleneck Id",
+      "type": "string"
+    },
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "expected_activation_gain": {
+      "$ref": "#/$defs/ActivationGainEstimate"
+    },
+    "minimal_enabling_conditions": {
+      "items": {
+        "$ref": "#/$defs/MinimalEnablingCondition"
+      },
+      "title": "Minimal Enabling Conditions",
+      "type": "array"
+    },
+    "mutates_repositories_shells_networks_or_models": {
+      "default": false,
+      "title": "Mutates Repositories Shells Networks Or Models",
+      "type": "boolean"
+    },
+    "post_inversion_audit_plan": {
+      "$ref": "#/$defs/PostInversionAuditPlan"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "recommendation_only": {
+      "default": true,
+      "title": "Recommendation Only",
+      "type": "boolean"
+    },
+    "risk_hazard_authority_notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Risk Hazard Authority Notes",
+      "type": "array"
+    },
+    "rollback_or_deactivation_plan": {
+      "$ref": "#/$defs/RollbackOrDeactivationPlan"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "verification_cost": {
+      "default": 1.0,
+      "title": "Verification Cost",
+      "type": "number"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "bottleneck_id",
+    "bottleneck_class",
+    "expected_activation_gain",
+    "rollback_or_deactivation_plan",
+    "post_inversion_audit_plan"
+  ],
+  "title": "BottleneckInversionCandidate",
+  "type": "object"
+}

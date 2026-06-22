@@ -1,0 +1,32 @@
+{
+  "description": "Portable contribution status for one graph object.",
+  "properties": {
+    "candidate_only": {
+      "default": true,
+      "title": "Candidate Only",
+      "type": "boolean"
+    },
+    "non_contributing_reason": {
+      "default": "candidate-only data does not improve phase metrics",
+      "title": "Non Contributing Reason",
+      "type": "string"
+    },
+    "positive_contribution": {
+      "default": false,
+      "title": "Positive Contribution",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "status": {
+      "default": "diagnostic",
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "title": "PacketContributionStatus",
+  "type": "object"
+}

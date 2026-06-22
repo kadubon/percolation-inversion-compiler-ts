@@ -1,0 +1,114 @@
+{
+  "$defs": {
+    "PacketQuarantineDecision": {
+      "properties": {
+        "applied": {
+          "default": false,
+          "title": "Applied",
+          "type": "boolean"
+        },
+        "decision": {
+          "default": "quarantine",
+          "title": "Decision",
+          "type": "string"
+        },
+        "decision_id": {
+          "title": "Decision Id",
+          "type": "string"
+        },
+        "deletes_packet": {
+          "default": false,
+          "title": "Deletes Packet",
+          "type": "boolean"
+        },
+        "packet_id": {
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "reversible": {
+          "default": true,
+          "title": "Reversible",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "decision_id",
+        "packet_id"
+      ],
+      "title": "PacketQuarantineDecision",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "deletes_packets": {
+      "default": false,
+      "title": "Deletes Packets",
+      "type": "boolean"
+    },
+    "executes_actions": {
+      "default": false,
+      "title": "Executes Actions",
+      "type": "boolean"
+    },
+    "graph_id": {
+      "default": "",
+      "title": "Graph Id",
+      "type": "string"
+    },
+    "plan_id": {
+      "default": "sqot-queue-rebalance",
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "quarantine_decisions": {
+      "items": {
+        "$ref": "#/$defs/PacketQuarantineDecision"
+      },
+      "title": "Quarantine Decisions",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "recommended_actions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Recommended Actions",
+      "type": "object"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "workflow_usable": {
+      "default": true,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "title": "QueueRebalancePlan",
+  "type": "object"
+}

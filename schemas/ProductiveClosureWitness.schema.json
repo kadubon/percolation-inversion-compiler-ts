@@ -1,0 +1,49 @@
+{
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Packet Ids",
+      "type": "array"
+    },
+    "productive_edge_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Productive Edge Ids",
+      "type": "array"
+    },
+    "productivity_lower_bound": {
+      "default": 0.0,
+      "title": "Productivity Lower Bound",
+      "type": "number"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "witness_id": {
+      "title": "Witness Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "witness_id"
+  ],
+  "title": "ProductiveClosureWitness",
+  "type": "object"
+}

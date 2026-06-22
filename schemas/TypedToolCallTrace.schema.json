@@ -1,0 +1,76 @@
+{
+  "description": "Typed data record for one observed agent tool call.",
+  "properties": {
+    "action_kind": {
+      "default": "tool-call",
+      "title": "Action Kind",
+      "type": "string"
+    },
+    "authority_status": {
+      "default": "not-granted",
+      "title": "Authority Status",
+      "type": "string"
+    },
+    "content_treated_as_data": {
+      "default": true,
+      "title": "Content Treated As Data",
+      "type": "boolean"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "execution_success_claim_verified": {
+      "default": false,
+      "title": "Execution Success Claim Verified",
+      "type": "boolean"
+    },
+    "input_digest": {
+      "default": "",
+      "title": "Input Digest",
+      "type": "string"
+    },
+    "output_digest": {
+      "default": "",
+      "title": "Output Digest",
+      "type": "string"
+    },
+    "receiver": {
+      "default": "tool",
+      "title": "Receiver",
+      "type": "string"
+    },
+    "rollback_status": {
+      "default": "unknown",
+      "title": "Rollback Status",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "source": {
+      "default": "agent",
+      "title": "Source",
+      "type": "string"
+    },
+    "tool_name": {
+      "default": "unknown",
+      "title": "Tool Name",
+      "type": "string"
+    },
+    "trace_id": {
+      "title": "Trace Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "trace_id"
+  ],
+  "title": "TypedToolCallTrace",
+  "type": "object"
+}

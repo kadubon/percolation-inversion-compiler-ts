@@ -1,0 +1,58 @@
+{
+  "description": "Receiver-context contribution from ALT abstraction liquidity.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "blockers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Blockers",
+      "type": "array"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "improves_receiver_context": {
+      "default": false,
+      "title": "Improves Receiver Context",
+      "type": "boolean"
+    },
+    "lift_id": {
+      "title": "Lift Id",
+      "type": "string"
+    },
+    "packet_id": {
+      "default": "",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "receiver_context_id": {
+      "default": "",
+      "title": "Receiver Context Id",
+      "type": "string"
+    },
+    "receiver_context_present": {
+      "default": false,
+      "title": "Receiver Context Present",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "lift_id"
+  ],
+  "title": "ReceiverLiquidityLift",
+  "type": "object"
+}

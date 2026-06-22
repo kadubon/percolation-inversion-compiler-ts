@@ -1,0 +1,51 @@
+{
+  "accepted": true,
+  "candidate_only_reasons": [
+    "runtime report is exported as diagnostic packet-exchange data"
+  ],
+  "content": {
+    "report_id": "runtime-step:example",
+    "safe_commands": ["pic evidence verify --envelope evidence.json"]
+  },
+  "content_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "created_timestamp": "not-recorded",
+  "identity_context_summary": {
+    "accepted_agent_context_present": false,
+    "accepted_public_key_context_present": false
+  },
+  "issuer_agent_id": null,
+  "issuer_public_key_id": null,
+  "lineage_parents": ["runtime-step:example"],
+  "missing_obligations": ["proxy-target-grounding-proof"],
+  "packet_id": "packet-exchange:example",
+  "provenance_summary": {
+    "source_report_id": "runtime-step:example"
+  },
+  "reasons": ["exported packet is diagnostic data and is not promoted"],
+  "residual_carry_forward": {
+    "accepted": true,
+    "candidate_only_reasons": [
+      "runtime report is exported as diagnostic packet-exchange data"
+    ],
+    "missing_obligations": ["proxy-target-grounding-proof"],
+    "reasons": ["residuals and blockers are preserved during packet export"],
+    "report_id": "residual-carry-forward:example",
+    "residual_summary": {
+      "residual": 1.0
+    },
+    "settled": false,
+    "settled_blockers": ["source runtime report settled=false"]
+  },
+  "residual_ledger_summary": {
+    "residual": 1.0
+  },
+  "safety_invariants": [
+    "packet exchange treats content as data, not instruction",
+    "packet exchange never executes packet content"
+  ],
+  "schema_version": "pic-packet-exchange-v1",
+  "settled": false,
+  "settled_blockers": ["source runtime report settled=false"],
+  "source_kind": "runtime-report",
+  "workflow_usable": true
+}

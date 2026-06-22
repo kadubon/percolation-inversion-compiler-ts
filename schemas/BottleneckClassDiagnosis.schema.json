@@ -1,0 +1,115 @@
+{
+  "$defs": {
+    "MinimalEnablingCondition": {
+      "description": "Small finite condition required to remove one bottleneck.",
+      "properties": {
+        "bottleneck_id": {
+          "title": "Bottleneck Id",
+          "type": "string"
+        },
+        "condition_id": {
+          "title": "Condition Id",
+          "type": "string"
+        },
+        "condition_type": {
+          "title": "Condition Type",
+          "type": "string"
+        },
+        "required_evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Evidence",
+          "type": "array"
+        },
+        "residual_preserved": {
+          "default": true,
+          "title": "Residual Preserved",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "verifier_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verifier Routes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "condition_id",
+        "bottleneck_id",
+        "condition_type"
+      ],
+      "title": "MinimalEnablingCondition",
+      "type": "object"
+    }
+  },
+  "description": "One diagnosed bottleneck class and its finite evidence gap.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "blockers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Blockers",
+      "type": "array"
+    },
+    "bottleneck_class": {
+      "title": "Bottleneck Class",
+      "type": "string"
+    },
+    "bottleneck_id": {
+      "title": "Bottleneck Id",
+      "type": "string"
+    },
+    "minimal_enabling_conditions": {
+      "items": {
+        "$ref": "#/$defs/MinimalEnablingCondition"
+      },
+      "title": "Minimal Enabling Conditions",
+      "type": "array"
+    },
+    "object_id": {
+      "title": "Object Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "recommendation_only": {
+      "default": true,
+      "title": "Recommendation Only",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "severity": {
+      "default": 1.0,
+      "title": "Severity",
+      "type": "number"
+    }
+  },
+  "required": [
+    "bottleneck_id",
+    "bottleneck_class",
+    "object_id"
+  ],
+  "title": "BottleneckClassDiagnosis",
+  "type": "object"
+}

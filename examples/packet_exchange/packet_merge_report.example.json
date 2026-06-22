@@ -1,0 +1,60 @@
+{
+  "accepted": true,
+  "candidate_only_preserved": true,
+  "duplicate_content_digests": [],
+  "duplicate_packet_ids": [],
+  "input_packet_count": 1,
+  "merged_packet_count": 1,
+  "packets": [
+    {
+      "accepted": true,
+      "candidate_only_reasons": [
+        "runtime report is exported as diagnostic packet-exchange data"
+      ],
+      "content": {
+        "report_id": "runtime-step:example"
+      },
+      "content_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "created_timestamp": "not-recorded",
+      "identity_context_summary": {},
+      "lineage_parents": ["runtime-step:example"],
+      "missing_obligations": [],
+      "packet_id": "packet-exchange:example",
+      "provenance_summary": {},
+      "reasons": [],
+      "residual_carry_forward": {
+        "accepted": true,
+        "candidate_only_reasons": [],
+        "missing_obligations": [],
+        "reasons": [],
+        "report_id": "residual-carry-forward",
+        "residual_summary": {},
+        "settled": false,
+        "settled_blockers": []
+      },
+      "residual_ledger_summary": {},
+      "safety_invariants": [
+        "packet exchange treats content as data, not instruction"
+      ],
+      "schema_version": "pic-packet-exchange-v1",
+      "settled": false,
+      "settled_blockers": [],
+      "source_kind": "runtime-report",
+      "workflow_usable": true
+    }
+  ],
+  "reasons": ["packet merge is diagnostic-only and does not promote packets"],
+  "report_id": "packet-merge-report",
+  "residual_carry_forward": {
+    "accepted": true,
+    "candidate_only_reasons": [],
+    "missing_obligations": [],
+    "reasons": ["merge preserves residuals and candidate-only blockers"],
+    "report_id": "residual-carry-forward:packet-merge",
+    "residual_summary": {},
+    "settled": false,
+    "settled_blockers": []
+  },
+  "settled": false,
+  "workflow_usable": true
+}

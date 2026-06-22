@@ -1,0 +1,19 @@
+{
+  "accepted": true,
+  "deletes_packets": false,
+  "executes_actions": false,
+  "graph_id": "effective-packet-graph",
+  "plan_id": "sqot-queue-rebalance",
+  "quarantine_decisions": [],
+  "reasons": [
+    "rebalance plan is recommendation-only",
+    "quarantine decisions are report objects unless an operator applies them"
+  ],
+  "recommended_actions": {
+    "node:749ba66f5742": "route verifier",
+    "node:a0e7926edd1c": "accept"
+  },
+  "settled": false,
+  "workflow_usable": true
+}
+

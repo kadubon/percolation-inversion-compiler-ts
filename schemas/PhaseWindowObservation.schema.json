@@ -1,0 +1,353 @@
+{
+  "$defs": {
+    "BasinReachabilityProxy": {
+      "properties": {
+        "effective_node_count": {
+          "default": 0,
+          "title": "Effective Node Count",
+          "type": "integer"
+        },
+        "execution_available_path_count": {
+          "default": 0,
+          "title": "Execution Available Path Count",
+          "type": "integer"
+        },
+        "reachability_proxy": {
+          "default": 0.0,
+          "title": "Reachability Proxy",
+          "type": "number"
+        }
+      },
+      "title": "BasinReachabilityProxy",
+      "type": "object"
+    },
+    "FalseLiquidityLoad": {
+      "properties": {
+        "candidate_count": {
+          "default": 0,
+          "title": "Candidate Count",
+          "type": "integer"
+        },
+        "certified_count": {
+          "default": 0,
+          "title": "Certified Count",
+          "type": "integer"
+        },
+        "load": {
+          "default": 0.0,
+          "title": "Load",
+          "type": "number"
+        }
+      },
+      "title": "FalseLiquidityLoad",
+      "type": "object"
+    },
+    "PhaseComponentObservation": {
+      "description": "One phase component value and threshold distance.",
+      "properties": {
+        "component": {
+          "title": "Component",
+          "type": "string"
+        },
+        "diagnostic_only": {
+          "default": true,
+          "title": "Diagnostic Only",
+          "type": "boolean"
+        },
+        "distance": {
+          "default": 0.0,
+          "title": "Distance",
+          "type": "number"
+        },
+        "positive_contribution_source": {
+          "default": "effective-graph-only",
+          "title": "Positive Contribution Source",
+          "type": "string"
+        },
+        "threshold": {
+          "default": 0.0,
+          "title": "Threshold",
+          "type": "number"
+        },
+        "value": {
+          "default": 0.0,
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "component"
+      ],
+      "title": "PhaseComponentObservation",
+      "type": "object"
+    },
+    "PhaseWindow": {
+      "description": "A finite Phase Lab observation window.",
+      "properties": {
+        "event_count": {
+          "default": 0,
+          "title": "Event Count",
+          "type": "integer"
+        },
+        "event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Event Ids",
+          "type": "array"
+        },
+        "sequence": {
+          "default": 0,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "window_id": {
+          "title": "Window Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "window_id"
+      ],
+      "title": "PhaseWindow",
+      "type": "object"
+    },
+    "SalienceObstructionLoad": {
+      "properties": {
+        "blocked_count": {
+          "default": 0,
+          "title": "Blocked Count",
+          "type": "integer"
+        },
+        "load": {
+          "default": 0.0,
+          "title": "Load",
+          "type": "number"
+        },
+        "total_count": {
+          "default": 0,
+          "title": "Total Count",
+          "type": "integer"
+        }
+      },
+      "title": "SalienceObstructionLoad",
+      "type": "object"
+    },
+    "VerificationThroughputWindow": {
+      "properties": {
+        "accepted_count": {
+          "default": 0,
+          "title": "Accepted Count",
+          "type": "integer"
+        },
+        "backlog_count": {
+          "default": 0,
+          "title": "Backlog Count",
+          "type": "integer"
+        },
+        "throughput_ratio": {
+          "default": 0.0,
+          "title": "Throughput Ratio",
+          "type": "number"
+        }
+      },
+      "title": "VerificationThroughputWindow",
+      "type": "object"
+    },
+    "WasteLoad": {
+      "properties": {
+        "load": {
+          "default": 0.0,
+          "title": "Load",
+          "type": "number"
+        },
+        "non_contributing_volume": {
+          "default": 0,
+          "title": "Non Contributing Volume",
+          "type": "integer"
+        },
+        "total_volume": {
+          "default": 0,
+          "title": "Total Volume",
+          "type": "integer"
+        }
+      },
+      "title": "WasteLoad",
+      "type": "object"
+    }
+  },
+  "description": "Windowed observation over Phase Lab events and an effective graph.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "accepted_packet_count": {
+      "default": 0,
+      "title": "Accepted Packet Count",
+      "type": "integer"
+    },
+    "alt_certified_capital_count": {
+      "default": 0,
+      "title": "Alt Certified Capital Count",
+      "type": "integer"
+    },
+    "alt_liquidity_candidate_count": {
+      "default": 0,
+      "title": "Alt Liquidity Candidate Count",
+      "type": "integer"
+    },
+    "autocatalytic_closure_score": {
+      "default": 0.0,
+      "title": "Autocatalytic Closure Score",
+      "type": "number"
+    },
+    "basin_reachability_proxy": {
+      "$ref": "#/$defs/BasinReachabilityProxy"
+    },
+    "bottleneck_count_by_type": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Bottleneck Count By Type",
+      "type": "object"
+    },
+    "candidate_only_packet_count": {
+      "default": 0,
+      "title": "Candidate Only Packet Count",
+      "type": "integer"
+    },
+    "closure_witness_count": {
+      "default": 0,
+      "title": "Closure Witness Count",
+      "type": "integer"
+    },
+    "components": {
+      "items": {
+        "$ref": "#/$defs/PhaseComponentObservation"
+      },
+      "title": "Components",
+      "type": "array"
+    },
+    "effective_edge_count": {
+      "default": 0,
+      "title": "Effective Edge Count",
+      "type": "integer"
+    },
+    "effective_node_count": {
+      "default": 0,
+      "title": "Effective Node Count",
+      "type": "integer"
+    },
+    "execution_available_path_count": {
+      "default": 0,
+      "title": "Execution Available Path Count",
+      "type": "integer"
+    },
+    "false_liquidity_load": {
+      "$ref": "#/$defs/FalseLiquidityLoad"
+    },
+    "missing_obligation_count": {
+      "default": 0,
+      "title": "Missing Obligation Count",
+      "type": "integer"
+    },
+    "observation_id": {
+      "default": "phase-window-observation",
+      "title": "Observation Id",
+      "type": "string"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "packet_candidate_count": {
+      "default": 0,
+      "title": "Packet Candidate Count",
+      "type": "integer"
+    },
+    "phase_gap_vector": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Phase Gap Vector",
+      "type": "object"
+    },
+    "protocol_relative_only": {
+      "default": true,
+      "title": "Protocol Relative Only",
+      "type": "boolean"
+    },
+    "proves_physical_or_oracle_truth": {
+      "default": false,
+      "title": "Proves Physical Or Oracle Truth",
+      "type": "boolean"
+    },
+    "proves_real_asi": {
+      "default": false,
+      "title": "Proves Real Asi",
+      "type": "boolean"
+    },
+    "raw_external_volume_diagnostic_only": {
+      "default": true,
+      "title": "Raw External Volume Diagnostic Only",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "residual_debt": {
+      "default": 0.0,
+      "title": "Residual Debt",
+      "type": "number"
+    },
+    "salience_obstruction_load": {
+      "$ref": "#/$defs/SalienceObstructionLoad"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "settled_packet_count": {
+      "default": 0,
+      "title": "Settled Packet Count",
+      "type": "integer"
+    },
+    "threshold_distance": {
+      "default": 0.0,
+      "title": "Threshold Distance",
+      "type": "number"
+    },
+    "verification_throughput": {
+      "$ref": "#/$defs/VerificationThroughputWindow"
+    },
+    "waste_load": {
+      "$ref": "#/$defs/WasteLoad"
+    },
+    "window": {
+      "$ref": "#/$defs/PhaseWindow"
+    },
+    "workflow_usable": {
+      "default": false,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    },
+    "workflow_usable_packet_count": {
+      "default": 0,
+      "title": "Workflow Usable Packet Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "window"
+  ],
+  "title": "PhaseWindowObservation",
+  "type": "object"
+}

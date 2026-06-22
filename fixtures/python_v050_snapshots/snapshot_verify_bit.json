@@ -1,0 +1,10 @@
+{
+  "artifact_key": "bit",
+  "canonical_manifest_schema_version": "canonical-manifest-2.0",
+  "canonical_sha256": "078a4c55eb51bd7b2a4c07533bdff3ba9ed94ae604e2985ea81a26662a005ac2",
+  "doi_matches": true,
+  "legacy_md5_matches": true,
+  "snapshot_is_derived_metadata": true,
+  "snapshot_schema_version": "theory-snapshot-1.0",
+  "valid": true
+}

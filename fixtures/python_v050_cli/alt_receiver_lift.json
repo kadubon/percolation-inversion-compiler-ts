@@ -1,0 +1,15 @@
+{
+  "accepted": false,
+  "blockers": [
+    "ALT packet is not accepted operational abstraction capital",
+    "receiver lift evidence_refs are required"
+  ],
+  "evidence_refs": [],
+  "improves_receiver_context": false,
+  "lift_id": "receiver-lift:packet-exchange:example:receiver-context",
+  "packet_id": "packet-exchange:example",
+  "receiver_context_id": "receiver-context",
+  "receiver_context_present": true,
+  "settled": false
+}
+

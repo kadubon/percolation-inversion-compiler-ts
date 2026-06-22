@@ -1,0 +1,314 @@
+{
+  "$defs": {
+    "ActionBoundaryRequirement": {
+      "properties": {
+        "requirement_id": {
+          "title": "Requirement Id",
+          "type": "string"
+        },
+        "requirement_type": {
+          "title": "Requirement Type",
+          "type": "string"
+        },
+        "residual": {
+          "default": "",
+          "title": "Residual",
+          "type": "string"
+        },
+        "satisfied": {
+          "default": false,
+          "title": "Satisfied",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "requirement_id",
+        "requirement_type"
+      ],
+      "title": "ActionBoundaryRequirement",
+      "type": "object"
+    },
+    "ExecutionAuthorityStatus": {
+      "properties": {
+        "authority_status": {
+          "default": "not-granted",
+          "title": "Authority Status",
+          "type": "string"
+        },
+        "explicit_scope_bounded": {
+          "default": false,
+          "title": "Explicit Scope Bounded",
+          "type": "boolean"
+        },
+        "grants_execution": {
+          "default": false,
+          "title": "Grants Execution",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        }
+      },
+      "title": "ExecutionAuthorityStatus",
+      "type": "object"
+    },
+    "ExecutionAvailableHyperpath": {
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "action_boundary_requirements": {
+          "items": {
+            "$ref": "#/$defs/ActionBoundaryRequirement"
+          },
+          "title": "Action Boundary Requirements",
+          "type": "array"
+        },
+        "authority_status": {
+          "$ref": "#/$defs/ExecutionAuthorityStatus"
+        },
+        "blocked": {
+          "default": true,
+          "title": "Blocked",
+          "type": "boolean"
+        },
+        "candidate_only": {
+          "default": true,
+          "title": "Candidate Only",
+          "type": "boolean"
+        },
+        "edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Edge Ids",
+          "type": "array"
+        },
+        "not_executed": {
+          "default": true,
+          "title": "Not Executed",
+          "type": "boolean"
+        },
+        "packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Packet Ids",
+          "type": "array"
+        },
+        "path_id": {
+          "title": "Path Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "receiver_context": {
+          "$ref": "#/$defs/ReceiverContextSupport"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "witness": {
+          "$ref": "#/$defs/ExecutionPathWitness"
+        }
+      },
+      "required": [
+        "path_id",
+        "witness"
+      ],
+      "title": "ExecutionAvailableHyperpath",
+      "type": "object"
+    },
+    "ExecutionPathWitness": {
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Edge Ids",
+          "type": "array"
+        },
+        "packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Packet Ids",
+          "type": "array"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "witness_id": {
+          "title": "Witness Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "witness_id"
+      ],
+      "title": "ExecutionPathWitness",
+      "type": "object"
+    },
+    "ReceiverContextSupport": {
+      "properties": {
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "present": {
+          "default": false,
+          "title": "Present",
+          "type": "boolean"
+        },
+        "receiver_context_id": {
+          "default": "receiver-context:default",
+          "title": "Receiver Context Id",
+          "type": "string"
+        }
+      },
+      "title": "ReceiverContextSupport",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "accepted_path_count": {
+      "default": 0,
+      "title": "Accepted Path Count",
+      "type": "integer"
+    },
+    "authority_requirements": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Authority Requirements",
+      "type": "array"
+    },
+    "blocked_path_count": {
+      "default": 0,
+      "title": "Blocked Path Count",
+      "type": "integer"
+    },
+    "blocker_reason_by_path": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Blocker Reason By Path",
+      "type": "object"
+    },
+    "candidate_only_path_count": {
+      "default": 0,
+      "title": "Candidate Only Path Count",
+      "type": "integer"
+    },
+    "executed_path_count": {
+      "default": 0,
+      "title": "Executed Path Count",
+      "type": "integer"
+    },
+    "graph_id": {
+      "title": "Graph Id",
+      "type": "string"
+    },
+    "operationally_usable": {
+      "default": false,
+      "title": "Operationally Usable",
+      "type": "boolean"
+    },
+    "path_count": {
+      "default": 0,
+      "title": "Path Count",
+      "type": "integer"
+    },
+    "path_density": {
+      "default": 0.0,
+      "title": "Path Density",
+      "type": "number"
+    },
+    "paths": {
+      "items": {
+        "$ref": "#/$defs/ExecutionAvailableHyperpath"
+      },
+      "title": "Paths",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "execution-available-path-density",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "residual_carry_forward": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Residual Carry Forward",
+      "type": "array"
+    },
+    "rollback_requirements": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rollback Requirements",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "workflow_usable": {
+      "default": true,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "graph_id"
+  ],
+  "title": "ExecutablePathDensityReport",
+  "type": "object"
+}

@@ -1,0 +1,63 @@
+{
+  "settled": false,
+  "store_manifest": {
+    "accepted": true,
+    "database_path": "phase_lab.sqlite",
+    "event_count": 2,
+    "latest_window_id": "phase-window:0001",
+    "reasons": [
+      "phase lab store is local and non-executing"
+    ],
+    "safety_invariants": [
+      "phase lab stores local report data only",
+      "phase lab never executes report or packet content",
+      "phase lab diagnostics do not settle claims"
+    ],
+    "schema_version": "phase-lab-store-v1",
+    "settled": false,
+    "store_id": "phase-lab-store",
+    "store_path": "pic-phase-lab",
+    "window_count": 2
+  },
+  "windows": [
+    {
+      "accepted": true,
+      "accepted_event_count": 1,
+      "candidate_only_event_count": 0,
+      "event_count": 1,
+      "event_ids": [
+        "phase-lab-event:0:a0e7926edd1c"
+      ],
+      "missing_obligation_count": 0,
+      "positive_contribution_event_count": 1,
+      "reasons": [
+        "window index preserves event residuals without settling claims"
+      ],
+      "residual_debt": 0.0,
+      "sequence": 0,
+      "settled": false,
+      "settled_event_count": 0,
+      "window_id": "phase-window:0000"
+    },
+    {
+      "accepted": true,
+      "accepted_event_count": 0,
+      "candidate_only_event_count": 1,
+      "event_count": 1,
+      "event_ids": [
+        "phase-lab-event:1:749ba66f5742"
+      ],
+      "missing_obligation_count": 0,
+      "positive_contribution_event_count": 0,
+      "reasons": [
+        "window index preserves event residuals without settling claims"
+      ],
+      "residual_debt": 1.0,
+      "sequence": 1,
+      "settled": false,
+      "settled_event_count": 0,
+      "window_id": "phase-window:0001"
+    }
+  ]
+}
+

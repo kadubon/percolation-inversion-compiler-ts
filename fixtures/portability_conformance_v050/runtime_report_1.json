@@ -1,0 +1,19 @@
+{
+  "accepted": true,
+  "edges": [
+    {
+      "accepted": true,
+      "edge_id": "edge:self-alpha",
+      "evidence_refs": ["evidence:alpha"],
+      "relation_type": "self-support",
+      "source_packet_ids": ["packet:alpha"],
+      "target_packet_id": "packet:alpha"
+    }
+  ],
+  "operationally_usable": true,
+  "packet_ref": "packet:alpha",
+  "report_id": "phase-lab-runtime-report-1",
+  "residual_summary": {},
+  "settled": false,
+  "workflow_usable": true
+}

@@ -1,0 +1,14 @@
+{
+  "accepted": true,
+  "deletes_packets": false,
+  "executes_actions": false,
+  "graph_id": "effective-graph-example",
+  "plan_id": "sqot-queue-rebalance",
+  "quarantine_decisions": [],
+  "reasons": ["rebalance plan is recommendation-only"],
+  "recommended_actions": {
+    "node:alpha": "accept"
+  },
+  "settled": false,
+  "workflow_usable": true
+}

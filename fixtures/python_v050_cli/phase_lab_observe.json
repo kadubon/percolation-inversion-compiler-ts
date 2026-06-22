@@ -1,0 +1,108 @@
+{
+  "accepted": true,
+  "accepted_packet_count": 0,
+  "alt_certified_capital_count": 0,
+  "alt_liquidity_candidate_count": 0,
+  "autocatalytic_closure_score": 0.0,
+  "basin_reachability_proxy": {
+    "effective_node_count": 0,
+    "execution_available_path_count": 0,
+    "reachability_proxy": 0.0
+  },
+  "bottleneck_count_by_type": {
+    "candidate-only": 1,
+    "verification-blocked": 1
+  },
+  "candidate_only_packet_count": 1,
+  "closure_witness_count": 0,
+  "components": [
+    {
+      "component": "accepted_packet_count",
+      "diagnostic_only": false,
+      "distance": 0.0,
+      "positive_contribution_source": "effective-graph-only",
+      "threshold": 0.0,
+      "value": 0.0
+    },
+    {
+      "component": "effective_node_count",
+      "diagnostic_only": false,
+      "distance": 0.0,
+      "positive_contribution_source": "effective-graph-only",
+      "threshold": 0.0,
+      "value": 0.0
+    },
+    {
+      "component": "effective_edge_count",
+      "diagnostic_only": false,
+      "distance": 0.0,
+      "positive_contribution_source": "effective-graph-only",
+      "threshold": 0.0,
+      "value": 0.0
+    },
+    {
+      "component": "raw_volume",
+      "diagnostic_only": true,
+      "distance": 0.0,
+      "positive_contribution_source": "effective-graph-only",
+      "threshold": 0.0,
+      "value": 1.0
+    }
+  ],
+  "effective_edge_count": 0,
+  "effective_node_count": 0,
+  "execution_available_path_count": 0,
+  "false_liquidity_load": {
+    "candidate_count": 0,
+    "certified_count": 0,
+    "load": 0.0
+  },
+  "missing_obligation_count": 0,
+  "observation_id": "phase-window-observation",
+  "operationally_usable": false,
+  "packet_candidate_count": 1,
+  "phase_gap_vector": {
+    "closure": 1.0,
+    "effective_edges": 1.0,
+    "effective_nodes": 1.0,
+    "execution_paths": 1.0
+  },
+  "protocol_relative_only": true,
+  "proves_physical_or_oracle_truth": false,
+  "proves_real_asi": false,
+  "raw_external_volume_diagnostic_only": true,
+  "reasons": [
+    "window observation is protocol-relative only",
+    "raw external volume is diagnostic only"
+  ],
+  "residual_debt": 1.0,
+  "salience_obstruction_load": {
+    "blocked_count": 0,
+    "load": 0.0,
+    "total_count": 1
+  },
+  "settled": false,
+  "settled_packet_count": 0,
+  "threshold_distance": 4.0,
+  "verification_throughput": {
+    "accepted_count": 0,
+    "backlog_count": 0,
+    "throughput_ratio": 0.0
+  },
+  "waste_load": {
+    "load": 1.0,
+    "non_contributing_volume": 1,
+    "total_volume": 1
+  },
+  "window": {
+    "event_count": 1,
+    "event_ids": [
+      "phase-lab-event:1:749ba66f5742"
+    ],
+    "sequence": 1,
+    "window_id": "phase-window:0001"
+  },
+  "workflow_usable": true,
+  "workflow_usable_packet_count": 1
+}
+

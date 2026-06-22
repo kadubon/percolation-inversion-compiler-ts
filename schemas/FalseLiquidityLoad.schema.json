@@ -1,0 +1,21 @@
+{
+  "properties": {
+    "candidate_count": {
+      "default": 0,
+      "title": "Candidate Count",
+      "type": "integer"
+    },
+    "certified_count": {
+      "default": 0,
+      "title": "Certified Count",
+      "type": "integer"
+    },
+    "load": {
+      "default": 0.0,
+      "title": "Load",
+      "type": "number"
+    }
+  },
+  "title": "FalseLiquidityLoad",
+  "type": "object"
+}

@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "defect_id": {
+      "title": "Defect Id",
+      "type": "string"
+    },
+    "defect_type": {
+      "title": "Defect Type",
+      "type": "string"
+    },
+    "packet_or_edge_id": {
+      "title": "Packet Or Edge Id",
+      "type": "string"
+    },
+    "residual_preserved": {
+      "default": true,
+      "title": "Residual Preserved",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "defect_id",
+    "packet_or_edge_id",
+    "defect_type"
+  ],
+  "title": "ClosureDefect",
+  "type": "object"
+}

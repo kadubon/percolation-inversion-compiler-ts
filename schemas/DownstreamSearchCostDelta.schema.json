@@ -1,0 +1,46 @@
+{
+  "description": "Finite downstream search-cost delta claimed by an ALT token.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "baseline_cost": {
+      "default": 0.0,
+      "title": "Baseline Cost",
+      "type": "number"
+    },
+    "candidate_cost": {
+      "default": 0.0,
+      "title": "Candidate Cost",
+      "type": "number"
+    },
+    "delta_id": {
+      "title": "Delta Id",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "lower_bound_reduction": {
+      "default": 0.0,
+      "title": "Lower Bound Reduction",
+      "type": "number"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "delta_id"
+  ],
+  "title": "DownstreamSearchCostDelta",
+  "type": "object"
+}

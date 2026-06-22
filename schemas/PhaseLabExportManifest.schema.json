@@ -1,0 +1,127 @@
+{
+  "$defs": {
+    "PhaseLabStoreManifest": {
+      "description": "Local Phase Lab store metadata.",
+      "properties": {
+        "accepted": {
+          "default": true,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "database_path": {
+          "default": "",
+          "title": "Database Path",
+          "type": "string"
+        },
+        "event_count": {
+          "default": 0,
+          "title": "Event Count",
+          "type": "integer"
+        },
+        "latest_window_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latest Window Id"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "safety_invariants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safety Invariants",
+          "type": "array"
+        },
+        "schema_version": {
+          "default": "phase-lab-store-v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "store_id": {
+          "default": "phase-lab-store",
+          "title": "Store Id",
+          "type": "string"
+        },
+        "store_path": {
+          "default": "",
+          "title": "Store Path",
+          "type": "string"
+        },
+        "window_count": {
+          "default": 0,
+          "title": "Window Count",
+          "type": "integer"
+        }
+      },
+      "title": "PhaseLabStoreManifest",
+      "type": "object"
+    }
+  },
+  "description": "Manifest for a deterministic local Phase Lab export.",
+  "properties": {
+    "absolute_paths_sanitized": {
+      "default": true,
+      "title": "Absolute Paths Sanitized",
+      "type": "boolean"
+    },
+    "accepted": {
+      "default": true,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "export_id": {
+      "default": "phase-lab-export",
+      "title": "Export Id",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "output_dir": {
+      "default": "",
+      "title": "Output Dir",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "store_manifest": {
+      "$ref": "#/$defs/PhaseLabStoreManifest"
+    }
+  },
+  "required": [
+    "store_manifest"
+  ],
+  "title": "PhaseLabExportManifest",
+  "type": "object"
+}

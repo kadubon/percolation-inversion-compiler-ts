@@ -11,6 +11,12 @@ import { dirname, join } from "node:path";
 import { Command } from "commander";
 import { altAdmit } from "../alt/index.js";
 import {
+  estimateCapitalImpact,
+  mapLiquidityToPaths,
+  verifyAltEcptLift,
+  verifyReceiverLift,
+} from "../alt_lift/index.js";
+import {
   accelerateAgentPhase,
   buildAgentAutonomyAudit,
   buildAgentRunbook,
@@ -34,11 +40,18 @@ import { parseJsonObject } from "../core/json.js";
 import { stableStringify } from "../core/json.js";
 import { ecologyPolicy, packetFromText } from "../ecology/index.js";
 import {
+  buildInversionCertificate,
+  buildMinimalEnablingConditions,
+  compareBottleneckBaseline,
+  diagnoseBottlenecks,
+  invertBottlenecks,
+} from "../bit_engine/index.js";
+import {
   fixtureJson,
   portabilityManifest,
   pythonCliFixture,
 } from "../io/fixtures.js";
-import { fixtureRoot } from "../io/paths.js";
+import { fixtureRoot, packageRoot } from "../io/paths.js";
 import { verifyPortabilityManifest } from "../io/portability.js";
 import {
   schemaBundle,
@@ -62,6 +75,21 @@ import {
 } from "../phase/index.js";
 import type { PhaseAccelerationRequest } from "../phase/index.js";
 import {
+  buildCollectivePhaseCertificateCandidate,
+  buildEffectivePacketGraph,
+  buildPhaseThresholdStatus,
+  comparePhaseWindows,
+  detectAutocatalyticClosure,
+  detectExecutionAvailablePaths,
+  exportPhaseLabStore,
+  ingestPhaseLabDirectory,
+  ingestPhaseLabFiles,
+  initPhaseLabStore,
+  listPhaseLabWindows,
+  loadPhaseLabGraph,
+  loadPhaseLabObservation,
+} from "../phase_lab/index.js";
+import {
   renderAdoptionPacketMarkdown,
   renderAdoptionRequestMarkdown,
   renderAgentAutonomyAuditMarkdown,
@@ -72,9 +100,21 @@ import {
 } from "../render/markdown.js";
 import { buildRuntimeStep, runtimeHealth } from "../runtime/index.js";
 import { buildSalienceSchedule } from "../sqot/index.js";
+import {
+  buildPacketQuarantineDecisions,
+  buildQueueRebalancePlan,
+  checkDiagnosticReserve,
+  diagnoseQueueOccupation,
+  diagnoseSalienceObstruction,
+} from "../sqot_controller/index.js";
 import { compileTrc } from "../trc/index.js";
+import {
+  adaptToolTrace,
+  adaptTrcTrace,
+  buildActionBoundaryReport,
+} from "../trc_adapter/index.js";
 
-const VERSION = "0.4.5";
+const VERSION = "0.5.0";
 
 function outputJson(data: unknown, output?: string): void {
   const text = stableStringify(data);
@@ -195,6 +235,26 @@ function readPhaseRequest(path: string): Record<string, unknown> {
   return parseJsonObject(readFileSync(path, "utf8"), "phase request");
 }
 
+function readJsonPath(path: string, label = "JSON"): Record<string, unknown> {
+  return parseJsonObject(readFileSync(path, "utf8"), label);
+}
+
+function readJsonPaths(
+  value: string | string[] | undefined,
+  label: string,
+): Record<string, unknown>[] {
+  if (!value) {
+    return [];
+  }
+  const paths = Array.isArray(value) ? value : [value];
+  return paths.flatMap((item) =>
+    String(item)
+      .split(",")
+      .filter(Boolean)
+      .map((path) => readJsonPath(path, label)),
+  );
+}
+
 function phaseRequestFromCli(
   options: Record<string, unknown>,
 ): PhaseAccelerationRequest {
@@ -276,7 +336,7 @@ const program = new Command();
 program
   .name("pic")
   .description(
-    "TypeScript port of percolation-inversion-compiler v0.4.4 public CLI contracts.",
+    "TypeScript-compatible port of percolation-inversion-compiler v0.5.0 public CLI contracts.",
   )
   .version(VERSION);
 program.exitOverride();
@@ -301,7 +361,7 @@ addOutputOptions(
 addOutputOptions(
   program
     .command("schema")
-    .description("Emit canonical Python v0.4.4 JSON Schema."),
+    .description("Emit canonical Python v0.5.0-compatible JSON Schema."),
 )
   .option("--type <typeName>", "schema type", "Registry")
   .option(
@@ -915,6 +975,206 @@ for (const name of ["benchmark-suite", "dashboard", "observe"]) {
   });
 }
 
+const phaseLab = phase
+  .command("lab")
+  .description("Run local Phase Ecology Lab diagnostics.");
+addOutputOptions(
+  phaseLab
+    .command("init")
+    .requiredOption(
+      "--output-dir <dir>",
+      "Directory for the local Phase Lab store",
+    )
+    .option("--format <format>", "output format", "json"),
+).action((options) =>
+  outputJson(initPhaseLabStore(options.outputDir), options.output),
+);
+addOutputOptions(
+  phaseLab
+    .command("ingest")
+    .requiredOption("--store <dir>", "Phase Lab store directory")
+    .option("--report <path...>", "PIC report JSON. May repeat")
+    .option("--packet <path...>", "Packet JSON. May repeat")
+    .option("--directory <dir>", "Directory of JSON reports to ingest")
+    .option("--format <format>", "output format", "json"),
+).action((options) => {
+  if (options.directory) {
+    outputJson(
+      ingestPhaseLabDirectory(options.store, options.directory),
+      options.output,
+    );
+    return;
+  }
+  const reports = Array.isArray(options.report) ? options.report : [];
+  const packets = Array.isArray(options.packet) ? options.packet : [];
+  if (reports.length === 0 && packets.length === 0) {
+    throw new Error("provide --report, --packet, or --directory");
+  }
+  outputJson(
+    ingestPhaseLabFiles(options.store, reports, packets),
+    options.output,
+  );
+});
+addOutputOptions(
+  phaseLab
+    .command("list-windows")
+    .requiredOption("--store <dir>", "Phase Lab store directory")
+    .option("--format <format>", "output format", "json"),
+).action((options) =>
+  outputJson(listPhaseLabWindows(options.store), options.output),
+);
+addOutputOptions(
+  phaseLab
+    .command("export")
+    .requiredOption("--store <dir>", "Phase Lab store directory")
+    .requiredOption("--output-dir <dir>", "Export directory")
+    .option("--format <format>", "output format", "json"),
+).action((options) =>
+  outputJson(
+    exportPhaseLabStore(options.store, options.outputDir),
+    options.output,
+  ),
+);
+addOutputOptions(
+  phaseLab
+    .command("observe")
+    .requiredOption("--store <dir>", "Phase Lab store directory")
+    .option(
+      "--window <window>",
+      "latest, previous, all, or window id",
+      "latest",
+    )
+    .option("--format <format>", "output format", "json"),
+).action((options) =>
+  outputJson(
+    loadPhaseLabObservation(options.store, options.window).observation,
+    options.output,
+  ),
+);
+addOutputOptions(
+  phaseLab
+    .command("graph")
+    .requiredOption("--store <dir>", "Phase Lab store directory")
+    .option("--window <window>", "latest, previous, all, or window id", "all")
+    .option("--format <format>", "output format", "json"),
+).action((options) =>
+  outputJson(loadPhaseLabGraph(options.store, options.window), options.output),
+);
+addOutputOptions(
+  phaseLab
+    .command("closure")
+    .requiredOption("--store <dir>", "Phase Lab store directory")
+    .option("--window <window>", "latest, previous, all, or window id", "all")
+    .option("--format <format>", "output format", "json"),
+).action((options) =>
+  outputJson(
+    detectAutocatalyticClosure(
+      loadPhaseLabGraph(options.store, options.window),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  phaseLab
+    .command("executable-paths")
+    .requiredOption("--store <dir>", "Phase Lab store directory")
+    .option("--window <window>", "latest, previous, all, or window id", "all")
+    .option("--format <format>", "output format", "json"),
+).action((options) =>
+  outputJson(
+    detectExecutionAvailablePaths(
+      loadPhaseLabGraph(options.store, options.window),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  phaseLab
+    .command("threshold-status")
+    .requiredOption("--store <dir>", "Phase Lab store directory")
+    .requiredOption("--threshold <path>", "ASIProxyThresholdSpec JSON")
+    .option("--window <window>", "latest, previous, or window id", "latest")
+    .option("--format <format>", "output format", "json"),
+).action((options) => {
+  const { observation } = loadPhaseLabObservation(
+    options.store,
+    options.window,
+  );
+  outputJson(
+    buildPhaseThresholdStatus(
+      observation,
+      readJsonPath(options.threshold, "threshold"),
+    ),
+    options.output,
+  );
+});
+addOutputOptions(
+  phaseLab
+    .command("certify")
+    .requiredOption("--store <dir>", "Phase Lab store directory")
+    .requiredOption("--threshold <path>", "ASIProxyThresholdSpec JSON")
+    .option("--window <window>", "latest, previous, or window id", "latest")
+    .option("--format <format>", "output format", "json"),
+).action((options) => {
+  const { observation, graph } = loadPhaseLabObservation(
+    options.store,
+    options.window,
+  );
+  const status = buildPhaseThresholdStatus(
+    observation,
+    readJsonPath(options.threshold, "threshold"),
+  );
+  outputJson(
+    buildCollectivePhaseCertificateCandidate(status, graph),
+    options.output,
+  );
+});
+addOutputOptions(
+  phaseLab
+    .command("compare-window")
+    .requiredOption("--store <dir>", "Phase Lab store directory")
+    .requiredOption("--baseline <window>", "previous, latest, or window id")
+    .requiredOption("--candidate <window>", "latest or window id")
+    .option("--format <format>", "output format", "json"),
+).action((options) => {
+  const baseline = loadPhaseLabObservation(
+    options.store,
+    options.baseline,
+  ).observation;
+  const candidate = loadPhaseLabObservation(
+    options.store,
+    options.candidate,
+  ).observation;
+  outputJson(comparePhaseWindows(baseline, candidate), options.output);
+});
+
+const phaseClosure = phase
+  .command("closure")
+  .description("Find and certify effective graph closure candidates.");
+addOutputOptions(
+  phaseClosure
+    .command("find")
+    .requiredOption("--graph <path>", "EffectivePacketGraph JSON")
+    .option("--format <format>", "output format", "json"),
+).action((options) =>
+  outputJson(
+    detectAutocatalyticClosure(readJsonPath(options.graph, "effective graph")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  phaseClosure
+    .command("certify")
+    .requiredOption("--graph <path>", "EffectivePacketGraph JSON")
+    .option("--format <format>", "output format", "json"),
+).action((options) =>
+  outputJson(
+    detectAutocatalyticClosure(readJsonPath(options.graph, "effective graph"))
+      .certificate_candidate,
+    options.output,
+  ),
+);
+
 const runtime = program
   .command("runtime")
   .description("Run bounded local runtime loops.");
@@ -987,6 +1247,72 @@ compile.action((options) =>
   ),
 );
 
+const bit = program
+  .command("bit")
+  .description("Run BIT bottleneck inversion diagnostics.");
+addOutputOptions(
+  bit
+    .command("diagnose")
+    .requiredOption("--graph <path>", "EffectivePacketGraph JSON"),
+).action((options) =>
+  outputJson(
+    diagnoseBottlenecks(readJsonPath(options.graph, "effective graph")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("invert")
+    .requiredOption("--bottlenecks <path>", "BottleneckInversionReport JSON"),
+).action((options) =>
+  outputJson(
+    invertBottlenecks(readJsonPath(options.bottlenecks, "bottlenecks")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("mec")
+    .requiredOption("--bottleneck <id>", "Bottleneck id")
+    .option("--bottlenecks <path>", "Optional BottleneckInversionReport JSON"),
+).action((options) =>
+  outputJson(
+    {
+      minimal_enabling_conditions: buildMinimalEnablingConditions(
+        options.bottleneck,
+        options.bottlenecks
+          ? readJsonPath(options.bottlenecks, "bottlenecks")
+          : undefined,
+      ),
+    },
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("certificate")
+    .requiredOption("--candidate <path>", "BottleneckInversionCandidate JSON"),
+).action((options) =>
+  outputJson(
+    buildInversionCertificate(readJsonPath(options.candidate, "candidate")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("compare-baseline")
+    .requiredOption("--baseline <path>", "PhaseWindowObservation JSON")
+    .requiredOption("--candidate <path>", "PhaseWindowObservation JSON"),
+).action((options) =>
+  outputJson(
+    compareBottleneckBaseline(
+      readJsonPath(options.baseline, "baseline observation"),
+      readJsonPath(options.candidate, "candidate observation"),
+    ),
+    options.output,
+  ),
+);
+
 const sqot = program.command("sqot");
 addOutputOptions(
   addProfile(sqot.command("schedule").option("--packets <path>")),
@@ -1000,11 +1326,131 @@ addOutputOptions(sqot.command("audit").option("--source <path>")).action(
       options.output,
     ),
 );
+addOutputOptions(
+  sqot
+    .command("diagnose-queue")
+    .requiredOption("--graph <path>", "EffectivePacketGraph JSON")
+    .option(
+      "--attention-budget <number>",
+      "Finite diagnostic attention budget",
+      "1",
+    ),
+).action((options) =>
+  outputJson(
+    diagnoseQueueOccupation(
+      readJsonPath(options.graph, "effective graph"),
+      Number(options.attentionBudget ?? 1),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  sqot
+    .command("salience-obstruction")
+    .requiredOption("--graph <path>", "EffectivePacketGraph JSON"),
+).action((options) =>
+  outputJson(
+    diagnoseSalienceObstruction(readJsonPath(options.graph, "effective graph")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  sqot
+    .command("rebalance")
+    .requiredOption("--graph <path>", "EffectivePacketGraph JSON"),
+).action((options) =>
+  outputJson(
+    buildQueueRebalancePlan(readJsonPath(options.graph, "effective graph")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  sqot
+    .command("quarantine")
+    .requiredOption("--graph <path>", "EffectivePacketGraph JSON"),
+).action((options) =>
+  outputJson(
+    buildPacketQuarantineDecisions(
+      readJsonPath(options.graph, "effective graph"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  sqot
+    .command("reserve-check")
+    .requiredOption("--graph <path>", "EffectivePacketGraph JSON")
+    .option(
+      "--attention-budget <number>",
+      "Finite diagnostic attention budget",
+      "1",
+    ),
+).action((options) =>
+  outputJson(
+    checkDiagnosticReserve(
+      readJsonPath(options.graph, "effective graph"),
+      Number(options.attentionBudget ?? 1),
+    ),
+    options.output,
+  ),
+);
 
 const alt = program.command("alt");
 addOutputOptions(alt.command("admit").option("--packet <path>")).action(
   (options) =>
     outputJson(altAdmit(options.packet ?? "alt-packet:demo"), options.output),
+);
+addOutputOptions(
+  alt
+    .command("ecpt-lift")
+    .requiredOption("--packets <path...>", "ALT packet/report JSON. May repeat")
+    .requiredOption("--graph <path>", "EffectivePacketGraph JSON"),
+).action((options) =>
+  outputJson(
+    verifyAltEcptLift(
+      readJsonPaths(options.packets, "ALT packet"),
+      readJsonPath(options.graph, "effective graph"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  alt
+    .command("receiver-lift")
+    .requiredOption("--packet <path>", "ALT packet/report JSON")
+    .requiredOption("--receiver-context <path>", "Receiver context JSON"),
+).action((options) =>
+  outputJson(
+    verifyReceiverLift(
+      readJsonPath(options.packet, "ALT packet"),
+      readJsonPath(options.receiverContext, "receiver context"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  alt
+    .command("liquidity-to-paths")
+    .requiredOption("--packet <path>", "ALT packet/report JSON")
+    .requiredOption("--graph <path>", "EffectivePacketGraph JSON"),
+).action((options) =>
+  outputJson(
+    mapLiquidityToPaths(
+      readJsonPath(options.packet, "ALT packet"),
+      readJsonPath(options.graph, "effective graph"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  alt
+    .command("capital-impact")
+    .requiredOption("--reports <path...>", "ALT report JSON. May repeat"),
+).action((options) =>
+  outputJson(
+    estimateCapitalImpact(readJsonPaths(options.reports, "ALT report")),
+    options.output,
+  ),
 );
 for (const name of [
   "audit",
@@ -1025,6 +1471,38 @@ for (const name of [
     (options) => outputJson(diagnostic(`alt:${name}`), options.output),
   );
 }
+
+const trc = program
+  .command("trc")
+  .description("Adapt traces into typed TRC diagnostic data.");
+addOutputOptions(
+  trc.command("trace-adapter").requiredOption("--input <path>", "Trace JSON"),
+).action((options) =>
+  outputJson(
+    adaptTrcTrace(readJsonPath(options.input, "trace input")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  trc
+    .command("tool-trace")
+    .requiredOption("--events <path>", "JSON tool events"),
+).action((options) =>
+  outputJson(
+    adaptToolTrace(readJsonPath(options.events, "tool events")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  trc
+    .command("action-boundary")
+    .requiredOption("--report <path>", "Runtime report JSON"),
+).action((options) =>
+  outputJson(
+    buildActionBoundaryReport(readJsonPath(options.report, "runtime report")),
+    options.output,
+  ),
+);
 
 const ecology = program.command("ecology");
 addOutputOptions(
@@ -1048,6 +1526,28 @@ addOutputOptions(
     .option("--profile <profile>", "policy", "controlled_web"),
 ).action((options) =>
   outputJson(ecologyPolicy(options.profile), options.output),
+);
+addOutputOptions(
+  ecology
+    .command("effective-graph")
+    .requiredOption("--reports <path...>", "PIC report JSON. May repeat"),
+).action((options) =>
+  outputJson(
+    buildEffectivePacketGraph(readJsonPaths(options.reports, "ecology report")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  ecology
+    .command("execution-available-paths")
+    .requiredOption("--graph <path>", "EffectivePacketGraph JSON"),
+).action((options) =>
+  outputJson(
+    detectExecutionAvailablePaths(
+      readJsonPath(options.graph, "effective graph"),
+    ),
+    options.output,
+  ),
 );
 for (const name of [
   "ingest-general",
@@ -1372,13 +1872,34 @@ addOutputOptions(
   ),
 );
 
+function nodeOnlyDemoCommands(demoDir = "pic-demo"): string[] {
+  return [
+    `pic-ts runtime step --state ${demoDir}/runtime_state.json --input ${demoDir}/runtime_step_input.json --output ${demoDir}/runtime_step_report.generated.json`,
+    `pic-ts packet export --report ${demoDir}/runtime_step_report.generated.json --output ${demoDir}/packet.json`,
+    `pic-ts packet inspect --packet ${demoDir}/packet.json`,
+    `pic-ts phase lab init --output-dir ${demoDir}/phase-lab`,
+    `pic-ts phase lab ingest --store ${demoDir}/phase-lab --report ${demoDir}/runtime_step_report.generated.json`,
+    `pic-ts phase lab observe --store ${demoDir}/phase-lab --window latest`,
+    `pic-ts phase lab graph --store ${demoDir}/phase-lab`,
+    `pic-ts phase lab closure --store ${demoDir}/phase-lab`,
+    `pic-ts phase lab executable-paths --store ${demoDir}/phase-lab`,
+    `pic-ts phase lab certify --store ${demoDir}/phase-lab --threshold ${demoDir}/asi_proxy_development.json`,
+    `pic-ts phase plan --request ${demoDir}/asi_proxy_phase_request.json --compact`,
+    'pic-ts agent accelerate --compact --text "Candidate packet: preserve residuals." --profile development',
+  ];
+}
+
 const demo = program.command("demo");
 addOutputOptions(addProfile(demo.command("installed-smoke"))).action(
-  (options) =>
-    outputJson(
-      { ...pythonCliFixture("demo_installed_smoke"), profile: options.profile },
-      options.output,
-    ),
+  (options) => {
+    const report = {
+      ...pythonCliFixture("demo_installed_smoke"),
+      profile: options.profile,
+      recommended_next_commands: nodeOnlyDemoCommands(),
+      settled: false,
+    };
+    outputJson(report, options.output);
+  },
 );
 addOutputOptions(
   demo
@@ -1395,6 +1916,11 @@ addOutputOptions(
     cpSync(join(demoDir, file), join(options.outputDir, file));
     copied.push(file);
   }
+  cpSync(
+    join(packageRoot(), "examples", "thresholds", "asi_proxy_development.json"),
+    join(options.outputDir, "asi_proxy_development.json"),
+  );
+  copied.push("asi_proxy_development.json");
   for (const [file, fixture] of [
     ["agent_check_report.json", "agent_check_full"],
     ["phase_acceleration_plan.json", "phase_plan_full"],
@@ -1412,6 +1938,7 @@ addOutputOptions(
       accepted: true,
       output_dir: options.outputDir,
       files: copied.sort(),
+      recommended_next_commands: nodeOnlyDemoCommands(options.outputDir),
       settled: false,
     },
     options.output,

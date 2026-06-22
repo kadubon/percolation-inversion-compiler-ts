@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { altAdmit } from "../src/alt/index.js";
+import { verifyAltEcptLift } from "../src/alt_lift/index.js";
 import { runAgentCheck } from "../src/agent/index.js";
 import {
   createAgentMessage,
@@ -15,9 +16,22 @@ import {
   buildPhaseAccelerationPlan,
   phaseAccelerationCompactPayload,
 } from "../src/phase/index.js";
+import {
+  buildCollectivePhaseCertificateCandidate,
+  buildEffectivePacketGraph,
+  buildPhaseThresholdStatus,
+  detectAutocatalyticClosure,
+  detectExecutionAvailablePaths,
+  observePhaseWindow,
+} from "../src/phase_lab/index.js";
 import { inspectPacketEnvelope } from "../src/packet/index.js";
 import { buildRuntimeStep } from "../src/runtime/index.js";
+import {
+  buildPacketQuarantineDecisions,
+  diagnoseQueueOccupation,
+} from "../src/sqot_controller/index.js";
 import { buildSalienceSchedule } from "../src/sqot/index.js";
+import { adaptToolTrace } from "../src/trc_adapter/index.js";
 import { compileTrc } from "../src/trc/index.js";
 
 describe("non-promotion and safety semantics", () => {
@@ -209,5 +223,108 @@ describe("non-promotion and safety semantics", () => {
     );
     expect(inspection.executed_command_count).toBe(0);
     expect(inspection.settled).toBe(false);
+  });
+
+  it("keeps Phase Ecology Lab raw and candidate-only records out of positive metrics", () => {
+    const events = [
+      {
+        accepted: true,
+        report_id: "accepted:alpha",
+        evidence_refs: ["evidence:alpha"],
+        settled: false,
+      },
+      {
+        accepted: true,
+        candidate_only: true,
+        report_id: "candidate:beta",
+        settled: false,
+      },
+      {
+        accepted: true,
+        report_id: "raw:gamma",
+        source_kind: "general-intake",
+        settled: false,
+      },
+    ];
+    const graph = buildEffectivePacketGraph(events);
+    expect(graph.accepted_packet_capital).toBe(1);
+    expect(graph.candidate_only_packets).toBe(2);
+    expect(graph.settled).toBe(false);
+
+    const observation = observePhaseWindow({ event_count: 3 }, events, graph);
+    expect(observation.accepted_packet_count).toBe(3);
+    expect(observation.effective_node_count).toBe(1);
+    expect(observation.candidate_only_packet_count).toBe(1);
+    expect(observation.raw_external_volume_diagnostic_only).toBe(true);
+    expect(observation.protocol_relative_only).toBe(true);
+    expect(observation.proves_real_asi).toBe(false);
+    expect(observation.proves_physical_or_oracle_truth).toBe(false);
+    expect(observation.settled).toBe(false);
+  });
+
+  it("keeps closure, executable paths, and phase certificates diagnostic-only", () => {
+    const graph = buildEffectivePacketGraph([
+      {
+        accepted: true,
+        report_id: "accepted:path",
+        execution_available: true,
+        evidence_refs: ["evidence:path"],
+        settled: false,
+      },
+    ]);
+    const closure = detectAutocatalyticClosure(graph);
+    const paths = detectExecutionAvailablePaths(graph);
+    const threshold = buildPhaseThresholdStatus(
+      observePhaseWindow({ event_count: 1 }, [{}], graph),
+      { minimum_accepted_packet_count: 1 },
+    );
+    const certificate = buildCollectivePhaseCertificateCandidate(
+      threshold,
+      graph,
+    );
+
+    expect(closure.settled).toBe(false);
+    expect(paths.executed_path_count).toBe(0);
+    expect(paths.execution_authority_granted).toBe(false);
+    expect(paths.settled).toBe(false);
+    expect(certificate.settled).toBe(false);
+    expect(certificate.execution_authority_granted).toBe(false);
+  });
+
+  it("keeps BIT/SQOT/ALT/TRC v0.5.0 helpers as inert recommendation data", () => {
+    const graph = buildEffectivePacketGraph([
+      {
+        accepted: true,
+        candidate_only: true,
+        report_id: "candidate:queue",
+        missing_obligations: ["verifier:evidence"],
+        settled: false,
+      },
+    ]);
+    const queue = diagnoseQueueOccupation(graph);
+    const quarantine = buildPacketQuarantineDecisions(graph);
+    const alt = verifyAltEcptLift(
+      [
+        {
+          accepted: true,
+          positive_ecpt_component_lift: true,
+          missing_obligations: ["baseline"],
+        },
+      ],
+      graph,
+    );
+    const trace = adaptToolTrace({
+      tool_calls: [
+        { name: "npm install inert" },
+        { command: "docker run inert" },
+      ],
+    });
+
+    expect(queue.settled).toBe(false);
+    expect(quarantine.settled).toBe(false);
+    expect(alt.settled).toBe(false);
+    expect(alt.promotes_to_ecpt_capital).toBe(false);
+    expect(trace.execution_authority_granted).toBe(false);
+    expect(trace.settled).toBe(false);
   });
 });

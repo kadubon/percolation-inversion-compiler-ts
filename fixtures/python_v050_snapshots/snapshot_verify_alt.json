@@ -1,0 +1,10 @@
+{
+  "artifact_key": "alt",
+  "canonical_manifest_schema_version": "canonical-manifest-2.0",
+  "canonical_sha256": "768d3737b5c466315da2491a96013f9fc01a474b76524c692437ff5615b14116",
+  "doi_matches": true,
+  "legacy_md5_matches": true,
+  "snapshot_is_derived_metadata": true,
+  "snapshot_schema_version": "theory-snapshot-1.0",
+  "valid": true
+}

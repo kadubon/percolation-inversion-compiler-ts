@@ -1,0 +1,44 @@
+{
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "edge_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Edge Ids",
+      "type": "array"
+    },
+    "hyperpath_id": {
+      "title": "Hyperpath Id",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "source_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Packet Ids",
+      "type": "array"
+    },
+    "target_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Target Packet Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "hyperpath_id"
+  ],
+  "title": "ClosureSupportHyperpath",
+  "type": "object"
+}

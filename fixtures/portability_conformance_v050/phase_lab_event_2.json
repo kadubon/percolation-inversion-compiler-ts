@@ -1,0 +1,55 @@
+{
+  "accepted": false,
+  "candidate_only": true,
+  "candidate_only_reasons": [
+    "external candidate requires finite verifier route"
+  ],
+  "content_digest": "749ba66f574233b51eb2a924e1c5c7314ee4800006cf86a351a7484b778e241d",
+  "event_id": "phase-lab-event:1:749ba66f5742",
+  "missing_obligations": [],
+  "operationally_usable": false,
+  "payload": {
+    "accepted": false,
+    "candidate_only": true,
+    "candidate_only_reasons": [
+      "external candidate requires finite verifier route"
+    ],
+    "operationally_usable": false,
+    "packet_ref": "packet:beta",
+    "report_id": "phase-lab-runtime-report-2",
+    "residual_summary": {
+      "missing_evidence": 1
+    },
+    "settled": false,
+    "settled_blockers": [
+      "missing evidence"
+    ],
+    "workflow_usable": true
+  },
+  "positive_contribution_allowed": false,
+  "reasons": [
+    "event content is stored as inert data",
+    "candidate-only reasons remain visible",
+    "settlement blockers remain visible",
+    "candidate-only event cannot improve phase metrics"
+  ],
+  "residual_summary": {
+    "missing_evidence": 1
+  },
+  "safety_boundary": [
+    "protocol-relative only",
+    "does not prove real ASI",
+    "does not prove physical or oracle truth",
+    "does not execute command text or safe_commands",
+    "raw packet volume is diagnostic only"
+  ],
+  "schema_hint": "AgentCheckReport",
+  "settled": false,
+  "settled_blockers": [
+    "missing evidence"
+  ],
+  "source_kind": "agent-check",
+  "source_path": "runtime_report_2.json",
+  "window_id": "phase-window:0001",
+  "workflow_usable": true
+}

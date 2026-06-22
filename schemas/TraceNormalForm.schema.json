@@ -1,0 +1,181 @@
+{
+  "$defs": {
+    "TypedActionBoundary": {
+      "description": "Boundary conditions around an agent/tool action trace.",
+      "properties": {
+        "action_kind": {
+          "default": "tool-call",
+          "title": "Action Kind",
+          "type": "string"
+        },
+        "authority_explicit": {
+          "default": false,
+          "title": "Authority Explicit",
+          "type": "boolean"
+        },
+        "boundary_id": {
+          "title": "Boundary Id",
+          "type": "string"
+        },
+        "external_result_verified": {
+          "default": false,
+          "title": "External Result Verified",
+          "type": "boolean"
+        },
+        "missing_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Obligations",
+          "type": "array"
+        },
+        "rollback_available": {
+          "default": false,
+          "title": "Rollback Available",
+          "type": "boolean"
+        },
+        "scope_bounded": {
+          "default": false,
+          "title": "Scope Bounded",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "trace_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Trace Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "boundary_id"
+      ],
+      "title": "TypedActionBoundary",
+      "type": "object"
+    },
+    "TypedToolCallTrace": {
+      "description": "Typed data record for one observed agent tool call.",
+      "properties": {
+        "action_kind": {
+          "default": "tool-call",
+          "title": "Action Kind",
+          "type": "string"
+        },
+        "authority_status": {
+          "default": "not-granted",
+          "title": "Authority Status",
+          "type": "string"
+        },
+        "content_treated_as_data": {
+          "default": true,
+          "title": "Content Treated As Data",
+          "type": "boolean"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "execution_success_claim_verified": {
+          "default": false,
+          "title": "Execution Success Claim Verified",
+          "type": "boolean"
+        },
+        "input_digest": {
+          "default": "",
+          "title": "Input Digest",
+          "type": "string"
+        },
+        "output_digest": {
+          "default": "",
+          "title": "Output Digest",
+          "type": "string"
+        },
+        "receiver": {
+          "default": "tool",
+          "title": "Receiver",
+          "type": "string"
+        },
+        "rollback_status": {
+          "default": "unknown",
+          "title": "Rollback Status",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "source": {
+          "default": "agent",
+          "title": "Source",
+          "type": "string"
+        },
+        "tool_name": {
+          "default": "unknown",
+          "title": "Tool Name",
+          "type": "string"
+        },
+        "trace_id": {
+          "title": "Trace Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "trace_id"
+      ],
+      "title": "TypedToolCallTrace",
+      "type": "object"
+    }
+  },
+  "description": "Normalized word and typed records for an adapted trace.",
+  "properties": {
+    "action_boundaries": {
+      "items": {
+        "$ref": "#/$defs/TypedActionBoundary"
+      },
+      "title": "Action Boundaries",
+      "type": "array"
+    },
+    "content_treated_as_data": {
+      "default": true,
+      "title": "Content Treated As Data",
+      "type": "boolean"
+    },
+    "normal_form_id": {
+      "title": "Normal Form Id",
+      "type": "string"
+    },
+    "normalized_word": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Normalized Word",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "tool_calls": {
+      "items": {
+        "$ref": "#/$defs/TypedToolCallTrace"
+      },
+      "title": "Tool Calls",
+      "type": "array"
+    }
+  },
+  "required": [
+    "normal_form_id"
+  ],
+  "title": "TraceNormalForm",
+  "type": "object"
+}

@@ -1,0 +1,235 @@
+{
+  "accepted": true,
+  "baseline_comparison": {},
+  "bottlenecks": [
+    {
+      "accepted": false,
+      "blockers": [
+        "candidate-only"
+      ],
+      "bottleneck_class": "missing evidence",
+      "bottleneck_id": "bit-bottleneck:node:749ba66f5742:missing-evidence",
+      "minimal_enabling_conditions": [
+        {
+          "bottleneck_id": "bit-bottleneck:node:749ba66f5742:missing-evidence",
+          "condition_id": "mec:bit-bottleneck:node:749ba66f5742:missing-evidence:evidence",
+          "condition_type": "evidence",
+          "required_evidence": [
+            "content-addressed-evidence-ref"
+          ],
+          "residual_preserved": true,
+          "settled": false,
+          "verifier_routes": [
+            "route:evidence"
+          ]
+        }
+      ],
+      "object_id": "node:749ba66f5742",
+      "reasons": [
+        "bottleneck diagnosis is recommendation-only",
+        "residual obligations remain visible"
+      ],
+      "recommendation_only": true,
+      "settled": false,
+      "severity": 1.0
+    },
+    {
+      "accepted": false,
+      "blockers": [
+        "verification-blocked"
+      ],
+      "bottleneck_class": "missing verifier route",
+      "bottleneck_id": "bit-bottleneck:node:749ba66f5742:missing-verifier-route",
+      "minimal_enabling_conditions": [
+        {
+          "bottleneck_id": "bit-bottleneck:node:749ba66f5742:missing-verifier-route",
+          "condition_id": "mec:bit-bottleneck:node:749ba66f5742:missing-verifier-route:verifier-route",
+          "condition_type": "verifier-route",
+          "required_evidence": [
+            "verifier-resolution"
+          ],
+          "residual_preserved": true,
+          "settled": false,
+          "verifier_routes": [
+            "route:verifier"
+          ]
+        }
+      ],
+      "object_id": "node:749ba66f5742",
+      "reasons": [
+        "bottleneck diagnosis is recommendation-only",
+        "residual obligations remain visible"
+      ],
+      "recommendation_only": true,
+      "settled": false,
+      "severity": 1.0
+    }
+  ],
+  "capability_expression_paths": [
+    {
+      "blocked_by": [],
+      "edge_ids": [
+        "edge:self-alpha"
+      ],
+      "execution_available": false,
+      "packet_ids": [
+        "node:a0e7926edd1c"
+      ],
+      "path_id": "capability-path:edge:self-alpha",
+      "settled": false
+    }
+  ],
+  "certificates": [],
+  "graph_id": "effective-packet-graph",
+  "inversion_candidates": [
+    {
+      "accepted": false,
+      "bottleneck_class": "missing evidence",
+      "bottleneck_id": "bit-bottleneck:node:749ba66f5742:missing-evidence",
+      "candidate_id": "inversion-candidate:bit-bottleneck:node:749ba66f5742:missing-evidence",
+      "expected_activation_gain": {
+        "assumptions": [
+          "all listed minimal enabling conditions are met",
+          "no new residual or salience obstruction is introduced"
+        ],
+        "estimate_id": "activation-gain:bit-bottleneck:node:749ba66f5742:missing-evidence",
+        "lower_bound": 0.3,
+        "settled": false,
+        "unit": "protocol-relative-phase-proxy",
+        "upper_bound": 0.5
+      },
+      "minimal_enabling_conditions": [
+        {
+          "bottleneck_id": "bit-bottleneck:node:749ba66f5742:missing-evidence",
+          "condition_id": "mec:bit-bottleneck:node:749ba66f5742:missing-evidence:evidence",
+          "condition_type": "evidence",
+          "required_evidence": [
+            "content-addressed-evidence-ref"
+          ],
+          "residual_preserved": true,
+          "settled": false,
+          "verifier_routes": [
+            "route:evidence"
+          ]
+        }
+      ],
+      "mutates_repositories_shells_networks_or_models": false,
+      "post_inversion_audit_plan": {
+        "evidence_to_record": [
+          "verifier route result",
+          "edge evidence",
+          "rollback evidence"
+        ],
+        "executes_actions": false,
+        "plan_id": "audit:inversion-candidate:bit-bottleneck:node:749ba66f5742:missing-evidence",
+        "preserves_residuals": true,
+        "required_checks": [
+          "rerun effective graph build",
+          "rerun threshold status",
+          "inspect residual ledger"
+        ]
+      },
+      "reasons": [
+        "candidate remains not settled until finite checker rules pass"
+      ],
+      "recommendation_only": true,
+      "risk_hazard_authority_notes": [
+        "explicit scope-bounded authority remains required",
+        "candidate is not execution authority"
+      ],
+      "rollback_or_deactivation_plan": {
+        "automatic_rollback": false,
+        "deactivation_steps": [
+          "revert candidate contribution to diagnostic-only status"
+        ],
+        "plan_id": "rollback:inversion-candidate:bit-bottleneck:node:749ba66f5742:missing-evidence",
+        "rollback_refs_required": [
+          "rollback-or-safe-abort-evidence"
+        ],
+        "rollback_required": true
+      },
+      "settled": false,
+      "verification_cost": 1.0
+    },
+    {
+      "accepted": false,
+      "bottleneck_class": "missing verifier route",
+      "bottleneck_id": "bit-bottleneck:node:749ba66f5742:missing-verifier-route",
+      "candidate_id": "inversion-candidate:bit-bottleneck:node:749ba66f5742:missing-verifier-route",
+      "expected_activation_gain": {
+        "assumptions": [
+          "all listed minimal enabling conditions are met",
+          "no new residual or salience obstruction is introduced"
+        ],
+        "estimate_id": "activation-gain:bit-bottleneck:node:749ba66f5742:missing-verifier-route",
+        "lower_bound": 0.35,
+        "settled": false,
+        "unit": "protocol-relative-phase-proxy",
+        "upper_bound": 0.55
+      },
+      "minimal_enabling_conditions": [
+        {
+          "bottleneck_id": "bit-bottleneck:node:749ba66f5742:missing-verifier-route",
+          "condition_id": "mec:bit-bottleneck:node:749ba66f5742:missing-verifier-route:verifier-route",
+          "condition_type": "verifier-route",
+          "required_evidence": [
+            "verifier-resolution"
+          ],
+          "residual_preserved": true,
+          "settled": false,
+          "verifier_routes": [
+            "route:verifier"
+          ]
+        }
+      ],
+      "mutates_repositories_shells_networks_or_models": false,
+      "post_inversion_audit_plan": {
+        "evidence_to_record": [
+          "verifier route result",
+          "edge evidence",
+          "rollback evidence"
+        ],
+        "executes_actions": false,
+        "plan_id": "audit:inversion-candidate:bit-bottleneck:node:749ba66f5742:missing-verifier-route",
+        "preserves_residuals": true,
+        "required_checks": [
+          "rerun effective graph build",
+          "rerun threshold status",
+          "inspect residual ledger"
+        ]
+      },
+      "reasons": [
+        "candidate remains not settled until finite checker rules pass"
+      ],
+      "recommendation_only": true,
+      "risk_hazard_authority_notes": [
+        "explicit scope-bounded authority remains required",
+        "candidate is not execution authority"
+      ],
+      "rollback_or_deactivation_plan": {
+        "automatic_rollback": false,
+        "deactivation_steps": [
+          "revert candidate contribution to diagnostic-only status"
+        ],
+        "plan_id": "rollback:inversion-candidate:bit-bottleneck:node:749ba66f5742:missing-verifier-route",
+        "rollback_refs_required": [
+          "rollback-or-safe-abort-evidence"
+        ],
+        "rollback_required": true
+      },
+      "settled": false,
+      "verification_cost": 1.0
+    }
+  ],
+  "protocol_relative_only": true,
+  "reasons": [
+    "BIT diagnostics do not grant execution authority",
+    "activation gain is protocol-relative only",
+    "inversion candidates are recommendations, not execution authority"
+  ],
+  "recommendation_only": true,
+  "report_id": "bit-bottleneck-inversion-report",
+  "settled": false,
+  "workflow_usable": true
+}
+

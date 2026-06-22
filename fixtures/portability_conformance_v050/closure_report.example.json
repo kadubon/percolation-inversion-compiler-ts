@@ -1,0 +1,39 @@
+{
+  "accepted": true,
+  "certificate_candidate": {
+    "abstention_reasons": [],
+    "accepted": true,
+    "certificate_id": "closure-certificate-candidate",
+    "certificate_status": "candidate",
+    "defects": [],
+    "reasons": ["closure candidate is not automatically settled"],
+    "settled": false,
+    "witness_ids": ["closure-witness:edge:self-alpha"]
+  },
+  "closure_score": 1.0,
+  "closure_witnesses": [
+    {
+      "accepted": true,
+      "edge_ids": ["edge:self-alpha"],
+      "evidence_supported": true,
+      "execution_available": false,
+      "packet_ids": ["node:alpha"],
+      "productive": true,
+      "protocol_relative_only": true,
+      "reasons": ["witness remains diagnostic until finite threshold checks pass"],
+      "settled": false,
+      "witness_id": "closure-witness:edge:self-alpha",
+      "witness_kind": "autocatalytic-closure"
+    }
+  ],
+  "defects": [],
+  "executable_witnesses": [],
+  "graph_id": "effective-graph-example",
+  "operationally_usable": true,
+  "productive_witnesses": [],
+  "reasons": ["closure detection does not execute or settle paths"],
+  "report_id": "autocatalytic-closure-report",
+  "settled": false,
+  "support_hyperpaths": [],
+  "workflow_usable": true
+}

@@ -1,0 +1,95 @@
+{
+  "accepted": true,
+  "baseline_comparison": {},
+  "bottlenecks": [
+    {
+      "accepted": false,
+      "blockers": [
+        "candidate-only"
+      ],
+      "bottleneck_class": "missing evidence",
+      "bottleneck_id": "bit-bottleneck:node:749ba66f5742:missing-evidence",
+      "minimal_enabling_conditions": [
+        {
+          "bottleneck_id": "bit-bottleneck:node:749ba66f5742:missing-evidence",
+          "condition_id": "mec:bit-bottleneck:node:749ba66f5742:missing-evidence:evidence",
+          "condition_type": "evidence",
+          "required_evidence": [
+            "content-addressed-evidence-ref"
+          ],
+          "residual_preserved": true,
+          "settled": false,
+          "verifier_routes": [
+            "route:evidence"
+          ]
+        }
+      ],
+      "object_id": "node:749ba66f5742",
+      "reasons": [
+        "bottleneck diagnosis is recommendation-only",
+        "residual obligations remain visible"
+      ],
+      "recommendation_only": true,
+      "settled": false,
+      "severity": 1.0
+    },
+    {
+      "accepted": false,
+      "blockers": [
+        "verification-blocked"
+      ],
+      "bottleneck_class": "missing verifier route",
+      "bottleneck_id": "bit-bottleneck:node:749ba66f5742:missing-verifier-route",
+      "minimal_enabling_conditions": [
+        {
+          "bottleneck_id": "bit-bottleneck:node:749ba66f5742:missing-verifier-route",
+          "condition_id": "mec:bit-bottleneck:node:749ba66f5742:missing-verifier-route:verifier-route",
+          "condition_type": "verifier-route",
+          "required_evidence": [
+            "verifier-resolution"
+          ],
+          "residual_preserved": true,
+          "settled": false,
+          "verifier_routes": [
+            "route:verifier"
+          ]
+        }
+      ],
+      "object_id": "node:749ba66f5742",
+      "reasons": [
+        "bottleneck diagnosis is recommendation-only",
+        "residual obligations remain visible"
+      ],
+      "recommendation_only": true,
+      "settled": false,
+      "severity": 1.0
+    }
+  ],
+  "capability_expression_paths": [
+    {
+      "blocked_by": [],
+      "edge_ids": [
+        "edge:self-alpha"
+      ],
+      "execution_available": false,
+      "packet_ids": [
+        "node:a0e7926edd1c"
+      ],
+      "path_id": "capability-path:edge:self-alpha",
+      "settled": false
+    }
+  ],
+  "certificates": [],
+  "graph_id": "effective-packet-graph",
+  "inversion_candidates": [],
+  "protocol_relative_only": true,
+  "reasons": [
+    "BIT diagnostics do not grant execution authority",
+    "activation gain is protocol-relative only"
+  ],
+  "recommendation_only": true,
+  "report_id": "bit-bottleneck-inversion-report",
+  "settled": false,
+  "workflow_usable": true
+}
+

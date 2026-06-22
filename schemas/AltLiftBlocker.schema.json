@@ -1,0 +1,34 @@
+{
+  "description": "Reason an ALT artifact did not lift into ECPT phase components.",
+  "properties": {
+    "blocker_id": {
+      "title": "Blocker Id",
+      "type": "string"
+    },
+    "blocker_type": {
+      "title": "Blocker Type",
+      "type": "string"
+    },
+    "packet_id": {
+      "default": "",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "remediation": {
+      "default": "",
+      "title": "Remediation",
+      "type": "string"
+    },
+    "residual_preserved": {
+      "default": true,
+      "title": "Residual Preserved",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "blocker_id",
+    "blocker_type"
+  ],
+  "title": "AltLiftBlocker",
+  "type": "object"
+}

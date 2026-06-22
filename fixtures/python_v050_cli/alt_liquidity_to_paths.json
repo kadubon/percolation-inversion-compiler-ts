@@ -1,0 +1,85 @@
+{
+  "accepted": false,
+  "affected_ecpt_components": [],
+  "blockers": [
+    {
+      "blocker_id": "alt-lift-blocker:packet-exchange:example:capital",
+      "blocker_type": "missing accepted ALT capital",
+      "packet_id": "packet-exchange:example",
+      "remediation": "admit an ALT packet with finite liquidity, transport, root, telemetry, lifecycle, and hazard checks",
+      "residual_preserved": true
+    },
+    {
+      "blocker_id": "alt-lift-blocker:packet-exchange:example:ecpt-component",
+      "blocker_type": "no ECPT component affected",
+      "packet_id": "packet-exchange:example",
+      "remediation": "provide edge, receiver, path, closure, or bottleneck evidence",
+      "residual_preserved": true
+    }
+  ],
+  "capital_to_path_contributions": [
+    {
+      "accepted": false,
+      "contribution_id": "capital-to-path:packet-exchange:example",
+      "graph_id": "effective-packet-graph",
+      "increases_execution_available_path_density": false,
+      "packet_id": "packet-exchange:example",
+      "path_ids": [
+        "edge:self-alpha"
+      ],
+      "reasons": [
+        "path contribution requires accepted graph edges",
+        "ALT capital does not execute paths"
+      ],
+      "settled": false
+    }
+  ],
+  "cross_context_transfer_witnesses": [],
+  "diagnostic_only_lift_failure": true,
+  "downstream_search_cost_deltas": [],
+  "graph_id": "effective-packet-graph",
+  "liquidity_to_closure_contributions": [
+    {
+      "accepted": false,
+      "closure_witness_ids": [
+        "closure-witness:edge:self-alpha"
+      ],
+      "contribution_id": "liquidity-to-closure:packet-exchange:example",
+      "graph_id": "effective-packet-graph",
+      "packet_id": "packet-exchange:example",
+      "reasons": [
+        "closure contribution requires evidence-supported closure witnesses"
+      ],
+      "settled": false,
+      "supports_closure": false
+    }
+  ],
+  "operationally_usable": false,
+  "protocol_relative_only": true,
+  "proves_real_asi": false,
+  "reasons": [
+    "ALT lift is protocol-relative only",
+    "positive ALT liquidity does not automatically become ECPT packet capital",
+    "no accepted ECPT component lift was established"
+  ],
+  "receiver_liquidity_lifts": [
+    {
+      "accepted": false,
+      "blockers": [
+        "ALT packet is not accepted operational abstraction capital",
+        "receiver lift evidence_refs are required"
+      ],
+      "evidence_refs": [],
+      "improves_receiver_context": false,
+      "lift_id": "receiver-lift:packet-exchange:example:graph-receiver-context",
+      "packet_id": "packet-exchange:example",
+      "receiver_context_id": "graph-receiver-context",
+      "receiver_context_present": true,
+      "settled": false
+    }
+  ],
+  "report_id": "alt-ecpt-lift",
+  "settled": false,
+  "workflow_usable": true
+}
+

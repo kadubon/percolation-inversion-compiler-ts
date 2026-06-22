@@ -1,0 +1,15 @@
+{
+  "candidate_id": "inversion-candidate:bit-bottleneck:edge:beta:missing-semantic-edge",
+  "certificate_id": "inversion-certificate:inversion-candidate:bit-bottleneck:edge:beta:missing-semantic-edge",
+  "certificate_status": "candidate",
+  "finite_requirements_passed": true,
+  "grants_execution_authority": false,
+  "protocol_relative_only": true,
+  "reasons": [
+    "certificate remains protocol-relative",
+    "candidate does not mutate repositories, shells, networks, or models"
+  ],
+  "residual_preserved": true,
+  "settled": false
+}
+

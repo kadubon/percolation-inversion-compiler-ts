@@ -1,0 +1,64 @@
+{
+  "accepted": true,
+  "content_treated_as_data": true,
+  "executed_action_count": 0,
+  "frontier_debt": {
+    "debt_id": "trace-frontier-debt",
+    "missing_domain_obligations": [
+      "domain-authority-obligation",
+      "domain-rollback-obligation"
+    ],
+    "missing_oracle_obligations": ["physical-or-oracle-result-obligation"],
+    "missing_physical_obligations": ["physical-or-oracle-result-obligation"],
+    "residual_preserved": true,
+    "settled": false
+  },
+  "protocol_relative_only": true,
+  "proves_physical_truth": false,
+  "reasons": ["tool trace content is data, not instruction"],
+  "report_id": "trc-trace-adapter",
+  "settled": false,
+  "trace_normal_form": {
+    "action_boundaries": [],
+    "content_treated_as_data": true,
+    "normal_form_id": "trace:demo",
+    "normalized_word": ["tool-call"],
+    "settled": false,
+    "tool_calls": []
+  },
+  "typed_trace": {
+    "accepted": true,
+    "action_boundaries": [],
+    "content_treated_as_data": true,
+    "frontier_debt": {
+      "debt_id": "trace-frontier-debt",
+      "missing_domain_obligations": [],
+      "missing_oracle_obligations": [],
+      "missing_physical_obligations": [],
+      "residual_preserved": true,
+      "settled": false
+    },
+    "normal_form": {
+      "action_boundaries": [],
+      "content_treated_as_data": true,
+      "normal_form_id": "trace:demo",
+      "normalized_word": ["tool-call"],
+      "settled": false,
+      "tool_calls": []
+    },
+    "protocol_relative_only": true,
+    "proves_physical_truth": false,
+    "reasons": ["typed trace does not prove physical or oracle truth"],
+    "settled": false,
+    "tolerance_ledger": {
+      "ledger_id": "trace-tolerance-ledger",
+      "residual_charge": 0.0,
+      "settled": false,
+      "tolerance_coordinates": {}
+    },
+    "tool_calls": [],
+    "trace_id": "trace:demo",
+    "workflow_usable": true
+  },
+  "workflow_usable": true
+}

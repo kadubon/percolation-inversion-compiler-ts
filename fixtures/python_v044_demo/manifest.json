@@ -62,7 +62,7 @@
     "pic phase benchmark-suite --profile development --format json",
     "pic phase dashboard --runtime-report pic-demo/runtime_step_report.json --profile development",
     "pic packet inspect --packet pic-demo/packet_envelope.json",
-    "pic packet merge --packets pic-demo/packet*.json --output pic-demo/merged-packets.json",
+    "pic packet merge --packets pic-demo/packet.json --output pic-demo/merged-packets.json",
     "pic packet lineage --packet pic-demo/merged-packets.json",
     "pic phase observe --reports pic-demo/phase_dashboard.json --output pic-demo/observation.json",
     "pic audit canonical-readiness --profile development --format json",
@@ -76,3 +76,4 @@
   ],
   "version": "0.4.4"
 }
+

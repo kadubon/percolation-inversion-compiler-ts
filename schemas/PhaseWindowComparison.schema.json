@@ -1,0 +1,67 @@
+{
+  "description": "Comparison between two Phase Lab windows.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "baseline_window_id": {
+      "title": "Baseline Window Id",
+      "type": "string"
+    },
+    "candidate_window_id": {
+      "title": "Candidate Window Id",
+      "type": "string"
+    },
+    "comparison_id": {
+      "default": "phase-window-comparison",
+      "title": "Comparison Id",
+      "type": "string"
+    },
+    "diagnostic_only_components": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Diagnostic Only Components",
+      "type": "array"
+    },
+    "metric_delta": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Metric Delta",
+      "type": "object"
+    },
+    "positive_progress_components": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Positive Progress Components",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "workflow_usable": {
+      "default": false,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "baseline_window_id",
+    "candidate_window_id"
+  ],
+  "title": "PhaseWindowComparison",
+  "type": "object"
+}

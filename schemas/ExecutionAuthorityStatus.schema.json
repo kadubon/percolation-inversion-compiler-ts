@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "authority_status": {
+      "default": "not-granted",
+      "title": "Authority Status",
+      "type": "string"
+    },
+    "explicit_scope_bounded": {
+      "default": false,
+      "title": "Explicit Scope Bounded",
+      "type": "boolean"
+    },
+    "grants_execution": {
+      "default": false,
+      "title": "Grants Execution",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    }
+  },
+  "title": "ExecutionAuthorityStatus",
+  "type": "object"
+}

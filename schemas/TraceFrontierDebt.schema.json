@@ -1,0 +1,43 @@
+{
+  "description": "Unresolved physical/oracle/domain trace obligations.",
+  "properties": {
+    "debt_id": {
+      "default": "trace-frontier-debt",
+      "title": "Debt Id",
+      "type": "string"
+    },
+    "missing_domain_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Domain Obligations",
+      "type": "array"
+    },
+    "missing_oracle_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Oracle Obligations",
+      "type": "array"
+    },
+    "missing_physical_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Physical Obligations",
+      "type": "array"
+    },
+    "residual_preserved": {
+      "default": true,
+      "title": "Residual Preserved",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "title": "TraceFrontierDebt",
+  "type": "object"
+}

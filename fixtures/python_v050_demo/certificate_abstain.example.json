@@ -1,0 +1,39 @@
+{
+  "accepted": false,
+  "certificate_id": "collective-phase-certificate-candidate",
+  "certificate_status": "abstain",
+  "defects": [],
+  "finite_requirements_passed": false,
+  "operationally_usable": false,
+  "protocol_relative_only": true,
+  "proves_physical_or_oracle_truth": false,
+  "proves_real_asi": false,
+  "reasons": [
+    "certificate candidate is protocol-relative only",
+    "certificate candidate does not prove real ASI"
+  ],
+  "settled": false,
+  "threshold_status": {
+    "accepted": false,
+    "certificate_status": "abstain",
+    "component_status": {},
+    "failed_components": [],
+    "observation": {
+      "settled": false,
+      "window": {
+        "event_count": 0,
+        "event_ids": [],
+        "sequence": 0,
+        "window_id": "phase-window:example"
+      }
+    },
+    "protocol_relative_only": true,
+    "proves_real_asi": false,
+    "settled": false,
+    "threshold": {
+      "threshold_id": "asi-proxy-development"
+    },
+    "threshold_distance": 0.0
+  },
+  "workflow_usable": true
+}

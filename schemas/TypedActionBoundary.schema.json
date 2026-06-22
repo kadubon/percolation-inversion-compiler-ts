@@ -1,0 +1,58 @@
+{
+  "description": "Boundary conditions around an agent/tool action trace.",
+  "properties": {
+    "action_kind": {
+      "default": "tool-call",
+      "title": "Action Kind",
+      "type": "string"
+    },
+    "authority_explicit": {
+      "default": false,
+      "title": "Authority Explicit",
+      "type": "boolean"
+    },
+    "boundary_id": {
+      "title": "Boundary Id",
+      "type": "string"
+    },
+    "external_result_verified": {
+      "default": false,
+      "title": "External Result Verified",
+      "type": "boolean"
+    },
+    "missing_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Obligations",
+      "type": "array"
+    },
+    "rollback_available": {
+      "default": false,
+      "title": "Rollback Available",
+      "type": "boolean"
+    },
+    "scope_bounded": {
+      "default": false,
+      "title": "Scope Bounded",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "trace_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Trace Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "boundary_id"
+  ],
+  "title": "TypedActionBoundary",
+  "type": "object"
+}

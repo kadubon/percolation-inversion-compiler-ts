@@ -1,0 +1,156 @@
+{
+  "$defs": {
+    "AttentionBudgetLedger": {
+      "properties": {
+        "attention_budget": {
+          "default": 1.0,
+          "title": "Attention Budget",
+          "type": "number"
+        },
+        "diagnostic_reserve_available": {
+          "default": 0.0,
+          "title": "Diagnostic Reserve Available",
+          "type": "number"
+        },
+        "diagnostic_reserve_required": {
+          "default": 0.1,
+          "title": "Diagnostic Reserve Required",
+          "type": "number"
+        },
+        "ledger_id": {
+          "default": "sqot-attention-budget",
+          "title": "Ledger Id",
+          "type": "string"
+        },
+        "occupied": {
+          "default": 0.0,
+          "title": "Occupied",
+          "type": "number"
+        },
+        "reserve_preserved": {
+          "default": false,
+          "title": "Reserve Preserved",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "title": "AttentionBudgetLedger",
+      "type": "object"
+    },
+    "VerificationQueuePressure": {
+      "properties": {
+        "backlog_count": {
+          "default": 0,
+          "title": "Backlog Count",
+          "type": "integer"
+        },
+        "candidate_only_count": {
+          "default": 0,
+          "title": "Candidate Only Count",
+          "type": "integer"
+        },
+        "pressure": {
+          "default": 0.0,
+          "title": "Pressure",
+          "type": "number"
+        },
+        "pressure_id": {
+          "default": "sqot-verification-pressure",
+          "title": "Pressure Id",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "stale_packet_count": {
+          "default": 0,
+          "title": "Stale Packet Count",
+          "type": "integer"
+        },
+        "unsafe_packet_count": {
+          "default": 0,
+          "title": "Unsafe Packet Count",
+          "type": "integer"
+        }
+      },
+      "title": "VerificationQueuePressure",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "attention_budget_ledger": {
+      "$ref": "#/$defs/AttentionBudgetLedger"
+    },
+    "blocked_high_value_packets": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Blocked High Value Packets",
+      "type": "array"
+    },
+    "graph_id": {
+      "default": "",
+      "title": "Graph Id",
+      "type": "string"
+    },
+    "low_value_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Low Value Packet Ids",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "repeated_candidate_only_packets": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Repeated Candidate Only Packets",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "sqot-queue-occupation",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "rollback_unavailable_decisions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rollback Unavailable Decisions",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "verification_queue_pressure": {
+      "$ref": "#/$defs/VerificationQueuePressure"
+    },
+    "workflow_usable": {
+      "default": true,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "title": "QueueOccupationReport",
+  "type": "object"
+}

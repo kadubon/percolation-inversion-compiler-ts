@@ -1,0 +1,20 @@
+{
+  "accepted": true,
+  "attention_budget_ledger": {
+    "attention_budget": 1.0,
+    "diagnostic_reserve_available": 0.9,
+    "diagnostic_reserve_required": 0.1,
+    "ledger_id": "sqot-attention-budget",
+    "occupied": 0.1,
+    "reserve_preserved": true,
+    "settled": false
+  },
+  "graph_id": "effective-packet-graph",
+  "reasons": [
+    "diagnostic reserve is checked without scheduling or executing work"
+  ],
+  "report_id": "sqot-diagnostic-reserve",
+  "reserve_deficit": 0.0,
+  "settled": false
+}
+

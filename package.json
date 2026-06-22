@@ -1,7 +1,7 @@
 {
   "name": "percolation-inversion-compiler-ts",
-  "version": "0.4.5",
-  "description": "TypeScript-compatible port of the Python v0.4.4 public JSON, CLI, schema, conformance, and safety semantics for npm and JS agent runtimes.",
+  "version": "0.5.0",
+  "description": "TypeScript-compatible port of the Python v0.5.0 public JSON, CLI, schema, conformance, and safety semantics, including Phase Ecology Lab records for npm and JavaScript agent runtimes.",
   "type": "module",
   "license": "Apache-2.0",
   "author": "K. Takahashi",
@@ -53,6 +53,26 @@
     "./packet": {
       "types": "./dist/packet/index.d.ts",
       "import": "./dist/packet/index.js"
+    },
+    "./phase-lab": {
+      "types": "./dist/phase_lab/index.d.ts",
+      "import": "./dist/phase_lab/index.js"
+    },
+    "./bit-engine": {
+      "types": "./dist/bit_engine/index.d.ts",
+      "import": "./dist/bit_engine/index.js"
+    },
+    "./sqot-controller": {
+      "types": "./dist/sqot_controller/index.d.ts",
+      "import": "./dist/sqot_controller/index.js"
+    },
+    "./alt-lift": {
+      "types": "./dist/alt_lift/index.d.ts",
+      "import": "./dist/alt_lift/index.js"
+    },
+    "./trc-adapter": {
+      "types": "./dist/trc_adapter/index.d.ts",
+      "import": "./dist/trc_adapter/index.js"
     }
   },
   "types": "./dist/index.d.ts",
@@ -67,6 +87,21 @@
       "packet": [
         "dist/packet/index.d.ts"
       ],
+      "phase-lab": [
+        "dist/phase_lab/index.d.ts"
+      ],
+      "bit-engine": [
+        "dist/bit_engine/index.d.ts"
+      ],
+      "sqot-controller": [
+        "dist/sqot_controller/index.d.ts"
+      ],
+      "alt-lift": [
+        "dist/alt_lift/index.d.ts"
+      ],
+      "trc-adapter": [
+        "dist/trc_adapter/index.d.ts"
+      ],
       "*": [
         "dist/index.d.ts"
       ]
@@ -79,6 +114,13 @@
     "fixtures/python_v044_cli/",
     "fixtures/python_v044_demo/",
     "fixtures/python_v044_snapshots/",
+    "fixtures/python_v050_cli/",
+    "fixtures/python_v050_demo/",
+    "fixtures/python_v050_snapshots/",
+    "fixtures/portability_conformance_v050/",
+    "examples/",
+    "docs/",
+    "agent-manifest.json",
     "CHANGELOG.md",
     "README.md",
     "LICENSE",
@@ -90,7 +132,7 @@
     "lint": "eslint .",
     "format:check": "prettier --check .",
     "test": "npm run build && vitest run",
-    "conformance": "npm run build && vitest run test/portability.test.ts test/cli.test.ts",
+    "conformance": "npm run build && vitest run test/portability.test.ts test/cli.test.ts test/v050-readiness.test.ts test/v050-subsystems.test.ts",
     "publish:safety": "node scripts/check-publish-safety.mjs",
     "pack:check": "npm run publish:safety",
     "installed:smoke": "node scripts/check-installed-smoke.mjs",

@@ -1,0 +1,48 @@
+{
+  "description": "Small finite condition required to remove one bottleneck.",
+  "properties": {
+    "bottleneck_id": {
+      "title": "Bottleneck Id",
+      "type": "string"
+    },
+    "condition_id": {
+      "title": "Condition Id",
+      "type": "string"
+    },
+    "condition_type": {
+      "title": "Condition Type",
+      "type": "string"
+    },
+    "required_evidence": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Evidence",
+      "type": "array"
+    },
+    "residual_preserved": {
+      "default": true,
+      "title": "Residual Preserved",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "verifier_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Verifier Routes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "condition_id",
+    "bottleneck_id",
+    "condition_type"
+  ],
+  "title": "MinimalEnablingCondition",
+  "type": "object"
+}

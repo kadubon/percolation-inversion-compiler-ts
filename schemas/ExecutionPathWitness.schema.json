@@ -1,0 +1,44 @@
+{
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "edge_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Edge Ids",
+      "type": "array"
+    },
+    "packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Packet Ids",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "witness_id": {
+      "title": "Witness Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "witness_id"
+  ],
+  "title": "ExecutionPathWitness",
+  "type": "object"
+}

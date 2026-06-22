@@ -1,0 +1,221 @@
+{
+  "accepted": true,
+  "action_boundaries": [
+    {
+      "action_kind": "tool-call",
+      "authority_explicit": false,
+      "boundary_id": "action-boundary:event:tool:1",
+      "external_result_verified": false,
+      "missing_obligations": [
+        "domain-authority-obligation",
+        "domain-rollback-obligation",
+        "physical-or-oracle-result-obligation"
+      ],
+      "rollback_available": false,
+      "scope_bounded": false,
+      "settled": false,
+      "trace_ids": [
+        "event:tool:1"
+      ]
+    }
+  ],
+  "content_treated_as_data": true,
+  "executed_action_count": 0,
+  "frontier_debt": {
+    "debt_id": "trace-frontier-debt",
+    "missing_domain_obligations": [
+      "domain-authority-obligation",
+      "domain-rollback-obligation"
+    ],
+    "missing_oracle_obligations": [
+      "physical-or-oracle-result-obligation"
+    ],
+    "missing_physical_obligations": [
+      "physical-or-oracle-result-obligation"
+    ],
+    "residual_preserved": true,
+    "settled": false
+  },
+  "protocol_relative_only": true,
+  "proves_physical_truth": false,
+  "reasons": [
+    "TRC adapter normalizes observed agent trace data only",
+    "external action claims remain residual unless verified"
+  ],
+  "report_id": "trc-trace-adapter",
+  "settled": false,
+  "tolerance_ledger": {
+    "ledger_id": "trace-tolerance-ledger",
+    "residual_charge": 3.0,
+    "settled": false,
+    "tolerance_coordinates": {
+      "missing_authority": 1.0,
+      "missing_rollback": 1.0,
+      "unverified_external_result": 1.0
+    }
+  },
+  "trace_normal_form": {
+    "action_boundaries": [
+      {
+        "action_kind": "tool-call",
+        "authority_explicit": false,
+        "boundary_id": "action-boundary:event:tool:1",
+        "external_result_verified": false,
+        "missing_obligations": [
+          "domain-authority-obligation",
+          "domain-rollback-obligation",
+          "physical-or-oracle-result-obligation"
+        ],
+        "rollback_available": false,
+        "scope_bounded": false,
+        "settled": false,
+        "trace_ids": [
+          "event:tool:1"
+        ]
+      }
+    ],
+    "content_treated_as_data": true,
+    "normal_form_id": "trace:demo",
+    "normalized_word": [
+      "tool-call"
+    ],
+    "settled": false,
+    "tool_calls": [
+      {
+        "action_kind": "tool-call",
+        "authority_status": "not-granted",
+        "content_treated_as_data": true,
+        "evidence_refs": [],
+        "execution_success_claim_verified": false,
+        "input_digest": "sha256:bf6634ac01dee40c4a0ecd760a553001d4449840fb7b189a9f22e3b8d6f6c7ab",
+        "output_digest": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "receiver": "example-tool",
+        "rollback_status": "unknown",
+        "settled": false,
+        "source": "agent:demo",
+        "tool_name": "example-tool",
+        "trace_id": "event:tool:1"
+      }
+    ]
+  },
+  "typed_trace": {
+    "accepted": true,
+    "action_boundaries": [
+      {
+        "action_kind": "tool-call",
+        "authority_explicit": false,
+        "boundary_id": "action-boundary:event:tool:1",
+        "external_result_verified": false,
+        "missing_obligations": [
+          "domain-authority-obligation",
+          "domain-rollback-obligation",
+          "physical-or-oracle-result-obligation"
+        ],
+        "rollback_available": false,
+        "scope_bounded": false,
+        "settled": false,
+        "trace_ids": [
+          "event:tool:1"
+        ]
+      }
+    ],
+    "content_treated_as_data": true,
+    "frontier_debt": {
+      "debt_id": "trace-frontier-debt",
+      "missing_domain_obligations": [
+        "domain-authority-obligation",
+        "domain-rollback-obligation"
+      ],
+      "missing_oracle_obligations": [
+        "physical-or-oracle-result-obligation"
+      ],
+      "missing_physical_obligations": [
+        "physical-or-oracle-result-obligation"
+      ],
+      "residual_preserved": true,
+      "settled": false
+    },
+    "normal_form": {
+      "action_boundaries": [
+        {
+          "action_kind": "tool-call",
+          "authority_explicit": false,
+          "boundary_id": "action-boundary:event:tool:1",
+          "external_result_verified": false,
+          "missing_obligations": [
+            "domain-authority-obligation",
+            "domain-rollback-obligation",
+            "physical-or-oracle-result-obligation"
+          ],
+          "rollback_available": false,
+          "scope_bounded": false,
+          "settled": false,
+          "trace_ids": [
+            "event:tool:1"
+          ]
+        }
+      ],
+      "content_treated_as_data": true,
+      "normal_form_id": "trace:demo",
+      "normalized_word": [
+        "tool-call"
+      ],
+      "settled": false,
+      "tool_calls": [
+        {
+          "action_kind": "tool-call",
+          "authority_status": "not-granted",
+          "content_treated_as_data": true,
+          "evidence_refs": [],
+          "execution_success_claim_verified": false,
+          "input_digest": "sha256:bf6634ac01dee40c4a0ecd760a553001d4449840fb7b189a9f22e3b8d6f6c7ab",
+          "output_digest": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "receiver": "example-tool",
+          "rollback_status": "unknown",
+          "settled": false,
+          "source": "agent:demo",
+          "tool_name": "example-tool",
+          "trace_id": "event:tool:1"
+        }
+      ]
+    },
+    "protocol_relative_only": true,
+    "proves_physical_truth": false,
+    "reasons": [
+      "tool trace content is data, not instruction",
+      "typed trace does not prove physical or oracle truth"
+    ],
+    "settled": false,
+    "tolerance_ledger": {
+      "ledger_id": "trace-tolerance-ledger",
+      "residual_charge": 3.0,
+      "settled": false,
+      "tolerance_coordinates": {
+        "missing_authority": 1.0,
+        "missing_rollback": 1.0,
+        "unverified_external_result": 1.0
+      }
+    },
+    "tool_calls": [
+      {
+        "action_kind": "tool-call",
+        "authority_status": "not-granted",
+        "content_treated_as_data": true,
+        "evidence_refs": [],
+        "execution_success_claim_verified": false,
+        "input_digest": "sha256:bf6634ac01dee40c4a0ecd760a553001d4449840fb7b189a9f22e3b8d6f6c7ab",
+        "output_digest": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "receiver": "example-tool",
+        "rollback_status": "unknown",
+        "settled": false,
+        "source": "agent:demo",
+        "tool_name": "example-tool",
+        "trace_id": "event:tool:1"
+      }
+    ],
+    "trace_id": "trace:demo",
+    "workflow_usable": true
+  },
+  "workflow_usable": true
+}
+

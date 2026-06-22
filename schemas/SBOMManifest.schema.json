@@ -52,7 +52,7 @@
       "type": "array"
     },
     "packageVersion": {
-      "default": "0.4.4",
+      "default": "0.5.0",
       "title": "Packageversion",
       "type": "string"
     },

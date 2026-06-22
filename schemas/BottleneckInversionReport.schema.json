@@ -1,0 +1,499 @@
+{
+  "$defs": {
+    "ActivationGainEstimate": {
+      "description": "Protocol-relative estimate of phase proxy activation after an inversion.",
+      "properties": {
+        "assumptions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Assumptions",
+          "type": "array"
+        },
+        "estimate_id": {
+          "title": "Estimate Id",
+          "type": "string"
+        },
+        "lower_bound": {
+          "default": 0.0,
+          "title": "Lower Bound",
+          "type": "number"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "unit": {
+          "default": "protocol-relative-phase-proxy",
+          "title": "Unit",
+          "type": "string"
+        },
+        "upper_bound": {
+          "default": 0.0,
+          "title": "Upper Bound",
+          "type": "number"
+        }
+      },
+      "required": [
+        "estimate_id"
+      ],
+      "title": "ActivationGainEstimate",
+      "type": "object"
+    },
+    "BottleneckClassDiagnosis": {
+      "description": "One diagnosed bottleneck class and its finite evidence gap.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "blockers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Blockers",
+          "type": "array"
+        },
+        "bottleneck_class": {
+          "title": "Bottleneck Class",
+          "type": "string"
+        },
+        "bottleneck_id": {
+          "title": "Bottleneck Id",
+          "type": "string"
+        },
+        "minimal_enabling_conditions": {
+          "items": {
+            "$ref": "#/$defs/MinimalEnablingCondition"
+          },
+          "title": "Minimal Enabling Conditions",
+          "type": "array"
+        },
+        "object_id": {
+          "title": "Object Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "recommendation_only": {
+          "default": true,
+          "title": "Recommendation Only",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "severity": {
+          "default": 1.0,
+          "title": "Severity",
+          "type": "number"
+        }
+      },
+      "required": [
+        "bottleneck_id",
+        "bottleneck_class",
+        "object_id"
+      ],
+      "title": "BottleneckClassDiagnosis",
+      "type": "object"
+    },
+    "BottleneckInversionCandidate": {
+      "description": "Recommendation-only BIT inversion candidate.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "bottleneck_class": {
+          "title": "Bottleneck Class",
+          "type": "string"
+        },
+        "bottleneck_id": {
+          "title": "Bottleneck Id",
+          "type": "string"
+        },
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "expected_activation_gain": {
+          "$ref": "#/$defs/ActivationGainEstimate"
+        },
+        "minimal_enabling_conditions": {
+          "items": {
+            "$ref": "#/$defs/MinimalEnablingCondition"
+          },
+          "title": "Minimal Enabling Conditions",
+          "type": "array"
+        },
+        "mutates_repositories_shells_networks_or_models": {
+          "default": false,
+          "title": "Mutates Repositories Shells Networks Or Models",
+          "type": "boolean"
+        },
+        "post_inversion_audit_plan": {
+          "$ref": "#/$defs/PostInversionAuditPlan"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "recommendation_only": {
+          "default": true,
+          "title": "Recommendation Only",
+          "type": "boolean"
+        },
+        "risk_hazard_authority_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Risk Hazard Authority Notes",
+          "type": "array"
+        },
+        "rollback_or_deactivation_plan": {
+          "$ref": "#/$defs/RollbackOrDeactivationPlan"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "verification_cost": {
+          "default": 1.0,
+          "title": "Verification Cost",
+          "type": "number"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "bottleneck_id",
+        "bottleneck_class",
+        "expected_activation_gain",
+        "rollback_or_deactivation_plan",
+        "post_inversion_audit_plan"
+      ],
+      "title": "BottleneckInversionCandidate",
+      "type": "object"
+    },
+    "CapabilityExpressionPath": {
+      "description": "Protocol-relative path from packet capital to an expressed capability proxy.",
+      "properties": {
+        "blocked_by": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Blocked By",
+          "type": "array"
+        },
+        "edge_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Edge Ids",
+          "type": "array"
+        },
+        "execution_available": {
+          "default": false,
+          "title": "Execution Available",
+          "type": "boolean"
+        },
+        "packet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Packet Ids",
+          "type": "array"
+        },
+        "path_id": {
+          "title": "Path Id",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "path_id"
+      ],
+      "title": "CapabilityExpressionPath",
+      "type": "object"
+    },
+    "InversionCertificate": {
+      "description": "Finite certificate candidate for a proposed BIT inversion.",
+      "properties": {
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "certificate_id": {
+          "title": "Certificate Id",
+          "type": "string"
+        },
+        "certificate_status": {
+          "default": "abstain",
+          "title": "Certificate Status",
+          "type": "string"
+        },
+        "finite_requirements_passed": {
+          "default": false,
+          "title": "Finite Requirements Passed",
+          "type": "boolean"
+        },
+        "grants_execution_authority": {
+          "default": false,
+          "title": "Grants Execution Authority",
+          "type": "boolean"
+        },
+        "protocol_relative_only": {
+          "default": true,
+          "title": "Protocol Relative Only",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_preserved": {
+          "default": true,
+          "title": "Residual Preserved",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "certificate_id",
+        "candidate_id"
+      ],
+      "title": "InversionCertificate",
+      "type": "object"
+    },
+    "MinimalEnablingCondition": {
+      "description": "Small finite condition required to remove one bottleneck.",
+      "properties": {
+        "bottleneck_id": {
+          "title": "Bottleneck Id",
+          "type": "string"
+        },
+        "condition_id": {
+          "title": "Condition Id",
+          "type": "string"
+        },
+        "condition_type": {
+          "title": "Condition Type",
+          "type": "string"
+        },
+        "required_evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Evidence",
+          "type": "array"
+        },
+        "residual_preserved": {
+          "default": true,
+          "title": "Residual Preserved",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "verifier_routes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verifier Routes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "condition_id",
+        "bottleneck_id",
+        "condition_type"
+      ],
+      "title": "MinimalEnablingCondition",
+      "type": "object"
+    },
+    "PostInversionAuditPlan": {
+      "description": "Audit steps that must follow a bottleneck inversion candidate.",
+      "properties": {
+        "evidence_to_record": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence To Record",
+          "type": "array"
+        },
+        "executes_actions": {
+          "default": false,
+          "title": "Executes Actions",
+          "type": "boolean"
+        },
+        "plan_id": {
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "preserves_residuals": {
+          "default": true,
+          "title": "Preserves Residuals",
+          "type": "boolean"
+        },
+        "required_checks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Checks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "plan_id"
+      ],
+      "title": "PostInversionAuditPlan",
+      "type": "object"
+    },
+    "RollbackOrDeactivationPlan": {
+      "description": "Rollback/deactivation plan for a candidate intervention.",
+      "properties": {
+        "automatic_rollback": {
+          "default": false,
+          "title": "Automatic Rollback",
+          "type": "boolean"
+        },
+        "deactivation_steps": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Deactivation Steps",
+          "type": "array"
+        },
+        "plan_id": {
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "rollback_refs_required": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rollback Refs Required",
+          "type": "array"
+        },
+        "rollback_required": {
+          "default": true,
+          "title": "Rollback Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "plan_id"
+      ],
+      "title": "RollbackOrDeactivationPlan",
+      "type": "object"
+    }
+  },
+  "description": "BIT bottleneck diagnosis and recommendation report.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "baseline_comparison": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Baseline Comparison",
+      "type": "object"
+    },
+    "bottlenecks": {
+      "items": {
+        "$ref": "#/$defs/BottleneckClassDiagnosis"
+      },
+      "title": "Bottlenecks",
+      "type": "array"
+    },
+    "capability_expression_paths": {
+      "items": {
+        "$ref": "#/$defs/CapabilityExpressionPath"
+      },
+      "title": "Capability Expression Paths",
+      "type": "array"
+    },
+    "certificates": {
+      "items": {
+        "$ref": "#/$defs/InversionCertificate"
+      },
+      "title": "Certificates",
+      "type": "array"
+    },
+    "graph_id": {
+      "default": "",
+      "title": "Graph Id",
+      "type": "string"
+    },
+    "inversion_candidates": {
+      "items": {
+        "$ref": "#/$defs/BottleneckInversionCandidate"
+      },
+      "title": "Inversion Candidates",
+      "type": "array"
+    },
+    "protocol_relative_only": {
+      "default": true,
+      "title": "Protocol Relative Only",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "recommendation_only": {
+      "default": true,
+      "title": "Recommendation Only",
+      "type": "boolean"
+    },
+    "report_id": {
+      "default": "bit-bottleneck-inversion-report",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "workflow_usable": {
+      "default": true,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "title": "BottleneckInversionReport",
+  "type": "object"
+}

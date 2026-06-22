@@ -1,0 +1,405 @@
+{
+  "$defs": {
+    "TraceFrontierDebt": {
+      "description": "Unresolved physical/oracle/domain trace obligations.",
+      "properties": {
+        "debt_id": {
+          "default": "trace-frontier-debt",
+          "title": "Debt Id",
+          "type": "string"
+        },
+        "missing_domain_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Domain Obligations",
+          "type": "array"
+        },
+        "missing_oracle_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Oracle Obligations",
+          "type": "array"
+        },
+        "missing_physical_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Physical Obligations",
+          "type": "array"
+        },
+        "residual_preserved": {
+          "default": true,
+          "title": "Residual Preserved",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        }
+      },
+      "title": "TraceFrontierDebt",
+      "type": "object"
+    },
+    "TraceNormalForm": {
+      "description": "Normalized word and typed records for an adapted trace.",
+      "properties": {
+        "action_boundaries": {
+          "items": {
+            "$ref": "#/$defs/TypedActionBoundary"
+          },
+          "title": "Action Boundaries",
+          "type": "array"
+        },
+        "content_treated_as_data": {
+          "default": true,
+          "title": "Content Treated As Data",
+          "type": "boolean"
+        },
+        "normal_form_id": {
+          "title": "Normal Form Id",
+          "type": "string"
+        },
+        "normalized_word": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Normalized Word",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "tool_calls": {
+          "items": {
+            "$ref": "#/$defs/TypedToolCallTrace"
+          },
+          "title": "Tool Calls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "normal_form_id"
+      ],
+      "title": "TraceNormalForm",
+      "type": "object"
+    },
+    "TraceToleranceLedger": {
+      "description": "TRC tolerance ledger for adapted agent traces.",
+      "properties": {
+        "ledger_id": {
+          "default": "trace-tolerance-ledger",
+          "title": "Ledger Id",
+          "type": "string"
+        },
+        "residual_charge": {
+          "default": 0.0,
+          "title": "Residual Charge",
+          "type": "number"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "tolerance_coordinates": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Tolerance Coordinates",
+          "type": "object"
+        }
+      },
+      "title": "TraceToleranceLedger",
+      "type": "object"
+    },
+    "TypedActionBoundary": {
+      "description": "Boundary conditions around an agent/tool action trace.",
+      "properties": {
+        "action_kind": {
+          "default": "tool-call",
+          "title": "Action Kind",
+          "type": "string"
+        },
+        "authority_explicit": {
+          "default": false,
+          "title": "Authority Explicit",
+          "type": "boolean"
+        },
+        "boundary_id": {
+          "title": "Boundary Id",
+          "type": "string"
+        },
+        "external_result_verified": {
+          "default": false,
+          "title": "External Result Verified",
+          "type": "boolean"
+        },
+        "missing_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Obligations",
+          "type": "array"
+        },
+        "rollback_available": {
+          "default": false,
+          "title": "Rollback Available",
+          "type": "boolean"
+        },
+        "scope_bounded": {
+          "default": false,
+          "title": "Scope Bounded",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "trace_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Trace Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "boundary_id"
+      ],
+      "title": "TypedActionBoundary",
+      "type": "object"
+    },
+    "TypedAgentTrace": {
+      "description": "Normalized typed agent trace.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "action_boundaries": {
+          "items": {
+            "$ref": "#/$defs/TypedActionBoundary"
+          },
+          "title": "Action Boundaries",
+          "type": "array"
+        },
+        "content_treated_as_data": {
+          "default": true,
+          "title": "Content Treated As Data",
+          "type": "boolean"
+        },
+        "frontier_debt": {
+          "$ref": "#/$defs/TraceFrontierDebt"
+        },
+        "normal_form": {
+          "$ref": "#/$defs/TraceNormalForm"
+        },
+        "protocol_relative_only": {
+          "default": true,
+          "title": "Protocol Relative Only",
+          "type": "boolean"
+        },
+        "proves_physical_truth": {
+          "default": false,
+          "title": "Proves Physical Truth",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "tolerance_ledger": {
+          "$ref": "#/$defs/TraceToleranceLedger"
+        },
+        "tool_calls": {
+          "items": {
+            "$ref": "#/$defs/TypedToolCallTrace"
+          },
+          "title": "Tool Calls",
+          "type": "array"
+        },
+        "trace_id": {
+          "default": "typed-agent-trace",
+          "title": "Trace Id",
+          "type": "string"
+        },
+        "workflow_usable": {
+          "default": true,
+          "title": "Workflow Usable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "normal_form"
+      ],
+      "title": "TypedAgentTrace",
+      "type": "object"
+    },
+    "TypedToolCallTrace": {
+      "description": "Typed data record for one observed agent tool call.",
+      "properties": {
+        "action_kind": {
+          "default": "tool-call",
+          "title": "Action Kind",
+          "type": "string"
+        },
+        "authority_status": {
+          "default": "not-granted",
+          "title": "Authority Status",
+          "type": "string"
+        },
+        "content_treated_as_data": {
+          "default": true,
+          "title": "Content Treated As Data",
+          "type": "boolean"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "execution_success_claim_verified": {
+          "default": false,
+          "title": "Execution Success Claim Verified",
+          "type": "boolean"
+        },
+        "input_digest": {
+          "default": "",
+          "title": "Input Digest",
+          "type": "string"
+        },
+        "output_digest": {
+          "default": "",
+          "title": "Output Digest",
+          "type": "string"
+        },
+        "receiver": {
+          "default": "tool",
+          "title": "Receiver",
+          "type": "string"
+        },
+        "rollback_status": {
+          "default": "unknown",
+          "title": "Rollback Status",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "source": {
+          "default": "agent",
+          "title": "Source",
+          "type": "string"
+        },
+        "tool_name": {
+          "default": "unknown",
+          "title": "Tool Name",
+          "type": "string"
+        },
+        "trace_id": {
+          "title": "Trace Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "trace_id"
+      ],
+      "title": "TypedToolCallTrace",
+      "type": "object"
+    }
+  },
+  "description": "Report emitted by the practical TRC trace adapter.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "action_boundaries": {
+      "items": {
+        "$ref": "#/$defs/TypedActionBoundary"
+      },
+      "title": "Action Boundaries",
+      "type": "array"
+    },
+    "content_treated_as_data": {
+      "default": true,
+      "title": "Content Treated As Data",
+      "type": "boolean"
+    },
+    "executed_action_count": {
+      "default": 0,
+      "title": "Executed Action Count",
+      "type": "integer"
+    },
+    "frontier_debt": {
+      "$ref": "#/$defs/TraceFrontierDebt"
+    },
+    "protocol_relative_only": {
+      "default": true,
+      "title": "Protocol Relative Only",
+      "type": "boolean"
+    },
+    "proves_physical_truth": {
+      "default": false,
+      "title": "Proves Physical Truth",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "report_id": {
+      "default": "trc-trace-adapter",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "tolerance_ledger": {
+      "$ref": "#/$defs/TraceToleranceLedger"
+    },
+    "trace_normal_form": {
+      "$ref": "#/$defs/TraceNormalForm"
+    },
+    "typed_trace": {
+      "$ref": "#/$defs/TypedAgentTrace"
+    },
+    "workflow_usable": {
+      "default": true,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "typed_trace",
+    "trace_normal_form"
+  ],
+  "title": "TraceAdapterReport",
+  "type": "object"
+}

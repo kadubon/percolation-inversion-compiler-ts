@@ -1,0 +1,51 @@
+{
+  "description": "Legacy-compatible threshold status alias used by phase observations.",
+  "properties": {
+    "abstain": {
+      "default": true,
+      "title": "Abstain",
+      "type": "boolean"
+    },
+    "component_status": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "title": "Component Status",
+      "type": "object"
+    },
+    "passed": {
+      "default": false,
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "rejected": {
+      "default": false,
+      "title": "Rejected",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "threshold_distance": {
+      "default": 0.0,
+      "title": "Threshold Distance",
+      "type": "number"
+    },
+    "threshold_id": {
+      "default": "phase-threshold",
+      "title": "Threshold Id",
+      "type": "string"
+    }
+  },
+  "title": "PhaseThresholdStatus",
+  "type": "object"
+}

@@ -29,6 +29,13 @@ const requiredFilesEntries = [
   "fixtures/python_v044_cli/",
   "fixtures/python_v044_demo/",
   "fixtures/python_v044_snapshots/",
+  "fixtures/portability_conformance_v050/",
+  "fixtures/python_v050_cli/",
+  "fixtures/python_v050_demo/",
+  "fixtures/python_v050_snapshots/",
+  "examples/",
+  "docs/",
+  "agent-manifest.json",
   "CHANGELOG.md",
   "README.md",
   "LICENSE",
@@ -42,10 +49,17 @@ const allowedPrefixes = [
   "fixtures/python_v044_cli/",
   "fixtures/python_v044_demo/",
   "fixtures/python_v044_snapshots/",
+  "fixtures/portability_conformance_v050/",
+  "fixtures/python_v050_cli/",
+  "fixtures/python_v050_demo/",
+  "fixtures/python_v050_snapshots/",
+  "examples/",
+  "docs/",
 ];
 
 const allowedExact = new Set([
   "package.json",
+  "agent-manifest.json",
   "CHANGELOG.md",
   "README.md",
   "LICENSE",
@@ -134,6 +148,26 @@ const overclaimPatterns = [
   /\bsafe_commands execute automatically\b/i,
 ];
 
+const staleExamplePatterns = [
+  /packet\*\.json/i,
+  /reports\/\*\.json/i,
+  /packets\/\*\.json/i,
+  /--baseline earliest/i,
+  /dist\\\*\.whl/i,
+  /dist\\\*\.tar\.gz/i,
+];
+
+const generatedSchemaTitleAllowlist = new Set(['"title": "Proves Real Asi",']);
+
+function overclaimScanLines(file, text) {
+  return text.split(/\r?\n/).filter((line) => {
+    const trimmed = line.trim();
+    return !(
+      file.startsWith("schemas/") && generatedSchemaTitleAllowlist.has(trimmed)
+    );
+  });
+}
+
 function suffixOf(file) {
   if (file.endsWith(".d.ts")) {
     return ".d.ts";
@@ -198,9 +232,19 @@ for (const file of files) {
         failures.push(`${file} matched ${pattern}`);
       }
     }
-    for (const pattern of overclaimPatterns) {
+    const overclaimLines = overclaimScanLines(file, text);
+    for (const [index, line] of overclaimLines.entries()) {
+      for (const pattern of overclaimPatterns) {
+        if (pattern.test(line)) {
+          failures.push(
+            `${file}:${index + 1} contains unqualified overclaim ${pattern}`,
+          );
+        }
+      }
+    }
+    for (const pattern of staleExamplePatterns) {
       if (pattern.test(text)) {
-        failures.push(`${file} contains unqualified overclaim ${pattern}`);
+        failures.push(`${file} contains stale non-portable example ${pattern}`);
       }
     }
   }
@@ -217,6 +261,16 @@ for (const file of [
   "dist/agent/messages.d.ts",
   "dist/packet/index.js",
   "dist/packet/index.d.ts",
+  "dist/phase_lab/index.js",
+  "dist/phase_lab/index.d.ts",
+  "dist/bit_engine/index.js",
+  "dist/bit_engine/index.d.ts",
+  "dist/sqot_controller/index.js",
+  "dist/sqot_controller/index.d.ts",
+  "dist/alt_lift/index.js",
+  "dist/alt_lift/index.d.ts",
+  "dist/trc_adapter/index.js",
+  "dist/trc_adapter/index.d.ts",
 ]) {
   if (!files.includes(file)) {
     failures.push(`npm pack must include ${file}`);
@@ -228,11 +282,46 @@ if (!files.includes("schemas/bundle.schema.json")) {
 if (!files.includes("fixtures/portability_conformance/manifest.json")) {
   failures.push("npm pack must include portability conformance manifest");
 }
+if (!files.includes("fixtures/portability_conformance_v050/manifest.json")) {
+  failures.push(
+    "npm pack must include v0.5.0 portability conformance manifest",
+  );
+}
 if (!files.includes("fixtures/python_v044_demo/runtime_state.json")) {
   failures.push("npm pack must include Python-free runtime demo state");
 }
 if (!files.includes("fixtures/python_v044_demo/asi_proxy_phase_request.json")) {
   failures.push("npm pack must include Node-only ASI-proxy phase request demo");
+}
+if (!files.includes("examples/phase_lab/runtime_report_1.json")) {
+  failures.push("npm pack must include v0.5.0 phase lab example inputs");
+}
+if (!files.includes("examples/thresholds/asi_proxy_development.json")) {
+  failures.push("npm pack must include v0.5.0 threshold example");
+}
+if (!files.includes("docs/cli-reference.md")) {
+  failures.push("npm pack must include CLI reference docs");
+}
+for (const file of [
+  "docs/effective-packet-graph.md",
+  "docs/bit-inversion-engine.md",
+  "docs/sqot-queue-sovereignty.md",
+  "docs/alt-ecpt-lift.md",
+  "docs/trc-trace-adapter.md",
+  "docs/threshold-certificates.md",
+]) {
+  if (!files.includes(file)) {
+    failures.push(`npm pack must include ${file}`);
+  }
+}
+if (!files.includes("agent-manifest.json")) {
+  failures.push("npm pack must include agent manifest");
+}
+if (!files.includes("schemas/index.json")) {
+  failures.push("npm pack must include schema index");
+}
+if (!files.includes("fixtures/python_v050_snapshots/manifest.json")) {
+  failures.push("npm pack must include v0.5.0 Python snapshot fixtures");
 }
 
 if (failures.length > 0) {

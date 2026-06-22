@@ -1,0 +1,41 @@
+{
+  "properties": {
+    "attention_budget": {
+      "default": 1.0,
+      "title": "Attention Budget",
+      "type": "number"
+    },
+    "diagnostic_reserve_available": {
+      "default": 0.0,
+      "title": "Diagnostic Reserve Available",
+      "type": "number"
+    },
+    "diagnostic_reserve_required": {
+      "default": 0.1,
+      "title": "Diagnostic Reserve Required",
+      "type": "number"
+    },
+    "ledger_id": {
+      "default": "sqot-attention-budget",
+      "title": "Ledger Id",
+      "type": "string"
+    },
+    "occupied": {
+      "default": 0.0,
+      "title": "Occupied",
+      "type": "number"
+    },
+    "reserve_preserved": {
+      "default": false,
+      "title": "Reserve Preserved",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "title": "AttentionBudgetLedger",
+  "type": "object"
+}

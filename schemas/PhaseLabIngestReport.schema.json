@@ -1,0 +1,344 @@
+{
+  "$defs": {
+    "PhaseLabEvent": {
+      "description": "One inert report or packet stored by the Phase Lab.",
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "candidate_only": {
+          "default": true,
+          "title": "Candidate Only",
+          "type": "boolean"
+        },
+        "candidate_only_reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Candidate Only Reasons",
+          "type": "array"
+        },
+        "content_digest": {
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "missing_obligations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Obligations",
+          "type": "array"
+        },
+        "operationally_usable": {
+          "default": false,
+          "title": "Operationally Usable",
+          "type": "boolean"
+        },
+        "payload": {
+          "additionalProperties": true,
+          "title": "Payload",
+          "type": "object"
+        },
+        "positive_contribution_allowed": {
+          "default": false,
+          "title": "Positive Contribution Allowed",
+          "type": "boolean"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_summary": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Residual Summary",
+          "type": "object"
+        },
+        "safety_boundary": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safety Boundary",
+          "type": "array"
+        },
+        "schema_hint": {
+          "default": "unknown",
+          "title": "Schema Hint",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "settled_blockers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Settled Blockers",
+          "type": "array"
+        },
+        "source_kind": {
+          "default": "unknown-report",
+          "title": "Source Kind",
+          "type": "string"
+        },
+        "source_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Path"
+        },
+        "window_id": {
+          "title": "Window Id",
+          "type": "string"
+        },
+        "workflow_usable": {
+          "default": false,
+          "title": "Workflow Usable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "event_id",
+        "window_id",
+        "content_digest"
+      ],
+      "title": "PhaseLabEvent",
+      "type": "object"
+    },
+    "PhaseLabStoreManifest": {
+      "description": "Local Phase Lab store metadata.",
+      "properties": {
+        "accepted": {
+          "default": true,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "database_path": {
+          "default": "",
+          "title": "Database Path",
+          "type": "string"
+        },
+        "event_count": {
+          "default": 0,
+          "title": "Event Count",
+          "type": "integer"
+        },
+        "latest_window_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latest Window Id"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "safety_invariants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Safety Invariants",
+          "type": "array"
+        },
+        "schema_version": {
+          "default": "phase-lab-store-v1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "store_id": {
+          "default": "phase-lab-store",
+          "title": "Store Id",
+          "type": "string"
+        },
+        "store_path": {
+          "default": "",
+          "title": "Store Path",
+          "type": "string"
+        },
+        "window_count": {
+          "default": 0,
+          "title": "Window Count",
+          "type": "integer"
+        }
+      },
+      "title": "PhaseLabStoreManifest",
+      "type": "object"
+    },
+    "PhaseLabWindowIndex": {
+      "description": "Index entry for one deterministic ingest window.",
+      "properties": {
+        "accepted": {
+          "default": true,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "accepted_event_count": {
+          "default": 0,
+          "title": "Accepted Event Count",
+          "type": "integer"
+        },
+        "candidate_only_event_count": {
+          "default": 0,
+          "title": "Candidate Only Event Count",
+          "type": "integer"
+        },
+        "event_count": {
+          "default": 0,
+          "title": "Event Count",
+          "type": "integer"
+        },
+        "event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Event Ids",
+          "type": "array"
+        },
+        "missing_obligation_count": {
+          "default": 0,
+          "title": "Missing Obligation Count",
+          "type": "integer"
+        },
+        "positive_contribution_event_count": {
+          "default": 0,
+          "title": "Positive Contribution Event Count",
+          "type": "integer"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "residual_debt": {
+          "default": 0.0,
+          "title": "Residual Debt",
+          "type": "number"
+        },
+        "sequence": {
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "settled_event_count": {
+          "default": 0,
+          "title": "Settled Event Count",
+          "type": "integer"
+        },
+        "window_id": {
+          "title": "Window Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "window_id",
+        "sequence"
+      ],
+      "title": "PhaseLabWindowIndex",
+      "type": "object"
+    }
+  },
+  "description": "Report emitted after ingesting inert files into a Phase Lab store.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "content_treated_as_data": {
+      "default": true,
+      "title": "Content Treated As Data",
+      "type": "boolean"
+    },
+    "executed_command_count": {
+      "default": 0,
+      "title": "Executed Command Count",
+      "type": "integer"
+    },
+    "ingested_events": {
+      "items": {
+        "$ref": "#/$defs/PhaseLabEvent"
+      },
+      "title": "Ingested Events",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "rejected_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Paths",
+      "type": "array"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "store_manifest": {
+      "$ref": "#/$defs/PhaseLabStoreManifest"
+    },
+    "window": {
+      "$ref": "#/$defs/PhaseLabWindowIndex"
+    },
+    "workflow_usable": {
+      "default": true,
+      "title": "Workflow Usable",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "report_id",
+    "store_manifest",
+    "window"
+  ],
+  "title": "PhaseLabIngestReport",
+  "type": "object"
+}

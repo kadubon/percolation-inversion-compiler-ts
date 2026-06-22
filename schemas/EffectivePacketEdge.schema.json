@@ -1,0 +1,135 @@
+{
+  "$defs": {
+    "PacketContributionStatus": {
+      "description": "Portable contribution status for one graph object.",
+      "properties": {
+        "candidate_only": {
+          "default": true,
+          "title": "Candidate Only",
+          "type": "boolean"
+        },
+        "non_contributing_reason": {
+          "default": "candidate-only data does not improve phase metrics",
+          "title": "Non Contributing Reason",
+          "type": "string"
+        },
+        "positive_contribution": {
+          "default": false,
+          "title": "Positive Contribution",
+          "type": "boolean"
+        },
+        "settled": {
+          "default": false,
+          "title": "Settled",
+          "type": "boolean"
+        },
+        "status": {
+          "default": "diagnostic",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "title": "PacketContributionStatus",
+      "type": "object"
+    },
+    "SemanticEdgeEvidence": {
+      "description": "Evidence summary for one effective graph edge.",
+      "properties": {
+        "edge_certificate_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Edge Certificate Refs",
+          "type": "array"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "evidence_supported": {
+          "default": false,
+          "title": "Evidence Supported",
+          "type": "boolean"
+        },
+        "missing_evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Evidence",
+          "type": "array"
+        },
+        "verifier_resolution_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verifier Resolution Refs",
+          "type": "array"
+        }
+      },
+      "title": "SemanticEdgeEvidence",
+      "type": "object"
+    }
+  },
+  "description": "One edge in the effective packet graph.",
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "contribution": {
+      "$ref": "#/$defs/PacketContributionStatus"
+    },
+    "edge_id": {
+      "title": "Edge Id",
+      "type": "string"
+    },
+    "evidence": {
+      "$ref": "#/$defs/SemanticEdgeEvidence"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "relation_type": {
+      "default": "semantic-dependency",
+      "title": "Relation Type",
+      "type": "string"
+    },
+    "residual_summary": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Residual Summary",
+      "type": "object"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "source_node_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Node Ids",
+      "type": "array"
+    },
+    "target_node_id": {
+      "title": "Target Node Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "edge_id",
+    "target_node_id"
+  ],
+  "title": "EffectivePacketEdge",
+  "type": "object"
+}

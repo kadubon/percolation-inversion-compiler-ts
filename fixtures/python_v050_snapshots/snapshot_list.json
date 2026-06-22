@@ -1,0 +1,112 @@
+{
+  "snapshots": [
+    {
+      "artifact": "Executable Capability Percolation Theory.tex",
+      "artifact_key": "ecpt",
+      "coverage_counts": {
+        "external_obligation": 30,
+        "implemented_checker": 48,
+        "implemented_constructive": 18,
+        "implemented_schema": 18,
+        "partial": 0,
+        "unsupported": 0
+      },
+      "doi": "10.5281/zenodo.20535654",
+      "external_obligation_category_summary": {
+        "ecpt-bridge-reserve": 6,
+        "ecpt-ecology-ontology": 3,
+        "ecpt-economics-policy": 6,
+        "ecpt-generator-limit": 5,
+        "ecpt-proxy-target": 3,
+        "ecpt-speculative-channel": 4,
+        "ecpt-trace-diagnostic": 1,
+        "numerical-envelope": 2
+      }
+    },
+    {
+      "artifact": "Bottleneck Inversion Theory.tex",
+      "artifact_key": "bit",
+      "coverage_counts": {
+        "external_obligation": 0,
+        "implemented_checker": 24,
+        "implemented_constructive": 15,
+        "implemented_schema": 3,
+        "partial": 0,
+        "unsupported": 0
+      },
+      "doi": "10.5281/zenodo.20545356",
+      "external_obligation_category_summary": {}
+    },
+    {
+      "artifact": "Typed Reality Compilation.tex",
+      "artifact_key": "trc",
+      "coverage_counts": {
+        "external_obligation": 32,
+        "implemented_checker": 52,
+        "implemented_constructive": 20,
+        "implemented_schema": 12,
+        "partial": 0,
+        "unsupported": 0
+      },
+      "doi": "10.5281/zenodo.20554083",
+      "external_obligation_category_summary": {
+        "archive-domain-cover": 5,
+        "assume-guarantee-contract": 3,
+        "distributionally-robust-metric": 1,
+        "latent-oracle-model": 5,
+        "numerical-envelope": 2,
+        "observation-partition": 3,
+        "physical-hybrid-system": 6,
+        "redesign-response": 3,
+        "telemetry-calibration": 4
+      }
+    },
+    {
+      "artifact": "Salience-Queue Occupation Theory.tex",
+      "artifact_key": "sqot",
+      "coverage_counts": {
+        "external_obligation": 15,
+        "implemented_checker": 78,
+        "implemented_constructive": 22,
+        "implemented_schema": 18,
+        "partial": 0,
+        "unsupported": 0
+      },
+      "doi": "10.5281/zenodo.20526451",
+      "external_obligation_category_summary": {
+        "domain-specific-proof": 8,
+        "ecpt-bridge-reserve": 1,
+        "sqot-adversarial-transfer": 3,
+        "sqot-protocol-integrity": 2,
+        "sqot-thermodynamic-discharge": 1
+      }
+    },
+    {
+      "artifact": "Abstraction Liquidity Theory.tex",
+      "artifact_key": "alt",
+      "coverage_counts": {
+        "external_obligation": 54,
+        "implemented_checker": 202,
+        "implemented_constructive": 47,
+        "implemented_schema": 53,
+        "partial": 0,
+        "unsupported": 0
+      },
+      "doi": "10.5281/zenodo.20476200",
+      "external_obligation_category_summary": {
+        "alt-cara-target": 5,
+        "alt-causal-effect": 4,
+        "alt-hazard": 2,
+        "alt-reproduction": 8,
+        "alt-root-trust": 4,
+        "alt-telemetry": 2,
+        "alt-transport": 9,
+        "assume-guarantee-contract": 1,
+        "domain-specific-proof": 11,
+        "ecpt-economics-policy": 1,
+        "sqot-adversarial-transfer": 2,
+        "telemetry-calibration": 5
+      }
+    }
+  ]
+}

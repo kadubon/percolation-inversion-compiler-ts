@@ -1,0 +1,112 @@
+{
+  "accepted": true,
+  "accepted_packet_capital": 1,
+  "candidate_only_packets": 0,
+  "edge_count_by_relation": {
+    "self-support": 1
+  },
+  "edges": [
+    {
+      "accepted": true,
+      "contribution": {
+        "candidate_only": false,
+        "non_contributing_reason": "",
+        "positive_contribution": true,
+        "settled": false,
+        "status": "accepted"
+      },
+      "edge_id": "edge:self-alpha",
+      "evidence": {
+        "edge_certificate_refs": [],
+        "evidence_refs": ["evidence:alpha"],
+        "evidence_supported": true,
+        "missing_evidence": [],
+        "verifier_resolution_refs": []
+      },
+      "reasons": ["edge extracted from inert report data"],
+      "relation_type": "self-support",
+      "residual_summary": {},
+      "settled": false,
+      "source_node_ids": ["node:alpha"],
+      "target_node_id": "node:alpha"
+    }
+  ],
+  "graph_id": "effective-graph-example",
+  "graph_safety_boundary": [
+    "raw packet volume is diagnostic only",
+    "candidate-only nodes do not improve positive phase components",
+    "graph construction does not execute packet content",
+    "graph construction does not settle claims"
+  ],
+  "missing_edge_evidence": [],
+  "node_count_by_status": {
+    "accepted": 1
+  },
+  "nodes": [
+    {
+      "accepted": true,
+      "content_digest": "sha256-alpha",
+      "contribution": {
+        "candidate_only": false,
+        "non_contributing_reason": "",
+        "positive_contribution": true,
+        "settled": false,
+        "status": "accepted"
+      },
+      "eligibility": {
+        "accepted_or_certificate_admissible": true,
+        "agent_text_not_treated_as_evidence": true,
+        "authority_valid": true,
+        "blockers": [],
+        "eligible": true,
+        "hash_valid": true,
+        "not_raw_external_volume": true,
+        "not_registry_metadata_only": true,
+        "not_salience_blocked": true,
+        "not_stale": true,
+        "not_verification_blocked": true,
+        "residuals_preserved": true,
+        "retrievable": true,
+        "rollback_available_or_not_required": true,
+        "within_validity_domain": true
+      },
+      "missing_obligations": [],
+      "node_id": "node:alpha",
+      "operationally_usable": true,
+      "reasons": [],
+      "residual_summary": {},
+      "schema_hint": "AgentCheckReport",
+      "settled": false,
+      "source_event_id": "event:alpha",
+      "source_kind": "agent-check",
+      "workflow_usable": true
+    }
+  ],
+  "non_contributing_volume": 0,
+  "operationally_usable": true,
+  "reasons": [
+    "effective graph separates positive contribution from diagnostic volume",
+    "raw packet count does not increase positive phase metrics"
+  ],
+  "rejected_or_quarantined_packets": 0,
+  "residual_summary": {
+    "candidate_only_reasons": [],
+    "missing_obligation_count": 0,
+    "residual_debt": 0.0,
+    "residual_summary": {},
+    "settled_blockers": []
+  },
+  "semantic_edge_witnesses": [
+    {
+      "edge_certificate_refs": [],
+      "evidence_refs": ["evidence:alpha"],
+      "evidence_supported": true,
+      "missing_evidence": [],
+      "verifier_resolution_refs": []
+    }
+  ],
+  "settled": false,
+  "source_window_id": "phase-window:0000",
+  "stale_or_unsafe_packets": [],
+  "workflow_usable": true
+}

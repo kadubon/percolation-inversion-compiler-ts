@@ -1,0 +1,53 @@
+{
+  "properties": {
+    "certificate_id": {
+      "default": "sqot-reversible-salience-sovereignty",
+      "title": "Certificate Id",
+      "type": "string"
+    },
+    "certificate_status": {
+      "default": "abstain",
+      "title": "Certificate Status",
+      "type": "string"
+    },
+    "grants_execution_authority": {
+      "default": false,
+      "title": "Grants Execution Authority",
+      "type": "boolean"
+    },
+    "graph_id": {
+      "default": "",
+      "title": "Graph Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "rebalance_plan_id": {
+      "default": "",
+      "title": "Rebalance Plan Id",
+      "type": "string"
+    },
+    "reversible": {
+      "default": true,
+      "title": "Reversible",
+      "type": "boolean"
+    },
+    "rollback_available": {
+      "default": false,
+      "title": "Rollback Available",
+      "type": "boolean"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    }
+  },
+  "title": "ReversibleSalienceSovereigntyCertificate",
+  "type": "object"
+}

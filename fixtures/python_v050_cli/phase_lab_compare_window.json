@@ -1,0 +1,24 @@
+{
+  "accepted": true,
+  "baseline_window_id": "phase-window:0000",
+  "candidate_window_id": "phase-window:0001",
+  "comparison_id": "phase-window-comparison",
+  "diagnostic_only_components": [
+    "packet_candidate_count",
+    "raw_volume"
+  ],
+  "metric_delta": {
+    "closure_witness_count": -1.0,
+    "effective_edge_count": -1.0,
+    "effective_node_count": -1.0,
+    "execution_available_path_count": -1.0,
+    "residual_debt": 1.0
+  },
+  "positive_progress_components": [],
+  "reasons": [
+    "comparison preserves protocol-relative diagnostic status"
+  ],
+  "settled": false,
+  "workflow_usable": true
+}
+

@@ -1,0 +1,61 @@
+{
+  "accepted": true,
+  "accepted_packet_count": 1,
+  "alt_certified_capital_count": 0,
+  "alt_liquidity_candidate_count": 0,
+  "autocatalytic_closure_score": 1.0,
+  "basin_reachability_proxy": {
+    "effective_node_count": 1,
+    "execution_available_path_count": 1,
+    "reachability_proxy": 1.0
+  },
+  "bottleneck_count_by_type": {},
+  "candidate_only_packet_count": 0,
+  "closure_witness_count": 1,
+  "components": [],
+  "effective_edge_count": 1,
+  "effective_node_count": 1,
+  "execution_available_path_count": 1,
+  "false_liquidity_load": {
+    "candidate_count": 0,
+    "certified_count": 0,
+    "load": 0.0
+  },
+  "missing_obligation_count": 0,
+  "observation_id": "phase-window-observation",
+  "operationally_usable": true,
+  "packet_candidate_count": 1,
+  "phase_gap_vector": {},
+  "protocol_relative_only": true,
+  "proves_physical_or_oracle_truth": false,
+  "proves_real_asi": false,
+  "raw_external_volume_diagnostic_only": true,
+  "reasons": ["window observation is protocol-relative only"],
+  "residual_debt": 0.0,
+  "salience_obstruction_load": {
+    "blocked_count": 0,
+    "load": 0.0,
+    "total_count": 1
+  },
+  "settled": false,
+  "settled_packet_count": 0,
+  "threshold_distance": 0.0,
+  "verification_throughput": {
+    "accepted_count": 1,
+    "backlog_count": 0,
+    "throughput_ratio": 1.0
+  },
+  "waste_load": {
+    "load": 0.0,
+    "non_contributing_volume": 0,
+    "total_volume": 1
+  },
+  "window": {
+    "event_count": 1,
+    "event_ids": ["event:alpha"],
+    "sequence": 0,
+    "window_id": "phase-window:0000"
+  },
+  "workflow_usable": true,
+  "workflow_usable_packet_count": 1
+}

@@ -1,0 +1,47 @@
+{
+  "properties": {
+    "accepted": {
+      "default": false,
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "closure_witness_id": {
+      "title": "Closure Witness Id",
+      "type": "string"
+    },
+    "execution_available": {
+      "default": false,
+      "title": "Execution Available",
+      "type": "boolean"
+    },
+    "execution_path_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Execution Path Ids",
+      "type": "array"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "settled": {
+      "default": false,
+      "title": "Settled",
+      "type": "boolean"
+    },
+    "witness_id": {
+      "title": "Witness Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "witness_id",
+    "closure_witness_id"
+  ],
+  "title": "ExecutableClosureWitness",
+  "type": "object"
+}
