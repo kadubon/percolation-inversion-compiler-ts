@@ -96,7 +96,7 @@ const exampleSchemas: Array<[string, string]> = [
 describe("v0.5.0 subsystem hardening", () => {
   it("records schema provenance and validates v0.5.0 examples", () => {
     const index = json(join(packageRoot(), "schemas", "index.json"));
-    expect(index.generated_from).toBe("percolation-inversion-compiler==0.6.0");
+    expect(index.generated_from).toBe("percolation-inversion-compiler==0.9.0");
     expect(index.root_schema_count).toBeGreaterThan(300);
     expect(index.interop_schema_paths).toEqual(
       expect.arrayContaining(["schemas/interop/ccr_task.schema.json"]),

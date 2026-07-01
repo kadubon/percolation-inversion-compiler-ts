@@ -43,33 +43,80 @@ import {
   a2aAgentCardReport,
   a2aTaskHandoffReport,
   activationConstructionReport,
+  activationCacheReport,
+  anchorTransferReport,
   altEcptBridgeReport,
+  atlasCheckReport,
   baselineEnvelopeCheck,
   bitCertificateCompilerReport,
   bitMecFrontierReport,
   bitRegistryReport,
   bitTasksFromRegistry,
+  boundaryQuotientReport,
+  cacheInvalidationReport,
+  cacheRebuildReport,
+  cacheStatusReport,
   capitalWitnessReport,
   ccrResidualsFromPhasePlan,
   ccrTasksFromPhasePlan,
   cegarSimulationBarrierReport,
+  checkerCostReport,
+  confidenceSequenceReport,
+  constructValidityReport,
+  diagnosticReserveReport,
+  duplicateInflationReport,
   deploymentAdmissibilityReport,
   diagnoseSqotQueueState,
   dynamicRegimeAccelerationReport,
+  dynamicRiskReport,
+  ecptQuotientReport,
+  efficiencyArchiveReport,
+  evidenceProductReport,
+  exchangeTensorReport,
+  fcuCheckReport,
+  lifecycleCostReport,
+  lifecycleSchedulerReport,
+  leakageAuditReport,
   jsonlText,
+  martingalePartitionReport,
+  mechanismAblationReport,
+  mechanismCubeReport,
+  missionValidityReport,
   mcpToolDescriptorReport,
   mcpToolInvocationPreflight,
   operationGateReport,
+  opportunityMeasureReport,
   pathLawResponsePolicyReport,
+  performanceBenchReport,
+  performanceReport,
   phaseAccelerationReport,
   phaseResponseControlStep,
   probeStopReport,
+  protocolMutationReport,
+  queueMorphismReport,
+  releaseIntervalReport,
+  resourceTensorReport,
   sqotProtocolIntegrityReport,
   sqotResourceExchangeReport,
+  stoppedSheafReport,
   targetValidityCheck,
+  telemetryCheckReport,
+  tokenAdmissibilityReport,
+  tokenDedupReport,
+  tokenExtractionPipelineReport,
+  tokenInterfaceStandardReport,
+  tokenLineageReport,
+  toleranceSchedulerReport,
+  traceInstrumentationContractReport,
   traceCheckReport,
   traceNormalFormReport,
   tracePacketCandidate,
+  traceSufficiencyReport,
+  transportCertificateReport,
+  trcObservationConsistencyReport,
+  trcObservationWindowReport,
+  trcResourceFlowReport,
+  unseenFrontierReport,
 } from "../interop/ccr.js";
 import {
   buildInversionCertificate,
@@ -146,7 +193,7 @@ import {
   buildActionBoundaryReport,
 } from "../trc_adapter/index.js";
 
-const VERSION = "0.8.0";
+const VERSION = "0.9.0";
 
 function outputJson(data: unknown, output?: string): void {
   const text = stableStringify(data);
@@ -169,6 +216,50 @@ function outputJsonl(
   } else {
     process.stdout.write(text);
   }
+}
+
+function compactReport(data: unknown): Record<string, unknown> {
+  const payload =
+    data && typeof data === "object" && !Array.isArray(data)
+      ? (data as Record<string, unknown>)
+      : { value: data };
+  const residuals = Array.isArray(payload.residuals)
+    ? payload.residuals.filter((item): item is Record<string, unknown> =>
+        Boolean(item && typeof item === "object" && !Array.isArray(item)),
+      )
+    : [];
+  const rawBlockers = Array.isArray(payload.blockers)
+    ? payload.blockers.map(String)
+    : residuals
+        .filter((item) => item.blocking === true && item.kind)
+        .map((item) => String(item.kind));
+  const safeCommands = Array.isArray(payload.safe_commands)
+    ? payload.safe_commands.map(String)
+    : [];
+  const nextSafeActions = Array.isArray(payload.next_safe_actions)
+    ? payload.next_safe_actions.map(String)
+    : [];
+  const recommended =
+    payload.recommended_action &&
+    typeof payload.recommended_action === "object" &&
+    !Array.isArray(payload.recommended_action)
+      ? (payload.recommended_action as Record<string, unknown>)
+      : {};
+  const nextSafeAction =
+    nextSafeActions[0] ??
+    safeCommands[0] ??
+    String(recommended.safe_command ?? "");
+  return {
+    accepted: payload.accepted,
+    blockers: [...new Set(rawBlockers.filter(Boolean))].sort(),
+    next_safe_action: nextSafeAction,
+    non_claims: Array.isArray(payload.non_claims) ? payload.non_claims : [],
+    ok: payload.ok === true,
+    residual_count: residuals.length,
+    schema_version: "pic-ts.compact_report.v1",
+    settled: payload.settled === true,
+    source_schema_version: payload.schema_version,
+  };
 }
 
 function readText(
@@ -371,6 +462,12 @@ function addOutputOptions(command: Command): Command {
   );
 }
 
+function addCompactOptions(command: Command): Command {
+  return command
+    .option("--compact", "compact output")
+    .option("--full", "full output");
+}
+
 function addProfile(command: Command): Command {
   return command.option(
     "--profile <profile>",
@@ -389,7 +486,7 @@ const program = new Command();
 program
   .name("pic")
   .description(
-    "TypeScript-compatible port of percolation-inversion-compiler v0.8.0 public CLI contracts.",
+    "TypeScript-compatible port of percolation-inversion-compiler v0.9.0 public CLI contracts.",
   )
   .version(VERSION);
 program.exitOverride();
@@ -1006,21 +1103,24 @@ addOutputOptions(addProfile(phase.command("runbook"))).action((options) =>
   outputJson(phaseAccelerationRunbook(options.profile), options.output),
 );
 addOutputOptions(
-  phase
-    .command("acceleration-report")
-    .requiredOption("--target <path>", "ASI-proxy target JSON")
-    .requiredOption("--baseline <path>", "Baseline upper envelope JSON")
-    .requiredOption("--capital <path>", "Runtime capital witness JSONL"),
-).action((options) =>
-  outputJson(
-    phaseAccelerationReport(
-      readJsonPath(options.target, "ASI-proxy target"),
-      readJsonPath(options.baseline, "baseline upper envelope"),
-      readJsonlPath(options.capital),
-    ),
-    options.output,
+  addCompactOptions(
+    phase
+      .command("acceleration-report")
+      .requiredOption("--target <path>", "ASI-proxy target JSON")
+      .requiredOption("--baseline <path>", "Baseline upper envelope JSON")
+      .requiredOption("--capital <path>", "Runtime capital witness JSONL"),
   ),
-);
+).action((options) => {
+  const report = phaseAccelerationReport(
+    readJsonPath(options.target, "ASI-proxy target"),
+    readJsonPath(options.baseline, "baseline upper envelope"),
+    readJsonlPath(options.capital),
+  );
+  outputJson(
+    options.compact && !options.full ? compactReport(report) : report,
+    options.output,
+  );
+});
 addOutputOptions(
   addProfile(addTextOptions(phase.command("benchmark")))
     .option("--request <path>", "phase request JSON")
@@ -1457,12 +1557,99 @@ addOutputOptions(
   outputJsonl(bitTasksFromRegistry(report), options.output);
 });
 addOutputOptions(
+  addCompactOptions(
+    bit
+      .command("mec-frontier")
+      .requiredOption("--certificates <path>", "BIT certificate JSONL"),
+  ),
+).action((options) => {
+  const report = bitMecFrontierReport(readJsonlPath(options.certificates));
+  outputJson(
+    options.compact && !options.full ? compactReport(report) : report,
+    options.output,
+  );
+});
+addOutputOptions(
   bit
-    .command("mec-frontier")
-    .requiredOption("--certificates <path>", "BIT certificate JSONL"),
+    .command("unseen-frontier")
+    .requiredOption("--discoveries <path>", "Discovery JSONL"),
 ).action((options) =>
   outputJson(
-    bitMecFrontierReport(readJsonlPath(options.certificates)),
+    unseenFrontierReport(readJsonlPath(options.discoveries)),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("mechanism-cube")
+    .requiredOption("--cube <path>", "Mechanism cube JSON"),
+).action((options) =>
+  outputJson(
+    mechanismCubeReport(readJsonPath(options.cube, "mechanism cube")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("release-interval")
+    .requiredOption("--program <path>", "Release program JSON"),
+).action((options) =>
+  outputJson(
+    releaseIntervalReport(readJsonPath(options.program, "release program")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("martingale-partition")
+    .requiredOption("--audit <path>", "Partition audit JSON"),
+).action((options) =>
+  outputJson(
+    martingalePartitionReport(
+      readJsonPath(options.audit, "martingale partition audit"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("anchor-transfer")
+    .requiredOption("--certificate <path>", "Anchor transfer certificate JSON"),
+).action((options) =>
+  outputJson(
+    anchorTransferReport(
+      readJsonPath(options.certificate, "anchor transfer certificate"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("stopped-sheaf")
+    .requiredOption("--evidence <path>", "Evidence JSONL"),
+).action((options) =>
+  outputJson(
+    stoppedSheafReport(readJsonlPath(options.evidence)),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("confidence-sequence")
+    .requiredOption("--evidence <path>", "Evidence JSONL"),
+).action((options) =>
+  outputJson(
+    confidenceSequenceReport(readJsonlPath(options.evidence)),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("evidence-product")
+    .requiredOption("--evidence <path>", "Evidence JSONL"),
+).action((options) =>
+  outputJson(
+    evidenceProductReport(readJsonlPath(options.evidence)),
     options.output,
   ),
 );
@@ -1608,17 +1795,20 @@ addOutputOptions(
   ),
 );
 addOutputOptions(
-  sqot
-    .command("protocol-integrity")
-    .requiredOption("--state <path>", "SQOT protocol state JSON"),
-).action((options) =>
-  outputJson(
-    sqotProtocolIntegrityReport(
-      readJsonPath(options.state, "SQOT protocol state"),
-    ),
-    options.output,
+  addCompactOptions(
+    sqot
+      .command("protocol-integrity")
+      .requiredOption("--state <path>", "SQOT protocol state JSON"),
   ),
-);
+).action((options) => {
+  const report = sqotProtocolIntegrityReport(
+    readJsonPath(options.state, "SQOT protocol state"),
+  );
+  outputJson(
+    options.compact && !options.full ? compactReport(report) : report,
+    options.output,
+  );
+});
 addOutputOptions(
   sqot
     .command("resource-exchange")
@@ -1628,6 +1818,70 @@ addOutputOptions(
     sqotResourceExchangeReport(
       readJsonPath(options.state, "SQOT resource exchange"),
     ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  sqot
+    .command("queue-morphism")
+    .requiredOption("--source <path>", "Source queue JSON")
+    .requiredOption("--target <path>", "Target queue JSON"),
+).action((options) =>
+  outputJson(
+    queueMorphismReport(
+      readJsonPath(options.source, "source queue"),
+      readJsonPath(options.target, "target queue"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  sqot
+    .command("resource-tensor")
+    .requiredOption("--state <path>", "SQOT resource tensor state JSON"),
+).action((options) =>
+  outputJson(
+    resourceTensorReport(readJsonPath(options.state, "resource tensor state")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  sqot
+    .command("exchange-tensor")
+    .requiredOption("--state <path>", "SQOT exchange tensor JSON"),
+).action((options) =>
+  outputJson(
+    exchangeTensorReport(readJsonPath(options.state, "exchange tensor")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  sqot
+    .command("diagnostic-reserve")
+    .requiredOption("--state <path>", "SQOT reserve state JSON"),
+).action((options) =>
+  outputJson(
+    diagnosticReserveReport(readJsonPath(options.state, "reserve state")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  sqot
+    .command("protocol-mutation")
+    .requiredOption("--state <path>", "SQOT protocol mutation state JSON"),
+).action((options) =>
+  outputJson(
+    protocolMutationReport(readJsonPath(options.state, "protocol mutation")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  sqot
+    .command("checker-cost")
+    .requiredOption("--state <path>", "Checker-cost ledger JSON"),
+).action((options) =>
+  outputJson(
+    checkerCostReport(readJsonPath(options.state, "checker-cost ledger")),
     options.output,
   ),
 );
@@ -1715,15 +1969,20 @@ addOutputOptions(
   ),
 );
 addOutputOptions(
-  alt
-    .command("capital-witness")
-    .requiredOption("--packet <path>", "ALT packet/report JSON"),
-).action((options) =>
-  outputJson(
-    capitalWitnessReport(readJsonPath(options.packet, "ALT packet")),
-    options.output,
+  addCompactOptions(
+    alt
+      .command("capital-witness")
+      .requiredOption("--packet <path>", "ALT packet/report JSON"),
   ),
-);
+).action((options) => {
+  const report = capitalWitnessReport(
+    readJsonPath(options.packet, "ALT packet"),
+  );
+  outputJson(
+    options.compact && !options.full ? compactReport(report) : report,
+    options.output,
+  );
+});
 addOutputOptions(
   addProfile(
     alt
@@ -1736,6 +1995,94 @@ addOutputOptions(
       readJsonPath(options.packet, "ALT packet"),
       options.profile,
     ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  alt
+    .command("mission-validity")
+    .requiredOption("--packet <path>", "ALT packet/report JSON"),
+).action((options) =>
+  outputJson(
+    missionValidityReport(readJsonPath(options.packet, "ALT packet")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  alt
+    .command("opportunity-law")
+    .requiredOption("--target <path>", "Target/opportunity JSON"),
+).action((options) =>
+  outputJson(
+    opportunityMeasureReport(readJsonPath(options.target, "target")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  alt
+    .command("transport-check")
+    .requiredOption("--source <path>", "Source scope JSON")
+    .requiredOption("--target <path>", "Target scope JSON")
+    .requiredOption("--certificate <path>", "Transport certificate JSON"),
+).action((options) =>
+  outputJson(
+    transportCertificateReport(
+      readJsonPath(options.source, "source"),
+      readJsonPath(options.target, "target"),
+      readJsonPath(options.certificate, "transport certificate"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  alt
+    .command("construct-validity")
+    .requiredOption("--packet <path>", "ALT packet/report JSON"),
+).action((options) =>
+  outputJson(
+    constructValidityReport(readJsonPath(options.packet, "ALT packet")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  alt.command("fcu-check").requiredOption("--cost <path>", "FCU/cost JSON"),
+).action((options) =>
+  outputJson(
+    fcuCheckReport(readJsonPath(options.cost, "FCU cost")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  alt
+    .command("lifecycle-cost")
+    .requiredOption("--packet <path>", "ALT packet/report JSON"),
+).action((options) =>
+  outputJson(
+    lifecycleCostReport(readJsonPath(options.packet, "ALT packet")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  alt
+    .command("telemetry-check")
+    .requiredOption("--telemetry <path>", "Telemetry JSON")
+    .requiredOption("--contract <path>", "Telemetry contract JSON"),
+).action((options) =>
+  outputJson(
+    telemetryCheckReport(
+      readJsonPath(options.telemetry, "telemetry"),
+      readJsonPath(options.contract, "telemetry contract"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  alt
+    .command("dynamic-risk")
+    .requiredOption("--ledger <path>", "Dynamic risk ledger JSON"),
+).action((options) =>
+  outputJson(
+    dynamicRiskReport(readJsonPath(options.ledger, "dynamic risk ledger")),
     options.output,
   ),
 );
@@ -1759,6 +2106,121 @@ for (const name of [
   );
 }
 
+const token = program.command("token");
+addOutputOptions(
+  addCompactOptions(
+    token
+      .command("extract-pipeline")
+      .requiredOption("--trace <path>", "Finite trace JSON"),
+  ),
+).action((options) => {
+  const report = tokenExtractionPipelineReport(
+    readJsonPath(options.trace, "trace"),
+  );
+  outputJson(
+    options.compact && !options.full ? compactReport(report) : report,
+    options.output,
+  );
+});
+addOutputOptions(
+  addCompactOptions(
+    token
+      .command("admissibility")
+      .requiredOption("--token <path>", "Token candidate JSON"),
+  ),
+).action((options) => {
+  const report = tokenAdmissibilityReport(readJsonPath(options.token, "token"));
+  outputJson(
+    options.compact && !options.full ? compactReport(report) : report,
+    options.output,
+  );
+});
+addOutputOptions(
+  token
+    .command("lineage")
+    .requiredOption("--token <path>", "Token candidate JSON"),
+).action((options) =>
+  outputJson(
+    tokenLineageReport(readJsonPath(options.token, "token")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  token
+    .command("dedup")
+    .requiredOption("--tokens <path>", "Token candidates JSONL"),
+).action((options) =>
+  outputJson(tokenDedupReport(readJsonlPath(options.tokens)), options.output),
+);
+addOutputOptions(
+  token
+    .command("interface-check")
+    .requiredOption("--token <path>", "Token candidate JSON")
+    .requiredOption("--standard <path>", "Interface standard JSON"),
+).action((options) =>
+  outputJson(
+    tokenInterfaceStandardReport(
+      readJsonPath(options.token, "token"),
+      readJsonPath(options.standard, "interface standard"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  token
+    .command("mechanism-ablation")
+    .requiredOption("--token <path>", "Token candidate JSON")
+    .requiredOption("--ablation <path>", "Ablation design JSON"),
+).action((options) =>
+  outputJson(
+    mechanismAblationReport(
+      readJsonPath(options.token, "token"),
+      readJsonPath(options.ablation, "ablation"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  token
+    .command("leakage-audit")
+    .requiredOption("--token <path>", "Token candidate JSON"),
+).action((options) =>
+  outputJson(
+    leakageAuditReport(readJsonPath(options.token, "token")),
+    options.output,
+  ),
+);
+
+const trace = program.command("trace");
+addOutputOptions(
+  trace
+    .command("instrumentation-check")
+    .requiredOption("--trace <path>", "Trace JSON")
+    .requiredOption("--contract <path>", "Instrumentation contract JSON"),
+).action((options) =>
+  outputJson(
+    traceInstrumentationContractReport(
+      readJsonPath(options.trace, "trace"),
+      readJsonPath(options.contract, "instrumentation contract"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  trace
+    .command("sufficiency-check")
+    .requiredOption("--trace <path>", "Trace JSON")
+    .requiredOption("--estimand <path>", "Estimand JSON"),
+).action((options) =>
+  outputJson(
+    traceSufficiencyReport(
+      readJsonPath(options.trace, "trace"),
+      readJsonPath(options.estimand, "estimand"),
+    ),
+    options.output,
+  ),
+);
+
 const mcp = program.command("mcp");
 addOutputOptions(
   addProfile(
@@ -1776,22 +2238,25 @@ addOutputOptions(
   ),
 );
 addOutputOptions(
-  addProfile(
-    mcp
-      .command("invocation-preflight")
-      .requiredOption("--descriptor <path>", "MCP descriptor JSON")
-      .requiredOption("--call <path>", "MCP call JSON"),
-  ),
-).action((options) =>
-  outputJson(
-    mcpToolInvocationPreflight(
-      readJsonPath(options.descriptor, "MCP descriptor"),
-      readJsonPath(options.call, "MCP call"),
-      options.profile,
+  addCompactOptions(
+    addProfile(
+      mcp
+        .command("invocation-preflight")
+        .requiredOption("--descriptor <path>", "MCP descriptor JSON")
+        .requiredOption("--call <path>", "MCP call JSON"),
     ),
-    options.output,
   ),
-);
+).action((options) => {
+  const report = mcpToolInvocationPreflight(
+    readJsonPath(options.descriptor, "MCP descriptor"),
+    readJsonPath(options.call, "MCP call"),
+    options.profile,
+  );
+  outputJson(
+    options.compact && !options.full ? compactReport(report) : report,
+    options.output,
+  );
+});
 
 const a2a = program.command("a2a");
 addOutputOptions(
@@ -1810,20 +2275,23 @@ addOutputOptions(
   ),
 );
 addOutputOptions(
-  addProfile(
-    a2a
-      .command("handoff-check")
-      .requiredOption("--handoff <path>", "A2A handoff JSON"),
-  ),
-).action((options) =>
-  outputJson(
-    a2aTaskHandoffReport(
-      readJsonPath(options.handoff, "A2A handoff"),
-      options.profile,
+  addCompactOptions(
+    addProfile(
+      a2a
+        .command("handoff-check")
+        .requiredOption("--handoff <path>", "A2A handoff JSON"),
     ),
-    options.output,
   ),
-);
+).action((options) => {
+  const report = a2aTaskHandoffReport(
+    readJsonPath(options.handoff, "A2A handoff"),
+    options.profile,
+  );
+  outputJson(
+    options.compact && !options.full ? compactReport(report) : report,
+    options.output,
+  );
+});
 
 const trc = program
   .command("trc")
@@ -1853,20 +2321,94 @@ addOutputOptions(
   ),
 );
 addOutputOptions(
+  addCompactOptions(
+    trc
+      .command("operation-gate")
+      .requiredOption(
+        "--trace <path>",
+        "TraceNF or PIC trace-check report JSON",
+      )
+      .option(
+        "--provider-profile <path>",
+        "Provider/authority gate profile JSON",
+      ),
+  ),
+).action((options) => {
+  const report = operationGateReport(
+    readJsonPath(options.trace, "trace normal form"),
+    options.providerProfile
+      ? readJsonPath(options.providerProfile, "provider profile")
+      : {},
+  );
+  outputJson(
+    options.compact && !options.full ? compactReport(report) : report,
+    options.output,
+  );
+});
+addOutputOptions(
   trc
-    .command("operation-gate")
-    .requiredOption("--trace <path>", "TraceNF or PIC trace-check report JSON")
-    .option(
-      "--provider-profile <path>",
-      "Provider/authority gate profile JSON",
-    ),
+    .command("observation-window")
+    .requiredOption("--window <path>", "Observation window JSON"),
 ).action((options) =>
   outputJson(
-    operationGateReport(
-      readJsonPath(options.trace, "trace normal form"),
-      options.providerProfile
-        ? readJsonPath(options.providerProfile, "provider profile")
-        : {},
+    trcObservationWindowReport(
+      readJsonPath(options.window, "observation window"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  trc
+    .command("observation-consistency")
+    .requiredOption("--window <path>", "Observation window JSON"),
+).action((options) =>
+  outputJson(
+    trcObservationConsistencyReport(
+      readJsonPath(options.window, "observation window"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  trc.command("resource-flow").requiredOption("--trace <path>", "Trace JSON"),
+).action((options) =>
+  outputJson(
+    trcResourceFlowReport(readJsonPath(options.trace, "trace")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  trc
+    .command("lifecycle-scheduler")
+    .requiredOption("--certificates <path>", "Lifecycle certificates JSON"),
+).action((options) =>
+  outputJson(
+    lifecycleSchedulerReport(
+      readJsonPath(options.certificates, "lifecycle certificates"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  trc
+    .command("tolerance-scheduler")
+    .requiredOption("--certificates <path>", "Tolerance certificates JSON"),
+).action((options) =>
+  outputJson(
+    toleranceSchedulerReport(
+      readJsonPath(options.certificates, "tolerance certificates"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  trc
+    .command("efficiency-archive")
+    .requiredOption("--frontier <path>", "Efficiency frontier JSON"),
+).action((options) =>
+  outputJson(
+    efficiencyArchiveReport(
+      readJsonPath(options.frontier, "efficiency frontier"),
     ),
     options.output,
   ),
@@ -1902,6 +2444,40 @@ addOutputOptions(
 ).action((options) =>
   outputJson(
     buildActionBoundaryReport(readJsonPath(options.report, "runtime report")),
+    options.output,
+  ),
+);
+
+const performance = program.command("performance");
+addOutputOptions(performance.command("report").option("--json")).action(
+  (options) => outputJson(performanceReport(), options.output),
+);
+addOutputOptions(
+  performance
+    .command("bench")
+    .requiredOption("--fixture <path>", "Benchmark fixture JSON")
+    .option("--json"),
+).action((options) =>
+  outputJson(
+    performanceBenchReport(readJsonPath(options.fixture, "benchmark fixture")),
+    options.output,
+  ),
+);
+
+const cache = program.command("cache");
+addOutputOptions(cache.command("status").option("--json")).action((options) =>
+  outputJson(cacheStatusReport(), options.output),
+);
+addOutputOptions(cache.command("rebuild").option("--json")).action((options) =>
+  outputJson(cacheRebuildReport(), options.output),
+);
+addOutputOptions(
+  cache
+    .command("invalidation")
+    .requiredOption("--file <path>", "Artifact JSON"),
+).action((options) =>
+  outputJson(
+    cacheInvalidationReport(readJsonPath(options.file, "artifact")),
     options.output,
   ),
 );
@@ -2188,6 +2764,62 @@ addOutputOptions(
 ).action((options) =>
   outputJson(
     pathLawResponsePolicyReport(readJsonPath(options.trajectory, "trajectory")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  addProfile(
+    ecpt
+      .command("quotient-check")
+      .requiredOption("--packets <path>", "Packet/token JSONL"),
+  ),
+).action((options) =>
+  outputJson(
+    ecptQuotientReport(readJsonlPath(options.packets), options.profile),
+    options.output,
+  ),
+);
+addOutputOptions(
+  ecpt
+    .command("boundary-quotient")
+    .requiredOption("--quotient <path>", "Quotient report JSON")
+    .requiredOption("--target <path>", "Target JSON"),
+).action((options) =>
+  outputJson(
+    boundaryQuotientReport(
+      readJsonPath(options.quotient, "quotient"),
+      readJsonPath(options.target, "target"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  ecpt
+    .command("duplicate-inflation")
+    .requiredOption("--packets <path>", "Packet/token JSONL"),
+).action((options) =>
+  outputJson(
+    duplicateInflationReport(readJsonlPath(options.packets)),
+    options.output,
+  ),
+);
+addOutputOptions(
+  ecpt
+    .command("atlas-check")
+    .requiredOption("--atlas <path>", "Stratified atlas JSON"),
+).action((options) =>
+  outputJson(
+    atlasCheckReport(readJsonPath(options.atlas, "atlas")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  ecpt
+    .command("activation-cache")
+    .requiredOption("--state <path>", "Activation cache state JSON"),
+).action((options) =>
+  outputJson(
+    activationCacheReport(readJsonPath(options.state, "activation state")),
     options.output,
   ),
 );

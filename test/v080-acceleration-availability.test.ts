@@ -154,6 +154,91 @@ describe("v0.8 acceleration and availability reports", () => {
     );
   });
 
+  it("uses structured MCP and A2A reports in operation gates", () => {
+    const descriptor = mcpToolDescriptorReport({
+      auth_scope: ["read"],
+      descriptor_version: "1",
+      egress_policy: "none",
+      server_id: "srv",
+      server_trust_status: "trusted",
+      side_effect_class: "read_only",
+      tool_name: "read",
+    });
+    const invocation = mcpToolInvocationPreflight(
+      {
+        auth_scope: ["read"],
+        descriptor_version: "1",
+        egress_policy: "none",
+        server_id: "srv",
+        server_trust_status: "trusted",
+        side_effect_class: "read_only",
+        tool_name: "read",
+      },
+      {
+        arguments: { path: "README.md" },
+        canonical_tool_name: "read",
+        output_redaction_policy: "none",
+        trace_logging_enabled: true,
+      },
+    );
+    const gate = operationGateReport(physicalTrace(), {
+      a2a_agent_card_report: {
+        accepted: true,
+        agent_card_hash: "sha256:agent",
+      },
+      a2a_task_handoff_report: {
+        accepted: true,
+        agent_card_hash: "sha256:agent",
+        handoff_hash: "sha256:handoff",
+      },
+      allow_execute: true,
+      explicit_execute: true,
+      mcp_tool_descriptor_report: descriptor,
+      mcp_tool_invocation_preflight: invocation,
+      requires_a2a_agent: true,
+      requires_mcp_tool: true,
+      side_effect_policy: "controlled_provider_allowed",
+      trusted_issuers: ["operator:test"],
+    });
+
+    expect(gate.mcp_tool_gate).toMatchObject({
+      descriptor_hash: descriptor.descriptor_hash,
+      ok: true,
+      required: true,
+    });
+    expect(gate.a2a_agent_gate).toMatchObject({
+      agent_card_hash: "sha256:agent",
+      ok: true,
+      required: true,
+    });
+  });
+
+  it("blocks structured and legacy gate disagreement", () => {
+    const gate = operationGateReport(physicalTrace(), {
+      allow_execute: true,
+      explicit_execute: true,
+      mcp_tool_descriptor_report: {
+        accepted: true,
+        descriptor_hash: "sha256:descriptor",
+      },
+      mcp_tool_gate_accepted: false,
+      mcp_tool_invocation_preflight: {
+        accepted: true,
+        descriptor_hash: "sha256:descriptor",
+      },
+      side_effect_policy: "controlled_provider_allowed",
+      trusted_issuers: ["operator:test"],
+    });
+
+    expect(gate.mcp_tool_gate).toMatchObject({ ok: false });
+    expect(gate.execution_blockers).toContain(
+      "mcp_gate_structured_legacy_mismatch",
+    );
+    expect(
+      (gate.residuals as Record<string, unknown>[]).map((item) => item.kind),
+    ).toContain("mcp_gate_structured_legacy_mismatch");
+  });
+
   it("fails CARA comparison closed without baseline and keeps proxy-only non-contributing", () => {
     const report = phaseAccelerationReport(
       {
@@ -195,6 +280,8 @@ describe("v0.8 acceleration and availability reports", () => {
     expect(report.ok).toBe(false);
     expect(report.blockers).toContain("missing_baseline_policy_class");
     expect(report.blockers).toContain("proxy_only_non_contributing");
+    expect(report.certified_acceleration_interval_candidate).toBe(false);
+    expect(report.interval_residuals).not.toEqual([]);
   });
 
   it("rejects target validity when authority is not approved", () => {

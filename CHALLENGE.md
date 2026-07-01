@@ -21,3 +21,12 @@ pic-ts bit mec-frontier --certificates examples/asi_proxy_acceleration_bundle/bi
 `settled=false` is normal. `capital_admitted`, `provider_dispatch_ready`, and
 `physical_dispatch_ready` do not authorize execution or prove a physical
 outcome.
+
+## v0.9 Loop Challenge
+
+PIC-TS must mirror Python PIC public JSON for token extraction, token
+admissibility, duplicate suppression, TRC observation residuals, SQOT resource
+tensors, BIT frontiers, cache invalidation, performance reports, and compact
+agent outputs without importing Python at runtime. The loop accelerates
+residual repair only by producing finite local JSON; it never grants network,
+shell, provider, repository, physical, or model-update authority.

@@ -35,6 +35,9 @@ const requiredFilesEntries = [
   "fixtures/python_v050_snapshots/",
   "examples/",
   "docs/",
+  "AGENTS.md",
+  "CHALLENGE.md",
+  "INTEROP_PIC.md",
   "agent-manifest.json",
   "CHANGELOG.md",
   "README.md",
@@ -59,6 +62,9 @@ const allowedPrefixes = [
 
 const allowedExact = new Set([
   "package.json",
+  "AGENTS.md",
+  "CHALLENGE.md",
+  "INTEROP_PIC.md",
   "agent-manifest.json",
   "CHANGELOG.md",
   "README.md",

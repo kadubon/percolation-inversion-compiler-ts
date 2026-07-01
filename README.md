@@ -8,9 +8,10 @@ structured JSON reports. The reports show what is accepted, what is usable for a
 workflow, what still needs checking, and what must not be treated as completed
 work.
 
-This npm package is a TypeScript-compatible port of the Python v0.8.0 public
+This npm package is a TypeScript-compatible port of the Python v0.9.0 public
 JSON, CLI, schema, conformance, CCR interop, TRC operation gates, MCP/A2A
-reports, and CARA acceleration semantics for npm and JavaScript agent runtimes.
+reports, CARA acceleration semantics, and agent-loop diagnostics for npm and
+JavaScript agent runtimes.
 The Python package remains the canonical implementation:
 
 - Canonical repository:
@@ -125,6 +126,15 @@ npx pic-ts sqot protocol-integrity --state examples/asi_proxy_acceleration_bundl
 npx pic-ts bit mec-frontier --certificates examples/asi_proxy_acceleration_bundle/bit_mec_certificates.jsonl
 ```
 
+Version 0.9.0 adds Node-only public reports for `token extract-pipeline`,
+`token admissibility`, token deduplication, TRC observation windows/resource
+flows, SQOT resource tensors, BIT unseen frontiers, cache invalidation, and
+local performance diagnostics. The shared
+`examples/asi_proxy_loop_bundle/` directory gives first-time agents a compact
+searchable fixture set for the CCR/PIC/PIC-TS loop. These outputs remain inert
+JSON: token extraction is not settlement, token admissibility is not capital
+admission, safe commands are hints only, and cache hits are not proof.
+
 `operation_ready=true` means the trace includes explicit authority, resource,
 rollback, witness, schedule, and tolerance information for a scoped handoff. It
 does not mean PIC-TS executed the handoff. Expired authority, unknown authority
@@ -203,7 +213,7 @@ npx pic-ts schema --type EffectivePacketGraph
 npx pic-ts snapshot list
 ```
 
-Use v0.7.0/v0.8.0 diagnostic helpers from a repository checkout or from packaged
+Use v0.7.0-v0.9.0 diagnostic helpers from a repository checkout or from packaged
 examples under `node_modules/percolation-inversion-compiler-ts/examples`:
 
 ```sh
@@ -298,7 +308,7 @@ missing obligations.
 ## Python Canonical Implementation
 
 The canonical implementation is the Python package
-`percolation-inversion-compiler==0.8.0`.
+`percolation-inversion-compiler==0.9.0`.
 
 Use the Python project when you need the canonical source implementation,
 Python SDK behavior, optional Python sidecars, or the full project
@@ -315,16 +325,16 @@ not copy Python internals line by line.
 
 ## Compatibility
 
-| Command family                                                                                                                                                                                        | Compatibility claim                                                                                              |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `agent check`, `agent intake`, `agent runbook`, `agent autonomy-audit`, `agent manifest`, `agent communication-guide`                                                                                 | Python v0.5.0 public JSON meaning, with v0.4.4 fixture-backed parity preserved.                                  |
-| `phase plan`, `phase gap`, `phase runbook`, `phase benchmark`, `phase benchmark-suite`, `phase dashboard`, `phase observe`                                                                            | Python v0.5.0 public semantics; dynamic `--request` keeps candidate-only and identity blockers visible.          |
-| `phase lab init/ingest/list-windows/export/observe/graph/closure/executable-paths/threshold-status/certify/compare-window`                                                                            | npm/Node JSON/JSONL local store for Python v0.5.0 Phase Ecology Lab records.                                     |
-| `bit`, `sqot`, `alt`, `trc`, `ecology effective-graph`, `ecology execution-available-paths`                                                                                                           | v0.5.0-v0.8.0 diagnostic and recommendation routes; outputs are inert JSON and do not grant execution authority. |
-| `phase --emit`, `bit emit-ccr-tasks`, `sqot --emit`, `alt bridge-ecpt`, `trc trace-normalize/check/to-packet`, `interop/ccr` SDK                                                                      | Python v0.8.0 CCR interop, TRC operation-gate, MCP/A2A, BIT, SQOT, and CARA semantics for Node.js runtimes.      |
-| `runtime step`, `schema`, `snapshot`, `routes`, `portability`, `adoption`, `identity`, `demo installed-smoke`                                                                                         | Python v0.5.0-compatible schema and fixture semantics, with bundled v0.4.4/v0.5.0 conformance fixtures.          |
-| `agent message`, `agent inbox`, `packet`, Node-only demo bootstrap                                                                                                                                    | npm/Node sidecar implementation with the same non-promotion and residual-preservation rules.                     |
-| evidence heavy routes, runtime service/store/heavy actions, SQOT audit, ALT heavy routes, ecology heavy routes, ECPT heavy routes, audit/extract/check/coverage/parse/provenance/sbom/demo datacenter | Safe diagnostic compatibility only.                                                                              |
+| Command family                                                                                                                                                                                        | Compatibility claim                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `agent check`, `agent intake`, `agent runbook`, `agent autonomy-audit`, `agent manifest`, `agent communication-guide`                                                                                 | Python v0.5.0 public JSON meaning, with v0.4.4 fixture-backed parity preserved.                                                        |
+| `phase plan`, `phase gap`, `phase runbook`, `phase benchmark`, `phase benchmark-suite`, `phase dashboard`, `phase observe`                                                                            | Python v0.5.0 public semantics; dynamic `--request` keeps candidate-only and identity blockers visible.                                |
+| `phase lab init/ingest/list-windows/export/observe/graph/closure/executable-paths/threshold-status/certify/compare-window`                                                                            | npm/Node JSON/JSONL local store for Python v0.5.0 Phase Ecology Lab records.                                                           |
+| `bit`, `sqot`, `alt`, `trc`, `ecology effective-graph`, `ecology execution-available-paths`                                                                                                           | v0.5.0-v0.9.0 diagnostic and recommendation routes; outputs are inert JSON and do not grant execution authority.                       |
+| `phase --emit`, `bit emit-ccr-tasks`, `sqot --emit`, `alt bridge-ecpt`, `trc trace-normalize/check/to-packet`, `interop/ccr`, `token`, `performance`, `cache` SDK                                     | Python v0.9.0 CCR interop, TRC operation-gate, MCP/A2A, BIT, SQOT, token, cache, performance, and CARA semantics for Node.js runtimes. |
+| `runtime step`, `schema`, `snapshot`, `routes`, `portability`, `adoption`, `identity`, `demo installed-smoke`                                                                                         | Python v0.5.0-compatible schema and fixture semantics, with bundled v0.4.4/v0.5.0 conformance fixtures.                                |
+| `agent message`, `agent inbox`, `packet`, Node-only demo bootstrap                                                                                                                                    | npm/Node sidecar implementation with the same non-promotion and residual-preservation rules.                                           |
+| evidence heavy routes, runtime service/store/heavy actions, SQOT audit, ALT heavy routes, ecology heavy routes, ECPT heavy routes, audit/extract/check/coverage/parse/provenance/sbom/demo datacenter | Safe diagnostic compatibility only.                                                                                                    |
 
 ## Development And Publishing Checks
 

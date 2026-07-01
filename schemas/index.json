@@ -1,13 +1,13 @@
 {
-  "index_id": "pic-ts-schema-index-v060",
-  "canonical_source": "percolation-inversion-compiler==0.6.0",
-  "generated_from": "percolation-inversion-compiler==0.6.0",
+  "index_id": "pic-ts-schema-index-v090",
+  "canonical_source": "percolation-inversion-compiler==0.9.0",
+  "generated_from": "percolation-inversion-compiler==0.9.0",
   "generation_command": "pic schema --all --output-dir <schema-output-dir>",
   "digest_reference": "schema-digest.json",
   "bundle_reference": "bundle.schema.json",
   "package_name": "percolation-inversion-compiler-ts",
-  "schema_count": 355,
-  "root_schema_count": 352,
+  "schema_count": 429,
+  "root_schema_count": 426,
   "interop_schema_paths": [
     "schemas/interop/ccr_pic_import.schema.json",
     "schemas/interop/ccr_residual.schema.json",
@@ -442,11 +442,21 @@
     "WebFetchPolicy",
     "WebFetchReport",
     "bundle"
+    ,
+    "token-extraction-pipeline-report",
+    "token-admissibility-report",
+    "token-dedup-report",
+    "observation-window-report",
+    "trace-indexed-resource-flow",
+    "resource-tensor-report",
+    "unseen-frontier-report",
+    "performance-report",
+    "cache-invalidation-report"
   ],
   "settled": false,
   "notes": [
-    "Python v0.6.0 remains the canonical implementation",
-    "root schemas preserve v0.5.0 public JSON boundaries",
-    "interop schemas describe v0.6.0 CCR JSONL handoff records for npm and JavaScript agent runtimes"
+    "Python v0.9.0 remains the canonical implementation",
+    "root schemas preserve public JSON safety boundaries",
+    "interop schemas describe CCR JSONL and v0.9 loop handoff records for npm and JavaScript agent runtimes"
   ]
 }

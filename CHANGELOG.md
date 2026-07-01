@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.9.0
+
+- Mirrors the Python `percolation-inversion-compiler==0.9.0` public v0.9
+  token extraction, token admissibility, duplicate suppression, TRC observation,
+  SQOT resource tensor, BIT frontier, cache invalidation, and performance JSON
+  report layer.
+- Adds v0.9 schemas, `examples/asi_proxy_loop_bundle/`, and first-time-agent
+  docs for loop protocol, token extraction, observation residuals, phase
+  interval reports, performance, and cross-repo conformance.
+- Keeps the npm runtime Python-free and non-executing: accepted reports do not
+  imply settlement, token admissibility is not capital admission, provider
+  dispatch readiness is not dispatch, and safe commands are hints only.
+
 ## v0.8.0
 
 - Mirrors the Python `percolation-inversion-compiler==0.8.0` public v0.8 JSON

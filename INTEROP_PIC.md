@@ -16,3 +16,8 @@ explicit:
 
 Use `examples/asi_proxy_acceleration_bundle/` for v0.8 target/baseline/capital,
 MCP/A2A, SQOT, BIT, TRC, preflight, and foundry fixture shapes.
+
+Use `examples/asi_proxy_loop_bundle/` for v0.9 PIC/PIC-TS/CCR loop parity:
+target/baseline, capital witnesses, loop state, active cuts, interval
+acceleration, token reports, MCP/A2A gate bindings, observation residuals, and
+performance reports. These fixtures are candidate evidence only.

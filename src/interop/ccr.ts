@@ -1227,6 +1227,325 @@ function gate(ok: boolean, residuals: JsonRecord[], note = ""): JsonRecord {
   };
 }
 
+function firstValue(...values: unknown[]): unknown {
+  for (const value of values) {
+    if (value === undefined || value === null || value === "") continue;
+    if (Array.isArray(value) && value.length === 0) continue;
+    if (
+      typeof value === "object" &&
+      !Array.isArray(value) &&
+      Object.keys(value as JsonRecord).length === 0
+    ) {
+      continue;
+    }
+    return value;
+  }
+  return undefined;
+}
+
+function reportHash(report: JsonRecord, ...keys: string[]): string {
+  for (const key of keys) {
+    const value = report[key];
+    if (value !== undefined && value !== null && value !== "") {
+      return String(value);
+    }
+  }
+  return digest(report);
+}
+
+function structuredReportAccepted(
+  report: JsonRecord,
+  readyKeys: Set<string>,
+): boolean {
+  if (Object.keys(report).length === 0) return false;
+  if (report.ok === true || report.accepted === true) return true;
+  if ([...readyKeys].some((key) => report[key] === true)) return true;
+  return statusOk(
+    report,
+    new Set(["accepted", "approved", "valid", "ready", "fresh"]),
+  );
+}
+
+function gateBlocker(
+  traceId: string,
+  stepId: string,
+  kind: string,
+  blockers: string[],
+  residuals: JsonRecord[],
+): void {
+  blockers.push(kind);
+  residuals.push(traceResidual(traceId, stepId, kind, true));
+}
+
+function mcpToolGateReport(
+  traceId: string,
+  providerProfile: JsonRecord,
+): [JsonRecord, JsonRecord[]] {
+  const descriptor = record(providerProfile.mcp_tool_descriptor_report);
+  const preflight = record(providerProfile.mcp_tool_invocation_preflight);
+  const structuredPresent =
+    Object.keys(descriptor).length > 0 || Object.keys(preflight).length > 0;
+  const required =
+    providerProfile.requires_mcp_tool === true || structuredPresent;
+  const legacyPresent = "mcp_tool_gate_accepted" in providerProfile;
+  const legacyAccepted = providerProfile.mcp_tool_gate_accepted === true;
+  const blockers: string[] = [];
+  const residuals: JsonRecord[] = [];
+  const descriptorHash =
+    Object.keys(descriptor).length > 0
+      ? reportHash(
+          descriptor,
+          "descriptor_hash",
+          "tool_descriptor_hash",
+          "hash",
+        )
+      : null;
+  const nestedDescriptor = record(preflight.descriptor_report);
+  const invocationDescriptorHash =
+    Object.keys(preflight).length > 0
+      ? firstValue(
+          preflight.descriptor_hash,
+          preflight.tool_descriptor_hash,
+          preflight.descriptor_report_hash,
+          nestedDescriptor.descriptor_hash,
+          nestedDescriptor.tool_descriptor_hash,
+        )
+      : undefined;
+  if (structuredPresent) {
+    if (Object.keys(descriptor).length === 0) {
+      gateBlocker(
+        traceId,
+        "mcp-tool-gate",
+        "mcp_tool_descriptor_report_required",
+        blockers,
+        residuals,
+      );
+    } else if (
+      !structuredReportAccepted(
+        descriptor,
+        new Set(["descriptor_ready", "tool_ready"]),
+      )
+    ) {
+      gateBlocker(
+        traceId,
+        "mcp-tool-gate",
+        "mcp_tool_descriptor_report_not_accepted",
+        blockers,
+        residuals,
+      );
+    }
+    if (Object.keys(preflight).length === 0) {
+      gateBlocker(
+        traceId,
+        "mcp-tool-gate",
+        "mcp_tool_invocation_preflight_required",
+        blockers,
+        residuals,
+      );
+    } else if (
+      !structuredReportAccepted(
+        preflight,
+        new Set(["invocation_ready", "preflight_ready", "dispatch_ready"]),
+      )
+    ) {
+      gateBlocker(
+        traceId,
+        "mcp-tool-gate",
+        "mcp_tool_invocation_preflight_not_accepted",
+        blockers,
+        residuals,
+      );
+    }
+    if (
+      descriptorHash &&
+      invocationDescriptorHash &&
+      descriptorHash !== String(invocationDescriptorHash)
+    ) {
+      gateBlocker(
+        traceId,
+        "mcp-tool-gate",
+        "mcp_descriptor_invocation_hash_mismatch",
+        blockers,
+        residuals,
+      );
+    }
+  } else if (required && !legacyAccepted) {
+    gateBlocker(
+      traceId,
+      "mcp-tool-gate",
+      "mcp_tool_gate_not_accepted",
+      blockers,
+      residuals,
+    );
+  }
+  const structuredOk = structuredPresent && blockers.length === 0;
+  if (structuredPresent && legacyPresent && structuredOk !== legacyAccepted) {
+    gateBlocker(
+      traceId,
+      "mcp-tool-gate",
+      "mcp_gate_structured_legacy_mismatch",
+      blockers,
+      residuals,
+    );
+  }
+  const ok =
+    (structuredPresent ? structuredOk : !required || legacyAccepted) &&
+    !residuals.some(
+      (item) => item.kind === "mcp_gate_structured_legacy_mismatch",
+    );
+  return [
+    {
+      blockers: dedupeSorted(blockers),
+      descriptor_hash: descriptorHash,
+      invocation_descriptor_hash: invocationDescriptorHash
+        ? String(invocationDescriptorHash)
+        : null,
+      legacy_accepted: legacyAccepted,
+      legacy_present: legacyPresent,
+      ok,
+      refs: {
+        descriptor: providerProfile.mcp_tool_descriptor_report_ref,
+        invocation_preflight: providerProfile.mcp_tool_invocation_preflight_ref,
+      },
+      required,
+      residual_kinds: dedupeSorted(residuals.map((item) => String(item.kind))),
+      structured_present: structuredPresent,
+    },
+    residuals,
+  ];
+}
+
+function a2aAgentGateReport(
+  traceId: string,
+  providerProfile: JsonRecord,
+): [JsonRecord, JsonRecord[]] {
+  const agentCard = record(providerProfile.a2a_agent_card_report);
+  const handoff = record(providerProfile.a2a_task_handoff_report);
+  const structuredPresent =
+    Object.keys(agentCard).length > 0 || Object.keys(handoff).length > 0;
+  const required =
+    providerProfile.requires_a2a_agent === true || structuredPresent;
+  const legacyPresent = "a2a_agent_gate_accepted" in providerProfile;
+  const legacyAccepted = providerProfile.a2a_agent_gate_accepted === true;
+  const blockers: string[] = [];
+  const residuals: JsonRecord[] = [];
+  const agentCardHash =
+    Object.keys(agentCard).length > 0
+      ? reportHash(agentCard, "agent_card_hash", "card_hash", "hash")
+      : null;
+  const handoffHash =
+    Object.keys(handoff).length > 0
+      ? reportHash(handoff, "handoff_hash", "task_handoff_hash", "hash")
+      : null;
+  const handoffAgentCardHash =
+    Object.keys(handoff).length > 0
+      ? firstValue(handoff.agent_card_hash, handoff.card_hash)
+      : undefined;
+  if (structuredPresent) {
+    if (Object.keys(agentCard).length === 0) {
+      gateBlocker(
+        traceId,
+        "a2a-agent-gate",
+        "a2a_agent_card_report_required",
+        blockers,
+        residuals,
+      );
+    } else if (
+      !structuredReportAccepted(
+        agentCard,
+        new Set(["agent_ready", "card_ready"]),
+      )
+    ) {
+      gateBlocker(
+        traceId,
+        "a2a-agent-gate",
+        "a2a_agent_card_report_not_accepted",
+        blockers,
+        residuals,
+      );
+    }
+    if (Object.keys(handoff).length === 0) {
+      gateBlocker(
+        traceId,
+        "a2a-agent-gate",
+        "a2a_task_handoff_report_required",
+        blockers,
+        residuals,
+      );
+    } else if (
+      !structuredReportAccepted(
+        handoff,
+        new Set(["handoff_ready", "task_handoff_ready", "delegation_ready"]),
+      )
+    ) {
+      gateBlocker(
+        traceId,
+        "a2a-agent-gate",
+        "a2a_task_handoff_report_not_accepted",
+        blockers,
+        residuals,
+      );
+    }
+    if (
+      agentCardHash &&
+      handoffAgentCardHash &&
+      agentCardHash !== String(handoffAgentCardHash)
+    ) {
+      gateBlocker(
+        traceId,
+        "a2a-agent-gate",
+        "a2a_agent_card_handoff_hash_mismatch",
+        blockers,
+        residuals,
+      );
+    }
+  } else if (required && !legacyAccepted) {
+    gateBlocker(
+      traceId,
+      "a2a-agent-gate",
+      "a2a_agent_gate_not_accepted",
+      blockers,
+      residuals,
+    );
+  }
+  const structuredOk = structuredPresent && blockers.length === 0;
+  if (structuredPresent && legacyPresent && structuredOk !== legacyAccepted) {
+    gateBlocker(
+      traceId,
+      "a2a-agent-gate",
+      "a2a_gate_structured_legacy_mismatch",
+      blockers,
+      residuals,
+    );
+  }
+  const ok =
+    (structuredPresent ? structuredOk : !required || legacyAccepted) &&
+    !residuals.some(
+      (item) => item.kind === "a2a_gate_structured_legacy_mismatch",
+    );
+  return [
+    {
+      agent_card_hash: agentCardHash,
+      blockers: dedupeSorted(blockers),
+      handoff_agent_card_hash: handoffAgentCardHash
+        ? String(handoffAgentCardHash)
+        : null,
+      handoff_hash: handoffHash,
+      legacy_accepted: legacyAccepted,
+      legacy_present: legacyPresent,
+      ok,
+      refs: {
+        agent_card: providerProfile.a2a_agent_card_report_ref,
+        task_handoff: providerProfile.a2a_task_handoff_report_ref,
+      },
+      required,
+      residual_kinds: dedupeSorted(residuals.map((item) => String(item.kind))),
+      structured_present: structuredPresent,
+    },
+    residuals,
+  ];
+}
+
 function withinNumericBudget(usage: JsonRecord, limit: JsonRecord): boolean {
   if (Object.keys(usage).length === 0 || Object.keys(limit).length === 0) {
     return true;
@@ -1374,16 +1693,6 @@ function physicalDispatchResiduals(
         "controlled_physical_allowed",
       ].includes(policy),
       "side_effect_policy_not_dispatchable",
-    ],
-    [
-      providerProfile.requires_mcp_tool !== true ||
-        providerProfile.mcp_tool_gate_accepted === true,
-      "mcp_tool_gate_not_accepted",
-    ],
-    [
-      providerProfile.requires_a2a_agent !== true ||
-        providerProfile.a2a_agent_gate_accepted === true,
-      "a2a_agent_gate_not_accepted",
     ],
   ];
   for (const [ok, kind] of checks) {
@@ -1632,12 +1941,27 @@ export function operationGateReport(
       );
     }
   }
+  const [mcpToolGate, mcpToolGateResiduals] = mcpToolGateReport(
+    traceId,
+    providerProfile,
+  );
+  const [a2aAgentGate, a2aAgentGateResiduals] = a2aAgentGateReport(
+    traceId,
+    providerProfile,
+  );
+  residuals.push(...mcpToolGateResiduals, ...a2aAgentGateResiduals);
+  const structuredGateBlockers = new Set(
+    [...mcpToolGateResiduals, ...a2aAgentGateResiduals]
+      .filter((item) => item.blocking === true)
+      .map((item) => String(item.kind)),
+  );
 
   const operationBlockerKinds = new Set([
     ...CORE_OPERATION_BLOCKERS,
     "missing_causal_schedule_block",
     "missing_certificate_lifecycle",
     "missing_hazard_envelope",
+    ...structuredGateBlockers,
   ]);
   const executionBlockers = dedupeSorted(
     residuals
@@ -1650,7 +1974,9 @@ export function operationGateReport(
     !fixtureDryRun &&
     !["dry_run_only", "none", "none_without_execute_flag"].includes(policy) &&
     providerProfile.allow_execute === true &&
-    providerProfile.explicit_execute === true;
+    providerProfile.explicit_execute === true &&
+    mcpToolGate.ok === true &&
+    a2aAgentGate.ok === true;
   const physicalRequested = Boolean(
     providerProfile.physical_dispatch_requested ??
     providerProfile.physical_domain_profile ??
@@ -1720,12 +2046,7 @@ export function operationGateReport(
 
   return {
     accepted: steps.length > 0,
-    a2a_agent_gate: {
-      ok:
-        providerProfile.requires_a2a_agent !== true ||
-        providerProfile.a2a_agent_gate_accepted === true,
-      required: providerProfile.requires_a2a_agent === true,
-    },
+    a2a_agent_gate: a2aAgentGate,
     authority_gate: gate(
       authorityGateResiduals.length === 0,
       authorityGateResiduals,
@@ -1739,12 +2060,7 @@ export function operationGateReport(
     execution_blockers: executionBlockers,
     hazard_gate: gate(hazardResiduals.length === 0, hazardResiduals),
     lifecycle_gate: gate(lifecycleResiduals.length === 0, lifecycleResiduals),
-    mcp_tool_gate: {
-      ok:
-        providerProfile.requires_mcp_tool !== true ||
-        providerProfile.mcp_tool_gate_accepted === true,
-      required: providerProfile.requires_mcp_tool === true,
-    },
+    mcp_tool_gate: mcpToolGate,
     non_claims: [
       ...NON_CLAIMS,
       "operation_ready_is_not_executed",
@@ -2569,6 +2885,125 @@ function targetThresholds(target: JsonRecord): Record<string, number> {
   );
 }
 
+const PHASE_CHARGE_FIELDS = [
+  "transport_error_upper_bound",
+  "calibration_error_upper_bound",
+  "hazard_charge_upper_bound",
+  "authority_charge_upper_bound",
+  "censoring_charge_upper_bound",
+  "competing_stop_charge_upper_bound",
+];
+
+function phaseIntervalEvidence(
+  target: JsonRecord,
+  baseline: JsonRecord,
+  marginDelta: number | null,
+  certifiedCandidate: boolean,
+): JsonRecord {
+  const confidenceBudget = firstValue(
+    target.confidence_budget,
+    baseline.confidence_budget,
+  );
+  const baselineRefreshAge = firstValue(
+    baseline.baseline_refresh_age,
+    baseline.refresh_age,
+    baseline.age,
+  );
+  const baselineStale =
+    baseline.baseline_stale === true ||
+    baseline.stale === true ||
+    baseline.lifecycle_stale === true;
+  const timeUniformEvidence =
+    target.time_uniform_evidence === true ||
+    baseline.time_uniform_evidence === true;
+  const subject = target.target_id ?? baseline.baseline_id ?? "phase";
+  const residuals: JsonRecord[] = [];
+  if (confidenceBudget === undefined) {
+    residuals.push(
+      reportResidual("phase-interval", subject, "missing_confidence_budget"),
+    );
+  }
+  if (baselineStale) {
+    residuals.push(reportResidual("phase-interval", subject, "baseline_stale"));
+  }
+  if (!timeUniformEvidence) {
+    residuals.push(
+      reportResidual(
+        "phase-interval",
+        subject,
+        "missing_time_uniform_evidence",
+      ),
+    );
+  }
+  const declaredMissingCharge = optionalFloat(
+    firstValue(
+      target.declared_missing_charge_upper_bound,
+      baseline.declared_missing_charge_upper_bound,
+    ),
+  );
+  const chargeUpperBounds: Record<string, number> = {};
+  for (const field of PHASE_CHARGE_FIELDS) {
+    let value = optionalFloat(firstValue(target[field], baseline[field]));
+    if (value === null && declaredMissingCharge !== null) {
+      value = declaredMissingCharge;
+    }
+    if (value === null) {
+      residuals.push(
+        reportResidual("phase-interval", subject, `missing_${field}`),
+      );
+    } else {
+      chargeUpperBounds[field] = value;
+    }
+  }
+  const totalCharge = Object.values(chargeUpperBounds).reduce(
+    (sum, value) => sum + value,
+    0,
+  );
+  const marginLower = marginDelta === null ? null : marginDelta - totalCharge;
+  const marginInterval =
+    marginDelta === null ? null : [marginLower, marginDelta];
+  const intervalCandidate =
+    certifiedCandidate &&
+    marginLower !== null &&
+    marginLower > 0 &&
+    confidenceBudget !== undefined &&
+    timeUniformEvidence &&
+    !baselineStale &&
+    blockingKinds(residuals).length === 0;
+  const evidenceStatus = intervalCandidate
+    ? "interval_candidate"
+    : certifiedCandidate
+      ? "point_candidate_interval_blocked"
+      : residuals.length > 0
+        ? "interval_diagnostic"
+        : "diagnostic";
+  return {
+    acceleration_interval: marginInterval,
+    baseline_refresh_age: baselineRefreshAge,
+    baseline_stale: baselineStale,
+    certified_acceleration_interval_candidate: intervalCandidate,
+    charge_upper_bounds: Object.fromEntries(
+      Object.entries(chargeUpperBounds).sort(([a], [b]) => a.localeCompare(b)),
+    ),
+    confidence_budget: confidenceBudget,
+    dynamic_regime_surface_ref: firstValue(
+      target.dynamic_regime_surface_ref,
+      baseline.dynamic_regime_surface_ref,
+    ),
+    evidence_status: evidenceStatus,
+    interval_residuals: residuals.sort((a, b) =>
+      String(a.kind).localeCompare(String(b.kind)),
+    ),
+    margin_interval: marginInterval,
+    stopped_evidence_sheaf_ref: firstValue(
+      target.stopped_evidence_sheaf_ref,
+      baseline.stopped_evidence_sheaf_ref,
+    ),
+    time_uniform_evidence: timeUniformEvidence,
+    total_charge_upper_bound: totalCharge,
+  };
+}
+
 export function phaseAccelerationReport(
   target: JsonRecord,
   baseline: JsonRecord,
@@ -2674,19 +3109,36 @@ export function phaseAccelerationReport(
     targetReport.ok === true &&
     baselineReport.ok === true &&
     blockers.length === 0;
+  const intervalEvidence = phaseIntervalEvidence(
+    target,
+    baseline,
+    marginDelta,
+    certified,
+  );
   return {
+    acceleration_interval: intervalEvidence.acceleration_interval,
     authority_ok: targetReport.authority_ok,
     baseline_envelope_ok: baselineReport.ok,
+    baseline_refresh_age: intervalEvidence.baseline_refresh_age,
+    baseline_stale: intervalEvidence.baseline_stale,
     blockers,
     capital_witnesses: witnesses,
     certified_acceleration_candidate: certified,
+    certified_acceleration_interval_candidate:
+      intervalEvidence.certified_acceleration_interval_candidate,
+    charge_upper_bounds: intervalEvidence.charge_upper_bounds,
+    confidence_budget: intervalEvidence.confidence_budget,
+    dynamic_regime_surface_ref: intervalEvidence.dynamic_regime_surface_ref,
+    evidence_status: intervalEvidence.evidence_status,
     finality_ok:
       witnesses.length > 0 &&
       witnesses.every((item) => item.finality_valid === true),
     hazard_ok: targetReport.hazard_ok,
     horizon: target.horizon,
+    interval_residuals: intervalEvidence.interval_residuals,
     k_alt_lower: Object.fromEntries(Object.entries(kAlt).sort()),
     k_baseline_upper: Object.fromEntries(Object.entries(kBaseline).sort()),
+    margin_interval: intervalEvidence.margin_interval,
     margin_delta: marginDelta,
     non_claims: [
       ...NON_CLAIMS,
@@ -2700,10 +3152,15 @@ export function phaseAccelerationReport(
     ),
     schema_version: "pic.phase_acceleration_report.v1",
     settled: false,
+    stopped_evidence_sheaf_ref: intervalEvidence.stopped_evidence_sheaf_ref,
     target_id: target.target_id,
     target_validity_ok: targetReport.ok,
     tau_alt: tauAlt,
     tau_baseline_upper: tauBaseline,
+    time_uniform_evidence: intervalEvidence.time_uniform_evidence,
+    total_charge_upper_bound: intervalEvidence.total_charge_upper_bound,
+    transport_error_upper_bound: record(intervalEvidence.charge_upper_bounds)
+      .transport_error_upper_bound,
     viability_ok: targetReport.viability_ok,
   };
 }
@@ -3182,6 +3639,1387 @@ export function dynamicRegimeAccelerationReport(
     ok: true,
     residuals,
     schema_version: "pic.dynamic_regime_acceleration_report.v1",
+    settled: false,
+  };
+}
+
+function simpleReport(
+  schemaVersion: string,
+  accepted: boolean,
+  residuals: JsonRecord[],
+  nonClaim: string,
+  extra: JsonRecord = {},
+): JsonRecord {
+  return {
+    ...extra,
+    accepted,
+    blockers: blockingKinds(residuals),
+    non_claims: [...NON_CLAIMS, nonClaim],
+    ok: true,
+    residuals: residuals.sort((a, b) =>
+      String(a.kind).localeCompare(String(b.kind)),
+    ),
+    schema_version: schemaVersion,
+    settled: false,
+  };
+}
+
+function normalizedClaim(item: JsonRecord): string {
+  const raw =
+    item.claim ??
+    item.claim_text ??
+    item.summary ??
+    item.description ??
+    item.token_id ??
+    item;
+  const text = typeof raw === "string" ? raw : compactStringify(raw);
+  return text.toLocaleLowerCase().split(/\s+/).filter(Boolean).join(" ");
+}
+
+function jaccardSimilarity(left: string, right: string): number {
+  const leftSet = new Set(left.split(/\W+/).filter(Boolean));
+  const rightSet = new Set(right.split(/\W+/).filter(Boolean));
+  if (leftSet.size === 0 && rightSet.size === 0) return 1;
+  if (leftSet.size === 0 || rightSet.size === 0) return 0;
+  const intersection = [...leftSet].filter((token) => rightSet.has(token));
+  const union = new Set([...leftSet, ...rightSet]);
+  return intersection.length / union.size;
+}
+
+export function tokenExtractionPipelineReport(
+  traceInput: JsonRecord,
+): JsonRecord {
+  const trace = traceInput ?? {};
+  const traceId = String(trace.trace_id ?? trace.id ?? shortHash(trace));
+  const residuals = requiredResiduals("token-pipeline", traceId, trace, [
+    "trace_id",
+    "steps",
+    "provenance",
+    "task_context",
+  ]);
+  const steps = records(trace.steps ?? trace.events);
+  if (steps.length === 0) {
+    residuals.push(
+      reportResidual("token-pipeline", traceId, "trace_steps_required"),
+    );
+  }
+  if (!(trace.instrumentation_contract_ref || trace.instrumentation_contract)) {
+    residuals.push(
+      reportResidual(
+        "token-pipeline",
+        traceId,
+        "instrumentation_contract_required",
+      ),
+    );
+  }
+  const blockers = blockingKinds(residuals);
+  const candidateId = `token-candidate:${shortHash([traceId, steps])}`;
+  return {
+    accepted: blockers.length === 0,
+    blockers,
+    candidate_token: {
+      candidate_only: true,
+      content_hash: digest(trace),
+      token_id: candidateId,
+      trace_id: traceId,
+    },
+    non_claims: [
+      ...NON_CLAIMS,
+      "token_extraction_is_not_token_execution",
+      "token_extraction_is_not_settlement",
+    ],
+    ok: true,
+    pipeline_stages: [
+      "segmentation",
+      "candidate_mining",
+      "canonicalization",
+      "ablation_design",
+      "leakage_check",
+      "dependency_graph",
+      "minimal_interface",
+      "verifier_binding",
+      "packet_proposal",
+    ].map((name) => ({
+      name,
+      status: blockers.length === 0 ? "candidate" : "residual",
+    })),
+    residuals,
+    schema_version: "pic.token_extraction_pipeline_report.v1",
+    settled: false,
+    trace_id: traceId,
+  };
+}
+
+export function tokenAdmissibilityReport(tokenInput: JsonRecord): JsonRecord {
+  const token = tokenInput ?? {};
+  const tokenId = String(token.token_id ?? token.id ?? shortHash(token));
+  const clauses: Record<string, boolean> = {
+    authority_capability_envelope: Boolean(
+      token.authority_envelope ||
+      token.authority_refs ||
+      token.capability_envelope_refs,
+    ),
+    counterfactual_deployment_contrast: Boolean(
+      token.counterfactual_contrast || token.deployment_contrast,
+    ),
+    cost_risk_accounting: Boolean(token.cost_ledger || token.risk_ledger),
+    deprecation_resurrection_conditions: Boolean(
+      token.deprecation_conditions || token.resurrection_conditions,
+    ),
+    dependency_closure: Boolean(
+      token.dependency_graph || token.dependency_closure_ref,
+    ),
+    expiry_lifecycle: Boolean(token.expiry || token.lifecycle),
+    guard_failure_contract: Boolean(token.guard || token.failure_contract),
+    leakage_exclusion: Boolean(
+      token.leakage_audit_ref || token.leakage_exclusion === true,
+    ),
+    mechanism_mediated_reuse: Boolean(token.mechanism || token.mechanism_ref),
+    provenance_origin: Boolean(
+      token.trace_id || token.provenance || token.origin,
+    ),
+    reusable_handle: Boolean(token.token_id || token.handle),
+    transport_scope: Boolean(token.transport_scope || token.scope),
+    verifier_binding: Boolean(token.verifier_binding || token.verifier_ref),
+  };
+  const residuals = Object.entries(clauses)
+    .filter(([, ok]) => !ok)
+    .map(([clause]) =>
+      reportResidual("token-admissibility", tokenId, `${clause}_required`),
+    );
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    admissibility_clauses: Object.fromEntries(Object.entries(clauses).sort()),
+    blockers,
+    capital_admitted: false,
+    non_claims: [
+      ...NON_CLAIMS,
+      "token_admissibility_is_not_capital_admission",
+      "useful_intervention_is_not_automatically_a_token",
+    ],
+    ok: true,
+    residuals,
+    schema_version: "pic.token_admissibility_report.v1",
+    settled: false,
+    token_id: tokenId,
+  };
+}
+
+export function tokenLineageReport(tokenInput: JsonRecord): JsonRecord {
+  const token = tokenInput ?? {};
+  const tokenId = String(token.token_id ?? token.id ?? shortHash(token));
+  const parents = dedupeSorted([
+    ...listField(token, "parents"),
+    ...listField(token, "lineage_refs"),
+  ]);
+  const residuals: JsonRecord[] = [];
+  if (parents.length === 0 && !token.trace_id) {
+    residuals.push(
+      reportResidual("token-lineage", tokenId, "lineage_origin_required"),
+    );
+  }
+  if (token.lineage_closed !== true) {
+    residuals.push(
+      reportResidual("token-lineage", tokenId, "lineage_closure_required"),
+    );
+  }
+  return simpleReport(
+    "pic.token_lineage_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "lineage_report_is_not_settlement",
+    {
+      content_hash: digest(token),
+      dependency_aware_hash: digest([token, parents]),
+      lineage_refs: parents,
+      normalized_claim_hash: digest(normalizedClaim(token)),
+      token_id: tokenId,
+    },
+  );
+}
+
+export function tokenDedupReport(tokens: JsonRecord[]): JsonRecord {
+  const groups = new Map<string, string[]>();
+  for (const [index, token] of tokens.entries()) {
+    const tokenId = String(token.token_id ?? token.id ?? `token:${index}`);
+    const claimHash = digest(normalizedClaim(token));
+    groups.set(claimHash, [...(groups.get(claimHash) ?? []), tokenId]);
+  }
+  const nearDuplicates: JsonRecord[] = [];
+  for (let leftIndex = 0; leftIndex < tokens.length; leftIndex += 1) {
+    for (
+      let rightIndex = leftIndex + 1;
+      rightIndex < tokens.length;
+      rightIndex += 1
+    ) {
+      const similarity = jaccardSimilarity(
+        normalizedClaim(tokens[leftIndex] ?? {}),
+        normalizedClaim(tokens[rightIndex] ?? {}),
+      );
+      if (similarity >= 0.82 && similarity < 1) {
+        nearDuplicates.push({
+          left: String(tokens[leftIndex]?.token_id ?? `token:${leftIndex}`),
+          right: String(tokens[rightIndex]?.token_id ?? `token:${rightIndex}`),
+          similarity,
+        });
+      }
+    }
+  }
+  const aliasLedger = [...groups.values()]
+    .filter((ids) => ids.length > 1)
+    .map((ids) => ({ alias_ids: ids.slice(1), canonical_id: ids[0] }));
+  return {
+    accepted: true,
+    alias_ledger: aliasLedger,
+    blockers: [],
+    canonical_representative_count: groups.size,
+    duplicate_mass_report: {
+      duplicate_mass_count: aliasLedger.reduce(
+        (total, item) =>
+          total + (Array.isArray(item.alias_ids) ? item.alias_ids.length : 0),
+        0,
+      ),
+      exact_duplicate_count: aliasLedger.length,
+      near_duplicate_candidate_count: nearDuplicates.length,
+    },
+    near_duplicate_candidates: nearDuplicates,
+    non_claims: [
+      ...NON_CLAIMS,
+      "string_similarity_is_not_semantic_identity",
+      "duplicate_mass_cannot_increase_support",
+    ],
+    ok: true,
+    residuals: nearDuplicates.map((item) =>
+      reportResidual(
+        "token-dedup",
+        `${String(item.left)}:${String(item.right)}`,
+        "near_duplicate_requires_review",
+        false,
+      ),
+    ),
+    schema_version: "pic.token_dedup_report.v1",
+    settled: false,
+  };
+}
+
+export function tokenInterfaceStandardReport(
+  token: JsonRecord,
+  standard: JsonRecord,
+): JsonRecord {
+  const tokenId = String(token.token_id ?? token.id ?? shortHash(token));
+  const required = listField(standard, "required_fields");
+  const fields =
+    required.length > 0
+      ? required
+      : ["token_id", "interface", "verifier_binding"];
+  const residuals = fields
+    .filter((field) => !token[field])
+    .map((field) =>
+      reportResidual("token-interface", tokenId, `missing_${field}`),
+    );
+  return simpleReport(
+    "pic.token_interface_standard_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "token_interface_check_is_not_execution_authority",
+    { required_fields: fields.sort(), token_id: tokenId },
+  );
+}
+
+export function traceInstrumentationContractReport(
+  trace: JsonRecord,
+  contract: JsonRecord,
+): JsonRecord {
+  const traceId = String(trace.trace_id ?? trace.id ?? shortHash(trace));
+  const required = listField(contract, "required_fields");
+  const fields =
+    required.length > 0 ? required : ["trace_id", "events", "provenance"];
+  const residuals = fields
+    .filter((field) => !trace[field])
+    .map((field) =>
+      reportResidual("trace-instrumentation", traceId, `missing_${field}`),
+    );
+  if (contract.requires_clock && !trace.clock) {
+    residuals.push(
+      reportResidual("trace-instrumentation", traceId, "clock_required"),
+    );
+  }
+  return simpleReport(
+    "pic.trace_instrumentation_contract_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "instrumentation_check_is_not_trace_truth",
+    { required_fields: fields.sort(), trace_id: traceId },
+  );
+}
+
+export function traceSufficiencyReport(
+  trace: JsonRecord,
+  estimand: JsonRecord,
+): JsonRecord {
+  const traceId = String(trace.trace_id ?? trace.id ?? shortHash(trace));
+  const residuals = requiredResiduals("trace-sufficiency", traceId, estimand, [
+    "estimand_id",
+    "target_quantity",
+    "identification_assumptions",
+  ]);
+  if (!(trace.events || trace.steps)) {
+    residuals.push(
+      reportResidual("trace-sufficiency", traceId, "trace_events_required"),
+    );
+  }
+  if (!(estimand.negative_controls || estimand.support_ledger)) {
+    residuals.push(
+      reportResidual(
+        "trace-sufficiency",
+        traceId,
+        "support_or_negative_controls_required",
+      ),
+    );
+  }
+  return simpleReport(
+    "pic.trace_sufficiency_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "trace_sufficiency_is_estimand_relative",
+    { trace_id: traceId },
+  );
+}
+
+export function mechanismAblationReport(
+  token: JsonRecord,
+  ablation: JsonRecord,
+): JsonRecord {
+  const tokenId = String(token.token_id ?? token.id ?? shortHash(token));
+  const residuals = requiredResiduals("mechanism-ablation", tokenId, ablation, [
+    "control_condition",
+    "treatment_condition",
+    "metric",
+    "verifier_binding",
+  ]);
+  for (const key of [
+    "confound_charge",
+    "proxy_charge",
+    "transport_charge",
+    "surface_charge",
+  ]) {
+    if (ablation[key] === undefined || ablation[key] === "") {
+      residuals.push(
+        reportResidual("mechanism-ablation", tokenId, `${key}_required`),
+      );
+    }
+  }
+  return simpleReport(
+    "pic.mechanism_ablation_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "mechanism_ablation_is_not_mechanism_truth",
+    { token_id: tokenId },
+  );
+}
+
+export function leakageAuditReport(token: JsonRecord): JsonRecord {
+  const tokenId = String(token.token_id ?? token.id ?? shortHash(token));
+  const residuals: JsonRecord[] = [];
+  const text = compactStringify(token).toLocaleLowerCase();
+  if (
+    ["answer_key", "heldout_answer", "benchmark_solution"].some((marker) =>
+      text.includes(marker),
+    )
+  ) {
+    residuals.push(
+      reportResidual("leakage-audit", tokenId, "benchmark_answer_leakage"),
+    );
+  }
+  if (!(token.leakage_audit_ref || token.leakage_exclusion === true)) {
+    residuals.push(
+      reportResidual("leakage-audit", tokenId, "leakage_exclusion_required"),
+    );
+  }
+  return simpleReport(
+    "pic.leakage_audit_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "leakage_audit_is_finite_and_scope_limited",
+    { token_id: tokenId },
+  );
+}
+
+export function missionValidityReport(packet: JsonRecord): JsonRecord {
+  const packetId = String(
+    packet.packet_id ?? packet.decision_id ?? packet.token_id ?? "alt-packet",
+  );
+  const residuals = requiredResiduals("mission-validity", packetId, packet, [
+    "mission_law",
+    "construct_evidence",
+    "target_scope",
+    "hazard_ledger",
+  ]);
+  if (packet.generated_law_gain && !packet.mission_bridge) {
+    residuals.push(
+      reportResidual(
+        "mission-validity",
+        packetId,
+        "generated_law_bridge_required",
+      ),
+    );
+  }
+  if (packet.externality_hazards && !packet.externality_hazard_ledger) {
+    residuals.push(
+      reportResidual(
+        "mission-validity",
+        packetId,
+        "externality_hazard_ledger_required",
+      ),
+    );
+  }
+  return simpleReport(
+    "pic.mission_validity_certificate.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "mission_validity_is_protocol_relative",
+    { packet_id: packetId },
+  );
+}
+
+export function opportunityMeasureReport(target: JsonRecord): JsonRecord {
+  const targetId = String(target.target_id ?? "target");
+  const residuals = requiredResiduals("opportunity-law", targetId, target, [
+    "mission_law",
+    "population",
+    "sampling_frame",
+    "cost_model",
+  ]);
+  return simpleReport(
+    "pic.opportunity_measure_constructor.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "opportunity_measure_is_not_oracle_truth",
+    { target_id: targetId },
+  );
+}
+
+export function transportCertificateReport(
+  source: JsonRecord,
+  target: JsonRecord,
+  certificate: JsonRecord,
+): JsonRecord {
+  const certificateId = String(
+    certificate.certificate_id ?? shortHash(certificate),
+  );
+  const residuals = requiredResiduals("transport", certificateId, certificate, [
+    "source_scope",
+    "target_scope",
+    "support_ledger",
+    "density_ratio_bound",
+  ]);
+  if (
+    source.scope !== undefined &&
+    target.scope !== undefined &&
+    source.scope !== target.scope &&
+    !certificate.bridge_evidence
+  ) {
+    residuals.push(
+      reportResidual("transport", certificateId, "bridge_evidence_required"),
+    );
+  }
+  if (certificate.support_miss === true) {
+    residuals.push(reportResidual("transport", certificateId, "support_miss"));
+  }
+  return simpleReport(
+    "pic.transport_certificate_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "source_liquidity_is_not_target_liquidity_without_transport",
+    { certificate_id: certificateId },
+  );
+}
+
+export function constructValidityReport(packet: JsonRecord): JsonRecord {
+  const packetId = String(packet.packet_id ?? packet.token_id ?? "alt-packet");
+  const residuals = requiredResiduals("construct-validity", packetId, packet, [
+    "construct_definition",
+    "measurement_protocol",
+    "negative_controls",
+  ]);
+  if (packet.aggregate_benchmark_success && !packet.construct_evidence) {
+    residuals.push(
+      reportResidual(
+        "construct-validity",
+        packetId,
+        "construct_evidence_required",
+      ),
+    );
+  }
+  return simpleReport(
+    "pic.construct_validity_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "aggregate_success_is_not_construct_validity",
+    { packet_id: packetId },
+  );
+}
+
+export function fcuCheckReport(cost: JsonRecord): JsonRecord {
+  const costId = String(cost.cost_id ?? shortHash(cost));
+  const residuals = requiredResiduals("fcu", costId, cost, [
+    "cost_coordinates",
+    "scalarization",
+    "upper_bounds",
+  ]);
+  if (
+    cost.irreversible_loss_absent !== true &&
+    !cost.irreversible_loss_ledger
+  ) {
+    residuals.push(
+      reportResidual("fcu", costId, "irreversible_loss_ledger_required"),
+    );
+  }
+  return simpleReport(
+    "pic.fcu_exchange_table_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "missing_cost_coordinate_is_not_zero",
+    { cost_id: costId },
+  );
+}
+
+export function lifecycleCostReport(packet: JsonRecord): JsonRecord {
+  const packetId = String(packet.packet_id ?? packet.token_id ?? "alt-packet");
+  const ledger = record(packet.lifecycle_cost_ledger ?? packet.cost_ledger);
+  const residuals = requiredResiduals("lifecycle-cost", packetId, ledger, [
+    "formation",
+    "deployment",
+    "validation",
+    "maintenance",
+    "depreciation",
+  ]);
+  if (!(packet.telemetry_contract_ref || packet.telemetry_contract)) {
+    residuals.push(
+      reportResidual("lifecycle-cost", packetId, "telemetry_contract_required"),
+    );
+  }
+  return simpleReport(
+    "pic.lifecycle_cost_ledger_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "lifecycle_cost_report_is_not_settlement",
+    { packet_id: packetId },
+  );
+}
+
+export function telemetryCheckReport(
+  telemetry: JsonRecord,
+  contract: JsonRecord,
+): JsonRecord {
+  const telemetryId = String(telemetry.telemetry_id ?? shortHash(telemetry));
+  const required = listField(contract, "required_fields");
+  const fields =
+    required.length > 0 ? required : ["events", "clock", "resource_use"];
+  const residuals = fields
+    .filter((field) => !telemetry[field])
+    .map((field) =>
+      reportResidual("telemetry", telemetryId, `missing_${field}`),
+    );
+  if (
+    telemetry.status === "failed" &&
+    !(telemetry.worst_case_charge || telemetry.claim_suspended)
+  ) {
+    residuals.push(
+      reportResidual(
+        "telemetry",
+        telemetryId,
+        "telemetry_failure_charge_required",
+      ),
+    );
+  }
+  return simpleReport(
+    "pic.closed_loop_telemetry_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "telemetry_report_is_not_physical_outcome_proof",
+    { telemetry_id: telemetryId },
+  );
+}
+
+export function dynamicRiskReport(ledger: JsonRecord): JsonRecord {
+  const ledgerId = String(ledger.ledger_id ?? shortHash(ledger));
+  const residuals = requiredResiduals("dynamic-risk", ledgerId, ledger, [
+    "risk_coordinates",
+    "update_rule",
+    "hazard_charge_upper_bound",
+  ]);
+  return simpleReport(
+    "pic.dynamic_risk_ledger_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "dynamic_risk_is_not_status_promotion",
+    { ledger_id: ledgerId },
+  );
+}
+
+export function stoppedSheafReport(evidence: JsonRecord[]): JsonRecord {
+  const residuals: JsonRecord[] = [];
+  for (const [index, item] of evidence.entries()) {
+    const subject = String(item.evidence_id ?? `evidence:${index}`);
+    if (item.stopped !== true) {
+      residuals.push(
+        reportResidual("stopped-sheaf", subject, "stopped_event_required"),
+      );
+    }
+    if (!item.resource_event) {
+      residuals.push(
+        reportResidual(
+          "stopped-sheaf",
+          subject,
+          "stopped_resource_event_required",
+        ),
+      );
+    }
+    if (!item.closure_witness) {
+      residuals.push(
+        reportResidual("stopped-sheaf", subject, "closure_witness_required"),
+      );
+    }
+  }
+  return simpleReport(
+    "pic.stopped_evidence_sheaf_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "stopped_evidence_supports_interval_reports_only_with_declared_witnesses",
+    { evidence_count: evidence.length },
+  );
+}
+
+export function confidenceSequenceReport(evidence: JsonRecord[]): JsonRecord {
+  const residuals: JsonRecord[] = [];
+  for (const [index, item] of evidence.entries()) {
+    const subject = String(item.evidence_id ?? `evidence:${index}`);
+    if (item.predictable !== true) {
+      residuals.push(
+        reportResidual(
+          "confidence-sequence",
+          subject,
+          "predictability_witness_required",
+        ),
+      );
+    }
+    if (item.alpha === undefined || item.alpha === "") {
+      residuals.push(
+        reportResidual("confidence-sequence", subject, "alpha_budget_required"),
+      );
+    }
+  }
+  return simpleReport(
+    "pic.confidence_sequence_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "confidence_sequence_is_protocol_relative",
+    { evidence_count: evidence.length },
+  );
+}
+
+export function evidenceProductReport(evidence: JsonRecord[]): JsonRecord {
+  const residuals: JsonRecord[] = [];
+  let product = 1;
+  for (const [index, item] of evidence.entries()) {
+    const subject = String(item.evidence_id ?? `evidence:${index}`);
+    product *= Math.max(floatValue(item.e_value, 1), 0);
+    if (item.conditional_witness !== true) {
+      residuals.push(
+        reportResidual(
+          "evidence-product",
+          subject,
+          "conditional_witness_required",
+        ),
+      );
+    }
+    if (item.closed_testing_witness !== true) {
+      residuals.push(
+        reportResidual(
+          "evidence-product",
+          subject,
+          "closed_testing_witness_required",
+        ),
+      );
+    }
+  }
+  return simpleReport(
+    "pic.evidence_product_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "plain_e_value_product_without_closure_is_residual_only",
+    { e_value_product: product, evidence_count: evidence.length },
+  );
+}
+
+export function ecptQuotientReport(
+  packets: JsonRecord[],
+  profile = "development",
+): JsonRecord {
+  const dedup = tokenDedupReport(packets);
+  const residuals = records(dedup.residuals);
+  if (
+    !packets.some(
+      (packet) => packet.held_out_ledger || packet.uniform_class_ledger,
+    )
+  ) {
+    residuals.push(
+      reportResidual(
+        "ecpt-quotient",
+        "packets",
+        "held_out_or_uniform_ledger_required",
+      ),
+    );
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    alias_ledger: dedup.alias_ledger,
+    blockers,
+    canonical_packet_count: dedup.canonical_representative_count,
+    duplicate_mass: dedup.duplicate_mass_report,
+    non_claims: [...NON_CLAIMS, "quotient_identity_is_context_relative"],
+    ok: true,
+    profile,
+    residuals,
+    schema_version: "pic.split_certified_quotient_report.v1",
+    settled: false,
+  };
+}
+
+export function boundaryQuotientReport(
+  quotient: JsonRecord,
+  target: JsonRecord,
+): JsonRecord {
+  const quotientId = String(quotient.quotient_id ?? shortHash(quotient));
+  const residuals = requiredResiduals(
+    "boundary-quotient",
+    quotientId,
+    quotient,
+    ["boundary_error_ledger", "coupling_error_ledger", "context", "tolerance"],
+  );
+  if (
+    target.target_id &&
+    quotient.target_id &&
+    target.target_id !== quotient.target_id
+  ) {
+    residuals.push(
+      reportResidual(
+        "boundary-quotient",
+        quotientId,
+        "target_profile_mismatch",
+      ),
+    );
+  }
+  return simpleReport(
+    "pic.boundary_aware_quotient_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "boundary_errors_must_be_subtracted_from_target_claims",
+    { quotient_id: quotientId },
+  );
+}
+
+export function duplicateInflationReport(packets: JsonRecord[]): JsonRecord {
+  const dedup = tokenDedupReport(packets);
+  const duplicateMass = Number(
+    record(dedup.duplicate_mass_report).duplicate_mass_count ?? 0,
+  );
+  return {
+    accepted: true,
+    blockers: [],
+    duplicate_mass_count: duplicateMass,
+    inflated_support_allowed: false,
+    non_claims: [
+      ...NON_CLAIMS,
+      "duplicate_representative_mass_cannot_create_support",
+    ],
+    ok: true,
+    residuals:
+      duplicateMass > 0
+        ? [
+            reportResidual(
+              "duplicate-inflation",
+              "packets",
+              "duplicate_mass_excluded",
+              false,
+            ),
+          ]
+        : [],
+    schema_version: "pic.duplicate_inflation_report.v1",
+    settled: false,
+  };
+}
+
+export function atlasCheckReport(atlas: JsonRecord): JsonRecord {
+  const atlasId = String(atlas.atlas_id ?? shortHash(atlas));
+  const residuals = requiredResiduals("atlas", atlasId, atlas, [
+    "strata",
+    "transition_maps",
+    "boundary_ledger",
+  ]);
+  return simpleReport(
+    "pic.stratified_packet_atlas_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "atlas_check_is_not_phase_settlement",
+    { atlas_id: atlasId },
+  );
+}
+
+export function activationCacheReport(state: JsonRecord): JsonRecord {
+  const stateId = String(state.state_id ?? shortHash(state));
+  const residuals = requiredResiduals("activation-cache", stateId, state, [
+    "activation_mode",
+    "dependency_hash",
+    "invalidation_keys",
+  ]);
+  if (state.activation_mode === "sampler" && !state.sample_error_ledger) {
+    residuals.push(
+      reportResidual(
+        "activation-cache",
+        stateId,
+        "sample_error_ledger_required",
+      ),
+    );
+  }
+  if (state.activation_mode === "factorized" && !state.factor_graph) {
+    residuals.push(
+      reportResidual("activation-cache", stateId, "factor_graph_required"),
+    );
+  }
+  return simpleReport(
+    "pic.activation_construction_cache_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "activation_cache_hit_is_not_proof",
+    { state_id: stateId },
+  );
+}
+
+export function queueMorphismReport(
+  source: JsonRecord,
+  target: JsonRecord,
+): JsonRecord {
+  const morphismId = shortHash([source, target]);
+  const residuals = [
+    "diagnostic_reserve",
+    "rollback_priority",
+    "blocking_residuals",
+  ]
+    .filter((coordinate) => source[coordinate] !== target[coordinate])
+    .map((coordinate) =>
+      reportResidual(
+        "queue-morphism",
+        morphismId,
+        `${coordinate}_not_preserved`,
+      ),
+    );
+  return simpleReport(
+    "pic.queue_morphism_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "queue_reencoding_is_not_equivalence_without_preservation",
+    { morphism_id: morphismId },
+  );
+}
+
+export function resourceTensorReport(state: JsonRecord): JsonRecord {
+  const stateId = String(state.state_id ?? shortHash(state));
+  const modalities = record(state.modalities ?? state.resource_modalities);
+  const residuals: JsonRecord[] = [];
+  if (Object.keys(modalities).length === 0) {
+    residuals.push(
+      reportResidual(
+        "resource-tensor",
+        stateId,
+        "resource_modalities_required",
+      ),
+    );
+  }
+  if (state.unknown_budget_is_zero === true) {
+    residuals.push(
+      reportResidual(
+        "resource-tensor",
+        stateId,
+        "unknown_budget_cannot_be_zero",
+      ),
+    );
+  }
+  return simpleReport(
+    "pic.resource_tensor_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "resource_tensor_is_not_scalar_budget",
+    { modality_count: Object.keys(modalities).length, state_id: stateId },
+  );
+}
+
+export function exchangeTensorReport(state: JsonRecord): JsonRecord {
+  return {
+    ...sqotResourceExchangeReport(state),
+    schema_version: "pic.exchange_tensor_report.v1",
+  };
+}
+
+export function diagnosticReserveReport(state: JsonRecord): JsonRecord {
+  const stateId = String(state.state_id ?? shortHash(state));
+  const reserve = floatValue(state.diagnostic_reserve);
+  const lower = floatValue(state.diagnostic_reserve_lower_bound);
+  const residuals: JsonRecord[] = [];
+  if (reserve <= 0) {
+    residuals.push(
+      reportResidual(
+        "diagnostic-reserve",
+        stateId,
+        "diagnostic_reserve_required",
+      ),
+    );
+  }
+  if (reserve > 0 && lower > 0 && reserve < lower) {
+    residuals.push(
+      reportResidual(
+        "diagnostic-reserve",
+        stateId,
+        "diagnostic_reserve_below_band",
+      ),
+    );
+  }
+  return simpleReport(
+    "pic.diagnostic_reserve_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "diagnostic_reserve_is_finite_and_protocol_relative",
+    { diagnostic_reserve: reserve, state_id: stateId },
+  );
+}
+
+export function protocolMutationReport(state: JsonRecord): JsonRecord {
+  const stateId = String(state.state_id ?? shortHash(state));
+  const residuals: JsonRecord[] = [];
+  if (
+    state.protocol_mutated === true &&
+    !(state.non_salience_induced_certificate || state.quarantined)
+  ) {
+    residuals.push(
+      reportResidual(
+        "protocol-mutation",
+        stateId,
+        "protocol_mutation_not_certified",
+      ),
+    );
+  }
+  return simpleReport(
+    "pic.protocol_mutation_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "protocol_mutation_blocks_acceptance_without_certificate_or_quarantine",
+    { state_id: stateId },
+  );
+}
+
+export function checkerCostReport(state: JsonRecord): JsonRecord {
+  const stateId = String(state.state_id ?? shortHash(state));
+  const residuals = requiredResiduals("checker-cost", stateId, state, [
+    "checker_cost",
+    "cost_budget",
+    "verification_queue",
+  ]);
+  if (floatValue(state.checker_cost) > floatValue(state.cost_budget)) {
+    residuals.push(
+      reportResidual("checker-cost", stateId, "checker_cost_budget_exceeded"),
+    );
+  }
+  return simpleReport(
+    "pic.checker_cost_ledger_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "checker_cost_is_queue_occupation",
+    { state_id: stateId },
+  );
+}
+
+export function trcObservationWindowReport(window: JsonRecord): JsonRecord {
+  const windowId = String(window.window_id ?? shortHash(window));
+  const residuals = requiredResiduals("observation-window", windowId, window, [
+    "observer",
+    "start",
+    "end",
+    "relative_scope",
+    "verifier",
+  ]);
+  return simpleReport(
+    "pic.observation_window_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "observation_window_is_relative_not_hidden_physical_truth",
+    { window_id: windowId },
+  );
+}
+
+export function trcObservationConsistencyReport(
+  window: JsonRecord,
+): JsonRecord {
+  const base = trcObservationWindowReport(window);
+  const residuals = records(base.residuals);
+  if (window.postcondition_observed === false) {
+    residuals.push(
+      reportResidual(
+        "observation-consistency",
+        String(base.window_id),
+        "postcondition_not_observed",
+      ),
+    );
+  }
+  if (window.resource_use_observed === false) {
+    residuals.push(
+      reportResidual(
+        "observation-consistency",
+        String(base.window_id),
+        "resource_use_not_observed",
+      ),
+    );
+  }
+  return simpleReport(
+    "pic.observation_consistency_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "observation_consistency_is_not_physical_outcome_proof",
+    { window_id: base.window_id },
+  );
+}
+
+export function trcResourceFlowReport(trace: JsonRecord): JsonRecord {
+  const traceId = String(trace.trace_id ?? trace.id ?? shortHash(trace));
+  const flows = records(trace.resource_flows ?? trace.resources);
+  const residuals: JsonRecord[] = [];
+  if (flows.length === 0) {
+    residuals.push(
+      reportResidual(
+        "resource-flow",
+        traceId,
+        "trace_indexed_resource_flow_required",
+      ),
+    );
+  }
+  for (const [index, flow] of flows.entries()) {
+    const subject = String(flow.flow_id ?? `${traceId}:${index}`);
+    if (flow.trace_index === undefined || flow.trace_index === "") {
+      residuals.push(
+        reportResidual("resource-flow", subject, "trace_index_required"),
+      );
+    }
+    if (flow.rollback_compensation_free === true) {
+      residuals.push(
+        reportResidual(
+          "resource-flow",
+          subject,
+          "rollback_compensation_not_free",
+        ),
+      );
+    }
+  }
+  return simpleReport(
+    "pic.trace_indexed_resource_flow_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "resource_flow_ledger_is_trace_indexed",
+    { flow_count: flows.length, trace_id: traceId },
+  );
+}
+
+function schedulerReport(
+  certificates: JsonRecord,
+  schemaVersion: string,
+  prefix: string,
+  nonClaim: string,
+): JsonRecord {
+  const rows = records(certificates.certificates ?? certificates.items);
+  const residuals: JsonRecord[] = [];
+  const recompute: string[] = [];
+  for (const [index, certificate] of rows.entries()) {
+    const certId = String(certificate.certificate_id ?? `certificate:${index}`);
+    if (certificate.stale === true || certificate.fresh === false) {
+      residuals.push(
+        reportResidual(prefix, certId, `${prefix}_recompute_required`),
+      );
+      recompute.push(certId);
+    }
+    if (certificate.lower_fidelity === true && !certificate.tolerance_charge) {
+      residuals.push(
+        reportResidual(prefix, certId, "tolerance_charge_required"),
+      );
+      recompute.push(certId);
+    }
+  }
+  if (rows.length === 0) {
+    residuals.push(
+      reportResidual(prefix, "certificates", "certificates_required"),
+    );
+  }
+  return simpleReport(
+    schemaVersion,
+    blockingKinds(residuals).length === 0,
+    residuals,
+    nonClaim,
+    { recompute_certificate_ids: dedupeSorted(recompute) },
+  );
+}
+
+export function lifecycleSchedulerReport(certificates: JsonRecord): JsonRecord {
+  return schedulerReport(
+    certificates,
+    "pic.lifecycle_recomputation_scheduler_report.v1",
+    "lifecycle",
+    "stale_lifecycle_witness_routes_to_diagnostic",
+  );
+}
+
+export function toleranceSchedulerReport(certificates: JsonRecord): JsonRecord {
+  return schedulerReport(
+    certificates,
+    "pic.tolerance_recomputation_scheduler_report.v1",
+    "tolerance",
+    "tolerance_charge_cannot_reduce_physical_residual",
+  );
+}
+
+export function efficiencyArchiveReport(frontier: JsonRecord): JsonRecord {
+  const frontierId = String(frontier.frontier_id ?? shortHash(frontier));
+  const residuals: JsonRecord[] = [];
+  if (frontier.promotes_risk_provisional === true) {
+    residuals.push(
+      reportResidual(
+        "efficiency-archive",
+        frontierId,
+        "risk_provisional_promotion_blocked",
+      ),
+    );
+  }
+  if (!(frontier.frontier || frontier.certificates)) {
+    residuals.push(
+      reportResidual(
+        "efficiency-archive",
+        frontierId,
+        "frontier_entries_required",
+      ),
+    );
+  }
+  return simpleReport(
+    "pic.resource_efficiency_archive_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "efficiency_archive_cannot_promote_relaxed_or_risk_provisional_status",
+    { frontier_id: frontierId },
+  );
+}
+
+export function unseenFrontierReport(discoveries: JsonRecord[]): JsonRecord {
+  const residuals =
+    discoveries.length === 0
+      ? [
+          reportResidual(
+            "unseen-frontier",
+            "discoveries",
+            "discoveries_required",
+          ),
+        ]
+      : [];
+  return simpleReport(
+    "pic.unseen_frontier_report.v1",
+    residuals.length === 0,
+    residuals,
+    "unseen_duplicate_false_and_unawakened_frontiers_are_separate",
+    {
+      duplicate_frontier_mass: discoveries.reduce(
+        (total, item) => total + floatValue(item.duplicate_mass),
+        0,
+      ),
+      false_entry_bound: discoveries.reduce(
+        (total, item) => total + floatValue(item.false_entry_bound),
+        0,
+      ),
+      unseen_frontier_mass: discoveries.reduce(
+        (total, item) => total + floatValue(item.unseen_mass),
+        0,
+      ),
+    },
+  );
+}
+
+export function mechanismCubeReport(cube: JsonRecord): JsonRecord {
+  const cubeId = String(cube.cube_id ?? shortHash(cube));
+  const charges = [
+    "direct_supply_charge",
+    "observation_drift_charge",
+    "logging_drift_charge",
+    "factorization_error_charge",
+    "rank_failure_charge",
+    "proxy_bridge_charge",
+  ];
+  const residuals = charges
+    .filter((charge) => cube[charge] === undefined || cube[charge] === "")
+    .map((charge) =>
+      reportResidual("mechanism-cube", cubeId, `${charge}_required`),
+    );
+  return simpleReport(
+    "pic.mechanism_factorized_channel_cube_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "mechanism_factorization_must_subtract_declared_charges",
+    {
+      cube_id: cubeId,
+      total_charge: charges.reduce(
+        (total, charge) => total + floatValue(cube[charge]),
+        0,
+      ),
+    },
+  );
+}
+
+export function releaseIntervalReport(program: JsonRecord): JsonRecord {
+  const programId = String(program.program_id ?? shortHash(program));
+  const residuals = requiredResiduals("release-interval", programId, program, [
+    "unit_ledger",
+    "primal_witness",
+    "dual_witness",
+    "solver_gap",
+  ]);
+  return simpleReport(
+    "pic.exactness_certified_release_interval_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "release_interval_requires_unit_primal_dual_solver_gap_witnesses",
+    { program_id: programId },
+  );
+}
+
+export function martingalePartitionReport(audit: JsonRecord): JsonRecord {
+  const auditId = String(audit.audit_id ?? shortHash(audit));
+  const residuals = requiredResiduals("martingale-partition", auditId, audit, [
+    "partition",
+    "filtration",
+    "deficiency_bound",
+  ]);
+  return simpleReport(
+    "pic.martingale_partition_deficiency_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "martingale_partition_deficiency_is_finite_evidence",
+    { audit_id: auditId },
+  );
+}
+
+export function anchorTransferReport(certificate: JsonRecord): JsonRecord {
+  const certificateId = String(
+    certificate.certificate_id ?? shortHash(certificate),
+  );
+  const residuals = requiredResiduals(
+    "anchor-transfer",
+    certificateId,
+    certificate,
+    [
+      "source_anchor",
+      "target_anchor",
+      "cross_validation",
+      "transfer_error_bound",
+    ],
+  );
+  return simpleReport(
+    "pic.cross_validated_anchor_transfer_report.v1",
+    blockingKinds(residuals).length === 0,
+    residuals,
+    "anchor_transfer_is_not_target_truth",
+    { certificate_id: certificateId },
+  );
+}
+
+export function performanceReport(fixture: JsonRecord = {}): JsonRecord {
+  return {
+    cache_bytes: Math.trunc(floatValue(fixture.cache_bytes)),
+    cache_entries: Math.trunc(floatValue(fixture.cache_entries)),
+    capital_witness_index_entries: Math.trunc(
+      floatValue(fixture.capital_witness_index_entries),
+    ),
+    cli_startup_ms: 0,
+    duplicate_hash_count: Math.trunc(floatValue(fixture.duplicate_hash_count)),
+    graph_edges: Math.trunc(floatValue(fixture.graph_edges)),
+    graph_nodes: Math.trunc(floatValue(fixture.graph_nodes)),
+    index_rebuild_required: Boolean(fixture.index_rebuild_required),
+    json_read_count: Math.trunc(floatValue(fixture.json_read_count)),
+    json_write_count: Math.trunc(floatValue(fixture.json_write_count)),
+    jsonl_lines_processed: Math.trunc(
+      floatValue(fixture.jsonl_lines_processed),
+    ),
+    non_claims: [...NON_CLAIMS, "performance_report_is_local_diagnostic"],
+    ok: true,
+    p50_command_ms: 0,
+    p95_command_ms: 0,
+    p99_command_ms: 0,
+    recommended_speedups: [
+      "stream_jsonl",
+      "reuse_schema_validators",
+      "content_hash_invalidation",
+    ],
+    residual_index_entries: Math.trunc(
+      floatValue(fixture.residual_index_entries),
+    ),
+    schema_validator_cache_hits: Math.trunc(
+      floatValue(fixture.schema_validator_cache_hits),
+    ),
+    schema_validator_cache_misses: Math.trunc(
+      floatValue(fixture.schema_validator_cache_misses),
+    ),
+    schema_version: "pic.performance_report.v1",
+    settled: false,
+    sqlite_query_count: Math.trunc(floatValue(fixture.sqlite_query_count)),
+    sqlite_write_count: Math.trunc(floatValue(fixture.sqlite_write_count)),
+  };
+}
+
+export function performanceBenchReport(fixture: JsonRecord): JsonRecord {
+  return {
+    ...performanceReport(fixture),
+    bench_fixture_hash: digest(fixture),
+    local_only: true,
+    network_call_performed: false,
+    provider_executed: false,
+    schema_version: "pic.performance_bench_report.v1",
+  };
+}
+
+export function cacheStatusReport(): JsonRecord {
+  return {
+    cache_entries: 0,
+    cache_hit_requires_schema_dependency_profile_hash: true,
+    index_rebuild_required: false,
+    non_claims: [...NON_CLAIMS, "cache_hit_is_not_proof"],
+    ok: true,
+    schema_version: "pic.cache_status_report.v1",
+    settled: false,
+  };
+}
+
+export function cacheRebuildReport(): JsonRecord {
+  return {
+    ...cacheStatusReport(),
+    mutated_runtime: false,
+    rebuilt: true,
+    schema_version: "pic.cache_rebuild_report.v1",
+  };
+}
+
+export function cacheInvalidationReport(fileData: JsonRecord): JsonRecord {
+  const coordinates = dedupeSorted(listField(fileData, "coordinates"));
+  return {
+    affected_coordinates: coordinates,
+    dependency_hash: digest(fileData),
+    dirty_set: coordinates.length > 0 ? coordinates : ["unknown"],
+    non_claims: [...NON_CLAIMS, "cache_invalidation_is_not_status_promotion"],
+    ok: true,
+    schema_version: "pic.cache_invalidation_report.v1",
     settled: false,
   };
 }
