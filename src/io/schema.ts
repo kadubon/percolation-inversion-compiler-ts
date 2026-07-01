@@ -133,5 +133,10 @@ export function writeAllSchemas(outputDir: string): string[] {
     cpSync(source, target);
     written.push(basename(target));
   }
+  const interopSource = join(schemaDir(), "interop");
+  if (existsSync(interopSource)) {
+    cpSync(interopSource, join(outputDir, "interop"), { recursive: true });
+    written.push("interop/");
+  }
   return written.sort();
 }

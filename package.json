@@ -1,7 +1,7 @@
 {
   "name": "percolation-inversion-compiler-ts",
-  "version": "0.5.0",
-  "description": "TypeScript-compatible port of the Python v0.5.0 public JSON, CLI, schema, conformance, and safety semantics, including Phase Ecology Lab records for npm and JavaScript agent runtimes.",
+  "version": "0.6.0",
+  "description": "TypeScript-compatible port of the Python v0.6.0 public JSON, CLI, schema, conformance, CCR interop, and TRC operation-readiness semantics for npm and JavaScript agent runtimes.",
   "type": "module",
   "license": "Apache-2.0",
   "author": "K. Takahashi",
@@ -73,6 +73,10 @@
     "./trc-adapter": {
       "types": "./dist/trc_adapter/index.d.ts",
       "import": "./dist/trc_adapter/index.js"
+    },
+    "./interop/ccr": {
+      "types": "./dist/interop/ccr.d.ts",
+      "import": "./dist/interop/ccr.js"
     }
   },
   "types": "./dist/index.d.ts",
@@ -101,6 +105,9 @@
       ],
       "trc-adapter": [
         "dist/trc_adapter/index.d.ts"
+      ],
+      "interop/ccr": [
+        "dist/interop/ccr.d.ts"
       ],
       "*": [
         "dist/index.d.ts"
@@ -132,7 +139,7 @@
     "lint": "eslint .",
     "format:check": "prettier --check .",
     "test": "npm run build && vitest run",
-    "conformance": "npm run build && vitest run test/portability.test.ts test/cli.test.ts test/v050-readiness.test.ts test/v050-subsystems.test.ts",
+    "conformance": "npm run build && vitest run test/portability.test.ts test/cli.test.ts test/v050-readiness.test.ts test/v050-subsystems.test.ts test/v060-interop.test.ts",
     "publish:safety": "node scripts/check-publish-safety.mjs",
     "pack:check": "npm run publish:safety",
     "installed:smoke": "node scripts/check-installed-smoke.mjs",

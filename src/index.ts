@@ -51,6 +51,18 @@ export {
   buildActionBoundaryReport,
 } from "./trc_adapter/index.js";
 export {
+  altEcptBridgeReport,
+  bitRegistryReport,
+  bitTasksFromRegistry,
+  ccrResidualsFromPhasePlan,
+  ccrTasksFromPhasePlan,
+  diagnoseSqotQueueState,
+  jsonlText,
+  traceCheckReport,
+  traceNormalFormReport,
+  tracePacketCandidate,
+} from "./interop/ccr.js";
+export {
   buildRuntimeStep,
   minimalRuntimeState,
   minimalRuntimeStepInput,

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/pic/interop/ccr_pic_import.schema.json",
+  "title": "PIC to CCR JSONL Import Bundle",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema_version", "tasks_jsonl", "residuals_jsonl", "settled"],
+  "properties": {
+    "schema_version": { "const": "pic.ccr_import_bundle.v1" },
+    "tasks_jsonl": { "type": "string" },
+    "residuals_jsonl": { "type": "string" },
+    "settled": { "const": false },
+    "non_claims": { "type": "array", "items": { "type": "string" } }
+  }
+}

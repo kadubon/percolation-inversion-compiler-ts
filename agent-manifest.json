@@ -1,10 +1,10 @@
 {
-  "manifest_id": "pic-ts-agent-manifest-v050",
+  "manifest_id": "pic-ts-agent-manifest-v060",
   "package_name": "percolation-inversion-compiler-ts",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "recommended_cli": "pic-ts",
   "compatibility_alias": "pic",
-  "canonical_python_package": "percolation-inversion-compiler==0.5.0",
+  "canonical_python_package": "percolation-inversion-compiler==0.6.0",
   "purpose": "Local JSON checker and workflow report generator for JavaScript and TypeScript agent runtimes.",
   "safe_entrypoints": [
     "pic-ts agent check --compact",
@@ -18,7 +18,10 @@
     "pic-ts phase lab closure --store <phase-lab-dir>",
     "pic-ts phase lab executable-paths --store <phase-lab-dir>",
     "pic-ts phase lab certify --store <phase-lab-dir> --threshold <threshold.json>",
-    "pic-ts phase plan --request <request.json> --compact"
+    "pic-ts phase plan --request <request.json> --compact",
+    "pic-ts phase plan --request <request.json> --compact --emit ccr-tasks",
+    "pic-ts trc trace-normalize --input <trace.json> --output <trace_nf.json>",
+    "pic-ts trc trace-check --trace <trace_nf.json>"
   ],
   "sdk_subpaths": [
     ".",
@@ -29,7 +32,8 @@
     "./bit-engine",
     "./sqot-controller",
     "./alt-lift",
-    "./trc-adapter"
+    "./trc-adapter",
+    "./interop/ccr"
   ],
   "safety_boundary": {
     "python_required_at_runtime": false,
@@ -45,6 +49,7 @@
     "workflow_usable does not imply settled",
     "operationally_usable does not imply settled",
     "candidate-only reports remain diagnostic",
-    "raw packet volume does not improve positive phase metrics"
+    "raw packet volume does not improve positive phase metrics",
+    "operation_ready does not imply executed or settled"
   ]
 }

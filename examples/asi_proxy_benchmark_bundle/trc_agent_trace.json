@@ -1,0 +1,61 @@
+{
+  "trace_id": "trace:asi-proxy:operation-fixture",
+  "steps": [
+    {
+      "action_type": "provider-handoff",
+      "authority_envelope": {
+        "expires_at": "1970-01-01T00:00:00Z",
+        "issuer": "operator:benchmark",
+        "scope": "example://asi-proxy-benchmark/dry-run",
+        "status": "approved"
+      },
+      "causal_schedule_block": {
+        "block_id": "schedule:benchmark:single-step",
+        "happens_after": [],
+        "happens_before": []
+      },
+      "certificate_version_refs": ["cert:benchmark:trc-operation:v1"],
+      "clock_cell": {
+        "logical_tick": 1,
+        "synchronization": "fixture"
+      },
+      "evidence_refs": ["packet:benchmark:checked", "phase-report:benchmark"],
+      "input_ref": "packet:benchmark:checked",
+      "output_ref": "provider-plan:benchmark:dry-run",
+      "postcondition": {
+        "provider_plan_created": true,
+        "side_effect_performed": false
+      },
+      "precondition": {
+        "blocking_residuals_preserved": true,
+        "packet_checked": true
+      },
+      "resource_ledger": {
+        "network_calls": 0,
+        "provider_calls": 0,
+        "wall_time_budget_seconds": 30
+      },
+      "rollback_escrow_obligation": {
+        "escrow_id": "escrow:benchmark:provider-plan",
+        "rollback": "discard dry-run provider plan",
+        "status": "available"
+      },
+      "step_id": "step:provider-plan",
+      "tolerance_ledger": {
+        "calibration_error": 0.0,
+        "observation_error": 0.0,
+        "operation_fidelity": "dry_run"
+      },
+      "tool": "ccr.operation.plan",
+      "validity_domain": {
+        "environment": "local-benchmark",
+        "network": "none",
+        "profile": "development"
+      },
+      "witness": {
+        "kind": "dry_run_trace_fixture",
+        "ref": "examples/asi_proxy_benchmark_bundle/trc_agent_trace.json"
+      }
+    }
+  ]
+}

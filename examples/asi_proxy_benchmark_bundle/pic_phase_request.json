@@ -1,0 +1,14 @@
+{
+  "compact": true,
+  "max_bottlenecks": 4,
+  "profile": "development",
+  "request_id": "asi-proxy-benchmark:pic-guided",
+  "step_input": {
+    "agent_output": "Candidate packet: preserve residuals and route verifier work.",
+    "allow_live_connectors": false,
+    "input_id": "asi-proxy-benchmark-step",
+    "live_sources": [],
+    "local_sources": [],
+    "packets": []
+  }
+}

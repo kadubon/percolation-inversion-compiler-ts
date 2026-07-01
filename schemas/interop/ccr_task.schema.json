@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/pic/interop/ccr_task.schema.json",
+  "title": "PIC-emitted CCR Task",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "task_id",
+    "created_at",
+    "status",
+    "role",
+    "title",
+    "objective",
+    "inputs",
+    "constraints",
+    "extensions",
+    "pic_interop",
+    "residual_policy",
+    "verifier_plan"
+  ],
+  "properties": {
+    "schema_version": { "const": "ccr.task.v0.1" },
+    "task_id": { "type": "string", "pattern": "^task:" },
+    "created_at": { "type": "string" },
+    "status": { "const": "open" },
+    "role": {
+      "type": "string",
+      "enum": [
+        "benchmark_runner",
+        "formalizer",
+        "implementer",
+        "integrator",
+        "pic_adapter",
+        "scheduler",
+        "security_reviewer",
+        "skeptic",
+        "verifier"
+      ]
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "objective": { "type": "string", "minLength": 1 },
+    "inputs": { "type": "array" },
+    "constraints": {
+      "type": "object",
+      "required": [
+        "allowed_commands",
+        "authority_policy",
+        "network_policy",
+        "side_effect_policy"
+      ],
+      "properties": {
+        "allowed_commands": { "type": "array", "maxItems": 0 },
+        "authority_policy": { "const": "read_only" },
+        "network_policy": { "const": "none" },
+        "side_effect_policy": { "const": "dry_run_only" }
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "required": [
+        "x_pic_residual_inputs",
+        "x_pic_safe_command_hints",
+        "x_pic_source_id",
+        "x_pic_task_kind"
+      ],
+      "properties": {
+        "x_pic_residual_inputs": { "type": "array", "items": { "type": "string" } },
+        "x_pic_safe_command_hints": { "type": "array", "items": { "type": "string" } },
+        "x_pic_source_id": { "type": "string" },
+        "x_pic_task_kind": { "type": "string" }
+      }
+    },
+    "pic_interop": {
+      "type": "object",
+      "required": [
+        "candidate_only_until_checked",
+        "enabled",
+        "recommended_pic_commands"
+      ],
+      "properties": {
+        "candidate_only_until_checked": { "const": true },
+        "enabled": { "const": true },
+        "recommended_pic_commands": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "residual_policy": {
+      "type": "object",
+      "required": ["preserve_residuals", "blocking_residuals_prevent_settlement"],
+      "properties": {
+        "blocking_residuals_prevent_settlement": { "const": true },
+        "preserve_residuals": { "const": true }
+      }
+    },
+    "verifier_plan": { "type": "object" }
+  }
+}
