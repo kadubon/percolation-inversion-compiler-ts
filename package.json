@@ -1,7 +1,7 @@
 {
   "name": "percolation-inversion-compiler-ts",
-  "version": "0.7.0",
-  "description": "TypeScript-compatible port of the Python v0.7.0 public JSON, CLI, schema, conformance, CCR interop, and TRC operation-gate semantics for npm and JavaScript agent runtimes.",
+  "version": "0.8.0",
+  "description": "TypeScript-compatible port of the Python v0.8.0 public JSON, CLI, schema, conformance, CCR interop, TRC operation gates, MCP/A2A checks, and CARA acceleration reports for npm and JavaScript agent runtimes.",
   "type": "module",
   "license": "Apache-2.0",
   "author": "K. Takahashi",
@@ -139,7 +139,7 @@
     "lint": "eslint .",
     "format:check": "prettier --check .",
     "test": "npm run build && vitest run",
-    "conformance": "npm run build && vitest run test/portability.test.ts test/cli.test.ts test/v050-readiness.test.ts test/v050-subsystems.test.ts test/v060-interop.test.ts",
+    "conformance": "npm run build && vitest run test/portability.test.ts test/cli.test.ts test/v050-readiness.test.ts test/v050-subsystems.test.ts test/v060-interop.test.ts test/v070-operation-gate.test.ts test/v070-alt-capital-admission.test.ts test/v070-python-parity.test.ts test/v080-acceleration-availability.test.ts",
     "publish:safety": "node scripts/check-publish-safety.mjs",
     "pack:check": "npm run publish:safety",
     "installed:smoke": "node scripts/check-installed-smoke.mjs",

@@ -1,6 +1,6 @@
 # CCR PIC Roundtrip
 
-The v0.6.0 roundtrip keeps PIC and CCR separated by an explicit data boundary.
+The v0.8.0 roundtrip keeps PIC/PIC-TS and CCR separated by an explicit data boundary.
 PIC emits candidate tasks and residuals; CCR may import and schedule them; PIC
 can later inspect returned reports without treating them as settlement.
 
@@ -20,5 +20,16 @@ Example files are packaged under:
 - `examples/interop/pic_to_ccr_roundtrip/phase_plan.compact.json`
 - `examples/asi_proxy_benchmark_bundle/trc_agent_trace.json`
 
-Python `percolation-inversion-compiler==0.6.0` remains canonical. PIC-TS tracks
+Python `percolation-inversion-compiler==0.8.0` remains canonical. PIC-TS tracks
 the public JSON, CLI, schema, and safety meaning for npm and Node.js runtimes.
+
+For v0.8 CARA and operation checks, use
+`examples/asi_proxy_acceleration_bundle/`. PIC-TS mirrors Python PIC public JSON
+for phase acceleration, capital witness, operation gate, MCP descriptor, A2A
+handoff, SQOT protocol integrity, and BIT MEC reports. Python PIC remains
+canonical; `pic-ts` is the preferred command name in Node projects.
+
+CCR can consume PIC-TS `pic.phase_response_control_step.v1` output with
+`ccr foundry allocate --strategy phase-response --response-report <json>`.
+That allocation is advisory; it does not execute providers, promote settlement,
+or consume all diagnostic reserve.

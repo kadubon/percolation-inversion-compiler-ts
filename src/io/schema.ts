@@ -29,12 +29,18 @@ function schemaPath(typeName: string): string {
   return join(schemaDir(), `${typeName}.schema.json`);
 }
 
-export function schemaNames(): string[] {
+function schemaFileNames(): string[] {
   return readdirSync(schemaDir())
     .filter(
       (name) => name.endsWith(".schema.json") && name !== "bundle.schema.json",
     )
+    .sort();
+}
+
+export function schemaNames(): string[] {
+  return schemaFileNames()
     .map((name) => name.slice(0, -".schema.json".length))
+    .filter((name) => PUBLIC_SCHEMA_NAME.test(name))
     .sort();
 }
 
@@ -120,7 +126,7 @@ export function writeAllSchemas(outputDir: string): string[] {
   mkdirSync(outputDir, { recursive: true });
   const written: string[] = [];
   const files = [
-    ...schemaNames().map((name) => `${name}.schema.json`),
+    ...schemaFileNames(),
     "bundle.schema.json",
     "schema-digest.json",
   ];

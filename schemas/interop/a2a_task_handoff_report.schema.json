@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/pic/interop/a2a_task_handoff_report.schema.json",
+  "title": "PIC A2A Task Handoff Report",
+  "type": "object",
+  "required": ["schema_version", "ok", "accepted", "handoff_id", "residuals", "blockers", "non_claims", "settled"],
+  "properties": {
+    "schema_version": { "const": "pic.a2a_task_handoff_report.v1" },
+    "settled": { "const": false }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/pic/runtime-capital-witness.schema.json",
+  "title": "PIC Runtime Capital Witness",
+  "type": "object",
+  "required": ["schema_version", "witness_id", "coordinate", "signed_surplus_lower_bound", "value_estimand_type", "capital_admitted", "residuals", "blockers", "settled"],
+  "properties": {
+    "schema_version": { "const": "pic.runtime_capital_witness.v1" },
+    "value_estimand_type": { "enum": ["causal", "calibrated_proxy", "proxy_only"] },
+    "capital_admitted": { "type": "boolean" },
+    "settled": { "const": false }
+  },
+  "additionalProperties": true
+}

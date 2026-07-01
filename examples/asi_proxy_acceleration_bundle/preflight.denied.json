@@ -1,0 +1,21 @@
+{
+  "accepted": true,
+  "executed": false,
+  "execution_blockers": ["side_effect_policy_not_dispatchable"],
+  "ok": false,
+  "operation_ready": false,
+  "physical_dispatch_ready": false,
+  "provider": "fixture",
+  "provider_dispatch_ready": false,
+  "residuals": [
+    {
+      "blocking": true,
+      "kind": "side_effect_policy_not_dispatchable",
+      "object_id": "operation-dispatch",
+      "object_type": "operation"
+    }
+  ],
+  "schema_version": "ccr.trc_operation_preflight.v1",
+  "settled": false,
+  "side_effect_policy": "dry_run_only"
+}

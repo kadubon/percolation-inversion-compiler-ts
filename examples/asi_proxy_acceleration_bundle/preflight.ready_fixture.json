@@ -1,0 +1,14 @@
+{
+  "accepted": true,
+  "executed": false,
+  "execution_blockers": [],
+  "ok": true,
+  "operation_ready": true,
+  "physical_dispatch_ready": false,
+  "provider": "fixture",
+  "provider_dispatch_ready": true,
+  "residuals": [],
+  "schema_version": "ccr.trc_operation_preflight.v1",
+  "settled": false,
+  "side_effect_policy": "controlled_provider_allowed"
+}

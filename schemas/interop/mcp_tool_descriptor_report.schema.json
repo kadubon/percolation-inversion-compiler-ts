@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/pic/interop/mcp_tool_descriptor_report.schema.json",
+  "title": "PIC MCP Tool Descriptor Report",
+  "type": "object",
+  "required": ["schema_version", "ok", "accepted", "canonical_tool_name", "descriptor_hash", "residuals", "blockers", "non_claims", "settled"],
+  "properties": {
+    "schema_version": { "const": "pic.mcp_tool_descriptor_report.v1" },
+    "ok": { "type": "boolean" },
+    "accepted": { "type": "boolean" },
+    "settled": { "const": false }
+  },
+  "additionalProperties": true
+}

@@ -8,9 +8,10 @@ structured JSON reports. The reports show what is accepted, what is usable for a
 workflow, what still needs checking, and what must not be treated as completed
 work.
 
-This npm package is a TypeScript-compatible port of the Python v0.7.0 public
-JSON, CLI, schema, conformance, CCR interop, and safety semantics for npm and JavaScript
-agent runtimes. The Python package remains the canonical implementation:
+This npm package is a TypeScript-compatible port of the Python v0.8.0 public
+JSON, CLI, schema, conformance, CCR interop, TRC operation gates, MCP/A2A
+reports, and CARA acceleration semantics for npm and JavaScript agent runtimes.
+The Python package remains the canonical implementation:
 
 - Canonical repository:
   [kadubon/percolation-inversion-compiler](https://github.com/kadubon/percolation-inversion-compiler)
@@ -38,6 +39,11 @@ In plain terms, it answers:
   execution authority?
 - Is a TRC trace operation-ready for a scoped provider handoff, while still
   marked as not executed and not settled?
+- Does a target-valid ASI-proxy/CARA report compare declared targets, lower-bound
+  capital witnesses, and a resource-matched baseline without confusing a
+  benchmark score with safe capital?
+- Are MCP descriptors and A2A handoffs checked as candidate evidence instead of
+  hidden execution authority?
 
 The package is local-first and Python-free at runtime. It does not execute
 arbitrary shell commands, mutate repositories, crawl in the background, or prove
@@ -100,8 +106,10 @@ oracle truth has been proven.
 
 ## Run CCR And TRC Interop
 
-Version 0.6.0 adds CCR-oriented interop and practical TRC operation-readiness
-checks. The outputs are still inert JSON/JSONL.
+Version 0.8.0 extends the CCR-oriented interop layer with target-valid
+ASI-proxy/CARA diagnostics, physical gate freshness checks, MCP/A2A structured
+reports, SQOT protocol-integrity reports, and BIT MEC frontier extraction. The
+outputs are still inert JSON/JSONL.
 
 ```sh
 npx pic-ts phase plan --request examples/asi_proxy_benchmark_bundle/pic_phase_request.json --compact --emit ccr-tasks
@@ -110,6 +118,11 @@ npx pic-ts trc trace-normalize --input examples/asi_proxy_benchmark_bundle/trc_a
 npx pic-ts trc trace-check --trace trace_nf.json
 npx pic-ts trc operation-gate --trace trace_nf.json --provider-profile provider_profile.json
 npx pic-ts trc trace-to-packet --trace trace_nf.json
+npx pic-ts phase acceleration-report --target examples/asi_proxy_acceleration_bundle/target.json --baseline examples/asi_proxy_acceleration_bundle/baseline_upper_envelope.json --capital examples/asi_proxy_acceleration_bundle/capital_witnesses.jsonl
+npx pic-ts mcp descriptor-check --descriptor examples/asi_proxy_acceleration_bundle/mcp_descriptor.good.json --profile development
+npx pic-ts a2a handoff-check --handoff examples/asi_proxy_acceleration_bundle/a2a_handoff.good.json --profile development
+npx pic-ts sqot protocol-integrity --state examples/asi_proxy_acceleration_bundle/sqot_protocol_integrity.missing_root.json
+npx pic-ts bit mec-frontier --certificates examples/asi_proxy_acceleration_bundle/bit_mec_certificates.jsonl
 ```
 
 `operation_ready=true` means the trace includes explicit authority, resource,
@@ -119,6 +132,12 @@ time, authority scope mismatch, and untrusted issuers block operation readiness.
 Fixture-only dry-run traces are diagnostic-only and remain non-executable.
 `provider_dispatch_ready` is not dispatch, and `physical_dispatch_ready` is not
 physical outcome proof.
+
+`certified_acceleration_candidate=true` means a declared target set is crossed
+with lower-bound admitted capital before a resource-matched baseline upper
+envelope, with positive margin under the declared protocol. It is not real ASI
+proof. Proxy-only evidence, stale baselines, missing authority, missing hazard
+checks, and unknown budgets remain residuals.
 
 ## Run The Phase Ecology Lab
 
@@ -184,7 +203,7 @@ npx pic-ts schema --type EffectivePacketGraph
 npx pic-ts snapshot list
 ```
 
-Use v0.5.0/v0.6.0 diagnostic helpers from a repository checkout or from packaged
+Use v0.7.0/v0.8.0 diagnostic helpers from a repository checkout or from packaged
 examples under `node_modules/percolation-inversion-compiler-ts/examples`:
 
 ```sh
@@ -279,7 +298,7 @@ missing obligations.
 ## Python Canonical Implementation
 
 The canonical implementation is the Python package
-`percolation-inversion-compiler==0.6.0`.
+`percolation-inversion-compiler==0.8.0`.
 
 Use the Python project when you need the canonical source implementation,
 Python SDK behavior, optional Python sidecars, or the full project
@@ -301,8 +320,8 @@ not copy Python internals line by line.
 | `agent check`, `agent intake`, `agent runbook`, `agent autonomy-audit`, `agent manifest`, `agent communication-guide`                                                                                 | Python v0.5.0 public JSON meaning, with v0.4.4 fixture-backed parity preserved.                                  |
 | `phase plan`, `phase gap`, `phase runbook`, `phase benchmark`, `phase benchmark-suite`, `phase dashboard`, `phase observe`                                                                            | Python v0.5.0 public semantics; dynamic `--request` keeps candidate-only and identity blockers visible.          |
 | `phase lab init/ingest/list-windows/export/observe/graph/closure/executable-paths/threshold-status/certify/compare-window`                                                                            | npm/Node JSON/JSONL local store for Python v0.5.0 Phase Ecology Lab records.                                     |
-| `bit`, `sqot`, `alt`, `trc`, `ecology effective-graph`, `ecology execution-available-paths`                                                                                                           | v0.5.0/v0.6.0 diagnostic and recommendation routes; outputs are inert JSON and do not grant execution authority. |
-| `phase --emit`, `bit emit-ccr-tasks`, `sqot --emit`, `alt bridge-ecpt`, `trc trace-normalize/check/to-packet`, `interop/ccr` SDK                                                                      | Python v0.6.0 CCR interop and TRC operation-readiness semantics for Node.js runtimes.                            |
+| `bit`, `sqot`, `alt`, `trc`, `ecology effective-graph`, `ecology execution-available-paths`                                                                                                           | v0.5.0-v0.8.0 diagnostic and recommendation routes; outputs are inert JSON and do not grant execution authority. |
+| `phase --emit`, `bit emit-ccr-tasks`, `sqot --emit`, `alt bridge-ecpt`, `trc trace-normalize/check/to-packet`, `interop/ccr` SDK                                                                      | Python v0.8.0 CCR interop, TRC operation-gate, MCP/A2A, BIT, SQOT, and CARA semantics for Node.js runtimes.      |
 | `runtime step`, `schema`, `snapshot`, `routes`, `portability`, `adoption`, `identity`, `demo installed-smoke`                                                                                         | Python v0.5.0-compatible schema and fixture semantics, with bundled v0.4.4/v0.5.0 conformance fixtures.          |
 | `agent message`, `agent inbox`, `packet`, Node-only demo bootstrap                                                                                                                                    | npm/Node sidecar implementation with the same non-promotion and residual-preservation rules.                     |
 | evidence heavy routes, runtime service/store/heavy actions, SQOT audit, ALT heavy routes, ecology heavy routes, ECPT heavy routes, audit/extract/check/coverage/parse/provenance/sbom/demo datacenter | Safe diagnostic compatibility only.                                                                              |

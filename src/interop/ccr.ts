@@ -1098,6 +1098,45 @@ function parseTime(value: unknown): Date | undefined {
   return Number.isFinite(parsed.getTime()) ? parsed : undefined;
 }
 
+function status(value: unknown): string {
+  const asRecord = optionalRecord(value);
+  return String(asRecord?.status ?? value ?? "")
+    .trim()
+    .toLowerCase();
+}
+
+function statusOk(value: unknown, allowed: Set<string>): boolean {
+  return allowed.has(status(value));
+}
+
+function freshUntil(value: JsonRecord, reference: Date | undefined): boolean {
+  if (!reference) return false;
+  const expiry = parseTime(value.expires_at ?? value.fresh_until);
+  return Boolean(expiry && expiry.getTime() > reference.getTime());
+}
+
+function certificateFresh(
+  value: unknown,
+  reference: Date | undefined,
+): boolean {
+  const cert = record(value);
+  const certStatus = status(cert);
+  if (["fresh", "recomputed"].includes(certStatus)) return true;
+  if (
+    ![
+      "accepted",
+      "approved",
+      "available",
+      "tested",
+      "verified",
+      "active",
+    ].includes(certStatus)
+  ) {
+    return false;
+  }
+  return freshUntil(cert, reference) || cert.fresh === true;
+}
+
 function referenceTime(
   traceNf: JsonRecord,
   nf: JsonRecord,
@@ -1186,6 +1225,173 @@ function gate(ok: boolean, residuals: JsonRecord[], note = ""): JsonRecord {
       residuals.map((item) => String(item.kind ?? "")).filter(Boolean),
     ),
   };
+}
+
+function withinNumericBudget(usage: JsonRecord, limit: JsonRecord): boolean {
+  if (Object.keys(usage).length === 0 || Object.keys(limit).length === 0) {
+    return true;
+  }
+  for (const [key, value] of Object.entries(usage)) {
+    if (!(key in limit)) continue;
+    const used = optionalFloat(value);
+    const allowed = optionalFloat(limit[key]);
+    if (used !== null && allowed !== null && used > allowed) return false;
+  }
+  return true;
+}
+
+function toleranceWithinBudget(tolerance: JsonRecord): boolean {
+  if (Object.keys(tolerance).length === 0) return true;
+  for (const [key, value] of Object.entries(tolerance)) {
+    if (key.endsWith("_budget")) continue;
+    const budget = tolerance[`${key}_budget`] ?? tolerance.budget;
+    const observed = optionalFloat(value);
+    const allowed = optionalFloat(budget);
+    if (observed !== null && allowed !== null && observed > allowed) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function lifecycleFresh(
+  providerProfile: JsonRecord,
+  reference: Date | undefined,
+): boolean {
+  const cert = record(
+    providerProfile.lifecycle_certificate ??
+      providerProfile.certificate_lifecycle,
+  );
+  if (Object.keys(cert).length === 0) {
+    return providerProfile.lifecycle_recomputed === true;
+  }
+  return certificateFresh(cert, reference);
+}
+
+function physicalDispatchResiduals(
+  traceId: string,
+  providerProfile: JsonRecord,
+  reference: Date | undefined,
+  policy: string,
+): JsonRecord[] {
+  const residuals: JsonRecord[] = [];
+  const physicalDomain = record(providerProfile.physical_domain_profile);
+  const actuatorClass = String(providerProfile.actuator_class ?? "");
+  const allowedActuators = new Set([
+    ...listField(providerProfile, "allowed_actuator_classes"),
+    ...listField(physicalDomain, "allowed_actuator_classes"),
+  ]);
+  const checks: Array<[boolean, string]> = [
+    [
+      statusOk(physicalDomain, new Set(["accepted", "approved"])),
+      "physical_profile_not_accepted",
+    ],
+    [
+      allowedActuators.size === 0 || allowedActuators.has(actuatorClass),
+      "actuator_class_not_allowed",
+    ],
+    [
+      statusOk(
+        record(providerProfile.human_operator_authority),
+        new Set(["approved", "active"]),
+      ) &&
+        freshUntil(record(providerProfile.human_operator_authority), reference),
+      "human_operator_authority_not_approved",
+    ],
+    [
+      statusOk(
+        record(providerProfile.emergency_stop),
+        new Set(["accepted", "tested", "available"]),
+      ),
+      "emergency_stop_not_tested",
+    ],
+    [
+      certificateFresh(
+        providerProfile.runtime_assurance_certificate,
+        reference,
+      ) &&
+        ["accepted", "fresh", "approved"].includes(
+          status(providerProfile.runtime_assurance_certificate),
+        ),
+      "runtime_assurance_certificate_not_accepted",
+    ],
+    [
+      !(
+        providerProfile.requires_shield_certificate ||
+        providerProfile.shield_certificate
+      ) ||
+        (certificateFresh(providerProfile.shield_certificate, reference) &&
+          ["accepted", "fresh", "approved"].includes(
+            status(providerProfile.shield_certificate),
+          )),
+      "shield_certificate_not_accepted",
+    ],
+    [
+      statusOk(
+        record(providerProfile.rollback_escrow),
+        new Set(["available", "verified"]),
+      ),
+      "rollback_escrow_not_verified",
+    ],
+    [
+      certificateFresh(
+        providerProfile.hazard_envelope ??
+          providerProfile.hazard_envelope_certificate,
+        reference,
+      ) &&
+        ["accepted", "fresh", "approved"].includes(
+          status(
+            providerProfile.hazard_envelope ??
+              providerProfile.hazard_envelope_certificate,
+          ),
+        ),
+      "hazard_envelope_not_accepted",
+    ],
+    [
+      record(providerProfile.observation_window).has_verifier === true ||
+        statusOk(
+          record(providerProfile.observation_window).verifier,
+          new Set(["accepted", "approved", "active"]),
+        ),
+      "observation_verifier_required",
+    ],
+    [
+      withinNumericBudget(
+        record(providerProfile.resource_use),
+        record(providerProfile.resource_limit),
+      ),
+      "resource_use_exceeds_profile",
+    ],
+    [
+      toleranceWithinBudget(record(providerProfile.tolerance_ledger)),
+      "tolerance_budget_exceeded",
+    ],
+    [lifecycleFresh(providerProfile, reference), "lifecycle_certificate_stale"],
+    [
+      [
+        "physical_provider_allowed",
+        "provider_physical_allowed",
+        "controlled_physical_allowed",
+      ].includes(policy),
+      "side_effect_policy_not_dispatchable",
+    ],
+    [
+      providerProfile.requires_mcp_tool !== true ||
+        providerProfile.mcp_tool_gate_accepted === true,
+      "mcp_tool_gate_not_accepted",
+    ],
+    [
+      providerProfile.requires_a2a_agent !== true ||
+        providerProfile.a2a_agent_gate_accepted === true,
+      "a2a_agent_gate_not_accepted",
+    ],
+  ];
+  for (const [ok, kind] of checks) {
+    if (!ok) {
+      residuals.push(traceResidual(traceId, "physical-dispatch", kind, true));
+    }
+  }
+  return residuals;
 }
 
 function authorityResiduals(
@@ -1465,6 +1671,9 @@ export function operationGateReport(
         });
       }
     }
+    physicalMissing.push(
+      ...physicalDispatchResiduals(traceId, providerProfile, reference, policy),
+    );
   }
   const physicalDispatchReady =
     providerDispatchReady && physicalRequested && physicalMissing.length === 0;
@@ -1562,6 +1771,1418 @@ export function operationGateReport(
     tolerance_gate: gate(toleranceResiduals.length === 0, toleranceResiduals),
     trace_id: traceId,
     trc_trace_nf: nf,
+  };
+}
+
+function reportResidual(
+  prefix: string,
+  subject: unknown,
+  kind: string,
+  blocking = true,
+  description?: string,
+): JsonRecord {
+  return {
+    blocking,
+    description: description ?? kind.replaceAll("_", " "),
+    kind,
+    residual_id: `${prefix}:${shortHash([subject, kind])}`,
+  };
+}
+
+function blockingKinds(residuals: JsonRecord[]): string[] {
+  return dedupeSorted(
+    residuals
+      .filter((item) => item.blocking === true)
+      .map((item) => String(item.kind ?? "")),
+  );
+}
+
+function requiredResiduals(
+  prefix: string,
+  subject: unknown,
+  data: JsonRecord,
+  fields: string[],
+): JsonRecord[] {
+  return fields
+    .filter((field) => {
+      const value = data[field];
+      return (
+        value === undefined ||
+        value === null ||
+        value === "" ||
+        (Array.isArray(value) && value.length === 0) ||
+        (typeof value === "object" &&
+          !Array.isArray(value) &&
+          Object.keys(value as JsonRecord).length === 0)
+      );
+    })
+    .map((field) => reportResidual(prefix, subject, `missing_${field}`));
+}
+
+function profileSettings(profile: string | JsonRecord): JsonRecord {
+  const defaults: JsonRecord = {
+    allowed_auth_scopes: ["read", "local", "local_fixture", "fixture"],
+    allowed_egress_policies: ["none", "disabled", "allowlist"],
+    allowed_side_effect_classes: ["read_only", "none", "diagnostic"],
+    max_byte_limit: 1_000_000,
+    max_timeout_budget: 30,
+    require_descriptor_provenance: false,
+    require_signature: false,
+    trusted_server_statuses: ["trusted", "approved", "accepted"],
+  };
+  if (typeof profile === "object" && profile !== null) {
+    return { ...defaults, profile: "custom", ...profile };
+  }
+  const normalized = String(profile || "development").toLowerCase();
+  const strict = ["production", "adversarial"].includes(normalized);
+  return {
+    ...defaults,
+    profile: normalized,
+    require_descriptor_provenance: strict,
+    require_signature: strict,
+  };
+}
+
+function listAny(value: unknown): string[] {
+  if (value === undefined || value === null || value === "") return [];
+  return Array.isArray(value)
+    ? value.filter((item) => item !== undefined && item !== null).map(String)
+    : [String(value)];
+}
+
+function lowerTokens(value: unknown): Set<string> {
+  return new Set(listAny(value).map((item) => item.trim().toLowerCase()));
+}
+
+function dangerousText(value: unknown): boolean {
+  const text = compactStringify(value).toLowerCase();
+  return [
+    "ignore previous",
+    "system prompt",
+    "developer message",
+    "rm -rf",
+    "powershell",
+    "bash -lc",
+    "curl ",
+    "wget ",
+    "ssh ",
+    "http://",
+    "https://",
+    "subprocess",
+    "exec(",
+    "eval(",
+  ].some((marker) => text.includes(marker));
+}
+
+function recordsAny(value: unknown): JsonRecord[] {
+  return records(value);
+}
+
+export function mcpToolDescriptorReport(
+  descriptorInput: JsonRecord,
+  profile: string | JsonRecord = "development",
+): JsonRecord {
+  const descriptor = descriptorInput ?? {};
+  const settings = profileSettings(profile);
+  const serverId = String(descriptor.server_id ?? descriptor.server ?? "");
+  const toolName = String(descriptor.tool_name ?? descriptor.name ?? "");
+  const canonicalName = serverId && toolName ? `${serverId}/${toolName}` : "";
+  const descriptorVersion = String(
+    descriptor.descriptor_version ?? descriptor.version ?? "",
+  );
+  const serverStatus = String(
+    descriptor.server_trust_status ?? descriptor.trust_status ?? "",
+  ).toLowerCase();
+  const sideEffectClass = String(
+    descriptor.side_effect_class ?? "unknown",
+  ).toLowerCase();
+  const egressPolicy = String(
+    descriptor.egress_policy ?? "unknown",
+  ).toLowerCase();
+  const authScope = listAny(descriptor.auth_scope ?? descriptor.auth_scopes);
+  const subject = canonicalName || digest(descriptor);
+  const residuals = requiredResiduals("mcp", subject, descriptor, [
+    "server_id",
+    "tool_name",
+    "descriptor_version",
+    "side_effect_class",
+  ]);
+  if (!lowerTokens(settings.trusted_server_statuses).has(serverStatus)) {
+    residuals.push(reportResidual("mcp", subject, "server_trust_not_accepted"));
+  }
+  if (
+    settings.require_descriptor_provenance === true &&
+    !(descriptor.provenance || descriptor.signature)
+  ) {
+    residuals.push(
+      reportResidual("mcp", subject, "descriptor_provenance_required"),
+    );
+  }
+  if (settings.require_signature === true && !descriptor.signature) {
+    residuals.push(
+      reportResidual("mcp", subject, "descriptor_signature_required"),
+    );
+  }
+  if (!lowerTokens(settings.allowed_side_effect_classes).has(sideEffectClass)) {
+    residuals.push(
+      reportResidual("mcp", subject, "side_effect_class_not_allowed"),
+    );
+  }
+  if (!lowerTokens(settings.allowed_egress_policies).has(egressPolicy)) {
+    residuals.push(reportResidual("mcp", subject, "egress_policy_not_allowed"));
+  }
+  const allowedScopes = lowerTokens(settings.allowed_auth_scopes);
+  if (!authScope.every((token) => allowedScopes.has(token.toLowerCase()))) {
+    residuals.push(reportResidual("mcp", subject, "auth_scope_not_allowed"));
+  }
+  const diagnostics: JsonRecord[] = [];
+  const dangerousKeys = Object.keys(descriptor).filter((key) =>
+    [
+      "system_prompt",
+      "developer_message",
+      "secrets",
+      "password",
+      "shell",
+      "exec",
+    ].includes(key.toLowerCase()),
+  );
+  if (dangerousKeys.length > 0) {
+    residuals.push({
+      ...reportResidual("mcp", subject, "dangerous_metadata_fields"),
+      fields: dangerousKeys.sort(),
+    });
+  }
+  if (dangerousText(descriptor.description)) {
+    diagnostics.push(
+      reportResidual(
+        "mcp",
+        subject,
+        "prompt_injection_bearing_description_risk",
+        false,
+      ),
+    );
+  }
+  if (descriptor.descriptor_changed_after_approval === true) {
+    residuals.push(
+      reportResidual("mcp", subject, "descriptor_rug_pull_blocked"),
+    );
+  }
+  const blockers = blockingKinds([...residuals, ...diagnostics]);
+  const inputSchema = descriptor.input_schema ?? descriptor.inputSchema;
+  const outputSchema = descriptor.output_schema ?? descriptor.outputSchema;
+  return {
+    accepted: blockers.length === 0,
+    auth_scope: authScope,
+    blockers,
+    canonical_tool_name: canonicalName,
+    descriptor_changed_after_approval:
+      descriptor.descriptor_changed_after_approval === true,
+    descriptor_hash: digest(descriptor),
+    descriptor_version: descriptorVersion,
+    egress_policy: egressPolicy,
+    input_schema_hash: inputSchema ? digest(inputSchema) : null,
+    non_claims: [
+      ...NON_CLAIMS,
+      "mcp_descriptor_is_candidate_evidence_not_execution_authority",
+    ],
+    ok: true,
+    output_schema_hash: outputSchema ? digest(outputSchema) : null,
+    profile: settings.profile,
+    residuals: [...residuals, ...diagnostics].sort((a, b) =>
+      String(a.kind).localeCompare(String(b.kind)),
+    ),
+    schema_version: "pic.mcp_tool_descriptor_report.v1",
+    server_id: serverId,
+    server_trust_status: serverStatus,
+    settled: false,
+    side_effect_class: sideEffectClass,
+    tool_name: toolName,
+  };
+}
+
+export function mcpToolInvocationPreflight(
+  descriptor: JsonRecord,
+  callInput: JsonRecord,
+  profile: string | JsonRecord = "development",
+): JsonRecord {
+  const call = callInput ?? {};
+  const descriptorReport = mcpToolDescriptorReport(descriptor, profile);
+  const settings = profileSettings(profile);
+  const canonical = String(descriptorReport.canonical_tool_name ?? "");
+  const requested = String(
+    call.canonical_tool_name ?? call.tool ?? call.tool_name ?? "",
+  );
+  const sideEffectClass = String(
+    descriptorReport.side_effect_class ?? "unknown",
+  ).toLowerCase();
+  const residuals = records(descriptorReport.residuals).filter(
+    (item) => item.blocking === true,
+  );
+  const subject = requested || canonical || digest(call);
+  if (descriptorReport.accepted !== true) {
+    residuals.push(
+      reportResidual("mcp-call", subject, "descriptor_not_accepted"),
+    );
+  }
+  if (
+    canonical &&
+    requested &&
+    ![canonical, canonical.split("/").at(-1)].includes(requested)
+  ) {
+    residuals.push(
+      reportResidual("mcp-call", subject, "canonical_tool_name_mismatch"),
+    );
+  }
+  if (
+    !["read_only", "none", "diagnostic"].includes(sideEffectClass) &&
+    !call.approval_ref
+  ) {
+    residuals.push(
+      reportResidual("mcp-call", subject, "per_call_approval_required"),
+    );
+  }
+  if (!lowerTokens(settings.allowed_side_effect_classes).has(sideEffectClass)) {
+    residuals.push(
+      reportResidual("mcp-call", subject, "side_effect_class_not_allowed"),
+    );
+  }
+  if (!call.output_redaction_policy) {
+    residuals.push(
+      reportResidual("mcp-call", subject, "output_redaction_policy_required"),
+    );
+  }
+  if (call.trace_logging_enabled !== true) {
+    residuals.push(
+      reportResidual("mcp-call", subject, "trace_logging_required"),
+    );
+  }
+  if (descriptorReport.descriptor_changed_after_approval === true) {
+    residuals.push(
+      reportResidual("mcp-call", subject, "descriptor_rug_pull_blocked"),
+    );
+  }
+  if (call.tool_name_collision === true) {
+    residuals.push(reportResidual("mcp-call", subject, "tool_name_collision"));
+  }
+  if (dangerousText(call.arguments ?? call.input ?? call)) {
+    residuals.push(
+      reportResidual("mcp-call", subject, "hidden_escalation_in_arguments"),
+    );
+  }
+  const timeout = optionalFloat(call.timeout_budget);
+  const byteLimit = optionalFloat(call.byte_limit);
+  if (
+    timeout !== null &&
+    timeout > floatValue(settings.max_timeout_budget, 30)
+  ) {
+    residuals.push(
+      reportResidual("mcp-call", subject, "timeout_budget_exceeded"),
+    );
+  }
+  if (
+    byteLimit !== null &&
+    byteLimit > floatValue(settings.max_byte_limit, 1_000_000)
+  ) {
+    residuals.push(reportResidual("mcp-call", subject, "byte_limit_exceeded"));
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    blockers,
+    canonical_tool_name: canonical,
+    descriptor_report: descriptorReport,
+    executed: false,
+    invocation_ready: blockers.length === 0,
+    network_call_performed: false,
+    non_claims: [
+      ...NON_CLAIMS,
+      "mcp_invocation_preflight_is_not_tool_dispatch",
+    ],
+    ok: true,
+    profile: settings.profile,
+    requested_tool_name: requested,
+    residuals: residuals.sort((a, b) =>
+      String(a.kind).localeCompare(String(b.kind)),
+    ),
+    schema_version: "pic.mcp_tool_invocation_preflight.v1",
+    settled: false,
+  };
+}
+
+export function a2aAgentCardReport(
+  cardInput: JsonRecord,
+  profile: string | JsonRecord = "development",
+): JsonRecord {
+  const card = cardInput ?? {};
+  const settings = profileSettings(profile);
+  const agentId = String(card.agent_id ?? card.id ?? "");
+  const residuals = requiredResiduals(
+    "a2a-card",
+    agentId || digest(card),
+    card,
+    ["agent_id", "endpoint", "task_schema", "declared_authority"],
+  );
+  const endpoint = record(card.endpoint);
+  if (!(endpoint.provenance || endpoint.url)) {
+    residuals.push(
+      reportResidual("a2a-card", agentId, "endpoint_provenance_required"),
+    );
+  }
+  if (settings.require_signature === true && !card.signature) {
+    residuals.push(
+      reportResidual("a2a-card", agentId, "agent_card_signature_required"),
+    );
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    agent_id: agentId,
+    blockers,
+    endpoint_hash: Object.keys(endpoint).length > 0 ? digest(endpoint) : null,
+    non_claims: [
+      ...NON_CLAIMS,
+      "a2a_agent_card_is_not_delegated_tool_authority",
+    ],
+    ok: true,
+    profile: settings.profile,
+    residuals: residuals.sort((a, b) =>
+      String(a.kind).localeCompare(String(b.kind)),
+    ),
+    schema_version: "pic.a2a_agent_card_report.v1",
+    settled: false,
+  };
+}
+
+export function a2aTaskHandoffReport(
+  handoffInput: JsonRecord,
+  profile: string | JsonRecord = "development",
+): JsonRecord {
+  const handoff = handoffInput ?? {};
+  const settings = profileSettings(profile);
+  const handoffId = String(
+    handoff.handoff_id ?? handoff.task_id ?? shortHash(handoff),
+  );
+  const residuals = requiredResiduals("a2a-handoff", handoffId, handoff, [
+    "agent_card_ref",
+    "task_schema",
+    "handoff_scope",
+    "replay_nonce",
+    "idempotency_key",
+  ]);
+  if (!handoff.declared_authority) {
+    residuals.push(
+      reportResidual("a2a-handoff", handoffId, "declared_authority_required"),
+    );
+  }
+  if (handoff.delegated_tool_execution === true) {
+    residuals.push(
+      reportResidual(
+        "a2a-handoff",
+        handoffId,
+        "delegated_execution_not_inferred",
+      ),
+    );
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    blockers,
+    handoff_id: handoffId,
+    non_claims: [
+      ...NON_CLAIMS,
+      "a2a_handoff_result_is_provider_evidence_not_settlement",
+      "a2a_message_does_not_grant_delegated_tool_execution",
+    ],
+    ok: true,
+    profile: settings.profile,
+    residuals: residuals.sort((a, b) =>
+      String(a.kind).localeCompare(String(b.kind)),
+    ),
+    schema_version: "pic.a2a_task_handoff_report.v1",
+    settled: false,
+  };
+}
+
+function targetStatusResiduals(
+  targetId: string,
+  target: JsonRecord,
+): JsonRecord[] {
+  const residuals: JsonRecord[] = [];
+  for (const field of ["mission_law", "generated_law", "externality_law"]) {
+    if (
+      !statusOk(
+        target[field],
+        new Set(["accepted", "approved", "fresh", "active"]),
+      )
+    ) {
+      residuals.push(
+        reportResidual("target", targetId, `${field}_not_accepted`),
+      );
+    }
+  }
+  if (
+    !statusOk(
+      target.hazard_envelope,
+      new Set(["accepted", "approved", "active"]),
+    )
+  ) {
+    residuals.push(
+      reportResidual("target", targetId, "hazard_envelope_not_accepted"),
+    );
+  }
+  if (
+    !statusOk(
+      target.authority_envelope,
+      new Set(["accepted", "approved", "active"]),
+    )
+  ) {
+    residuals.push(
+      reportResidual("target", targetId, "authority_envelope_not_approved"),
+    );
+  }
+  if (
+    !statusOk(
+      target.capability_envelope,
+      new Set(["accepted", "approved", "active"]),
+    )
+  ) {
+    residuals.push(
+      reportResidual("target", targetId, "capability_envelope_not_accepted"),
+    );
+  }
+  if (
+    !statusOk(target.viability_set, new Set(["accepted", "approved", "active"]))
+  ) {
+    residuals.push(
+      reportResidual("target", targetId, "viability_set_not_accepted"),
+    );
+  }
+  if (target.target_set_changed_after_observation === true) {
+    residuals.push(
+      reportResidual("target", targetId, "target_changed_after_observation"),
+    );
+  }
+  return residuals;
+}
+
+export function targetValidityCheck(targetInput: JsonRecord): JsonRecord {
+  const target = targetInput ?? {};
+  const targetId = String(target.target_id ?? "target");
+  const residuals = requiredResiduals("target", targetId, target, [
+    "capability_basis",
+    "target_set",
+    "mission_law",
+    "generated_law",
+    "externality_law",
+    "hazard_envelope",
+    "authority_envelope",
+    "capability_envelope",
+    "viability_set",
+    "raw_net_capital_floor",
+    "horizon",
+    "target_validity_certificate_ref",
+    "baseline_upper_envelope_ref",
+  ]);
+  if (
+    target.observed_outcome_ref &&
+    !target.target_set_locked_before_observation
+  ) {
+    residuals.push(
+      reportResidual("target", targetId, "target_changed_after_observation"),
+    );
+  }
+  residuals.push(...targetStatusResiduals(targetId, target));
+  const blockers = blockingKinds(residuals);
+  const authorityOk = statusOk(
+    target.authority_envelope,
+    new Set(["accepted", "approved", "active"]),
+  );
+  const hazardOk = statusOk(
+    target.hazard_envelope,
+    new Set(["accepted", "approved", "active"]),
+  );
+  const opportunityLawOk = [
+    "mission_law",
+    "generated_law",
+    "externality_law",
+  ].every((field) =>
+    statusOk(
+      target[field],
+      new Set(["accepted", "approved", "fresh", "active"]),
+    ),
+  );
+  const viabilityOk = statusOk(
+    target.viability_set,
+    new Set(["accepted", "approved", "active"]),
+  );
+  return {
+    authority_ok: authorityOk,
+    blockers,
+    hazard_ok: hazardOk,
+    non_claims: [...NON_CLAIMS, "target_validity_is_protocol_relative"],
+    ok: blockers.length === 0,
+    opportunity_law_ok: opportunityLawOk,
+    residuals: residuals.sort((a, b) =>
+      String(a.kind).localeCompare(String(b.kind)),
+    ),
+    schema_version: "pic.target_validity_certificate.v1",
+    settled: false,
+    target_id: targetId,
+    target_validity_ok: blockers.length === 0,
+    viability_ok: viabilityOk,
+  };
+}
+
+export function baselineEnvelopeCheck(baselineInput: JsonRecord): JsonRecord {
+  const baseline = baselineInput ?? {};
+  const baselineId = String(baseline.baseline_id ?? "baseline");
+  const residuals = requiredResiduals("baseline", baselineId, baseline, [
+    "baseline_policy_class",
+    "resource_envelope",
+    "model_toolchain_environment_versions",
+    "control_observability",
+    "upper_bound_method",
+    "confidence_budget",
+    "refresh_contract",
+    "path_law_refs",
+    "envelope_coordinates",
+  ]);
+  if (baseline.stale === true) {
+    residuals.push(
+      reportResidual("baseline", baselineId, "baseline_refresh_required"),
+    );
+  }
+  if (baseline.resource_matched === false) {
+    residuals.push(
+      reportResidual("baseline", baselineId, "baseline_not_resource_matched"),
+    );
+  }
+  if (
+    typeof baseline.control_observability === "object" &&
+    baseline.control_observability !== null &&
+    !statusOk(
+      baseline.control_observability,
+      new Set(["accepted", "approved", "active"]),
+    )
+  ) {
+    residuals.push(
+      reportResidual(
+        "baseline",
+        baselineId,
+        "control_observability_not_accepted",
+      ),
+    );
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    baseline_envelope_ok: blockers.length === 0,
+    baseline_id: baselineId,
+    blockers,
+    non_claims: [...NON_CLAIMS, "baseline_upper_envelope_is_not_oracle_truth"],
+    ok: blockers.length === 0,
+    residuals: residuals.sort((a, b) =>
+      String(a.kind).localeCompare(String(b.kind)),
+    ),
+    schema_version: "pic.baseline_upper_envelope_check.v1",
+    settled: false,
+  };
+}
+
+export function capitalWitnessReport(packetInput: JsonRecord): JsonRecord {
+  const packet = packetInput ?? {};
+  const id = packetId(packet);
+  const coordinate = String(
+    packet.coordinate ?? record(packet.capital).coordinate ?? id,
+  );
+  const capitalLower = floatValue(
+    packet.capital_lower_bound,
+    packet.capital_lower,
+  );
+  const costUpper = floatValue(packet.cost_upper_bound, packet.cost_upper);
+  const hazardUpper = floatValue(
+    packet.hazard_charge_upper_bound,
+    packet.hazard_upper,
+  );
+  const transportUpper = floatValue(
+    packet.transport_charge_upper_bound,
+    packet.transport_upper,
+  );
+  const signedSurplus = floatValue(
+    packet.signed_surplus_lower_bound,
+    capitalLower - costUpper - hazardUpper - transportUpper,
+  );
+  const valueType = String(packet.value_estimand_type ?? "proxy_only");
+  const residuals = requiredResiduals("capital", id, packet, [
+    "coordinate",
+    "baseline_ref",
+    "transport_ref",
+    "finality_ref",
+  ]);
+  for (const field of [
+    "mission_valid",
+    "transport_valid",
+    "finality_valid",
+    "hazard_constrained",
+    "gauge_compatible",
+    "raw_net_solvent",
+  ]) {
+    if (packet[field] !== true) {
+      residuals.push(reportResidual("capital", id, `${field}_not_verified`));
+    }
+  }
+  if (valueType === "proxy_only") {
+    residuals.push(reportResidual("capital", id, "proxy_only_not_admitted"));
+  }
+  if (signedSurplus <= 0) {
+    residuals.push(reportResidual("capital", id, "nonpositive_signed_surplus"));
+  }
+  if (packet.negative_liquidity === true) {
+    residuals.push(reportResidual("capital", id, "negative_liquidity"));
+  }
+  if (packet.lifecycle_stale === true) {
+    residuals.push(reportResidual("capital", id, "stale_lifecycle"));
+  }
+  if (packet.authority_fresh === false) {
+    residuals.push(reportResidual("capital", id, "authority_not_fresh"));
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    blockers,
+    capital_admitted: blockers.length === 0,
+    capital_lower_bound: capitalLower,
+    coordinate,
+    cost_upper_bound: costUpper,
+    evidence_refs: listAny(packet.evidence_refs),
+    finality_valid: packet.finality_valid === true,
+    gauge_compatible: packet.gauge_compatible === true,
+    hazard_charge_upper_bound: hazardUpper,
+    hazard_constrained: packet.hazard_constrained === true,
+    mission_valid: packet.mission_valid === true,
+    non_claims: [
+      ...NON_CLAIMS,
+      "accepted_report_does_not_imply_capital_admitted",
+      "proxy_only_cannot_increase_safe_capital",
+    ],
+    ok: true,
+    packet_refs: listAny(packet.packet_refs ?? id),
+    raw_net_solvent: packet.raw_net_solvent === true,
+    residuals: residuals.sort((a, b) =>
+      String(a.kind).localeCompare(String(b.kind)),
+    ),
+    schema_version: "pic.runtime_capital_witness.v1",
+    settled: false,
+    signed_surplus_lower_bound: signedSurplus,
+    transport_charge_upper_bound: transportUpper,
+    transport_valid: packet.transport_valid === true,
+    value_estimand_type: valueType,
+    verifier_refs: listAny(packet.verifier_refs),
+    witness_id: String(packet.witness_id ?? `capital:${shortHash(packet)}`),
+  };
+}
+
+export function deploymentAdmissibilityReport(
+  packetInput: JsonRecord,
+  profile: string | JsonRecord = "development",
+): JsonRecord {
+  const packet = packetInput ?? {};
+  const id = packetId(packet);
+  const residuals = requiredResiduals("deployment", id, packet, [
+    "guard_certificate",
+    "current_certificate",
+    "authority_envelope",
+  ]);
+  if (
+    !statusOk(
+      record(packet.guard_certificate),
+      new Set(["accepted", "fresh", "approved"]),
+    )
+  ) {
+    residuals.push(
+      reportResidual("deployment", id, "guard_certificate_not_accepted"),
+    );
+  }
+  if (!certificateFresh(packet.current_certificate, new Date())) {
+    residuals.push(
+      reportResidual("deployment", id, "current_certificate_not_fresh"),
+    );
+  }
+  if (
+    !statusOk(
+      record(packet.authority_envelope),
+      new Set(["approved", "active"]),
+    )
+  ) {
+    residuals.push(reportResidual("deployment", id, "authority_not_approved"));
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    admissible: blockers.length === 0,
+    blockers,
+    non_claims: [
+      ...NON_CLAIMS,
+      "deployment_admissible_is_not_provider_dispatch",
+    ],
+    ok: true,
+    packet_id: id,
+    profile: profileSettings(profile).profile,
+    residuals: residuals.sort((a, b) =>
+      String(a.kind).localeCompare(String(b.kind)),
+    ),
+    schema_version: "pic.deployment_admissibility_report.v1",
+    settled: false,
+  };
+}
+
+function baselineCoordinates(baseline: JsonRecord): Record<string, number> {
+  const raw = baseline.envelope_coordinates;
+  if (raw && typeof raw === "object" && !Array.isArray(raw)) {
+    return Object.fromEntries(
+      Object.entries(raw as JsonRecord).map(([key, value]) => [
+        key,
+        floatValue(value),
+      ]),
+    );
+  }
+  return Object.fromEntries(
+    recordsAny(raw).map((item) => [
+      String(item.coordinate),
+      floatValue(item.upper_bound, item.value),
+    ]),
+  );
+}
+
+function targetThresholds(target: JsonRecord): Record<string, number> {
+  const targetSet = record(target.target_set);
+  const raw = targetSet.thresholds ?? targetSet.coordinate_thresholds;
+  if (raw && typeof raw === "object" && !Array.isArray(raw)) {
+    return Object.fromEntries(
+      Object.entries(raw as JsonRecord).map(([key, value]) => [
+        key,
+        floatValue(value),
+      ]),
+    );
+  }
+  return Object.fromEntries(
+    recordsAny(raw).map((item) => [
+      String(item.coordinate),
+      floatValue(item.threshold, item.value),
+    ]),
+  );
+}
+
+export function phaseAccelerationReport(
+  target: JsonRecord,
+  baseline: JsonRecord,
+  capitalWitnesses: JsonRecord[],
+): JsonRecord {
+  const targetReport = targetValidityCheck(target);
+  const baselineReport = baselineEnvelopeCheck(baseline);
+  const witnesses = capitalWitnesses.map((item) =>
+    item.schema_version === "pic.runtime_capital_witness.v1"
+      ? item
+      : capitalWitnessReport(item),
+  );
+  const residuals = [
+    ...records(targetReport.residuals),
+    ...records(baselineReport.residuals),
+  ];
+  const kAlt: Record<string, number> = {};
+  for (const witness of witnesses) {
+    if (witness.capital_admitted === true) {
+      const coord = String(witness.coordinate);
+      kAlt[coord] =
+        (kAlt[coord] ?? 0) + floatValue(witness.signed_surplus_lower_bound);
+    } else if (witness.value_estimand_type === "proxy_only") {
+      residuals.push(
+        reportResidual(
+          "phase",
+          witness.witness_id,
+          "proxy_only_non_contributing",
+        ),
+      );
+    }
+  }
+  const kBaseline = baselineCoordinates(baseline);
+  const thresholds = targetThresholds(target);
+  if (Object.keys(kAlt).length === 0) {
+    residuals.push(
+      reportResidual(
+        "phase",
+        target.target_id ?? "target",
+        "runtime_capital_witness_required",
+      ),
+    );
+  }
+  if (
+    Object.values(kAlt).reduce((sum, value) => sum + value, 0) <
+    floatValue(target.raw_net_capital_floor)
+  ) {
+    residuals.push(
+      reportResidual(
+        "phase",
+        target.target_id ?? "target",
+        "raw_net_capital_floor_not_met",
+      ),
+    );
+  }
+  if (Object.keys(thresholds).length === 0) {
+    residuals.push(
+      reportResidual(
+        "phase",
+        target.target_id ?? "target",
+        "target_set_evaluator_required",
+      ),
+    );
+  }
+  const coords = [
+    ...new Set([
+      ...Object.keys(kAlt),
+      ...Object.keys(kBaseline),
+      ...Object.keys(thresholds),
+    ]),
+  ].sort();
+  const margins = coords.map(
+    (coord) => (kAlt[coord] ?? 0) - (kBaseline[coord] ?? 0),
+  );
+  const marginDelta = margins.length > 0 ? Math.min(...margins) : null;
+  const tauAlt = Object.fromEntries(
+    Object.entries(thresholds)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([coord, threshold]) => [
+        coord,
+        (kAlt[coord] ?? 0) >= threshold ? 0 : null,
+      ]),
+  );
+  const tauBaseline = Object.fromEntries(
+    Object.entries(thresholds)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([coord, threshold]) => [
+        coord,
+        (kBaseline[coord] ?? 0) >= threshold ? 0 : null,
+      ]),
+  );
+  const blockers = blockingKinds(residuals);
+  const certified =
+    Object.keys(thresholds).length > 0 &&
+    targetReport.ok === true &&
+    baselineReport.ok === true &&
+    blockers.length === 0 &&
+    marginDelta !== null &&
+    marginDelta > 0 &&
+    Object.values(tauAlt).some((value) => value === 0) &&
+    !Object.values(tauBaseline).every((value) => value === 0);
+  const reportOk =
+    targetReport.ok === true &&
+    baselineReport.ok === true &&
+    blockers.length === 0;
+  return {
+    authority_ok: targetReport.authority_ok,
+    baseline_envelope_ok: baselineReport.ok,
+    blockers,
+    capital_witnesses: witnesses,
+    certified_acceleration_candidate: certified,
+    finality_ok:
+      witnesses.length > 0 &&
+      witnesses.every((item) => item.finality_valid === true),
+    hazard_ok: targetReport.hazard_ok,
+    horizon: target.horizon,
+    k_alt_lower: Object.fromEntries(Object.entries(kAlt).sort()),
+    k_baseline_upper: Object.fromEntries(Object.entries(kBaseline).sort()),
+    margin_delta: marginDelta,
+    non_claims: [
+      ...NON_CLAIMS,
+      "certified_acceleration_candidate_is_not_real_asi_proof",
+      "target_baseline_and_witnesses_are_protocol_relative",
+    ],
+    ok: reportOk,
+    opportunity_law_ok: targetReport.opportunity_law_ok,
+    residuals: residuals.sort((a, b) =>
+      String(a.kind).localeCompare(String(b.kind)),
+    ),
+    schema_version: "pic.phase_acceleration_report.v1",
+    settled: false,
+    target_id: target.target_id,
+    target_validity_ok: targetReport.ok,
+    tau_alt: tauAlt,
+    tau_baseline_upper: tauBaseline,
+    viability_ok: targetReport.viability_ok,
+  };
+}
+
+export function activationConstructionReport(
+  stateInput: JsonRecord,
+): JsonRecord {
+  const state = stateInput ?? {};
+  const stateId = String(state.state_id ?? state.graph_id ?? "state");
+  const configs = recordsAny(
+    state.configurations ?? state.states ?? state.nodes,
+  );
+  const residuals: JsonRecord[] = [];
+  if (configs.length === 0) {
+    residuals.push(
+      reportResidual("ecpt", stateId, "finite_configuration_set_required"),
+    );
+  }
+  if (configs.length > 64 && !state.factor_graph) {
+    residuals.push(reportResidual("ecpt", stateId, "factor_graph_required"));
+  }
+  if (state.sampler_mode && !state.sample_ledger) {
+    residuals.push(reportResidual("ecpt", stateId, "sampler_ledger_required"));
+  }
+  const utilities = configs.map(
+    (cfg) =>
+      floatValue(cfg.gain) -
+      floatValue(cfg.burden) -
+      floatValue(cfg.debt) -
+      floatValue(cfg.queue_cost) -
+      floatValue(cfg.capacity_price) -
+      floatValue(cfg.incompatibility) +
+      floatValue(cfg.acceleration_drive),
+  );
+  const weights = utilities.map((utility) => Math.max(0, utility) + 1);
+  const total = weights.reduce((a, b) => a + b, 0) || 1;
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    activation_probabilities: weights.map((weight, index) => ({
+      configuration_id: String(configs[index]?.configuration_id ?? index),
+      probability: Math.round((weight / total) * 1e12) / 1e12,
+      utility: utilities[index],
+    })),
+    blockers,
+    certified_intervals: Boolean(state.error_ledger),
+    non_claims: [...NON_CLAIMS, "no_global_gibbs_claim_without_certificate"],
+    ok: true,
+    residuals,
+    schema_version: "pic.activation_construction_certificate.v1",
+    settled: false,
+    state_id: stateId,
+  };
+}
+
+export function phaseResponseControlStep(
+  state: JsonRecord,
+  controlInput: JsonRecord,
+): JsonRecord {
+  const control = controlInput ?? {};
+  const report = activationConstructionReport(state);
+  const controlId = String(
+    control.control_id ?? control.action_id ?? "control",
+  );
+  const residuals = records(report.residuals);
+  if (!control.control_surface) {
+    residuals.push(
+      reportResidual("ecpt-control", controlId, "control_surface_required"),
+    );
+  }
+  const utility =
+    floatValue(control.gain) -
+    floatValue(control.burden) -
+    floatValue(control.debt) -
+    floatValue(control.queue_cost) -
+    floatValue(control.capacity_price) -
+    floatValue(control.incompatibility) +
+    floatValue(control.acceleration_drive);
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    blockers,
+    control_id: controlId,
+    non_claims: [...NON_CLAIMS, "phase_response_step_is_advisory"],
+    ok: true,
+    residuals,
+    schema_version: "pic.phase_response_control_step.v1",
+    settled: false,
+    utility_interval: state.error_ledger
+      ? [utility - 1, utility + 1]
+      : [utility, utility],
+  };
+}
+
+export function pathLawResponsePolicyReport(
+  trajectoryInput: JsonRecord,
+): JsonRecord {
+  const trajectory = trajectoryInput ?? {};
+  const trajectoryId = String(trajectory.trajectory_id ?? "trajectory");
+  const residuals = requiredResiduals("ecpt-policy", trajectoryId, trajectory, [
+    "path_law_refs",
+    "response_policy",
+    "control_surface",
+  ]);
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    blockers,
+    non_claims: [...NON_CLAIMS, "response_policy_is_not_execution_authority"],
+    ok: true,
+    residuals,
+    schema_version: "pic.path_law_response_policy.v1",
+    settled: false,
+    trajectory_id: trajectoryId,
+  };
+}
+
+export function sqotProtocolIntegrityReport(
+  stateInput: JsonRecord,
+): JsonRecord {
+  const state = stateInput ?? {};
+  const stateId = String(state.protocol_id ?? state.state_id ?? "protocol");
+  const residuals = requiredResiduals("sqot-protocol", stateId, state, [
+    "mandatory_obligations",
+    "checker_thresholds",
+    "audit_fuel",
+    "diagnostic_reserve",
+  ]);
+  if (state.hidden_protocol_mutation || state.protocol_mutation_edges) {
+    residuals.push(
+      reportResidual("sqot-protocol", stateId, "hidden_protocol_mutation"),
+    );
+  }
+  if (!state.root_checker_integrity) {
+    residuals.push(
+      reportResidual(
+        "sqot-protocol",
+        stateId,
+        "root_checker_integrity_missing",
+      ),
+    );
+  }
+  if (
+    !["accepted", "closed", "not_applicable"].includes(
+      String(state.semantic_egress_status),
+    )
+  ) {
+    residuals.push(
+      reportResidual("sqot-protocol", stateId, "semantic_egress_unresolved"),
+    );
+  }
+  if (state.verification_cost_status === "over_band") {
+    residuals.push(
+      reportResidual("sqot-protocol", stateId, "verification_cost_over_band"),
+    );
+  }
+  if (
+    state.mechanism_compatibility_status === undefined ||
+    state.mechanism_compatibility_status === "" ||
+    state.mechanism_compatibility_status === "missing"
+  ) {
+    residuals.push(
+      reportResidual("sqot-protocol", stateId, "mechanism_witness_missing"),
+    );
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    audit_fuel: state.audit_fuel,
+    blockers,
+    checker_thresholds: state.checker_thresholds,
+    diagnostic_reserve: state.diagnostic_reserve,
+    mandatory_obligations: state.mandatory_obligations,
+    mechanism_compatibility_status: state.mechanism_compatibility_status,
+    meta_vulnerability: state.meta_vulnerability,
+    non_claims: [...NON_CLAIMS, "single_scalar_cannot_certify_sqot_safety"],
+    ok: true,
+    protocol_mutation_edges: state.protocol_mutation_edges ?? [],
+    protocol_state_hash: digest(state),
+    queue_morphism_status: state.queue_morphism_status,
+    residuals: residuals.sort((a, b) =>
+      String(a.kind).localeCompare(String(b.kind)),
+    ),
+    root_checker_integrity: state.root_checker_integrity,
+    schema_version: "pic.sqot_protocol_integrity_report.v1",
+    semantic_egress_status: state.semantic_egress_status,
+    settled: false,
+    verification_cost_status: state.verification_cost_status,
+  };
+}
+
+export function sqotResourceExchangeReport(stateInput: JsonRecord): JsonRecord {
+  const state = stateInput ?? {};
+  const stateId = String(
+    state.exchange_id ?? state.state_id ?? "resource-exchange",
+  );
+  const conversions = recordsAny(
+    state.conversions ?? state.resource_conversions,
+  );
+  const residuals: JsonRecord[] = [];
+  if (conversions.length === 0) {
+    residuals.push(
+      reportResidual("sqot-exchange", stateId, "resource_conversion_required"),
+    );
+  }
+  for (const conversion of conversions) {
+    const subject = conversion.conversion_id ?? stateId;
+    if (!conversion.from || !conversion.to) {
+      residuals.push(
+        reportResidual("sqot-exchange", subject, "unknown_conversion"),
+      );
+    }
+    if (conversion.rate === undefined || conversion.loss === undefined) {
+      residuals.push(
+        reportResidual(
+          "sqot-exchange",
+          subject,
+          "conversion_rate_loss_required",
+        ),
+      );
+    }
+    if (floatValue(conversion.meta_occupation_charge) <= 0) {
+      residuals.push(
+        reportResidual(
+          "sqot-exchange",
+          subject,
+          "meta_occupation_charge_required",
+        ),
+      );
+    }
+    if (conversion.arbitrage_obstruction === true) {
+      residuals.push(
+        reportResidual(
+          "sqot-exchange",
+          subject,
+          "exchange_arbitrage_obstruction",
+        ),
+      );
+    }
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    blockers,
+    conversions,
+    non_claims: [
+      ...NON_CLAIMS,
+      "local_resource_safety_does_not_imply_cross_modal_safety",
+    ],
+    ok: true,
+    residuals,
+    schema_version: "pic.sqot_resource_exchange_report.v1",
+    settled: false,
+  };
+}
+
+export function probeStopReport(probeTreeInput: JsonRecord): JsonRecord {
+  const probeTree = probeTreeInput ?? {};
+  const probeId = String(probeTree.probe_id ?? "probe");
+  const reserve = floatValue(probeTree.diagnostic_reserve, 0);
+  const cost = floatValue(probeTree.probe_cost, probeTree.cost);
+  const metaBand = floatValue(probeTree.meta_occupation_band, 1);
+  const metaCharge = floatValue(probeTree.meta_occupation_charge, 0);
+  const residuals: JsonRecord[] = [];
+  if (cost > reserve) {
+    residuals.push(
+      reportResidual("probe", probeId, "probe_cost_exceeds_reserve"),
+    );
+  }
+  if (metaCharge > metaBand) {
+    residuals.push(
+      reportResidual("probe", probeId, "meta_occupation_band_exceeded"),
+    );
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    blockers,
+    no_action_certificate: blockers.length > 0,
+    non_claims: [...NON_CLAIMS, "probe_plan_is_not_provider_execution"],
+    ok: true,
+    residuals,
+    schema_version: "pic.probe_stop_report.v1",
+    settled: false,
+  };
+}
+
+type MecMetrics = { cost: number; friction: number; load: number };
+
+function mecMetrics(item: JsonRecord): MecMetrics {
+  return {
+    cost: floatValue(item.cost),
+    friction: floatValue(item.friction),
+    load: floatValue(item.load),
+  };
+}
+
+function paretoFrontier(items: JsonRecord[]): JsonRecord[] {
+  return items
+    .filter((candidate) => {
+      const candidateMetrics = mecMetrics(candidate);
+      return !items.some((other) => {
+        if (other === candidate) return false;
+        const otherMetrics = mecMetrics(other);
+        const keys = ["cost", "friction", "load"] as const;
+        return (
+          keys.every((key) => otherMetrics[key] <= candidateMetrics[key]) &&
+          keys.some((key) => otherMetrics[key] < candidateMetrics[key])
+        );
+      });
+    })
+    .sort((a, b) =>
+      String(a.certificate_id ?? a.witness_id ?? a).localeCompare(
+        String(b.certificate_id ?? b.witness_id ?? b),
+      ),
+    );
+}
+
+export function bitMecFrontierReport(certificates: JsonRecord[]): JsonRecord {
+  const residuals: JsonRecord[] = [];
+  const accepted: JsonRecord[] = [];
+  for (const [index, certificate] of certificates.entries()) {
+    const certId = String(certificate.certificate_id ?? `certificate:${index}`);
+    if (!certificate.finite_witness) {
+      residuals.push(
+        reportResidual("bit-mec", certId, "finite_witness_required"),
+      );
+      continue;
+    }
+    if (!certificate.unit_ledger) {
+      residuals.push(reportResidual("bit-mec", certId, "unit_ledger_required"));
+      continue;
+    }
+    accepted.push(certificate);
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    blockers,
+    frontier: paretoFrontier(accepted),
+    non_claims: [...NON_CLAIMS, "mec_frontier_reports_only_finite_witnesses"],
+    ok: true,
+    residuals,
+    schema_version: "pic.bit_mec_frontier_report.v1",
+    settled: false,
+  };
+}
+
+export function bitCertificateCompilerReport(
+  certificates: JsonRecord[],
+): JsonRecord {
+  const frontier = bitMecFrontierReport(certificates);
+  return {
+    accepted: frontier.accepted,
+    blockers: frontier.blockers,
+    compiled_certificate_count: records(frontier.frontier).length,
+    non_claims: [
+      ...NON_CLAIMS,
+      "compiler_report_does_not_promote_diagnostic_clauses",
+    ],
+    ok: true,
+    residuals: frontier.residuals,
+    schema_version: "pic.bit_certificate_compiler_report.v1",
+    settled: false,
+  };
+}
+
+export function bitUnitCompatibilityReport(
+  certificates: JsonRecord[],
+): JsonRecord {
+  const units = new Set(
+    certificates
+      .filter((certificate) => certificate.unit_ledger !== undefined)
+      .map((certificate) => compactStringify(certificate.unit_ledger)),
+  );
+  const residuals: JsonRecord[] = [];
+  if (units.size > 1) {
+    residuals.push(
+      reportResidual("bit-unit", "unit-ledger", "unit_mixing_blocked"),
+    );
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    blockers,
+    non_claims: [...NON_CLAIMS, "unit_compatibility_is_coordinate_local"],
+    ok: true,
+    residuals,
+    schema_version: "pic.bit_unit_compatibility_report.v1",
+    settled: false,
+  };
+}
+
+export function cegarSimulationBarrierReport(
+  barrierInput: JsonRecord,
+): JsonRecord {
+  const barrier = barrierInput ?? {};
+  const barrierId = String(barrier.barrier_id ?? "barrier");
+  const residuals: JsonRecord[] = [];
+  if (!(barrier.finite_transition_table || barrier.interval_table)) {
+    residuals.push(
+      reportResidual("cegar", barrierId, "finite_transition_table_required"),
+    );
+  }
+  if (!(barrier.simulation_contraction || barrier.refinement_record)) {
+    residuals.push(
+      reportResidual("cegar", barrierId, "refinement_record_required"),
+    );
+  }
+  if (barrier.uncovered_counterexamples) {
+    residuals.push(
+      reportResidual("cegar", barrierId, "uncovered_counterexample"),
+    );
+  }
+  if (!barrier.bad_state_bound_certified) {
+    residuals.push(
+      reportResidual("cegar", barrierId, "bad_state_bound_uncertified"),
+    );
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    blockers,
+    non_claims: [
+      ...NON_CLAIMS,
+      "simulation_barrier_is_not_real_physical_outcome_proof",
+    ],
+    ok: true,
+    residuals,
+    schema_version: "pic.cegar_simulation_barrier_report.v1",
+    settled: false,
+  };
+}
+
+export function dynamicRegimeAccelerationReport(
+  surfaceInput: JsonRecord,
+): JsonRecord {
+  const surface = surfaceInput ?? {};
+  const surfaceId = String(surface.surface_id ?? "surface");
+  const residuals: JsonRecord[] = [];
+  if (surface.dynamic_baseline_resource_matched !== true) {
+    residuals.push(
+      reportResidual(
+        "dynamic",
+        surfaceId,
+        "dynamic_baseline_not_resource_matched",
+      ),
+    );
+  }
+  if (floatValue(surface.positivity_floor) <= 0) {
+    residuals.push(
+      reportResidual("dynamic", surfaceId, "positivity_floor_required"),
+    );
+  }
+  for (const key of [
+    "censoring_charge",
+    "competing_stop_charge",
+    "truncation_charge",
+  ]) {
+    if (surface[key] === undefined || surface[key] === "") {
+      residuals.push(reportResidual("dynamic", surfaceId, `${key}_required`));
+    }
+  }
+  const blockers = blockingKinds(residuals);
+  return {
+    accepted: blockers.length === 0,
+    arrival_gain_lower_bound:
+      blockers.length === 0
+        ? floatValue(surface.arrival_gain_lower_bound)
+        : null,
+    blockers,
+    non_claims: [
+      ...NON_CLAIMS,
+      "arrival_gain_is_local_to_declared_risk_set_convention",
+    ],
+    ok: true,
+    residuals,
+    schema_version: "pic.dynamic_regime_acceleration_report.v1",
+    settled: false,
   };
 }
 

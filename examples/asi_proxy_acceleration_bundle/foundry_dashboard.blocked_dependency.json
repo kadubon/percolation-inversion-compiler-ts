@@ -1,0 +1,14 @@
+{
+  "active_cuts": ["evidence_bandwidth_cut"],
+  "metrics": {
+    "blocking_residual_edge_count": 1,
+    "checked_packet_growth": 0,
+    "dependency_blocked_packet_count": 1,
+    "positive_packet_count": 0,
+    "settled_packet_growth": 0,
+    "unknown_diagnostic_reserve": 1
+  },
+  "ok": true,
+  "schema_version": "ccr.foundry_dashboard.v1",
+  "settled": false
+}

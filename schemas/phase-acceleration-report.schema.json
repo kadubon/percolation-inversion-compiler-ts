@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/pic/phase-acceleration-report.schema.json",
+  "title": "PIC Phase Acceleration Report",
+  "type": "object",
+  "required": ["schema_version", "ok", "target_id", "target_validity_ok", "baseline_envelope_ok", "capital_witnesses", "k_alt_lower", "k_baseline_upper", "certified_acceleration_candidate", "residuals", "blockers", "non_claims", "settled"],
+  "properties": {
+    "schema_version": { "const": "pic.phase_acceleration_report.v1" },
+    "settled": { "const": false },
+    "certified_acceleration_candidate": { "type": "boolean" }
+  },
+  "additionalProperties": true
+}

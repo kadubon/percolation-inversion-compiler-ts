@@ -1,7 +1,7 @@
 # PIC-TS CLI Reference
 
 `percolation-inversion-compiler-ts` is an npm and Node.js companion for the
-Python `percolation-inversion-compiler==0.6.0` public JSON and CLI surface. Use
+Python `percolation-inversion-compiler==0.8.0` public JSON and CLI surface. Use
 `pic-ts` in Node projects. `pic` is kept only as a compatibility alias and may
 conflict with the Python command.
 
@@ -14,6 +14,9 @@ pic-ts runtime step --state .pic-demo/runtime_state.json --input .pic-demo/runti
 pic-ts packet export --report .pic-demo/runtime_step_report.generated.json --output .pic-demo/packet.json
 pic-ts packet inspect --packet .pic-demo/packet.json
 pic-ts phase plan --request .pic-demo/asi_proxy_phase_request.json --compact
+pic-ts phase acceleration-report --target examples/asi_proxy_acceleration_bundle/target.json --baseline examples/asi_proxy_acceleration_bundle/baseline_upper_envelope.json --capital examples/asi_proxy_acceleration_bundle/capital_witnesses.jsonl
+pic-ts mcp descriptor-check --descriptor examples/asi_proxy_acceleration_bundle/mcp_descriptor.good.json --profile development
+pic-ts a2a handoff-check --handoff examples/asi_proxy_acceleration_bundle/a2a_handoff.good.json --profile development
 ```
 
 These commands inspect JSON and report missing work. They do not run packet

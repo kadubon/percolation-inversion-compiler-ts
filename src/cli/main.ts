@@ -40,14 +40,33 @@ import { parseJsonObject } from "../core/json.js";
 import { stableStringify } from "../core/json.js";
 import { ecologyPolicy, packetFromText } from "../ecology/index.js";
 import {
+  a2aAgentCardReport,
+  a2aTaskHandoffReport,
+  activationConstructionReport,
   altEcptBridgeReport,
+  baselineEnvelopeCheck,
+  bitCertificateCompilerReport,
+  bitMecFrontierReport,
   bitRegistryReport,
   bitTasksFromRegistry,
+  capitalWitnessReport,
   ccrResidualsFromPhasePlan,
   ccrTasksFromPhasePlan,
+  cegarSimulationBarrierReport,
+  deploymentAdmissibilityReport,
   diagnoseSqotQueueState,
+  dynamicRegimeAccelerationReport,
   jsonlText,
+  mcpToolDescriptorReport,
+  mcpToolInvocationPreflight,
   operationGateReport,
+  pathLawResponsePolicyReport,
+  phaseAccelerationReport,
+  phaseResponseControlStep,
+  probeStopReport,
+  sqotProtocolIntegrityReport,
+  sqotResourceExchangeReport,
+  targetValidityCheck,
   traceCheckReport,
   traceNormalFormReport,
   tracePacketCandidate,
@@ -127,7 +146,7 @@ import {
   buildActionBoundaryReport,
 } from "../trc_adapter/index.js";
 
-const VERSION = "0.7.0";
+const VERSION = "0.8.0";
 
 function outputJson(data: unknown, output?: string): void {
   const text = stableStringify(data);
@@ -370,7 +389,7 @@ const program = new Command();
 program
   .name("pic")
   .description(
-    "TypeScript-compatible port of percolation-inversion-compiler v0.6.0 public CLI contracts.",
+    "TypeScript-compatible port of percolation-inversion-compiler v0.8.0 public CLI contracts.",
   )
   .version(VERSION);
 program.exitOverride();
@@ -987,6 +1006,22 @@ addOutputOptions(addProfile(phase.command("runbook"))).action((options) =>
   outputJson(phaseAccelerationRunbook(options.profile), options.output),
 );
 addOutputOptions(
+  phase
+    .command("acceleration-report")
+    .requiredOption("--target <path>", "ASI-proxy target JSON")
+    .requiredOption("--baseline <path>", "Baseline upper envelope JSON")
+    .requiredOption("--capital <path>", "Runtime capital witness JSONL"),
+).action((options) =>
+  outputJson(
+    phaseAccelerationReport(
+      readJsonPath(options.target, "ASI-proxy target"),
+      readJsonPath(options.baseline, "baseline upper envelope"),
+      readJsonlPath(options.capital),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
   addProfile(addTextOptions(phase.command("benchmark")))
     .option("--request <path>", "phase request JSON")
     .option("--runtime-report <path>", "runtime report JSON")
@@ -1421,6 +1456,50 @@ addOutputOptions(
   );
   outputJsonl(bitTasksFromRegistry(report), options.output);
 });
+addOutputOptions(
+  bit
+    .command("mec-frontier")
+    .requiredOption("--certificates <path>", "BIT certificate JSONL"),
+).action((options) =>
+  outputJson(
+    bitMecFrontierReport(readJsonlPath(options.certificates)),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("compiler-report")
+    .requiredOption("--certificates <path>", "BIT certificate JSONL"),
+).action((options) =>
+  outputJson(
+    bitCertificateCompilerReport(readJsonlPath(options.certificates)),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("cegar-barrier")
+    .requiredOption("--barrier <path>", "CEGAR barrier JSON"),
+).action((options) =>
+  outputJson(
+    cegarSimulationBarrierReport(
+      readJsonPath(options.barrier, "CEGAR barrier"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  bit
+    .command("dynamic-regime")
+    .requiredOption("--surface <path>", "Dynamic-regime surface JSON"),
+).action((options) =>
+  outputJson(
+    dynamicRegimeAccelerationReport(
+      readJsonPath(options.surface, "dynamic-regime surface"),
+    ),
+    options.output,
+  ),
+);
 
 const sqot = program.command("sqot");
 addOutputOptions(
@@ -1528,6 +1607,40 @@ addOutputOptions(
     options.output,
   ),
 );
+addOutputOptions(
+  sqot
+    .command("protocol-integrity")
+    .requiredOption("--state <path>", "SQOT protocol state JSON"),
+).action((options) =>
+  outputJson(
+    sqotProtocolIntegrityReport(
+      readJsonPath(options.state, "SQOT protocol state"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  sqot
+    .command("resource-exchange")
+    .requiredOption("--state <path>", "SQOT resource exchange JSON"),
+).action((options) =>
+  outputJson(
+    sqotResourceExchangeReport(
+      readJsonPath(options.state, "SQOT resource exchange"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  sqot
+    .command("probe-stop")
+    .requiredOption("--probe-tree <path>", "Finite probe tree JSON"),
+).action((options) =>
+  outputJson(
+    probeStopReport(readJsonPath(options.probeTree, "probe tree")),
+    options.output,
+  ),
+);
 
 const alt = program.command("alt");
 addOutputOptions(alt.command("admit").option("--packet <path>")).action(
@@ -1601,6 +1714,31 @@ addOutputOptions(
     options.output,
   ),
 );
+addOutputOptions(
+  alt
+    .command("capital-witness")
+    .requiredOption("--packet <path>", "ALT packet/report JSON"),
+).action((options) =>
+  outputJson(
+    capitalWitnessReport(readJsonPath(options.packet, "ALT packet")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  addProfile(
+    alt
+      .command("deployment-admissibility")
+      .requiredOption("--packet <path>", "ALT packet/report JSON"),
+  ),
+).action((options) =>
+  outputJson(
+    deploymentAdmissibilityReport(
+      readJsonPath(options.packet, "ALT packet"),
+      options.profile,
+    ),
+    options.output,
+  ),
+);
 for (const name of [
   "audit",
   "tokenize",
@@ -1620,6 +1758,72 @@ for (const name of [
     (options) => outputJson(diagnostic(`alt:${name}`), options.output),
   );
 }
+
+const mcp = program.command("mcp");
+addOutputOptions(
+  addProfile(
+    mcp
+      .command("descriptor-check")
+      .requiredOption("--descriptor <path>", "MCP descriptor JSON"),
+  ),
+).action((options) =>
+  outputJson(
+    mcpToolDescriptorReport(
+      readJsonPath(options.descriptor, "MCP descriptor"),
+      options.profile,
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  addProfile(
+    mcp
+      .command("invocation-preflight")
+      .requiredOption("--descriptor <path>", "MCP descriptor JSON")
+      .requiredOption("--call <path>", "MCP call JSON"),
+  ),
+).action((options) =>
+  outputJson(
+    mcpToolInvocationPreflight(
+      readJsonPath(options.descriptor, "MCP descriptor"),
+      readJsonPath(options.call, "MCP call"),
+      options.profile,
+    ),
+    options.output,
+  ),
+);
+
+const a2a = program.command("a2a");
+addOutputOptions(
+  addProfile(
+    a2a
+      .command("card-check")
+      .requiredOption("--card <path>", "A2A agent card JSON"),
+  ),
+).action((options) =>
+  outputJson(
+    a2aAgentCardReport(
+      readJsonPath(options.card, "A2A agent card"),
+      options.profile,
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  addProfile(
+    a2a
+      .command("handoff-check")
+      .requiredOption("--handoff <path>", "A2A handoff JSON"),
+  ),
+).action((options) =>
+  outputJson(
+    a2aTaskHandoffReport(
+      readJsonPath(options.handoff, "A2A handoff"),
+      options.profile,
+    ),
+    options.output,
+  ),
+);
 
 const trc = program
   .command("trc")
@@ -1931,6 +2135,62 @@ addOutputOptions(addProfile(identity.command("explain-profile"))).action(
 );
 
 const ecpt = program.command("ecpt");
+addOutputOptions(
+  ecpt
+    .command("target-validity-check")
+    .requiredOption("--target <path>", "ASI-proxy target JSON"),
+).action((options) =>
+  outputJson(
+    targetValidityCheck(readJsonPath(options.target, "ASI-proxy target")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  ecpt
+    .command("baseline-envelope-check")
+    .requiredOption("--baseline <path>", "Baseline upper envelope JSON"),
+).action((options) =>
+  outputJson(
+    baselineEnvelopeCheck(
+      readJsonPath(options.baseline, "baseline upper envelope"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  ecpt
+    .command("activation-check")
+    .requiredOption("--state <path>", "Finite ECPT state JSON"),
+).action((options) =>
+  outputJson(
+    activationConstructionReport(readJsonPath(options.state, "ECPT state")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  ecpt
+    .command("phase-response-step")
+    .requiredOption("--state <path>", "Finite ECPT state JSON")
+    .requiredOption("--control <path>", "Phase control action JSON"),
+).action((options) =>
+  outputJson(
+    phaseResponseControlStep(
+      readJsonPath(options.state, "ECPT state"),
+      readJsonPath(options.control, "ECPT control"),
+    ),
+    options.output,
+  ),
+);
+addOutputOptions(
+  ecpt
+    .command("response-policy")
+    .requiredOption("--trajectory <path>", "Trajectory JSON"),
+).action((options) =>
+  outputJson(
+    pathLawResponsePolicyReport(readJsonPath(options.trajectory, "trajectory")),
+    options.output,
+  ),
+);
 for (const name of ["plan", "simulate", "route-obligations"]) {
   addOutputOptions(
     addProfile(ecpt.command(name).allowUnknownOption(true)),

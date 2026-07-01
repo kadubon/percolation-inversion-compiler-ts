@@ -1,10 +1,10 @@
 {
-  "manifest_id": "pic-ts-agent-manifest-v060",
+  "manifest_id": "pic-ts-agent-manifest-v080",
   "package_name": "percolation-inversion-compiler-ts",
-  "version": "0.6.0",
+  "version": "0.8.0",
   "recommended_cli": "pic-ts",
   "compatibility_alias": "pic",
-  "canonical_python_package": "percolation-inversion-compiler==0.6.0",
+  "canonical_python_package": "percolation-inversion-compiler==0.8.0",
   "purpose": "Local JSON checker and workflow report generator for JavaScript and TypeScript agent runtimes.",
   "safe_entrypoints": [
     "pic-ts agent check --compact",
@@ -21,7 +21,13 @@
     "pic-ts phase plan --request <request.json> --compact",
     "pic-ts phase plan --request <request.json> --compact --emit ccr-tasks",
     "pic-ts trc trace-normalize --input <trace.json> --output <trace_nf.json>",
-    "pic-ts trc trace-check --trace <trace_nf.json>"
+    "pic-ts trc trace-check --trace <trace_nf.json>",
+    "pic-ts trc operation-gate --trace <trace_nf.json> --provider-profile <profile.json>",
+    "pic-ts phase acceleration-report --target <target.json> --baseline <baseline.json> --capital <capital.jsonl>",
+    "pic-ts mcp descriptor-check --descriptor <descriptor.json> --profile development",
+    "pic-ts a2a handoff-check --handoff <handoff.json> --profile development",
+    "pic-ts sqot protocol-integrity --state <state.json>",
+    "pic-ts bit mec-frontier --certificates <certificates.jsonl>"
   ],
   "sdk_subpaths": [
     ".",
@@ -50,6 +56,10 @@
     "operationally_usable does not imply settled",
     "candidate-only reports remain diagnostic",
     "raw packet volume does not improve positive phase metrics",
-    "operation_ready does not imply executed or settled"
+    "operation_ready does not imply executed or settled",
+    "provider_dispatch_ready does not imply dispatch",
+    "physical_dispatch_ready does not imply physical outcome proof",
+    "capital_admitted does not imply settled",
+    "MCP descriptors and A2A handoffs remain candidate evidence unless checked"
   ]
 }

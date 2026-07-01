@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.8.0
+
+- Mirrors the Python `percolation-inversion-compiler==0.8.0` public v0.8 JSON
+  layer for target-valid ASI-proxy/CARA acceleration, MCP descriptor reports,
+  MCP invocation preflight, A2A agent-card and task-handoff reports, SQOT
+  protocol/resource diagnostics, BIT MEC frontier extraction, and TRC physical
+  gate freshness checks.
+- Adds v0.7/v0.8 conformance tests and keeps `pic-ts` as the preferred command
+  name when the Python `pic` CLI is also installed.
+- Keeps all outputs non-executing and residual-preserving: accepted reports do
+  not imply settlement, provider dispatch readiness is not dispatch, and
+  physical dispatch readiness is not physical outcome proof.
+- Mirrors Python fail-closed CARA and MCP semantics: blocked target/baseline or
+  capital evidence sets phase acceleration `ok=false`, and descriptors changed
+  after approval are rejected before invocation.
+
 ## v0.7.0
 
 - Tracks the Python `percolation-inversion-compiler==0.7.0` TRC operation gate
