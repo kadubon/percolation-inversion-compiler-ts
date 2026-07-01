@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.0
+
+- Tracks the Python `percolation-inversion-compiler==0.6.0` CCR interop and TRC operation-readiness public surfaces for npm and JavaScript agent runtimes.
+- Adds CCR JSONL emissions from `phase plan`, `phase gap`, BIT witness registries, and SQOT queue diagnostics.
+- Adds TRC `trace-normalize`, `trace-check`, and `trace-to-packet` commands plus the `interop/ccr` SDK subpath.
+- Adds the ASI-proxy benchmark bundle, CCR roundtrip examples, interop schemas, and v0.6 audit documentation.
+- Preserves the public boundary: operation-ready means required scoped planning fields are present; PIC-TS does not execute provider actions or mark reports settled.
+
 ## v0.5.0
 
 - Tracks the Python `percolation-inversion-compiler==0.5.0` public JSON, CLI, schema, examples, and safety semantics for npm and JavaScript agent runtimes.

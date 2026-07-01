@@ -1,0 +1,16 @@
+{
+  "accepted": true,
+  "candidate_only_reasons": ["external packet has no verifier route"],
+  "profile": "development",
+  "schema_version": "pic.phase_plan.compact.example.v1",
+  "settled": false,
+  "settled_blockers": ["baseline not resource matched"],
+  "top_bottlenecks": [
+    {
+      "bottleneck_kind": "queue-service-and-diagnostic-reserve",
+      "candidate_id": "bottleneck:sqot",
+      "target_component": "SQOT"
+    }
+  ],
+  "workflow_usable": true
+}

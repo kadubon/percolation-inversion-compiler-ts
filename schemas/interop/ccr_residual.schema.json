@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/pic/interop/ccr_residual.schema.json",
+  "title": "PIC-emitted CCR Residual",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "residual_id",
+    "created_at",
+    "status",
+    "severity",
+    "kind",
+    "description",
+    "blocking",
+    "object_type",
+    "object_id",
+    "refs",
+    "source",
+    "extensions"
+  ],
+  "properties": {
+    "schema_version": { "const": "ccr.residual.v0.1" },
+    "residual_id": { "type": "string", "pattern": "^residual:" },
+    "created_at": { "type": "string" },
+    "status": { "const": "open" },
+    "severity": { "type": "string", "enum": ["info", "low", "medium", "high", "critical"] },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "candidate_only_reason",
+        "negative_liquidity",
+        "settlement_blocker",
+        "validation_error",
+        "other"
+      ]
+    },
+    "description": { "type": "string", "minLength": 1 },
+    "blocking": { "type": "boolean" },
+    "object_type": { "type": "string" },
+    "object_id": { "type": "string" },
+    "refs": { "type": "array", "items": { "type": "string" } },
+    "source": { "const": "pic" },
+    "extensions": {
+      "type": "object",
+      "required": ["x_pic_source_field", "x_pic_source_id"]
+    }
+  }
+}

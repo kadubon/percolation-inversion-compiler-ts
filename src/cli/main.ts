@@ -40,6 +40,18 @@ import { parseJsonObject } from "../core/json.js";
 import { stableStringify } from "../core/json.js";
 import { ecologyPolicy, packetFromText } from "../ecology/index.js";
 import {
+  altEcptBridgeReport,
+  bitRegistryReport,
+  bitTasksFromRegistry,
+  ccrResidualsFromPhasePlan,
+  ccrTasksFromPhasePlan,
+  diagnoseSqotQueueState,
+  jsonlText,
+  traceCheckReport,
+  traceNormalFormReport,
+  tracePacketCandidate,
+} from "../interop/ccr.js";
+import {
   buildInversionCertificate,
   buildMinimalEnablingConditions,
   compareBottleneckBaseline,
@@ -114,10 +126,23 @@ import {
   buildActionBoundaryReport,
 } from "../trc_adapter/index.js";
 
-const VERSION = "0.5.0";
+const VERSION = "0.6.0";
 
 function outputJson(data: unknown, output?: string): void {
   const text = stableStringify(data);
+  if (output) {
+    mkdirSync(dirname(output), { recursive: true });
+    writeFileSync(output, text, "utf8");
+  } else {
+    process.stdout.write(text);
+  }
+}
+
+function outputJsonl(
+  items: Array<Record<string, unknown>>,
+  output?: string,
+): void {
+  const text = jsonlText(items);
   if (output) {
     mkdirSync(dirname(output), { recursive: true });
     writeFileSync(output, text, "utf8");
@@ -239,6 +264,14 @@ function readJsonPath(path: string, label = "JSON"): Record<string, unknown> {
   return parseJsonObject(readFileSync(path, "utf8"), label);
 }
 
+function readJsonlPath(path: string): Array<Record<string, unknown>> {
+  return readFileSync(path, "utf8")
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, index) => parseJsonObject(line, `${path}:${index + 1}`));
+}
+
 function readJsonPaths(
   value: string | string[] | undefined,
   label: string,
@@ -336,7 +369,7 @@ const program = new Command();
 program
   .name("pic")
   .description(
-    "TypeScript-compatible port of percolation-inversion-compiler v0.5.0 public CLI contracts.",
+    "TypeScript-compatible port of percolation-inversion-compiler v0.6.0 public CLI contracts.",
   )
   .version(VERSION);
 program.exitOverride();
@@ -894,10 +927,25 @@ addOutputOptions(addProfile(addTextOptions(phase.command("plan"))))
   .option("--input <path>", "runtime input")
   .option("--identity-context <path>", "identity context")
   .option("--no-allow-live-connectors", "disable live connector intake")
+  .option(
+    "--emit <kind>",
+    "optional interop emission: ccr-tasks or ccr-residuals",
+  )
   .action((options) => {
     assertPhaseRequestExclusive(options);
     const request = phaseRequestFromCli(options);
     const plan = buildPhaseAccelerationPlan(request);
+    if (options.emit === "ccr-tasks") {
+      outputJsonl(ccrTasksFromPhasePlan(plan), options.output);
+      return;
+    }
+    if (options.emit === "ccr-residuals") {
+      outputJsonl(ccrResidualsFromPhasePlan(plan), options.output);
+      return;
+    }
+    if (options.emit) {
+      throw new Error("--emit must be ccr-tasks or ccr-residuals");
+    }
     const compact = request.compact === true;
     outputJson(
       compact ? phaseAccelerationCompactPayload(plan) : plan,
@@ -913,10 +961,25 @@ addOutputOptions(
     .option("--state <path>", "runtime state")
     .option("--input <path>", "runtime input")
     .option("--identity-context <path>", "identity context")
-    .option("--no-allow-live-connectors", "disable live connector intake"),
+    .option("--no-allow-live-connectors", "disable live connector intake")
+    .option(
+      "--emit <kind>",
+      "optional interop emission: ccr-residuals or ccr-tasks",
+    ),
 ).action((options) => {
   assertPhaseRequestExclusive(options);
   const plan = buildPhaseAccelerationPlan(phaseRequestFromCli(options));
+  if (options.emit === "ccr-residuals") {
+    outputJsonl(ccrResidualsFromPhasePlan(plan), options.output);
+    return;
+  }
+  if (options.emit === "ccr-tasks") {
+    outputJsonl(ccrTasksFromPhasePlan(plan), options.output);
+    return;
+  }
+  if (options.emit) {
+    throw new Error("--emit must be ccr-residuals or ccr-tasks");
+  }
   outputJson(plan.phase_gap_vector, options.output);
 });
 addOutputOptions(addProfile(phase.command("runbook"))).action((options) =>
@@ -1312,6 +1375,51 @@ addOutputOptions(
     options.output,
   ),
 );
+addOutputOptions(
+  bit
+    .command("extract-registry")
+    .requiredOption("--source <path>", "TeX-like source file"),
+).action((options) => {
+  const report = bitRegistryReport(
+    readFileSync(options.source, "utf8"),
+    String(options.source),
+  );
+  outputJsonl(recordList(report.records), options.output);
+});
+addOutputOptions(
+  bit
+    .command("verify-witnesses")
+    .requiredOption("--registry <path>", "Registry JSONL file"),
+).action((options) => {
+  const lines = readJsonlPath(options.registry);
+  const report = bitRegistryReport(
+    lines.map((line) => String(line.raw_line ?? "")).join("\n"),
+    String(options.registry),
+  );
+  const missing = Array.isArray(report.missing_witness_claims)
+    ? report.missing_witness_claims
+    : [];
+  outputJson(
+    {
+      ...report,
+      accepted: missing.length === 0,
+      settled: false,
+    },
+    options.output,
+  );
+});
+addOutputOptions(
+  bit
+    .command("emit-ccr-tasks")
+    .requiredOption("--registry <path>", "Registry JSONL file"),
+).action((options) => {
+  const lines = readJsonlPath(options.registry);
+  const report = bitRegistryReport(
+    lines.map((line) => String(line.raw_line ?? "")).join("\n"),
+    String(options.registry),
+  );
+  outputJsonl(bitTasksFromRegistry(report), options.output);
+});
 
 const sqot = program.command("sqot");
 addOutputOptions(
@@ -1329,21 +1437,46 @@ addOutputOptions(sqot.command("audit").option("--source <path>")).action(
 addOutputOptions(
   sqot
     .command("diagnose-queue")
-    .requiredOption("--graph <path>", "EffectivePacketGraph JSON")
+    .option("--graph <path>", "EffectivePacketGraph JSON")
+    .option("--state <path>", "Runtime or phase report JSON")
     .option(
       "--attention-budget <number>",
       "Finite diagnostic attention budget",
       "1",
-    ),
-).action((options) =>
-  outputJson(
-    diagnoseQueueOccupation(
-      readJsonPath(options.graph, "effective graph"),
-      Number(options.attentionBudget ?? 1),
-    ),
-    options.output,
-  ),
-);
+    )
+    .option("--emit <kind>", "optional interop emission: ccr-tasks"),
+).action((options) => {
+  if (typeof options.state === "string") {
+    const report = diagnoseSqotQueueState(
+      readJsonPath(options.state, "SQOT state"),
+    );
+    if (options.emit === "ccr-tasks") {
+      outputJsonl(recordList(report.repair_tasks), options.output);
+      return;
+    }
+    if (options.emit) {
+      throw new Error("--emit must be ccr-tasks");
+    }
+    outputJson(report, options.output);
+    return;
+  }
+  if (typeof options.graph !== "string") {
+    throw new Error("provide --graph or --state");
+  }
+  const report = diagnoseQueueOccupation(
+    readJsonPath(options.graph, "effective graph"),
+    Number(options.attentionBudget ?? 1),
+  );
+  const queueReport = diagnoseSqotQueueState(report);
+  if (options.emit === "ccr-tasks") {
+    outputJsonl(recordList(queueReport.repair_tasks), options.output);
+    return;
+  }
+  if (options.emit) {
+    throw new Error("--emit must be ccr-tasks");
+  }
+  outputJson({ ...report, sqot_queue_report: queueReport }, options.output);
+});
 addOutputOptions(
   sqot
     .command("salience-obstruction")
@@ -1452,6 +1585,21 @@ addOutputOptions(
     options.output,
   ),
 );
+addOutputOptions(
+  addProfile(
+    alt
+      .command("bridge-ecpt")
+      .requiredOption("--packet <path>", "ALT packet JSON"),
+  ),
+).action((options) =>
+  outputJson(
+    altEcptBridgeReport(
+      readJsonPath(options.packet, "ALT packet"),
+      options.profile,
+    ),
+    options.output,
+  ),
+);
 for (const name of [
   "audit",
   "tokenize",
@@ -1484,12 +1632,42 @@ addOutputOptions(
   ),
 );
 addOutputOptions(
+  trc.command("trace-normalize").requiredOption("--input <path>", "Trace JSON"),
+).action((options) =>
+  outputJson(
+    traceNormalFormReport(readJsonPath(options.input, "trace input")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  trc.command("trace-check").requiredOption("--trace <path>", "TraceNF JSON"),
+).action((options) =>
+  outputJson(
+    traceCheckReport(readJsonPath(options.trace, "trace normal form")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  trc
+    .command("trace-to-packet")
+    .requiredOption("--trace <path>", "TraceNF JSON"),
+).action((options) =>
+  outputJson(
+    tracePacketCandidate(readJsonPath(options.trace, "trace normal form")),
+    options.output,
+  ),
+);
+addOutputOptions(
   trc
     .command("tool-trace")
     .requiredOption("--events <path>", "JSON tool events"),
 ).action((options) =>
   outputJson(
-    adaptToolTrace(readJsonPath(options.events, "tool events")),
+    adaptToolTrace(
+      String(options.events).toLowerCase().endsWith(".jsonl")
+        ? readJsonlPath(options.events)
+        : readJsonPath(options.events, "tool events"),
+    ),
     options.output,
   ),
 );

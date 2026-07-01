@@ -66,7 +66,14 @@ const allowedExact = new Set([
   "NOTICE",
 ]);
 
-const allowedSuffixes = new Set([".d.ts", ".js", ".json", ".md", ".txt"]);
+const allowedSuffixes = new Set([
+  ".d.ts",
+  ".js",
+  ".json",
+  ".jsonl",
+  ".md",
+  ".txt",
+]);
 
 const forbiddenSuffixes = new Set([
   ".7z",
@@ -271,6 +278,8 @@ for (const file of [
   "dist/alt_lift/index.d.ts",
   "dist/trc_adapter/index.js",
   "dist/trc_adapter/index.d.ts",
+  "dist/interop/ccr.js",
+  "dist/interop/ccr.d.ts",
 ]) {
   if (!files.includes(file)) {
     failures.push(`npm pack must include ${file}`);
@@ -319,6 +328,30 @@ if (!files.includes("agent-manifest.json")) {
 }
 if (!files.includes("schemas/index.json")) {
   failures.push("npm pack must include schema index");
+}
+if (!files.includes("schemas/interop/ccr_task.schema.json")) {
+  failures.push("npm pack must include v0.6.0 CCR task interop schema");
+}
+if (!files.includes("schemas/interop/ccr_residual.schema.json")) {
+  failures.push("npm pack must include v0.6.0 CCR residual interop schema");
+}
+if (
+  !files.includes("examples/asi_proxy_benchmark_bundle/trc_agent_trace.json")
+) {
+  failures.push("npm pack must include v0.6.0 ASI-proxy TRC trace fixture");
+}
+if (!files.includes("examples/interop/ccr_tasks.example.jsonl")) {
+  failures.push("npm pack must include v0.6.0 CCR task JSONL example");
+}
+for (const file of [
+  "docs/ccr-pic-roundtrip.md",
+  "docs/asi-proxy-acceleration.md",
+  "docs/interop/ccr.md",
+  "docs/v060-audit.md",
+]) {
+  if (!files.includes(file)) {
+    failures.push(`npm pack must include ${file}`);
+  }
 }
 if (!files.includes("fixtures/python_v050_snapshots/manifest.json")) {
   failures.push("npm pack must include v0.5.0 Python snapshot fixtures");

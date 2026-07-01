@@ -48,6 +48,7 @@ import { diagnoseBottlenecks } from "percolation-inversion-compiler-ts/bit-engin
 import { diagnoseQueueOccupation } from "percolation-inversion-compiler-ts/sqot-controller";
 import { verifyAltEcptLift } from "percolation-inversion-compiler-ts/alt-lift";
 import { adaptToolTrace } from "percolation-inversion-compiler-ts/trc-adapter";
+import { traceNormalFormReport } from "percolation-inversion-compiler-ts/interop/ccr";
 const schema = schemaByType("PhaseAccelerationPlan");
 const schemaFromSubpath = schemaByTypeSubpath("RuntimeStepReport");
 const graphSchema = schemaByType("EffectivePacketGraph");
@@ -64,6 +65,10 @@ const bit = diagnoseBottlenecks(graph);
 const sqot = diagnoseQueueOccupation(graph);
 const alt = verifyAltEcptLift([{ accepted: true, positive_ecpt_component_lift: true }], graph);
 const trc = adaptToolTrace({ tool_calls: [{ name: "npm install inert-data-only" }] });
+const ccr = traceNormalFormReport({
+  trace_id: "installed-sdk-trace",
+  steps: [{ tool: "dry-run", authority_status: "approved" }]
+});
 if (schema.title !== "PhaseAccelerationPlan") throw new Error("schema import failed");
 if (schemaFromSubpath.title !== "RuntimeStepReport") throw new Error("schema subpath import failed");
 if (graphSchema.title !== "EffectivePacketGraph") throw new Error("v0.5.0 schema import failed");
@@ -72,6 +77,7 @@ if (!String(message.message_id).startsWith("agent-message:")) throw new Error("a
 if (packet.settled !== false || packet.workflow_usable !== true) throw new Error("packet subpath import failed");
 if (graph.settled !== false || bit.settled !== false || sqot.settled !== false) throw new Error("v0.5.0 SDK non-promotion failed");
 if (alt.settled !== false || trc.execution_authority_granted !== false) throw new Error("v0.5.0 SDK safety boundary failed");
+if (ccr.settled !== false || ccr.schema_version !== "pic.trc_trace_nf.v1") throw new Error("v0.6.0 CCR interop subpath failed");
 `;
 writeFileSync(join(tmp, "check.mjs"), importCheck, "utf8");
 execFileSync(node, ["check.mjs"], { cwd: tmp, stdio: "inherit" });
@@ -189,6 +195,26 @@ if (
   )
 ) {
   throw new Error("installed CLI phase plan request failed");
+}
+const phaseTasksOut = runPackageBin("pic-ts", [
+  "phase",
+  "plan",
+  "--request",
+  join(demoDir, "asi_proxy_phase_request.json"),
+  "--compact",
+  "--emit",
+  "ccr-tasks",
+]);
+const phaseTasks = phaseTasksOut
+  .trim()
+  .split(/\r?\n/)
+  .filter(Boolean)
+  .map((line) => JSON.parse(line));
+if (
+  phaseTasks.length === 0 ||
+  phaseTasks.some((task) => task.schema_version !== "ccr.task.v0.1")
+) {
+  throw new Error("installed CLI phase plan CCR task emission failed");
 }
 const phaseGapOut = runPackageBin("pic-ts", [
   "phase",
@@ -532,6 +558,30 @@ const trcOut = JSON.parse(
 );
 if (trcOut.execution_authority_granted !== false || trcOut.settled !== false) {
   throw new Error("installed CLI trc trace-adapter failed");
+}
+const traceNfPath = join(tmp, "trace_nf.json");
+runPackageBin("pic-ts", [
+  "trc",
+  "trace-normalize",
+  "--input",
+  join(
+    pkgRoot,
+    "examples",
+    "asi_proxy_benchmark_bundle",
+    "trc_agent_trace.json",
+  ),
+  "--output",
+  traceNfPath,
+]);
+const traceCheck = JSON.parse(
+  runPackageBin("pic-ts", ["trc", "trace-check", "--trace", traceNfPath]),
+);
+if (
+  traceCheck.real_world_operation_gate?.operation_ready !== true ||
+  traceCheck.real_world_operation_gate?.executed !== false ||
+  traceCheck.settled !== false
+) {
+  throw new Error("installed CLI TRC operation-readiness check failed");
 }
 for (const args of [
   [

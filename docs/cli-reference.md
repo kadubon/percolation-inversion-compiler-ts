@@ -1,7 +1,7 @@
 # PIC-TS CLI Reference
 
 `percolation-inversion-compiler-ts` is an npm and Node.js companion for the
-Python `percolation-inversion-compiler==0.5.0` public JSON and CLI surface. Use
+Python `percolation-inversion-compiler==0.6.0` public JSON and CLI surface. Use
 `pic-ts` in Node projects. `pic` is kept only as a compatibility alias and may
 conflict with the Python command.
 
@@ -66,3 +66,21 @@ pic-ts trc action-boundary --report fixtures/python_v044_demo/runtime_step_repor
 All of these routes are diagnostic or recommendation outputs. They keep
 `settled=false` unless a finite verifier path has actually discharged the
 scoped obligations.
+
+## v0.6.0 CCR And TRC Interop
+
+```sh
+pic-ts phase plan --compact --emit ccr-tasks
+pic-ts phase gap --compact --emit ccr-residuals
+pic-ts bit extract-registry --source registry.tex --output registry.jsonl
+pic-ts bit verify-witnesses --registry registry.jsonl
+pic-ts bit emit-ccr-tasks --registry registry.jsonl
+pic-ts sqot diagnose-queue --state queue_state.json --emit ccr-tasks
+pic-ts alt bridge-ecpt --packet alt_packet.json
+pic-ts trc trace-normalize --input trace.json --output trace_nf.json
+pic-ts trc trace-check --trace trace_nf.json
+pic-ts trc trace-to-packet --trace trace_nf.json
+```
+
+These commands emit inert JSON or JSONL for downstream runtimes. They preserve
+residuals and do not grant execution authority.

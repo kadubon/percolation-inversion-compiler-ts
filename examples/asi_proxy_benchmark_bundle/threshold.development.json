@@ -1,0 +1,6 @@
+{
+  "baseline_refresh_required": true,
+  "diagnostic_reserve_required": true,
+  "profile": "development",
+  "settlement_allowed": false
+}

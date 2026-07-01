@@ -1,0 +1,9 @@
+{
+  "accepted": true,
+  "candidate_only_reasons": ["benchmark input is synthetic"],
+  "finite_route_count_delta": 2,
+  "profile": "development",
+  "residual_visibility_delta": 3,
+  "schema_version": "pic.asi_proxy_benchmark.example.v1",
+  "settled": false
+}

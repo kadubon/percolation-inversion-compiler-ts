@@ -1,0 +1,13 @@
+{
+  "accepted": false,
+  "cannot_promote_because": ["runtime report is absent"],
+  "operationally_usable": true,
+  "schema_version": "pic.phase_plan.expected.example.v1",
+  "settled": false,
+  "settled_blockers": [
+    "one or more phase proxy components remain below threshold",
+    "runtime report is absent"
+  ],
+  "top_bottleneck_kind": "missing-runtime-report",
+  "workflow_usable": true
+}
