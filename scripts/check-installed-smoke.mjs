@@ -26,14 +26,21 @@ function runPackageBin(name, args) {
 }
 
 const packJson = runNpm(
-  ["pack", "--json", "--ignore-scripts", "--pack-destination", tmp],
+  [
+    "pack",
+    "--json",
+    "--ignore-scripts",
+    "--dry-run=false",
+    "--pack-destination",
+    tmp,
+  ],
   { cwd: root, encoding: "utf8" },
 );
 const pack = JSON.parse(packJson)[0];
 const tarball = join(tmp, pack.filename);
 
 runNpm(["init", "-y"], { cwd: tmp, stdio: "ignore" });
-runNpm(["install", tarball, "--ignore-scripts"], {
+runNpm(["install", tarball, "--ignore-scripts", "--dry-run=false"], {
   cwd: tmp,
   stdio: "ignore",
 });
@@ -577,8 +584,11 @@ const traceCheck = JSON.parse(
   runPackageBin("pic-ts", ["trc", "trace-check", "--trace", traceNfPath]),
 );
 if (
-  traceCheck.real_world_operation_gate?.operation_ready !== true ||
+  traceCheck.real_world_operation_gate?.operation_ready !== false ||
   traceCheck.real_world_operation_gate?.executed !== false ||
+  !traceCheck.execution_blockers?.includes(
+    "fixture_only_authority_non_executable",
+  ) ||
   traceCheck.settled !== false
 ) {
   throw new Error("installed CLI TRC operation-readiness check failed");

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/pic/interop/trc_operation_gate_report.schema.json",
+  "title": "PIC TRC Operation Gate Report",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "accepted",
+    "settled",
+    "executed",
+    "operation_ready",
+    "provider_dispatch_ready",
+    "physical_dispatch_ready",
+    "side_effect_policy",
+    "authority_gate",
+    "capability_gate",
+    "hazard_gate",
+    "resource_gate",
+    "rollback_gate",
+    "tolerance_gate",
+    "schedule_gate",
+    "clock_gate",
+    "observation_gate",
+    "lifecycle_gate",
+    "mcp_tool_gate",
+    "a2a_agent_gate",
+    "residuals",
+    "execution_blockers",
+    "non_claims"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "pic.trc_operation_gate_report.v1"
+    },
+    "accepted": {
+      "type": "boolean"
+    },
+    "settled": {
+      "const": false
+    },
+    "executed": {
+      "const": false
+    },
+    "operation_ready": {
+      "type": "boolean"
+    },
+    "provider_dispatch_ready": {
+      "type": "boolean"
+    },
+    "physical_dispatch_ready": {
+      "type": "boolean"
+    },
+    "side_effect_policy": {
+      "type": "string"
+    },
+    "residuals": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "execution_blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "non_claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

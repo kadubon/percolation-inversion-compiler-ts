@@ -11,6 +11,7 @@ import {
   bitTasksFromRegistry,
   ccrTasksFromPhasePlan,
   diagnoseSqotQueueState,
+  operationGateReport,
   traceCheckReport,
   traceNormalFormReport,
   tracePacketCandidate,
@@ -79,10 +80,16 @@ describe("v0.6.0 CCR interop and TRC operation readiness", () => {
 
   it("checks TRC operation readiness while keeping execution false", () => {
     const normalized = traceNormalFormReport({
+      operation_evaluation_clock: "2026-07-01T00:00:00Z",
       trace_id: "trace:operation",
       steps: [
         {
-          authority_envelope: { issuer: "operator:test", status: "approved" },
+          authority_envelope: {
+            expires_at: "2099-01-01T00:00:00Z",
+            issuer: "operator:test",
+            scopes: ["local-test", "environment:local-test"],
+            status: "approved",
+          },
           causal_schedule_block: { block_id: "schedule:test" },
           evidence_refs: ["evidence:fixture"],
           output_ref: "provider-plan:test",
@@ -91,6 +98,7 @@ describe("v0.6.0 CCR interop and TRC operation readiness", () => {
           step_id: "s1",
           tolerance_ledger: { observation_error: 0 },
           tool: "ccr.operation.plan",
+          validity_domain: { environment: "local-test" },
         },
       ],
     });
@@ -119,11 +127,88 @@ describe("v0.6.0 CCR interop and TRC operation readiness", () => {
       traceNf,
     ]);
     const report = cli(["trc", "trace-check", "--trace", traceNf]);
-    expect(report.execution_available).toBe(true);
+    expect(report.execution_available).toBe(false);
     expect(
       (report.real_world_operation_gate as Record<string, unknown>)
         .operation_ready,
-    ).toBe(true);
+    ).toBe(false);
+    expect(report.execution_blockers).toContain(
+      "fixture_only_authority_non_executable",
+    );
+  });
+
+  it("separates operation gates from dispatch and blocks expired authority", () => {
+    const expired = traceNormalFormReport({
+      operation_evaluation_clock: "2026-07-01T00:00:00Z",
+      trace_id: "trace:expired-authority",
+      steps: [
+        {
+          authority_envelope: {
+            expires_at: "1970-01-01T00:00:00Z",
+            issuer: "operator:test",
+            scopes: ["local-test", "environment:local-test"],
+            status: "approved",
+          },
+          causal_schedule_block: { block_id: "schedule:test" },
+          certificate_version_refs: ["cert:test:v1"],
+          evidence_refs: ["evidence:fixture"],
+          hazard_envelope: { hazard_refs: ["hazard:test"] },
+          resource_ledger: { budget: 1, units: "fixture" },
+          rollback_escrow_obligation: { rollback: "delete fixture output" },
+          step_id: "s1",
+          tolerance_ledger: { observation_error: 0 },
+          tool: "fixture-provider",
+          validity_domain: { environment: "local-test" },
+        },
+      ],
+    });
+    const expiredGate = operationGateReport(expired);
+    expect(expiredGate.operation_ready).toBe(false);
+    expect(expiredGate.execution_blockers).toContain(
+      "expired_authority_envelope",
+    );
+
+    const fresh = traceNormalFormReport({
+      operation_evaluation_clock: "2026-07-01T00:00:00Z",
+      provider_target: "fixture-provider",
+      side_effect_policy: "provider_webhook_allowed",
+      trace_id: "trace:fresh-authority",
+      steps: [
+        {
+          authority_envelope: {
+            expires_at: "2099-01-01T00:00:00Z",
+            issuer: "operator:test",
+            scopes: [
+              "local-test",
+              "environment:local-test",
+              "fixture-provider",
+            ],
+            status: "approved",
+          },
+          causal_schedule_block: { block_id: "schedule:test" },
+          certificate_version_refs: ["cert:test:v1"],
+          evidence_refs: ["evidence:fixture"],
+          hazard_envelope: { hazard_refs: ["hazard:test"] },
+          resource_ledger: { budget: 1, units: "fixture" },
+          rollback_escrow_obligation: { rollback: "delete fixture output" },
+          step_id: "s1",
+          tolerance_ledger: { observation_error: 0 },
+          tool: "fixture-provider",
+          validity_domain: { environment: "local-test" },
+        },
+      ],
+    });
+    const freshGate = operationGateReport(fresh, {
+      allow_execute: true,
+      explicit_execute: true,
+      provider_target: "fixture-provider",
+      side_effect_policy: "provider_webhook_allowed",
+      trusted_issuers: ["operator:test"],
+    });
+    expect(freshGate.operation_ready).toBe(true);
+    expect(freshGate.provider_dispatch_ready).toBe(true);
+    expect(freshGate.physical_dispatch_ready).toBe(false);
+    expect(freshGate.execution_blockers).toEqual([]);
   });
 
   it("keeps incomplete traces blocked from operation readiness", () => {
@@ -206,7 +291,8 @@ describe("v0.6.0 CCR interop and TRC operation readiness", () => {
       packet_id: "alt-packet:test",
       negative_liquidity_certificate: { reason: "cost increased" },
     });
-    expect(bridge.accepted).toBe(false);
+    expect(bridge.accepted).toBe(true);
+    expect(bridge.capital_admitted).toBe(false);
     expect(bridge.settled).toBe(false);
     expect(bridge.settled_blockers).toEqual(
       expect.arrayContaining(["negative liquidity signal preserved"]),

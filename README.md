@@ -8,7 +8,7 @@ structured JSON reports. The reports show what is accepted, what is usable for a
 workflow, what still needs checking, and what must not be treated as completed
 work.
 
-This npm package is a TypeScript-compatible port of the Python v0.6.0 public
+This npm package is a TypeScript-compatible port of the Python v0.7.0 public
 JSON, CLI, schema, conformance, CCR interop, and safety semantics for npm and JavaScript
 agent runtimes. The Python package remains the canonical implementation:
 
@@ -108,12 +108,17 @@ npx pic-ts phase plan --request examples/asi_proxy_benchmark_bundle/pic_phase_re
 npx pic-ts phase gap --request examples/asi_proxy_benchmark_bundle/pic_phase_request.json --compact --emit ccr-residuals
 npx pic-ts trc trace-normalize --input examples/asi_proxy_benchmark_bundle/trc_agent_trace.json --output trace_nf.json
 npx pic-ts trc trace-check --trace trace_nf.json
+npx pic-ts trc operation-gate --trace trace_nf.json --provider-profile provider_profile.json
 npx pic-ts trc trace-to-packet --trace trace_nf.json
 ```
 
 `operation_ready=true` means the trace includes explicit authority, resource,
 rollback, witness, schedule, and tolerance information for a scoped handoff. It
-does not mean PIC-TS executed the handoff.
+does not mean PIC-TS executed the handoff. Expired authority, unknown authority
+time, authority scope mismatch, and untrusted issuers block operation readiness.
+Fixture-only dry-run traces are diagnostic-only and remain non-executable.
+`provider_dispatch_ready` is not dispatch, and `physical_dispatch_ready` is not
+physical outcome proof.
 
 ## Run The Phase Ecology Lab
 

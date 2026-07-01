@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.7.0
+
+- Tracks the Python `percolation-inversion-compiler==0.7.0` TRC operation gate
+  and ALT capital admission semantics for npm and JavaScript agent runtimes.
+- Adds `pic-ts trc operation-gate` and `operationGateReport()` with authority,
+  provider-dispatch, physical-dispatch, MCP, and A2A gates.
+- Blocks expired, time-unknown, scope-mismatched, untrusted, and fixture-only
+  authority envelopes from operation readiness while keeping `executed=false`
+  and `settled=false`.
+- Separates ALT bridge `accepted` from `capital_admitted` and preserves signed
+  surplus bounds plus capital admission blockers.
+
 ## v0.6.0
 
 - Tracks the Python `percolation-inversion-compiler==0.6.0` CCR interop and TRC operation-readiness public surfaces for npm and JavaScript agent runtimes.

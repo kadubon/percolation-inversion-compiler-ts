@@ -1,4 +1,6 @@
 {
+  "fixture_mode": true,
+  "side_effect_policy": "dry_run_only",
   "trace_id": "trace:asi-proxy:operation-fixture",
   "steps": [
     {

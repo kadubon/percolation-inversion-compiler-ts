@@ -47,6 +47,7 @@ import {
   ccrTasksFromPhasePlan,
   diagnoseSqotQueueState,
   jsonlText,
+  operationGateReport,
   traceCheckReport,
   traceNormalFormReport,
   tracePacketCandidate,
@@ -126,7 +127,7 @@ import {
   buildActionBoundaryReport,
 } from "../trc_adapter/index.js";
 
-const VERSION = "0.6.0";
+const VERSION = "0.7.0";
 
 function outputJson(data: unknown, output?: string): void {
   const text = stableStringify(data);
@@ -1644,6 +1645,25 @@ addOutputOptions(
 ).action((options) =>
   outputJson(
     traceCheckReport(readJsonPath(options.trace, "trace normal form")),
+    options.output,
+  ),
+);
+addOutputOptions(
+  trc
+    .command("operation-gate")
+    .requiredOption("--trace <path>", "TraceNF or PIC trace-check report JSON")
+    .option(
+      "--provider-profile <path>",
+      "Provider/authority gate profile JSON",
+    ),
+).action((options) =>
+  outputJson(
+    operationGateReport(
+      readJsonPath(options.trace, "trace normal form"),
+      options.providerProfile
+        ? readJsonPath(options.providerProfile, "provider profile")
+        : {},
+    ),
     options.output,
   ),
 );

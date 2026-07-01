@@ -617,27 +617,46 @@ export function altEcptBridgeReport(
     settledBlockers.push("negative liquidity signal preserved");
   }
 
-  const accepted = residuals.length === 0 && !proxyOnly && !negativeSignal;
-  const surplus = floatValue(
+  const accepted = Object.keys(packet).length > 0;
+  const surplusLower = floatValue(
     liquidity.signed_surplus_lower_bound,
     liquidity.downstream_search_cost_reduction_lower_bound,
     packet.signed_surplus_lower_bound,
   );
+  const surplusUpper = floatValue(
+    liquidity.signed_surplus_upper_bound,
+    liquidity.downstream_search_cost_reduction_upper_bound,
+    packet.signed_surplus_upper_bound,
+    surplusLower,
+  );
+  const capitalBlockers = dedupeSorted([
+    ...settledBlockers,
+    ...candidateOnlyReasons,
+    ...(Object.keys(liquidity).length > 0 &&
+    !negativeSignal &&
+    surplusLower <= 0
+      ? ["nonpositive_signed_surplus_lower_bound"]
+      : []),
+  ]);
+  const capitalAdmitted =
+    accepted && capitalBlockers.length === 0 && surplusLower > 0;
   const status = negativeSignal
     ? "negative_liquidity"
-    : accepted
-      ? "admitted"
+    : capitalAdmitted
+      ? "capital_admitted"
       : Object.keys(liquidity).length === 0 && Object.keys(packet).length === 0
         ? "diagnostic"
         : "candidate";
   return {
     accepted,
     alt_status: status,
+    capital_admission_blockers: capitalBlockers,
+    capital_admitted: capitalAdmitted,
     candidate_only_reasons: dedupeSorted(candidateOnlyReasons),
     ecpt_contribution: {
       hazard_envelope: dedupeSorted(hazard),
       liquidity_debt: residuals.map((item) => String(item.kind)),
-      liquidity_lower_bound: accepted && surplus > 0 ? surplus : null,
+      liquidity_lower_bound: capitalAdmitted ? surplusLower : null,
       phase_components: {
         alt_bridge_candidate: Boolean(id),
         receiver_scope_present: receiver.length > 0,
@@ -655,6 +674,8 @@ export function altEcptBridgeReport(
     schema_version: "pic.alt_ecpt_bridge.v1",
     settled: false,
     settled_blockers: dedupeSorted(settledBlockers),
+    signed_surplus_lower_bound: surplusLower,
+    signed_surplus_upper_bound: surplusUpper,
   };
 }
 
@@ -923,9 +944,13 @@ export function traceNormalFormReport(trace: JsonRecord): JsonRecord {
     residuals.push(...stepResiduals);
     steps.push({
       action_type: actionType,
+      actuator_class: raw.actuator_class,
       authority_envelope: raw.authority_envelope ?? {
         status: String(raw.authority_status ?? "missing"),
       },
+      emergency_stop: raw.emergency_stop,
+      hazard_envelope: raw.hazard_envelope ?? raw.hazard_envelope_certificate,
+      human_operator_authority: raw.human_operator_authority,
       causal_schedule_block: raw.causal_schedule_block,
       certificate_version_refs: listField(raw, "certificate_version_refs"),
       clock_cell: raw.clock_cell,
@@ -935,13 +960,19 @@ export function traceNormalFormReport(trace: JsonRecord): JsonRecord {
       output_ref: String(
         raw.output_ref ?? digest(raw.output ?? raw.result ?? {}),
       ),
+      observation_window: raw.observation_window,
+      physical_domain_profile: raw.physical_domain_profile,
       postcondition: raw.postcondition ?? {},
       precondition: raw.precondition ?? {},
+      provider_target: raw.provider_target,
+      runtime_assurance_certificate:
+        raw.runtime_assurance_certificate ?? raw.shield_certificate,
       residuals: stepResiduals,
       resource_use: raw.resource_use ?? raw.resource_ledger ?? null,
       rollback_escrow_obligation: raw.rollback_escrow_obligation ?? {
         status: String(raw.rollback_status ?? "missing"),
       },
+      side_effect_policy: raw.side_effect_policy,
       step_id: stepId,
       tolerance_ledger: raw.tolerance_ledger ?? raw.tolerance_budget ?? null,
       tool_call: toolCall,
@@ -957,24 +988,309 @@ export function traceNormalFormReport(trace: JsonRecord): JsonRecord {
     schema_version: "pic.trc_trace_nf.v1",
     settled: false,
     trace_id: traceId,
-    trc_trace_nf: { steps },
+    trc_trace_nf: {
+      evaluation_clock:
+        trace.evaluation_clock ??
+        trace.operation_evaluation_clock ??
+        trace.reference_time,
+      fixture_mode: trace.fixture_mode === true,
+      provider_target: trace.provider_target,
+      side_effect_policy: trace.side_effect_policy,
+      steps,
+      validity_domain: trace.validity_domain,
+    },
   };
+}
+
+const ACTIVE_AUTHORITY_STATUSES = new Set(["active", "approved"]);
+const AUTHORITY_RESIDUAL_KINDS = new Set([
+  "authority_issuer_untrusted",
+  "authority_scope_mismatch",
+  "authority_status_not_active",
+  "authority_time_unknown",
+  "expired_authority_envelope",
+  "fixture_only_authority_non_executable",
+  "missing_authority_envelope",
+]);
+const CORE_OPERATION_BLOCKERS = new Set([
+  ...AUTHORITY_RESIDUAL_KINDS,
+  "missing_resource_ledger",
+  "missing_rollback_escrow_obligation",
+  "missing_steps",
+  "missing_step_witness",
+  "missing_tolerance_ledger",
+]);
+const OPERATION_GATE_KINDS: Record<string, Set<string>> = {
+  capability_gate: new Set(["missing_step_witness", "missing_steps"]),
+  resource_gate: new Set(["missing_resource_ledger"]),
+  rollback_gate: new Set(["missing_rollback_escrow_obligation"]),
+  tolerance_gate: new Set(["missing_tolerance_ledger"]),
+};
+const PHYSICAL_PROFILE_FIELDS: Record<string, string> = {
+  actuator_class: "physical actuator class",
+  emergency_stop: "emergency stop or abort route",
+  hazard_envelope: "hazard envelope",
+  human_operator_authority: "human/operator authority",
+  observation_window: "observation window",
+  physical_domain_profile: "physical domain profile",
+  rollback_escrow: "rollback/escrow",
+  runtime_assurance_certificate: "runtime assurance or shield certificate",
+};
+
+function contextValue(
+  traceNf: JsonRecord,
+  nf: JsonRecord,
+  providerProfile: JsonRecord,
+  ...keys: string[]
+): unknown {
+  for (const key of keys) {
+    const value = providerProfile[key];
+    if (value !== undefined && value !== null && value !== "") return value;
+  }
+  for (const key of keys) {
+    const value = nf[key];
+    if (value !== undefined && value !== null && value !== "") return value;
+  }
+  for (const key of keys) {
+    const value = traceNf[key];
+    if (value !== undefined && value !== null && value !== "") return value;
+  }
+  return undefined;
+}
+
+function boolContext(
+  traceNf: JsonRecord,
+  nf: JsonRecord,
+  providerProfile: JsonRecord,
+  ...keys: string[]
+): boolean {
+  const value = contextValue(traceNf, nf, providerProfile, ...keys);
+  if (typeof value === "boolean") return value;
+  return ["1", "true", "yes", "fixture", "fixture-only"].includes(
+    String(value ?? "")
+      .trim()
+      .toLowerCase(),
+  );
+}
+
+function sideEffectPolicy(
+  traceNf: JsonRecord,
+  nf: JsonRecord,
+  providerProfile: JsonRecord,
+): string {
+  return String(
+    contextValue(
+      traceNf,
+      nf,
+      providerProfile,
+      "side_effect_policy",
+      "default_side_effect_policy",
+    ) ?? "none_without_execute_flag",
+  );
+}
+
+function parseTime(value: unknown): Date | undefined {
+  if (value === undefined || value === null || value === "") return undefined;
+  if (value instanceof Date && Number.isFinite(value.getTime())) return value;
+  const text = String(value).trim();
+  if (!text) return undefined;
+  const parsed = new Date(text);
+  return Number.isFinite(parsed.getTime()) ? parsed : undefined;
+}
+
+function referenceTime(
+  traceNf: JsonRecord,
+  nf: JsonRecord,
+  providerProfile: JsonRecord,
+): Date | undefined {
+  for (const value of [
+    contextValue(
+      traceNf,
+      nf,
+      providerProfile,
+      "operation_evaluation_clock",
+      "evaluation_clock",
+      "reference_time",
+      "checked_at",
+    ),
+    deepGet(nf, "clock_cell.evaluation_time"),
+    deepGet(nf, "clock_cell.reference_time"),
+  ]) {
+    const parsed = parseTime(value);
+    if (parsed) return parsed;
+  }
+  for (const step of records(nf.steps)) {
+    const clockCell = record(step.clock_cell);
+    for (const key of [
+      "operation_evaluation_clock",
+      "evaluation_time",
+      "reference_time",
+      "wall_time",
+    ]) {
+      const parsed = parseTime(clockCell[key]);
+      if (parsed) return parsed;
+    }
+  }
+  return undefined;
+}
+
+function scopeTokens(value: unknown): Set<string> {
+  const tokens = new Set<string>();
+  if (value === undefined || value === null || value === "") return tokens;
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      for (const token of scopeTokens(item)) tokens.add(token);
+    }
+  } else if (typeof value === "object") {
+    for (const [key, item] of Object.entries(value as JsonRecord)) {
+      if (item === undefined || item === null || item === "") continue;
+      tokens.add(String(item).trim().toLowerCase());
+      tokens.add(`${key}:${String(item)}`.trim().toLowerCase());
+    }
+  } else {
+    tokens.add(String(value).trim().toLowerCase());
+  }
+  tokens.delete("");
+  return tokens;
+}
+
+function authorityScopeTokens(authority: JsonRecord): Set<string> {
+  const tokens = new Set<string>();
+  for (const key of [
+    "scope",
+    "scopes",
+    "validity_domain",
+    "validity_domains",
+    "provider_target",
+    "provider_targets",
+    "provider",
+    "providers",
+  ]) {
+    for (const token of scopeTokens(authority[key])) tokens.add(token);
+  }
+  return tokens;
+}
+
+function scopeMatches(authority: JsonRecord, required: Set<string>): boolean {
+  if (required.size === 0) return true;
+  const authorityTokens = authorityScopeTokens(authority);
+  if (authorityTokens.has("*")) return true;
+  return [...required].every((token) => authorityTokens.has(token));
+}
+
+function gate(ok: boolean, residuals: JsonRecord[], note = ""): JsonRecord {
+  return {
+    ok,
+    note,
+    residual_kinds: dedupeSorted(
+      residuals.map((item) => String(item.kind ?? "")).filter(Boolean),
+    ),
+  };
+}
+
+function authorityResiduals(
+  traceId: string,
+  traceNf: JsonRecord,
+  nf: JsonRecord,
+  providerProfile: JsonRecord,
+): JsonRecord[] {
+  const output: JsonRecord[] = [];
+  const steps = records(nf.steps);
+  const policy = sideEffectPolicy(traceNf, nf, providerProfile);
+  const fixtureDryRun =
+    boolContext(traceNf, nf, providerProfile, "fixture_mode") &&
+    policy === "dry_run_only";
+  const reference = referenceTime(traceNf, nf, providerProfile);
+  const trustedIssuers = new Set(listField(providerProfile, "trusted_issuers"));
+  const providerTargetTokens = scopeTokens(
+    contextValue(traceNf, nf, providerProfile, "provider_target", "provider"),
+  );
+
+  for (const step of steps) {
+    const stepId = String(step.step_id ?? "step");
+    const authority = record(step.authority_envelope);
+    if (
+      Object.keys(authority).length === 0 ||
+      String(authority.status ?? "").toLowerCase() === "missing"
+    ) {
+      continue;
+    }
+    const status = String(authority.status ?? "").toLowerCase();
+    if (!ACTIVE_AUTHORITY_STATUSES.has(status)) {
+      output.push(
+        traceResidual(traceId, stepId, "authority_status_not_active", true),
+      );
+    }
+    const issuer = String(authority.issuer ?? "");
+    if (trustedIssuers.size > 0 && !trustedIssuers.has(issuer)) {
+      output.push(
+        traceResidual(traceId, stepId, "authority_issuer_untrusted", true),
+      );
+    }
+    const expiresAt = authority.expires_at;
+    if (expiresAt === undefined || expiresAt === null || expiresAt === "") {
+      if (!fixtureDryRun) {
+        output.push(
+          traceResidual(traceId, stepId, "authority_time_unknown", true),
+        );
+      }
+    } else {
+      const expiry = parseTime(expiresAt);
+      if (!expiry) {
+        output.push(
+          traceResidual(traceId, stepId, "authority_time_unknown", true),
+        );
+      } else if (!reference) {
+        if (!fixtureDryRun) {
+          output.push(
+            traceResidual(traceId, stepId, "authority_time_unknown", true),
+          );
+        }
+      } else if (expiry.getTime() <= reference.getTime()) {
+        output.push(
+          traceResidual(traceId, stepId, "expired_authority_envelope", true),
+        );
+      }
+      if (String(expiresAt) === FIXED_CREATED_AT && fixtureDryRun) {
+        output.push(
+          traceResidual(
+            traceId,
+            stepId,
+            "fixture_only_authority_non_executable",
+            true,
+          ),
+        );
+      }
+    }
+    const requiredScope = new Set([
+      ...scopeTokens(step.validity_domain),
+      ...providerTargetTokens,
+    ]);
+    if (!scopeMatches(authority, requiredScope)) {
+      output.push(
+        traceResidual(traceId, stepId, "authority_scope_mismatch", true),
+      );
+    }
+  }
+  return output;
+}
+
+function gateResiduals(
+  residuals: JsonRecord[],
+  kinds: Set<string>,
+): JsonRecord[] {
+  return residuals.filter((item) => kinds.has(String(item.kind ?? "")));
 }
 
 export function traceCheckReport(traceNf: JsonRecord): JsonRecord {
   const nf = optionalRecord(traceNf.trc_trace_nf) ?? traceNf;
   const steps = records(nf.steps);
   const residuals = steps.flatMap((step) => records(step.residuals));
+  const traceId = String(traceNf.trace_id ?? nf.trace_id ?? "trace");
   if (steps.length === 0) {
-    residuals.push(
-      traceResidual(
-        String(traceNf.trace_id ?? "trace"),
-        "trace",
-        "missing_steps",
-        true,
-      ),
-    );
+    residuals.push(traceResidual(traceId, "trace", "missing_steps", true));
   }
+  residuals.push(...authorityResiduals(traceId, traceNf, nf, {}));
   const missingAuthority = residuals.some(
     (item) => item.kind === "missing_authority_envelope",
   );
@@ -987,20 +1303,17 @@ export function traceCheckReport(traceNf: JsonRecord): JsonRecord {
   const missingTolerance = residuals.some(
     (item) => item.kind === "missing_tolerance_ledger",
   );
-  const blockerKinds = new Set([
-    "missing_authority_envelope",
-    "missing_resource_ledger",
-    "missing_rollback_escrow_obligation",
-    "missing_steps",
-    "missing_step_witness",
-    "missing_tolerance_ledger",
-  ]);
   const executionBlockers = dedupeSorted(
     residuals
       .map((item) => String(item.kind ?? ""))
-      .filter((kind) => blockerKinds.has(kind)),
+      .filter((kind) => CORE_OPERATION_BLOCKERS.has(kind)),
   );
   const executionAvailable = steps.length > 0 && executionBlockers.length === 0;
+  const policy = sideEffectPolicy(traceNf, nf, {});
+  const authorityGateResiduals = gateResiduals(
+    residuals,
+    AUTHORITY_RESIDUAL_KINDS,
+  );
   return {
     accepted:
       steps.length > 0 && !residuals.some((item) => item.blocking === true),
@@ -1009,17 +1322,24 @@ export function traceCheckReport(traceNf: JsonRecord): JsonRecord {
     missing_obligations: residuals.map((item) => String(item.kind)),
     ok: true,
     real_world_operation_gate: {
+      authority_gate: gate(
+        authorityGateResiduals.length === 0,
+        authorityGateResiduals,
+      ),
       executed: false,
       operation_ready: executionAvailable,
+      physical_dispatch_ready: false,
+      provider_dispatch_ready: false,
       requires_explicit_authority: true,
       requires_provider_config: true,
       safe_commands_are_authority: false,
+      side_effect_policy: policy,
     },
     residuals,
     schema_version: "pic.trc_trace_report.v1",
     settled: false,
     status: residuals.length > 0 ? "diagnostic" : "provisional",
-    trace_id: String(traceNf.trace_id ?? "trace"),
+    trace_id: traceId,
     trc_trace_nf: nf,
     warnings: [
       ...(missingResource
@@ -1034,7 +1354,214 @@ export function traceCheckReport(traceNf: JsonRecord): JsonRecord {
       ...(missingAuthority
         ? ["missing authority envelope blocks operation claims"]
         : []),
+      ...(authorityGateResiduals.length > 0
+        ? ["authority freshness/scope/trust blocks operation claims"]
+        : []),
     ],
+  };
+}
+
+export function operationGateReport(
+  traceNf: JsonRecord,
+  providerProfileInput: JsonRecord = {},
+): JsonRecord {
+  const providerProfile = providerProfileInput ?? {};
+  const nf = optionalRecord(traceNf.trc_trace_nf) ?? traceNf;
+  const steps = records(nf.steps);
+  const traceId = String(traceNf.trace_id ?? nf.trace_id ?? "trace");
+  const checked = traceCheckReport(traceNf);
+  const baseResiduals = records(checked.residuals).filter(
+    (item) => !AUTHORITY_RESIDUAL_KINDS.has(String(item.kind ?? "")),
+  );
+  const residuals = [
+    ...baseResiduals,
+    ...authorityResiduals(traceId, traceNf, nf, providerProfile),
+  ];
+  const policy = sideEffectPolicy(traceNf, nf, providerProfile);
+  const fixtureDryRun =
+    boolContext(traceNf, nf, providerProfile, "fixture_mode") &&
+    policy === "dry_run_only";
+  const reference = referenceTime(traceNf, nf, providerProfile);
+
+  if (!fixtureDryRun) {
+    if (steps.some((step) => !record(step).causal_schedule_block)) {
+      residuals.push(
+        traceResidual(
+          traceId,
+          "operation",
+          "missing_causal_schedule_block",
+          true,
+        ),
+      );
+    }
+    const hasHazard = Boolean(
+      providerProfile.hazard_envelope ??
+      providerProfile.hazard_envelope_certificate ??
+      steps.find(
+        (step) =>
+          record(step).hazard_envelope ??
+          record(step).hazard_envelope_certificate,
+      ),
+    );
+    if (!hasHazard) {
+      residuals.push(
+        traceResidual(traceId, "operation", "missing_hazard_envelope", true),
+      );
+    }
+    const hasLifecycle = Boolean(
+      providerProfile.certificate_version_refs ??
+      steps.find(
+        (step) =>
+          listField(record(step), "certificate_version_refs").length > 0,
+      ),
+    );
+    if (!hasLifecycle) {
+      residuals.push(
+        traceResidual(
+          traceId,
+          "operation",
+          "missing_certificate_lifecycle",
+          true,
+        ),
+      );
+    }
+  }
+
+  const operationBlockerKinds = new Set([
+    ...CORE_OPERATION_BLOCKERS,
+    "missing_causal_schedule_block",
+    "missing_certificate_lifecycle",
+    "missing_hazard_envelope",
+  ]);
+  const executionBlockers = dedupeSorted(
+    residuals
+      .map((item) => String(item.kind ?? ""))
+      .filter((kind) => operationBlockerKinds.has(kind)),
+  );
+  const operationReady = steps.length > 0 && executionBlockers.length === 0;
+  const providerDispatchReady =
+    operationReady &&
+    !fixtureDryRun &&
+    !["dry_run_only", "none", "none_without_execute_flag"].includes(policy) &&
+    providerProfile.allow_execute === true &&
+    providerProfile.explicit_execute === true;
+  const physicalRequested = Boolean(
+    providerProfile.physical_dispatch_requested ??
+    providerProfile.physical_domain_profile ??
+    providerProfile.actuator_class,
+  );
+  const physicalMissing: JsonRecord[] = [];
+  if (physicalRequested) {
+    for (const [key, label] of Object.entries(PHYSICAL_PROFILE_FIELDS)) {
+      if (!providerProfile[key]) {
+        physicalMissing.push({
+          ...traceResidual(
+            traceId,
+            "physical-dispatch",
+            `missing_${key}`,
+            true,
+          ),
+          description: `missing ${label}`,
+        });
+      }
+    }
+  }
+  const physicalDispatchReady =
+    providerDispatchReady && physicalRequested && physicalMissing.length === 0;
+  const authorityGateResiduals = gateResiduals(
+    residuals,
+    AUTHORITY_RESIDUAL_KINDS,
+  );
+  const capabilityResiduals = gateResiduals(
+    residuals,
+    OPERATION_GATE_KINDS.capability_gate ?? new Set(),
+  );
+  const resourceResiduals = gateResiduals(
+    residuals,
+    OPERATION_GATE_KINDS.resource_gate ?? new Set(),
+  );
+  const rollbackResiduals = gateResiduals(
+    residuals,
+    OPERATION_GATE_KINDS.rollback_gate ?? new Set(),
+  );
+  const toleranceResiduals = gateResiduals(
+    residuals,
+    OPERATION_GATE_KINDS.tolerance_gate ?? new Set(),
+  );
+  const hazardResiduals = gateResiduals(
+    residuals,
+    new Set(["missing_hazard_envelope"]),
+  );
+  const scheduleResiduals = gateResiduals(
+    residuals,
+    new Set(["missing_causal_schedule_block"]),
+  );
+  const lifecycleResiduals = gateResiduals(
+    residuals,
+    new Set(["missing_certificate_lifecycle"]),
+  );
+  const clockResiduals = gateResiduals(
+    residuals,
+    new Set(["authority_time_unknown"]),
+  );
+  const observationResiduals = gateResiduals(
+    residuals,
+    new Set(["missing_step_witness"]),
+  );
+
+  return {
+    accepted: steps.length > 0,
+    a2a_agent_gate: {
+      ok:
+        providerProfile.requires_a2a_agent !== true ||
+        providerProfile.a2a_agent_gate_accepted === true,
+      required: providerProfile.requires_a2a_agent === true,
+    },
+    authority_gate: gate(
+      authorityGateResiduals.length === 0,
+      authorityGateResiduals,
+    ),
+    capability_gate: gate(
+      capabilityResiduals.length === 0,
+      capabilityResiduals,
+    ),
+    clock_gate: gate(reference !== undefined || fixtureDryRun, clockResiduals),
+    executed: false,
+    execution_blockers: executionBlockers,
+    hazard_gate: gate(hazardResiduals.length === 0, hazardResiduals),
+    lifecycle_gate: gate(lifecycleResiduals.length === 0, lifecycleResiduals),
+    mcp_tool_gate: {
+      ok:
+        providerProfile.requires_mcp_tool !== true ||
+        providerProfile.mcp_tool_gate_accepted === true,
+      required: providerProfile.requires_mcp_tool === true,
+    },
+    non_claims: [
+      ...NON_CLAIMS,
+      "operation_ready_is_not_executed",
+      "physical_dispatch_ready_is_not_physical_outcome_proof",
+    ],
+    observation_gate: gate(
+      observationResiduals.length === 0,
+      observationResiduals,
+    ),
+    ok: true,
+    operation_ready: operationReady,
+    physical_dispatch_blockers: physicalMissing.map((item) =>
+      String(item.kind),
+    ),
+    physical_dispatch_ready: physicalDispatchReady,
+    provider_dispatch_ready: providerDispatchReady,
+    residuals: [...residuals, ...physicalMissing],
+    resource_gate: gate(resourceResiduals.length === 0, resourceResiduals),
+    rollback_gate: gate(rollbackResiduals.length === 0, rollbackResiduals),
+    schedule_gate: gate(scheduleResiduals.length === 0, scheduleResiduals),
+    schema_version: "pic.trc_operation_gate_report.v1",
+    settled: false,
+    side_effect_policy: policy,
+    tolerance_gate: gate(toleranceResiduals.length === 0, toleranceResiduals),
+    trace_id: traceId,
+    trc_trace_nf: nf,
   };
 }
 

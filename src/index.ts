@@ -58,6 +58,7 @@ export {
   ccrTasksFromPhasePlan,
   diagnoseSqotQueueState,
   jsonlText,
+  operationGateReport,
   traceCheckReport,
   traceNormalFormReport,
   tracePacketCandidate,

@@ -1,7 +1,7 @@
 {
   "name": "percolation-inversion-compiler-ts",
-  "version": "0.6.0",
-  "description": "TypeScript-compatible port of the Python v0.6.0 public JSON, CLI, schema, conformance, CCR interop, and TRC operation-readiness semantics for npm and JavaScript agent runtimes.",
+  "version": "0.7.0",
+  "description": "TypeScript-compatible port of the Python v0.7.0 public JSON, CLI, schema, conformance, CCR interop, and TRC operation-gate semantics for npm and JavaScript agent runtimes.",
   "type": "module",
   "license": "Apache-2.0",
   "author": "K. Takahashi",
